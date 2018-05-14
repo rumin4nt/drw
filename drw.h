@@ -46,7 +46,7 @@ enum DRWAlignmentVertical
 #include "src/d_font_hershey.h"
 #include "src/d_font_hpvec.h"
 
-#include "src/d_glus.h"
+//#include "src/d_glus.h"
 #include "src/d_wobject_ops.h"
 #include "src/d_point.h"
 

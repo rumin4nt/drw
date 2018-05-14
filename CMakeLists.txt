@@ -7,8 +7,15 @@ set (drw_VERSION_PATCH 1)
 
 file(GLOB_RECURSE sources *.c src/*.c)
 
-
 add_library(drw STATIC ${sources})
+
+option(BuildLibrary "Build the brush library for embedding or linking" ON)
+option(BuildTest "BuildTest" ON)
+option(BuildDocumentation "BuildDocumentation" OFF)
+
+if(${BuildTest})
+  add_subdirectory("test")
+endif()
 
 set_property(TARGET drw PROPERTY C_STANDARD 99)
 

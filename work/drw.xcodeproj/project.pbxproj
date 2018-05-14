@@ -9,11 +9,8 @@
 /* Begin PBXBuildFile section */
 		490380E51F732C5F00A50AE8 /* d_wobject_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 490380E31F732C5F00A50AE8 /* d_wobject_ops.c */; };
 		490380E61F732C5F00A50AE8 /* d_wobject_ops.h in Headers */ = {isa = PBXBuildFile; fileRef = 490380E41F732C5F00A50AE8 /* d_wobject_ops.h */; };
-		49EDBF021F60D5C100B1C1BE /* d_glus.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EDBF001F60D5C100B1C1BE /* d_glus.h */; };
 		571DFC24200845D5002A1120 /* d_font_hershey.h in Headers */ = {isa = PBXBuildFile; fileRef = 571DFC22200845D5002A1120 /* d_font_hershey.h */; };
 		571DFC25200845D5002A1120 /* d_font_hershey.c in Sources */ = {isa = PBXBuildFile; fileRef = 571DFC23200845D5002A1120 /* d_font_hershey.c */; };
-		572546832002FA7000EBCBF4 /* d_svg.h in Headers */ = {isa = PBXBuildFile; fileRef = 572546812002FA7000EBCBF4 /* d_svg.h */; };
-		572546842002FA7000EBCBF4 /* d_svg.c in Sources */ = {isa = PBXBuildFile; fileRef = 572546822002FA7000EBCBF4 /* d_svg.c */; };
 		575C6758204F47DF00431EAE /* d_font_ftgl.h in Headers */ = {isa = PBXBuildFile; fileRef = 575C6756204F47DF00431EAE /* d_font_ftgl.h */; };
 		575C6759204F47DF00431EAE /* d_font_ftgl.c in Sources */ = {isa = PBXBuildFile; fileRef = 575C6757204F47DF00431EAE /* d_font_ftgl.c */; };
 		578EC3E120A78170008C5420 /* d_primitives.h in Headers */ = {isa = PBXBuildFile; fileRef = 578EC3DF20A78170008C5420 /* d_primitives.h */; };
@@ -30,11 +27,8 @@
 /* Begin PBXFileReference section */
 		490380E31F732C5F00A50AE8 /* d_wobject_ops.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = d_wobject_ops.c; sourceTree = "<group>"; };
 		490380E41F732C5F00A50AE8 /* d_wobject_ops.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = d_wobject_ops.h; sourceTree = "<group>"; };
-		49EDBF001F60D5C100B1C1BE /* d_glus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = d_glus.h; sourceTree = "<group>"; };
 		571DFC22200845D5002A1120 /* d_font_hershey.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = d_font_hershey.h; sourceTree = "<group>"; };
 		571DFC23200845D5002A1120 /* d_font_hershey.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = d_font_hershey.c; sourceTree = "<group>"; };
-		572546812002FA7000EBCBF4 /* d_svg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = d_svg.h; sourceTree = "<group>"; };
-		572546822002FA7000EBCBF4 /* d_svg.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = d_svg.c; sourceTree = "<group>"; };
 		575C6756204F47DF00431EAE /* d_font_ftgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = d_font_ftgl.h; sourceTree = "<group>"; };
 		575C6757204F47DF00431EAE /* d_font_ftgl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = d_font_ftgl.c; sourceTree = "<group>"; };
 		578EC3DF20A78170008C5420 /* d_primitives.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = d_primitives.h; sourceTree = "<group>"; };
@@ -47,13 +41,6 @@
 		57EBD0482093B2A300651E63 /* d_font_hpvec.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = d_font_hpvec.c; sourceTree = "<group>"; };
 		57EBD04B2093BE8600651E63 /* d_font_asteroids.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = d_font_asteroids.h; sourceTree = "<group>"; };
 		57EBD04C2093BE8600651E63 /* d_font_asteroids.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = d_font_asteroids.c; sourceTree = "<group>"; };
-		57F12DD21F806D0500564D7C /* d_fbo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = d_fbo.h; sourceTree = "<group>"; };
-		57F12DD31F806D0500564D7C /* d_glus.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = d_glus.c; sourceTree = "<group>"; };
-		57F12DD41F806D0500564D7C /* d_hatch.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = d_hatch.c; sourceTree = "<group>"; };
-		57F12DD51F806D0600564D7C /* d_fbo.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = d_fbo.c; sourceTree = "<group>"; };
-		57F12DD61F806D0600564D7C /* d_fbo2.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = d_fbo2.h; sourceTree = "<group>"; };
-		57F12DD81F806D0600564D7C /* d_hatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = d_hatch.h; sourceTree = "<group>"; };
-		57F12DD91F806D0600564D7C /* d_fbo2.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = d_fbo2.c; sourceTree = "<group>"; };
 		D1A8335B1E99AD2C009AA5D2 /* libdrw.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libdrw.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1A8368D1E99AEF3009AA5D2 /* libdrw.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libdrw.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AA9AB91EA00E1A00675C3A /* drw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = drw.h; path = ../drw.h; sourceTree = "<group>"; };
@@ -110,20 +97,10 @@
 				571DFC23200845D5002A1120 /* d_font_hershey.c */,
 				57EBD04B2093BE8600651E63 /* d_font_asteroids.h */,
 				57EBD04C2093BE8600651E63 /* d_font_asteroids.c */,
-				57F12DD51F806D0600564D7C /* d_fbo.c */,
-				57F12DD21F806D0500564D7C /* d_fbo.h */,
-				57F12DD91F806D0600564D7C /* d_fbo2.c */,
-				57F12DD61F806D0600564D7C /* d_fbo2.h */,
-				49EDBF001F60D5C100B1C1BE /* d_glus.h */,
-				57F12DD31F806D0500564D7C /* d_glus.c */,
-				57F12DD41F806D0500564D7C /* d_hatch.c */,
-				57F12DD81F806D0600564D7C /* d_hatch.h */,
 				575C6757204F47DF00431EAE /* d_font_ftgl.c */,
 				575C6756204F47DF00431EAE /* d_font_ftgl.h */,
 				490380E31F732C5F00A50AE8 /* d_wobject_ops.c */,
 				490380E41F732C5F00A50AE8 /* d_wobject_ops.h */,
-				572546812002FA7000EBCBF4 /* d_svg.h */,
-				572546822002FA7000EBCBF4 /* d_svg.c */,
 			);
 			name = src;
 			path = ../src;
@@ -136,8 +113,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				572546832002FA7000EBCBF4 /* d_svg.h in Headers */,
-				49EDBF021F60D5C100B1C1BE /* d_glus.h in Headers */,
 				575C6758204F47DF00431EAE /* d_font_ftgl.h in Headers */,
 				57EBD0492093B2A300651E63 /* d_font_hpvec.h in Headers */,
 				578EC3E120A78170008C5420 /* d_primitives.h in Headers */,
@@ -244,7 +219,6 @@
 				57EBD04A2093B2A300651E63 /* d_font_hpvec.c in Sources */,
 				57EBD04E2093BE8600651E63 /* d_font_asteroids.c in Sources */,
 				57DC6B1A1F6E6F23009205C0 /* d_render.c in Sources */,
-				572546842002FA7000EBCBF4 /* d_svg.c in Sources */,
 				578EC3E220A78170008C5420 /* d_primitives.c in Sources */,
 				571DFC25200845D5002A1120 /* d_font_hershey.c in Sources */,
 				57E285DB2099088C00BBB5E5 /* d_point.c in Sources */,
