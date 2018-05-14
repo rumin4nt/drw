@@ -1,0 +1,460 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		49AF16551F5F54C2005303BD /* r_fbo.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AF16471F5F54C2005303BD /* r_fbo.c */; };
+		49AF16561F5F54C2005303BD /* r_fbo.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AF16481F5F54C2005303BD /* r_fbo.h */; };
+		49AF16571F5F54C2005303BD /* r_fbo2.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AF16491F5F54C2005303BD /* r_fbo2.c */; };
+		49AF16581F5F54C2005303BD /* r_fbo2.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AF164A1F5F54C2005303BD /* r_fbo2.h */; };
+		49AF16591F5F54C2005303BD /* r_font_ftgl.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AF164B1F5F54C2005303BD /* r_font_ftgl.c */; };
+		49AF165A1F5F54C2005303BD /* d_font_ftgl.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AF164C1F5F54C2005303BD /* d_font_ftgl.h */; };
+		49AF165B1F5F54C2005303BD /* r_font_ftgles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 49AF164D1F5F54C2005303BD /* r_font_ftgles.cpp */; };
+		49AF165C1F5F54C2005303BD /* r_font_ftgles.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AF164E1F5F54C2005303BD /* r_font_ftgles.h */; };
+		49AF165D1F5F54C2005303BD /* r_gcp.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AF164F1F5F54C2005303BD /* r_gcp.c */; };
+		49AF165E1F5F54C2005303BD /* r_gcp.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AF16501F5F54C2005303BD /* r_gcp.h */; };
+		49AF165F1F5F54C2005303BD /* r_hatch.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AF16511F5F54C2005303BD /* r_hatch.c */; };
+		49AF16601F5F54C2005303BD /* r_hatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AF16521F5F54C2005303BD /* r_hatch.h */; };
+		49AF16611F5F54C2005303BD /* r_render.c in Sources */ = {isa = PBXBuildFile; fileRef = 49AF16531F5F54C2005303BD /* r_render.c */; };
+		49AF16621F5F54C2005303BD /* d_render.h in Headers */ = {isa = PBXBuildFile; fileRef = 49AF16541F5F54C2005303BD /* d_render.h */; };
+		49AF167E1F5F558A005303BD /* libassimp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16641F5F558A005303BD /* libassimp.a */; };
+		49AF167F1F5F558A005303BD /* libchipmunk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16651F5F558A005303BD /* libchipmunk.a */; };
+		49AF16801F5F558A005303BD /* libcjson.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16661F5F558A005303BD /* libcjson.a */; };
+		49AF16811F5F558A005303BD /* libFLAC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16671F5F558A005303BD /* libFLAC.a */; };
+		49AF16821F5F558A005303BD /* libfmod.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16681F5F558A005303BD /* libfmod.dylib */; };
+		49AF16831F5F558A005303BD /* libfmodL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16691F5F558A005303BD /* libfmodL.dylib */; };
+		49AF16841F5F558A005303BD /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF166A1F5F558A005303BD /* libfreetype.a */; };
+		49AF16851F5F558A005303BD /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF166B1F5F558A005303BD /* libftgl.a */; };
+		49AF16861F5F558A005303BD /* libGLEW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF166C1F5F558A005303BD /* libGLEW.a */; };
+		49AF16871F5F558A005303BD /* libglfw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF166D1F5F558A005303BD /* libglfw3.a */; };
+		49AF16881F5F558A005303BD /* libGLUS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF166E1F5F558A005303BD /* libGLUS.a */; };
+		49AF16891F5F558A005303BD /* libiniparser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF166F1F5F558A005303BD /* libiniparser.a */; };
+		49AF168A1F5F558A005303BD /* libIrrXML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16701F5F558A005303BD /* libIrrXML.a */; };
+		49AF168B1F5F558A005303BD /* liblo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16711F5F558A005303BD /* liblo.a */; };
+		49AF168C1F5F558A005303BD /* libluajit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16721F5F558A005303BD /* libluajit.a */; };
+		49AF168D1F5F558A005303BD /* libogg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16731F5F558A005303BD /* libogg.a */; };
+		49AF168E1F5F558A005303BD /* libphysfs.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16741F5F558A005303BD /* libphysfs.a */; };
+		49AF168F1F5F558A005303BD /* libpng.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16751F5F558A005303BD /* libpng.a */; };
+		49AF16901F5F558A005303BD /* libportaudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16761F5F558A005303BD /* libportaudio.a */; };
+		49AF16911F5F558A005303BD /* libportmidi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16771F5F558A005303BD /* libportmidi.a */; };
+		49AF16921F5F558A005303BD /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16781F5F558A005303BD /* libsndfile.a */; };
+		49AF16931F5F558A005303BD /* libTUIO.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16791F5F558A005303BD /* libTUIO.a */; };
+		49AF16941F5F558A005303BD /* libuuid.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF167A1F5F558A005303BD /* libuuid.a */; };
+		49AF16951F5F558A005303BD /* libvorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF167B1F5F558A005303BD /* libvorbis.a */; };
+		49AF16961F5F558A005303BD /* libvorbisenc.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF167C1F5F558A005303BD /* libvorbisenc.a */; };
+		49AF16971F5F558A005303BD /* libvorbisfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF167D1F5F558A005303BD /* libvorbisfile.a */; };
+		49AF169B1F5F5612005303BD /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF16991F5F5612005303BD /* libbz2.tbd */; };
+		49AF169C1F5F5612005303BD /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AF169A1F5F5612005303BD /* libz.tbd */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		49AF163F1F5F54A0005303BD /* libdrw.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libdrw.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		49AF16471F5F54C2005303BD /* r_fbo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = r_fbo.c; sourceTree = "<group>"; };
+		49AF16481F5F54C2005303BD /* r_fbo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r_fbo.h; sourceTree = "<group>"; };
+		49AF16491F5F54C2005303BD /* r_fbo2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = r_fbo2.c; sourceTree = "<group>"; };
+		49AF164A1F5F54C2005303BD /* r_fbo2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r_fbo2.h; sourceTree = "<group>"; };
+		49AF164B1F5F54C2005303BD /* r_font_ftgl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = r_font_ftgl.c; sourceTree = "<group>"; };
+		49AF164C1F5F54C2005303BD /* d_font_ftgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = d_font_ftgl.h; sourceTree = "<group>"; };
+		49AF164D1F5F54C2005303BD /* r_font_ftgles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = r_font_ftgles.cpp; sourceTree = "<group>"; };
+		49AF164E1F5F54C2005303BD /* r_font_ftgles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r_font_ftgles.h; sourceTree = "<group>"; };
+		49AF164F1F5F54C2005303BD /* r_gcp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = r_gcp.c; sourceTree = "<group>"; };
+		49AF16501F5F54C2005303BD /* r_gcp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r_gcp.h; sourceTree = "<group>"; };
+		49AF16511F5F54C2005303BD /* r_hatch.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = r_hatch.c; sourceTree = "<group>"; };
+		49AF16521F5F54C2005303BD /* r_hatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = r_hatch.h; sourceTree = "<group>"; };
+		49AF16531F5F54C2005303BD /* r_render.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = r_render.c; sourceTree = "<group>"; };
+		49AF16541F5F54C2005303BD /* d_render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = d_render.h; sourceTree = "<group>"; };
+		49AF16641F5F558A005303BD /* libassimp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassimp.a; path = ../../../contrib/platform/darwin/libassimp.a; sourceTree = "<group>"; };
+		49AF16651F5F558A005303BD /* libchipmunk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libchipmunk.a; path = ../../../contrib/platform/darwin/libchipmunk.a; sourceTree = "<group>"; };
+		49AF16661F5F558A005303BD /* libcjson.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcjson.a; path = ../../../contrib/platform/darwin/libcjson.a; sourceTree = "<group>"; };
+		49AF16671F5F558A005303BD /* libFLAC.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFLAC.a; path = ../../../contrib/platform/darwin/libFLAC.a; sourceTree = "<group>"; };
+		49AF16681F5F558A005303BD /* libfmod.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmod.dylib; path = ../../../contrib/platform/darwin/libfmod.dylib; sourceTree = "<group>"; };
+		49AF16691F5F558A005303BD /* libfmodL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfmodL.dylib; path = ../../../contrib/platform/darwin/libfmodL.dylib; sourceTree = "<group>"; };
+		49AF166A1F5F558A005303BD /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../../../contrib/platform/darwin/libfreetype.a; sourceTree = "<group>"; };
+		49AF166B1F5F558A005303BD /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libftgl.a; path = ../../../contrib/platform/darwin/libftgl.a; sourceTree = "<group>"; };
+		49AF166C1F5F558A005303BD /* libGLEW.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLEW.a; path = ../../../contrib/platform/darwin/libGLEW.a; sourceTree = "<group>"; };
+		49AF166D1F5F558A005303BD /* libglfw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglfw3.a; path = ../../../contrib/platform/darwin/libglfw3.a; sourceTree = "<group>"; };
+		49AF166E1F5F558A005303BD /* libGLUS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGLUS.a; path = ../../../contrib/platform/darwin/libGLUS.a; sourceTree = "<group>"; };
+		49AF166F1F5F558A005303BD /* libiniparser.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libiniparser.a; path = ../../../contrib/platform/darwin/libiniparser.a; sourceTree = "<group>"; };
+		49AF16701F5F558A005303BD /* libIrrXML.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libIrrXML.a; path = ../../../contrib/platform/darwin/libIrrXML.a; sourceTree = "<group>"; };
+		49AF16711F5F558A005303BD /* liblo.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = liblo.a; path = ../../../contrib/platform/darwin/liblo.a; sourceTree = "<group>"; };
+		49AF16721F5F558A005303BD /* libluajit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libluajit.a; path = ../../../contrib/platform/darwin/libluajit.a; sourceTree = "<group>"; };
+		49AF16731F5F558A005303BD /* libogg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libogg.a; path = ../../../contrib/platform/darwin/libogg.a; sourceTree = "<group>"; };
+		49AF16741F5F558A005303BD /* libphysfs.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libphysfs.a; path = ../../../contrib/platform/darwin/libphysfs.a; sourceTree = "<group>"; };
+		49AF16751F5F558A005303BD /* libpng.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng.a; path = ../../../contrib/platform/darwin/libpng.a; sourceTree = "<group>"; };
+		49AF16761F5F558A005303BD /* libportaudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportaudio.a; path = ../../../contrib/platform/darwin/libportaudio.a; sourceTree = "<group>"; };
+		49AF16771F5F558A005303BD /* libportmidi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libportmidi.a; path = ../../../contrib/platform/darwin/libportmidi.a; sourceTree = "<group>"; };
+		49AF16781F5F558A005303BD /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../contrib/platform/darwin/libsndfile.a; sourceTree = "<group>"; };
+		49AF16791F5F558A005303BD /* libTUIO.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libTUIO.a; path = ../../../contrib/platform/darwin/libTUIO.a; sourceTree = "<group>"; };
+		49AF167A1F5F558A005303BD /* libuuid.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libuuid.a; path = ../../../contrib/platform/darwin/libuuid.a; sourceTree = "<group>"; };
+		49AF167B1F5F558A005303BD /* libvorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbis.a; path = ../../../contrib/platform/darwin/libvorbis.a; sourceTree = "<group>"; };
+		49AF167C1F5F558A005303BD /* libvorbisenc.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisenc.a; path = ../../../contrib/platform/darwin/libvorbisenc.a; sourceTree = "<group>"; };
+		49AF167D1F5F558A005303BD /* libvorbisfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libvorbisfile.a; path = ../../../contrib/platform/darwin/libvorbisfile.a; sourceTree = "<group>"; };
+		49AF16991F5F5612005303BD /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		49AF169A1F5F5612005303BD /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49AF163C1F5F54A0005303BD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49AF169B1F5F5612005303BD /* libbz2.tbd in Frameworks */,
+				49AF169C1F5F5612005303BD /* libz.tbd in Frameworks */,
+				49AF16921F5F558A005303BD /* libsndfile.a in Frameworks */,
+				49AF16821F5F558A005303BD /* libfmod.dylib in Frameworks */,
+				49AF16871F5F558A005303BD /* libglfw3.a in Frameworks */,
+				49AF16831F5F558A005303BD /* libfmodL.dylib in Frameworks */,
+				49AF16881F5F558A005303BD /* libGLUS.a in Frameworks */,
+				49AF168A1F5F558A005303BD /* libIrrXML.a in Frameworks */,
+				49AF16951F5F558A005303BD /* libvorbis.a in Frameworks */,
+				49AF168F1F5F558A005303BD /* libpng.a in Frameworks */,
+				49AF16861F5F558A005303BD /* libGLEW.a in Frameworks */,
+				49AF167F1F5F558A005303BD /* libchipmunk.a in Frameworks */,
+				49AF16811F5F558A005303BD /* libFLAC.a in Frameworks */,
+				49AF16931F5F558A005303BD /* libTUIO.a in Frameworks */,
+				49AF16961F5F558A005303BD /* libvorbisenc.a in Frameworks */,
+				49AF16851F5F558A005303BD /* libftgl.a in Frameworks */,
+				49AF16841F5F558A005303BD /* libfreetype.a in Frameworks */,
+				49AF168C1F5F558A005303BD /* libluajit.a in Frameworks */,
+				49AF16901F5F558A005303BD /* libportaudio.a in Frameworks */,
+				49AF168D1F5F558A005303BD /* libogg.a in Frameworks */,
+				49AF168B1F5F558A005303BD /* liblo.a in Frameworks */,
+				49AF16891F5F558A005303BD /* libiniparser.a in Frameworks */,
+				49AF16971F5F558A005303BD /* libvorbisfile.a in Frameworks */,
+				49AF168E1F5F558A005303BD /* libphysfs.a in Frameworks */,
+				49AF16801F5F558A005303BD /* libcjson.a in Frameworks */,
+				49AF16941F5F558A005303BD /* libuuid.a in Frameworks */,
+				49AF167E1F5F558A005303BD /* libassimp.a in Frameworks */,
+				49AF16911F5F558A005303BD /* libportmidi.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		49AF16361F5F54A0005303BD = {
+			isa = PBXGroup;
+			children = (
+				49AF16631F5F557A005303BD /* lib */,
+				49AF16461F5F54C2005303BD /* src */,
+				49AF16401F5F54A0005303BD /* Products */,
+				49AF16981F5F5612005303BD /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		49AF16401F5F54A0005303BD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49AF163F1F5F54A0005303BD /* libdrw.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49AF16461F5F54C2005303BD /* src */ = {
+			isa = PBXGroup;
+			children = (
+				49AF16471F5F54C2005303BD /* r_fbo.c */,
+				49AF16481F5F54C2005303BD /* r_fbo.h */,
+				49AF16491F5F54C2005303BD /* r_fbo2.c */,
+				49AF164A1F5F54C2005303BD /* r_fbo2.h */,
+				49AF164B1F5F54C2005303BD /* r_font_ftgl.c */,
+				49AF164C1F5F54C2005303BD /* d_font_ftgl.h */,
+				49AF164D1F5F54C2005303BD /* r_font_ftgles.cpp */,
+				49AF164E1F5F54C2005303BD /* r_font_ftgles.h */,
+				49AF164F1F5F54C2005303BD /* r_gcp.c */,
+				49AF16501F5F54C2005303BD /* r_gcp.h */,
+				49AF16511F5F54C2005303BD /* r_hatch.c */,
+				49AF16521F5F54C2005303BD /* r_hatch.h */,
+				49AF16531F5F54C2005303BD /* r_render.c */,
+				49AF16541F5F54C2005303BD /* d_render.h */,
+			);
+			name = src;
+			path = ../src;
+			sourceTree = "<group>";
+		};
+		49AF16631F5F557A005303BD /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				49AF16641F5F558A005303BD /* libassimp.a */,
+				49AF16651F5F558A005303BD /* libchipmunk.a */,
+				49AF16661F5F558A005303BD /* libcjson.a */,
+				49AF16671F5F558A005303BD /* libFLAC.a */,
+				49AF16681F5F558A005303BD /* libfmod.dylib */,
+				49AF16691F5F558A005303BD /* libfmodL.dylib */,
+				49AF166A1F5F558A005303BD /* libfreetype.a */,
+				49AF166B1F5F558A005303BD /* libftgl.a */,
+				49AF166C1F5F558A005303BD /* libGLEW.a */,
+				49AF166D1F5F558A005303BD /* libglfw3.a */,
+				49AF166E1F5F558A005303BD /* libGLUS.a */,
+				49AF166F1F5F558A005303BD /* libiniparser.a */,
+				49AF16701F5F558A005303BD /* libIrrXML.a */,
+				49AF16711F5F558A005303BD /* liblo.a */,
+				49AF16721F5F558A005303BD /* libluajit.a */,
+				49AF16731F5F558A005303BD /* libogg.a */,
+				49AF16741F5F558A005303BD /* libphysfs.a */,
+				49AF16751F5F558A005303BD /* libpng.a */,
+				49AF16761F5F558A005303BD /* libportaudio.a */,
+				49AF16771F5F558A005303BD /* libportmidi.a */,
+				49AF16781F5F558A005303BD /* libsndfile.a */,
+				49AF16791F5F558A005303BD /* libTUIO.a */,
+				49AF167A1F5F558A005303BD /* libuuid.a */,
+				49AF167B1F5F558A005303BD /* libvorbis.a */,
+				49AF167C1F5F558A005303BD /* libvorbisenc.a */,
+				49AF167D1F5F558A005303BD /* libvorbisfile.a */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		49AF16981F5F5612005303BD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				49AF16991F5F5612005303BD /* libbz2.tbd */,
+				49AF169A1F5F5612005303BD /* libz.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		49AF163D1F5F54A0005303BD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49AF165E1F5F54C2005303BD /* r_gcp.h in Headers */,
+				49AF16581F5F54C2005303BD /* r_fbo2.h in Headers */,
+				49AF165C1F5F54C2005303BD /* r_font_ftgles.h in Headers */,
+				49AF16621F5F54C2005303BD /* d_render.h in Headers */,
+				49AF16561F5F54C2005303BD /* r_fbo.h in Headers */,
+				49AF16601F5F54C2005303BD /* r_hatch.h in Headers */,
+				49AF165A1F5F54C2005303BD /* d_font_ftgl.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		49AF163E1F5F54A0005303BD /* drw */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49AF16431F5F54A0005303BD /* Build configuration list for PBXNativeTarget "drw" */;
+			buildPhases = (
+				49AF163B1F5F54A0005303BD /* Sources */,
+				49AF163C1F5F54A0005303BD /* Frameworks */,
+				49AF163D1F5F54A0005303BD /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = drw;
+			productName = drw;
+			productReference = 49AF163F1F5F54A0005303BD /* libdrw.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49AF16371F5F54A0005303BD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0830;
+				ORGANIZATIONNAME = "Andrew Macfarlane";
+				TargetAttributes = {
+					49AF163E1F5F54A0005303BD = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = W7MSG2FEA9;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 49AF163A1F5F54A0005303BD /* Build configuration list for PBXProject "drw-shared" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 49AF16361F5F54A0005303BD;
+			productRefGroup = 49AF16401F5F54A0005303BD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49AF163E1F5F54A0005303BD /* drw */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49AF163B1F5F54A0005303BD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49AF165D1F5F54C2005303BD /* r_gcp.c in Sources */,
+				49AF165F1F5F54C2005303BD /* r_hatch.c in Sources */,
+				49AF16611F5F54C2005303BD /* r_render.c in Sources */,
+				49AF16551F5F54C2005303BD /* r_fbo.c in Sources */,
+				49AF16571F5F54C2005303BD /* r_fbo2.c in Sources */,
+				49AF165B1F5F54C2005303BD /* r_font_ftgles.cpp in Sources */,
+				49AF16591F5F54C2005303BD /* r_font_ftgl.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		49AF16411F5F54A0005303BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		49AF16421F5F54A0005303BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		49AF16441F5F54A0005303BD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = W7MSG2FEA9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"$(r4_root)/contrib/include",
+					"$(r4_root)/libs",
+					"$(r4_root)/contrib",
+				);
+				LIBRARY_SEARCH_PATHS = "$(r4_root)/contrib/platform/darwin";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ../../../build;
+				r4_root = "$(HOME)/art/r4";
+			};
+			name = Debug;
+		};
+		49AF16451F5F54A0005303BD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = W7MSG2FEA9;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				HEADER_SEARCH_PATHS = (
+					"$(r4_root)/contrib/include",
+					"$(r4_root)/libs",
+					"$(r4_root)/contrib",
+				);
+				LIBRARY_SEARCH_PATHS = "$(r4_root)/contrib/platform/darwin";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYMROOT = ../../../build;
+				r4_root = "$(HOME)/art/r4";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49AF163A1F5F54A0005303BD /* Build configuration list for PBXProject "drw-shared" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49AF16411F5F54A0005303BD /* Debug */,
+				49AF16421F5F54A0005303BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49AF16431F5F54A0005303BD /* Build configuration list for PBXNativeTarget "drw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49AF16441F5F54A0005303BD /* Debug */,
+				49AF16451F5F54A0005303BD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 49AF16371F5F54A0005303BD /* Project object */;
+}
