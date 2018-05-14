@@ -764,6 +764,22 @@ void d_transform_apply(WTransform t)
 	d_rotate_wvec(t.rotation);
 }
 
+void d_transform_deapply(WTransform t)
+{
+	/*d_rotate_wvec(t.rotation);
+
+	d_translate_wvec(t.position);
+	d_translate_wvec(t.anchor);
+	d_scale_wvec(t.scale);
+*/
+	
+}
+
+void d_gtransform_deapply(GTransform t)
+{
+	
+}
+
 #ifdef RPLATFORM_IOS
 #define glTranslated glTranslatef
 #define glScaled glScalef

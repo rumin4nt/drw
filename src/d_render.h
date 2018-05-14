@@ -88,6 +88,9 @@ void d_pop(void);
 
 void d_transform_apply(WTransform t);
 void d_gtransform_apply(GTransform t);
+void d_transform_deapply(WTransform t);
+void d_gtransform_deapply(GTransform t);
+
 void d_translate_wvec(WVec3d v);
 void d_scale_wvec(WVec3d v);
 void d_scale_vec3(vec3_t v);
