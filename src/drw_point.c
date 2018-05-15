@@ -206,9 +206,14 @@ void drw_point_2d_to_3d(double x, double y, double* _rx, double* _ry, double* _r
 	winz = 0.;
 
 #ifndef RPLATFORM_WIN
+	
+#ifdef RPLATFORM_IOS
+	printf("Error, this is unsupported as hell on IOS\n");
+#else
 	gluUnProject(winx, winy, winz, modelview, projection, viewport, &worldx,
 		     &worldy, &worldz);
-
+#endif
+	
 #ifdef RPLATFORM_IOS
 // worldx += app_settings.current_window_x * .5;
 // worldy += app_settings.current_window_y * .5;

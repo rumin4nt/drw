@@ -4,7 +4,7 @@
 
 #ifdef RPLATFORM_IOS
 
-#include "d_font_ftgles.h"
+#include "drw_font_ftgles.h"
 
 #include "../drw.h"
 #include "FTGL/ftgles.h"
@@ -14,13 +14,13 @@ static FTTextureFont* tfont = 0;
 //static FTGLfont *font = NULL;
 //void* font = 0;
 
-void d_font_init()
+void drw_font_init()
 {
 
 	//ummm guess we don't need this?
 }
 
-void d_font_size(int sz, int garbage)
+void drw_font_size(int sz, int garbage)
 {
 	if (!font)
 	{
@@ -30,7 +30,7 @@ void d_font_size(int sz, int garbage)
 	font->FaceSize(sz);
 }
 
-void d_font_deinit()
+void drw_font_deinit()
 {
 	if (font)
 	{
@@ -39,7 +39,7 @@ void d_font_deinit()
 	font = 0;
 }
 
-int d_font_load(const char* path)
+int drw_font_load(const char* path)
 {
 	printf("loading ftgles font %s.\n", path);
 	if (font)
@@ -83,7 +83,7 @@ int d_font_load(const char* path)
 
 extern "C"
 {
-	void d_font_draw(const char* str)
+	void drw_font_draw(const char* str)
 	{
 		if (!str)
 		{
@@ -100,7 +100,7 @@ extern "C"
 	}
 }
 
-void d_font_get_bbox(const char* str, int num, float* data)
+void drw_font_get_bbox(const char* str, int num, float* data)
 {
 	font->BBox(str, data[0], data[1], data[2], data[3], data[4], data[5]);
 
