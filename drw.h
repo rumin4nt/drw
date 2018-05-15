@@ -15,7 +15,7 @@
 
 #include <r4/src/r4_platform.h>
 
-#include "src/d_render.h"
+#include "src/drw_render.h"
 //#include "src/r_hatch.h"
 
 #define D_FONT_SIZE 18
@@ -37,20 +37,20 @@ enum DRWAlignmentVertical
 };
 
 #ifdef RPLATFORM_IOS
-#include "src/d_font_ftgles.h"
+#include "src/drw_font_ftgles.h"
 #else
-#include "src/d_font_ftgl.h"
+#include "src/drw_font_ftgl.h"
 #endif
 
-#include "src/d_font_asteroids.h"
-#include "src/d_font_hershey.h"
-#include "src/d_font_hpvec.h"
+#include "src/drw_font_asteroids.h"
+#include "src/drw_font_hershey.h"
+#include "src/drw_font_hpvec.h"
 
 //#include "src/d_glus.h"
-#include "src/d_wobject_ops.h"
-#include "src/d_point.h"
+#include "src/drw_wobject_ops.h"
+#include "src/drw_point.h"
 
-#include "src/d_primitives.h"
+#include "src/drw_primitives.h"
 
 #ifdef DEBUG
 #include "stdio.h"

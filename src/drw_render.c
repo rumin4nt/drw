@@ -6,12 +6,10 @@
 //  Copyright © 2016 vaporstack. All rights reserved.
 //
 
-#include "d_render.h"
+#include "drw_render.h"
 
 #include <r4/src/r4_config.h>
 #include <r4/src/r4_platform.h>
-
-
 
 #ifndef RPLATFORM_IOS
 #define ENABLE_OLD_HACKY_GLUT
@@ -21,7 +19,6 @@
 #include <GLUT/glut.h>
 #endif
 
-
 #ifdef RPLATFORM_IOS
 
 //#include "../core/r_app_ios.h"
@@ -29,14 +26,12 @@
 //#include <OpenGLES/ES1/gl.h>
 //#include <OpenGLES/ES3/gl.h>
 
-
-
-#include "d_font_ftgles.h"
+#include "drw_font_ftgles.h"
 #include "src/gluLookAt.h"
 #else
 #ifdef RPLATFORM_DARWIN
 //#include <OpenGL/gl.h>
-#include "d_font_ftgl.h"
+#include "drw_font_ftgl.h"
 //#undef RPLATFORM_IOS
 #else
 
@@ -57,7 +52,7 @@
 #include <gl-matrix/gl-matrix.h>
 
 //#include <GL/glew.h>
-#include "d_font_ftgl.h"
+#include "drw_font_ftgl.h"
 
 //#undef RPLATFORM_IOS
 #endif
@@ -176,7 +171,7 @@ GLuint vertexbuffer;
  };
  */
 
-int d_get_gl_error()
+int drw_get_gl_error()
 {
 
 	GLenum e = glGetError();
@@ -223,7 +218,7 @@ int d_get_gl_error()
 	return e;
 }
 
-void d_init()
+void drw_init()
 {
 	for (int i = 0; i < MAX_CIRCLE_PRECISION; i++)
 	{
@@ -238,7 +233,7 @@ void d_init()
 	glEnableClientState(GL_VERTEX_ARRAY);
 	//  todo: figure out why this becomes fucking 5 when toggling fullscreen
 
-	d_get_gl_error();
+	drw_get_gl_error();
 	glEnable(GL_BLEND);
 #ifndef RPLATFORM_WIN
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -259,9 +254,9 @@ void d_init()
 	glEnable(GL_POLYGON_SMOOTH);
 #endif
 
-	d_calculate_scale();
+	drw_calculate_scale();
 
-	d_setup_view();
+	drw_setup_view();
 
 	// const char* path = r_resource_load("ruminant","ttf");
 	// if ( debug_settings.render )
@@ -272,10 +267,10 @@ void d_init()
 	//{
 	// const char* path = r_resource_load("vs-junk","otf");
 	//  r_font_load(path);
-	//    d_font_size(72 * app_settings.scale_retina);
+	//    drw_font_size(72 * app_settings.scale_retina);
 	// }
 
-	d_get_gl_error();
+	drw_get_gl_error();
 	// Generate 1 buffer, put the resulting identifier in vertexbuffer
 	// glGenBuffers(1, &vertexbuffer);
 	// The following commands will talk about our 'vertexbuffer' buffer
@@ -284,10 +279,10 @@ void d_init()
 	// glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data),
 	// g_vertex_buffer_data, GL_STATIC_DRAW);  glBindBuffer(0,
 	// vertexbuffer);
-	d_clear();
+	drw_clear();
 }
 
-void d_deinit(void)
+void drw_deinit(void)
 {
 	for (int i = 0; i < MAX_CIRCLE_PRECISION; i++)
 	{
@@ -299,29 +294,29 @@ void d_deinit(void)
 	}
 }
 
-void d_set_line_width(float v)
+void drw_set_line_width(float v)
 {
 	glLineWidth(v);
 
-	d_get_gl_error();
+	drw_get_gl_error();
 }
 
-void d_text_load(const char* path)
+void drw_text_load(const char* path)
 {
 
 // 0if ( path != NULL )
 //{
 // const char* path = r_resource_load("vs-junk","otf");
 #ifdef R4_ENABLE_FTGL
-	d_font_load(path);
+	drw_font_load(path);
 
 #endif
 
-	// d_font_size(72);
+	// drw_font_size(72);
 	// }
 }
 
-void d_set_blend(int v)
+void drw_set_blend(int v)
 {
 
 #ifndef RPLATFORM_WIN
@@ -366,12 +361,12 @@ void d_set_blend(int v)
 #endif
 }
 
-void d_clear()
+void drw_clear()
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT );
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }
 
-RColor8 d_check_color(void)
+RColor8 drw_checkcolor(void)
 {
 	RColor8 c;
 	c.r = _r;
@@ -381,26 +376,26 @@ RColor8 d_check_color(void)
 	return c;
 }
 
-void d_color_clear(float r, float g, float b, float a)
+void drw_color_clear(float r, float g, float b, float a)
 {
 	glClearColor(r, g, b, a);
 }
 
-void d_color_clear_color(RColor c)
+void drw_color_clear_color(RColor c)
 {
-	d_color_clear(c.r, c.g, c.b, c.a);
+	drw_color_clear(c.r, c.g, c.b, c.a);
 }
 
-void d_color_clear_color8(RColor8 c)
+void drw_color_clear_color8(RColor8 c)
 {
-	d_color_clear(c.r, c.g, c.b, c.a);
+	drw_color_clear(c.r, c.g, c.b, c.a);
 
 	//glClearColor(c.r, c.g, c.b, c.a);
 }
 
-void d_color_clear_color16(RColor16 c)
+void drw_color_clear_color16(RColor16 c)
 {
-	d_color_clear(c.r, c.g, c.b, c.a);
+	drw_color_clear(c.r, c.g, c.b, c.a);
 	//glClearColor(c.r, c.g, c.b, c.a);
 }
 
@@ -412,12 +407,12 @@ void _set_internal_colors(float r, float g, float b, float a)
 	_a = a;
 }
 
-void d_set_colorbypass(bool v)
+void drw_set_colorbypass(bool v)
 {
 	color_bypass = v;
 }
 
-void d_color(double r, double g, double b, double a)
+void drw_color(double r, double g, double b, double a)
 {
 	_set_internal_colors(r, g, b, a);
 #ifndef RPLATFORM_IOS
@@ -427,62 +422,62 @@ void d_color(double r, double g, double b, double a)
 #endif
 }
 
-void d_color4f(float r, float g, float b, float a)
+void drw_color4f(float r, float g, float b, float a)
 {
 	_set_internal_colors(r, g, b, a);
 	glColor4f(r, g, b, a);
 }
 
-void d_color_c(RColor c)
+void drw_color_c(RColor c)
 {
 	_set_internal_colors(c.r, c.g, c.b, c.a);
 	glColor4f(c.r, c.g, c.b, c.a);
 }
 
-void d_color_c8(RColor8 c)
+void drw_color_c8(RColor8 c)
 {
 	_set_internal_colors(c.r, c.g, c.b, c.a);
 	glColor4f(c.r, c.g, c.b, c.a);
 }
 
-void d_color_c16(RColor16 c)
+void drw_color_c16(RColor16 c)
 {
 	_set_internal_colors(c.r, c.g, c.b, c.a);
 	glColor4f(c.r, c.g, c.b, c.a);
 }
 
-void d_color_wc(WColor c)
+void drw_color_wc(WColor c)
 {
 	_set_internal_colors(c.r, c.g, c.b, c.a);
 	glColor4f(c.r, c.g, c.b, c.a);
 }
 
 /*
-void d_color_wc8(WColor8 c)
+void drw_color_wc8(WColor8 c)
 {
 	_set_internal_colors(c.r, c.g, c.b, c.a);
 	glColor4f(c.r, c.g, c.b, c.a);
 }
 */
 
-void d_color_wc16(WColor16 c)
+void drw_color_wc16(WColor16 c)
 {
 	_set_internal_colors(c.r, c.g, c.b, c.a);
 	glColor4f(c.r, c.g, c.b, c.a);
 }
-void d_color3f(float r, float g, float b)
+void drw_color3f(float r, float g, float b)
 {
 	_set_internal_colors(r, g, b, _a);
 	glColor4f(r, g, b, _a);
 }
 
-void d_color_u(float v)
+void drw_color_u(float v)
 {
 	_set_internal_colors(v, v, v, 1.);
 	glColor4f(v, v, v, 1.);
 }
 
-void d_color_push()
+void drw_color_push()
 {
 	prev.r = _r;
 	prev.g = _g;
@@ -490,7 +485,7 @@ void d_color_push()
 	prev.a = _a;
 }
 
-void d_color_pop()
+void drw_color_pop()
 {
 	_set_internal_colors(prev.r, prev.g, prev.b, prev.a);
 
@@ -498,32 +493,32 @@ void d_color_pop()
 }
 
 /*
- void d_color_c(RColor* c)
+ void drw_color_c(RColor* c)
  {
  _set_internal_colors(c->r, c->g, c->b, 1.0f);
  glColor4f(c->r,c->g,c->b,1.);
  }
 
- void d_color_c8(RColor8* c)
+ void drw_color_c8(RColor8* c)
  {
  _set_internal_colors(c->r, c->g, c->b, c->a);
  glColor4f(c->r,c->g,c->b,c->a);
  }
 
- void d_color_c16(RColor16* c)
+ void drw_color_c16(RColor16* c)
  {
  _set_internal_colors(c->r, c->g, c->b, c->a);
  glColor4f(c->r,c->g,c->b,c->a);
  }
  */
 
-void d_alpha(float a)
+void drw_alpha(float a)
 {
 	prev_alpha = a;
 	glColor4f(_r, _g, _b, a);
 }
 
-void d_alpha_pop()
+void drw_alpha_pop()
 {
 	_a = prev_alpha;
 	glColor4f(_r, _g, _b, _a);
@@ -537,22 +532,22 @@ void d_alpha_pop()
 
 static int matrix_stack_count = 0;
 
-void d_alpha_mult(double v)
+void drw_alpha_mult(double v)
 {
 	alpha_mult = v;
 }
 
-int d_check_matrix(void)
+int drw_checkmatrix(void)
 {
 	return matrix_stack_count;
 }
 
-void d_alpha_mult_pop()
+void drw_alpha_mult_pop()
 {
 	alpha_mult = 1;
 }
 
-void d_push()
+void drw_push()
 {
 	matrix_stack_count++;
 	if (matrix_stack_count > MATRIX_STACK_MAX)
@@ -562,7 +557,7 @@ void d_push()
 	glPushMatrix();
 }
 
-void d_pop()
+void drw_pop()
 {
 	matrix_stack_count--;
 	if (matrix_stack_count < 0)
@@ -572,22 +567,22 @@ void d_pop()
 	glPopMatrix();
 }
 
-void d_rotate_x(float r)
+void drw_rotate_x(float r)
 {
 	glRotatef(r, 1, 0, 0);
 }
 
-void d_rotate_y(float r)
+void drw_rotate_y(float r)
 {
 	glRotatef(r, 0, 1, 0);
 }
 
-void d_rotate_z(float r)
+void drw_rotate_z(float r)
 {
 	glRotatef(r, 0, 0, 1);
 }
 
-void d_rotate(float x, float y, float z)
+void drw_rotate(float x, float y, float z)
 {
 	glRotatef(x, 1, 0, 0);
 	glRotatef(y, 0, 1, 0);
@@ -596,7 +591,7 @@ void d_rotate(float x, float y, float z)
 
 #pragma mark primitives
 
-void d_line_r(RLine* poly)
+void drw_line_r(RLine* poly)
 {
 
 	const unsigned long long renderLineSize = poly->num * 2;
@@ -618,14 +613,14 @@ void d_line_r(RLine* poly)
 	free(arr);
 }
 
-void d_line_3f(float ax, float ay, float az, float bx, float by, float bz)
+void drw_line_3f(float ax, float ay, float az, float bx, float by, float bz)
 {
 	const GLfloat renderLine[] = {ax, ay, az, bx, by, bz};
 	glVertexPointer(3, GL_FLOAT, 0, renderLine);
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
 }
 
-void d_line3_r(RLine3* poly)
+void drw_line3_r(RLine3* poly)
 {
 
 	const unsigned long long renderLineSize = (poly->num * 3);
@@ -645,139 +640,137 @@ void d_line3_r(RLine3* poly)
 	}
 
 	glVertexPointer(3, GL_FLOAT, 0, arr);
-	
+
 	glDrawArrays(GL_LINE_STRIP, 0, (int)poly->num);
 	free(arr);
 }
 
-void d_line(float ax, float ay, float bx, float by)
+void drw_line(float ax, float ay, float bx, float by)
 {
 	const GLfloat renderLine[] = {ax, ay, bx, by};
 	glVertexPointer(2, GL_FLOAT, 0, renderLine);
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
 }
 
-void d_line_p(WPoint a, WPoint b)
+void drw_line_p(WPoint a, WPoint b)
 {
 	const GLfloat renderLine[] = {a.x, a.y, b.x, b.y};
 	glVertexPointer(2, GL_FLOAT, 0, renderLine);
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
 }
 
-void d_tri(float ax, float ay, float bx, float by, float cx, float cy)
+void drw_tri(float ax, float ay, float bx, float by, float cx, float cy)
 {
 	const GLfloat renderLine[] = {ax, ay, bx, by, cx, cy};
 	glVertexPointer(2, GL_FLOAT, 0, renderLine);
 	glDrawArrays(GL_LINE_STRIP, 0, 3);
 }
 
-void d_scale_2f(float x, float y)
+void drw_scale_2f(float x, float y)
 {
 	glScalef(x, y, 1);
 }
 
-void d_scale(float x, float y, float z)
+void drw_scale(float x, float y, float z)
 {
 	glScalef(x, y, z);
 }
-void d_scale_u(float v)
+void drw_scale_u(float v)
 {
 	glScalef(v, v, v);
 }
-void d_scale_x(float x)
+void drw_scale_x(float x)
 {
 	glScalef(x, 1, 1);
 }
-void d_scale_y(float y)
+void drw_scale_y(float y)
 {
 	glScalef(1, y, 1);
 }
-void d_scale_z(float z)
+void drw_scale_z(float z)
 {
 	glScalef(1, 1, z);
 }
 /*
- void d_translate_vec2(Vec2* v)
+ void drw_translate_vec2(Vec2* v)
  {
  glTranslatef(v->x, v->y, 0);
  }
 
  */
-void d_translate_vec3(vec3_t v)
+void drw_translate_vec3(vec3_t v)
 {
 	glTranslatef(v[0], v[1], v[2]);
 }
 
-void d_translate_x(float v)
+void drw_translate_x(float v)
 {
 	glTranslatef(v, 0, 0);
 }
 
-void d_translate_y(float v)
+void drw_translate_y(float v)
 {
 	glTranslatef(0, v, 0);
 }
 
-void d_translate_z(float v)
+void drw_translate_z(float v)
 {
 	glTranslatef(0, 0, v);
 }
 
-void d_translate2f(float x, float y)
+void drw_translate2f(float x, float y)
 {
 	glTranslatef(x, y, 0);
 }
 
-void d_translate(float x, float y, float z)
+void drw_translate(float x, float y, float z)
 {
 	glTranslatef(x, y, z);
 }
 
-void d_translate_rp(RPoint p)
+void drw_translate_rp(RPoint p)
 {
 	glTranslatef(p.x, p.y, 0);
 }
 
-void d_translate_rp3(RPoint3 p)
+void drw_translate_rp3(RPoint3 p)
 {
 	glTranslatef(p.x, p.y, p.z);
 }
 
-void d_translate3f(float x, float y, float z)
+void drw_translate3f(float x, float y, float z)
 {
 	glTranslatef(x, y, z);
 }
 
-void d_gtransform_apply(GTransform t)
+void drw_gtransform_apply(GTransform t)
 {
-	d_translate_vec3(t.position);
-	d_translate_vec3(t.anchor);
-	d_scale_vec3(t.scale);
-	d_rotate_vec3(t.rotation);
+	drw_translate_vec3(t.position);
+	drw_translate_vec3(t.anchor);
+	drw_scale_vec3(t.scale);
+	drw_rotate_vec3(t.rotation);
 }
 
-void d_transform_apply(WTransform t)
+void drw_transform_apply(WTransform t)
 {
-	d_translate_wvec(t.position);
-	d_translate_wvec(t.anchor);
-	d_scale_wvec(t.scale);
-	d_rotate_wvec(t.rotation);
+	drw_translate_wvec(t.position);
+	drw_translate_wvec(t.anchor);
+	drw_scale_wvec(t.scale);
+	drw_rotate_wvec(t.rotation);
 }
 
-void d_transform_deapply(WTransform t)
+void drw_transform_deapply(WTransform t)
 {
-	/*d_rotate_wvec(t.rotation);
+	/*drw_rotate_wvec(t.rotation);
 
-	d_translate_wvec(t.position);
-	d_translate_wvec(t.anchor);
-	d_scale_wvec(t.scale);
+	drw_translate_wvec(t.position);
+	drw_translate_wvec(t.anchor);
+	drw_scale_wvec(t.scale);
 */
-	
 }
 
-void d_gtransform_deapply(GTransform t)
+void drw_gtransform_deapply(GTransform t)
 {
-	
 }
 
 #ifdef RPLATFORM_IOS
@@ -786,64 +779,64 @@ void d_gtransform_deapply(GTransform t)
 #define glRotated glRotatef
 #endif
 
-void d_translate_wvec(WVec3d v)
+void drw_translate_wvec(WVec3d v)
 {
 	glTranslated(v.x, v.y, v.z);
 }
 
-void d_scale_wvec(WVec3d v)
+void drw_scale_wvec(WVec3d v)
 {
 	// printf("%f %f %f\n", v.x, v.y, v.z);
 	glScaled(v.x, v.y, v.z);
 }
 
-void d_scale_vec3(vec3_t v)
+void drw_scale_vec3(vec3_t v)
 {
 	// printf("%f %f %f\n", v.x, v.y, v.z);
 	glScaled(v[0], v[1], v[2]);
 }
 /*
-void d_rotate_vec3(vec3_t v)
+void drw_rotate_vec3(vec3_t v)
 {
 	glRotated(v[0], 1, 0, 0);
 	glRotated(v[1], 0, 1, 0);
 	glRotated(v[2], 0, 0, 1);
 }
 */
-void d_rotate_wvec(WVec3d v)
+void drw_rotate_wvec(WVec3d v)
 {
 	glRotated(v.x, 1, 0, 0);
 	glRotated(v.y, 0, 1, 0);
 	glRotated(v.z, 0, 0, 1);
 }
 
-void d_rotate_vec3(vec3_t vec)
+void drw_rotate_vec3(vec3_t vec)
 {
-	d_rotate(vec[0], vec[1], vec[2]);
+	drw_rotate(vec[0], vec[1], vec[2]);
 }
 
-void d_nice_axis()
+void drw_axis_nice()
 {
 	float x = axis_radius * scale_factor;
 
-	d_push();
-	d_line(x, 0, x * 2, 0);
-	d_rotate_z(120.0);
-	d_line(x, 0, x * 2, 0);
-	d_rotate_z(120.0);
-	d_line(x, 0, x * 2, 0);
-	d_rotate_z(120.0);
-	d_pop();
+	drw_push();
+	drw_line(x, 0, x * 2, 0);
+	drw_rotate_z(120.0);
+	drw_line(x, 0, x * 2, 0);
+	drw_rotate_z(120.0);
+	drw_line(x, 0, x * 2, 0);
+	drw_rotate_z(120.0);
+	drw_pop();
 }
 
-void d_text_size(int sz, int resolution)
+void drw_text_size(int sz, int resolution)
 {
 #ifdef R4_ENABLE_FTGL
-	d_font_size(sz, resolution);
+	drw_font_size(sz, resolution);
 
 #endif
 }
-void d_text(const char* format, ...)
+void drw_text(const char* format, ...)
 {
 	char buf[TEXT_MAX];
 	sprintf(buf, "%s", format);
@@ -854,7 +847,7 @@ void d_text(const char* format, ...)
 
 #ifdef R4_ENABLE_FTGL
 
-	d_font_draw(buf);
+	drw_font_draw(buf);
 #endif
 }
 
@@ -869,7 +862,7 @@ void d_wsequence_e(WSequence* seq, int frame)
 	//  do stuff here.
 }
 
-void d_robject(RObject* obj)
+void drw_robject(RObject* obj)
 {
 
 	size_t num = obj->lines.length;
@@ -886,18 +879,18 @@ void d_robject(RObject* obj)
 			return;
 		}
 
-		d_rline(l);
+		drw_rline(l);
 	}
 }
 
-void d_wobject_normal(WObject* obj)
+void drw_wobject_normal(WObject* obj)
 {
-	// d_color(1,1,1,.9);
-	d_push();
-	d_translate(obj->transform.position.x, obj->transform.position.y,
+	// drw_color(1,1,1,.9);
+	drw_push();
+	drw_translate(obj->transform.position.x, obj->transform.position.y,
 		    obj->transform.position.z);
 
-	d_scale_2f(obj->transform.scale.x, obj->transform.scale.y);
+	drw_scale_2f(obj->transform.scale.x, obj->transform.scale.y);
 	int i;
 
 	for (i = 0; i < obj->num_lines; ++i)
@@ -909,16 +902,16 @@ void d_wobject_normal(WObject* obj)
 			return;
 		}
 
-		d_poly(l);
+		drw_poly(l);
 	}
 
-	d_pop();
+	drw_pop();
 }
 
-void d_wobject_naive(WObject* obj)
+void drw_wobject_naive(WObject* obj)
 {
 
-	d_rect_w(obj->bounds);
+	drw_rect_w(obj->bounds);
 
 	if (!obj)
 	{
@@ -942,28 +935,28 @@ void d_wobject_naive(WObject* obj)
 			return;
 		}
 
-		d_poly(l);
+		drw_poly(l);
 	}
 }
 
-void d_wobject_e(WObject* obj)
+void drw_wobject_e(WObject* obj)
 {
 
 	if (obj->normalized)
 	{
-		d_wobject_normal(obj);
+		drw_wobject_normal(obj);
 	}
 	else
 	{
-		d_wobject_naive(obj);
+		drw_wobject_naive(obj);
 	}
 }
 
-void d_wline_fill(WLine* l)
+void drw_wline_fill(WLine* l)
 {
-	d_set_fill(true);
-	d_poly(l);
-	d_pop_fill();
+	drw_set_fill(true);
+	drw_poly(l);
+	drw_pop_fill();
 }
 
 /*
@@ -972,7 +965,7 @@ void d_wline_fill(WLine* l)
 }
 */
 
-void d_wline_strokeonly(WLine* l)
+void drw_wline_strokeonly(WLine* l)
 {
 	if (l == NULL)
 	{
@@ -980,10 +973,10 @@ void d_wline_strokeonly(WLine* l)
 		return;
 	}
 
-	d_poly(l);
+	drw_poly(l);
 }
 
-void d_wline(WLine* l)
+void drw_wline(WLine* l)
 {
 	if (l == NULL)
 	{
@@ -996,16 +989,16 @@ void d_wline(WLine* l)
 		if (l->has_stroke)
 		{
 			WColor16 c = l->stroke;
-			d_color(c.r, c.g, c.b, c.a * alpha_mult);
+			drw_color(c.r, c.g, c.b, c.a * alpha_mult);
 			/// dirty hack to have color and also transparent onion
 			/// skins oops
 			//r_alpha(c.a * alpha_mult);
 		}
 		if (l->closed)
 		{
-			d_set_fill(l->closed);
-			d_poly(l);
-			d_pop_fill();
+			drw_set_fill(l->closed);
+			drw_poly(l);
+			drw_pop_fill();
 		}
 		if (l->has_stroke)
 		{
@@ -1021,7 +1014,7 @@ void d_wline(WLine* l)
 	{
 		if (l->tess)
 		{
-			d_gpc_tristrip(l->tess);
+			drw_gpc_tristrip(l->tess);
 			return;
 		}
 
@@ -1029,17 +1022,17 @@ void d_wline(WLine* l)
 		{
 			if (l->brush->stroke->tess)
 			{
-				d_gpc_tristrip(l->brush->stroke->tess);
+				drw_gpc_tristrip(l->brush->stroke->tess);
 			}
 			else
 			{
 
-				d_triangle_strip(l->brush->stroke);
+				drw_triangle_strip(l->brush->stroke);
 			}
 		}
 		// else{
 
-		//  d_poly(l->brush->stroke);
+		//  drw_poly(l->brush->stroke);
 		//}
 	}
 	else
@@ -1047,23 +1040,23 @@ void d_wline(WLine* l)
 
 		if (l->tess)
 		{
-			d_gpc_tristrip(l->tess);
+			drw_gpc_tristrip(l->tess);
 		}
 		else
 		{
-			d_poly(l);
+			drw_poly(l);
 		}
 	}
 #else
-	d_poly(l);
+	drw_poly(l);
 #endif
 	//  TODO color pop?
 }
 
-void d_wobject(WObject* obj)
+void drw_wobject(WObject* obj)
 {
 
-	// d_rect_w(obj->bounds);
+	// drw_rect_w(obj->bounds);
 	if (!obj)
 	{
 		printf("Error, tried to render a null obj!\n");
@@ -1075,8 +1068,8 @@ void d_wobject(WObject* obj)
 		return;
 	}
 
-	d_push();
-	d_transform_apply(obj->transform);
+	drw_push();
+	drw_transform_apply(obj->transform);
 	int i;
 	for (i = 0; i < obj->num_lines; ++i)
 	{
@@ -1095,15 +1088,15 @@ void d_wobject(WObject* obj)
 			printf("AAACK\n");
 			continue;
 		}
-		d_wline(l);
+		drw_wline(l);
 	}
-	d_pop();
+	drw_pop();
 }
 
-void d_wobject_notransform(WObject* obj)
+void drw_wobject_notransform(WObject* obj)
 {
 
-	// d_rect_w(obj->bounds);
+	// drw_rect_w(obj->bounds);
 
 	if (!obj)
 	{
@@ -1116,8 +1109,8 @@ void d_wobject_notransform(WObject* obj)
 		return;
 	}
 
-	d_push();
-	//d_transform_apply(obj->transform);
+	drw_push();
+	//drw_transform_apply(obj->transform);
 	int i;
 	for (i = 0; i < obj->num_lines; ++i)
 	{
@@ -1132,15 +1125,15 @@ void d_wobject_notransform(WObject* obj)
 			return;
 		}
 
-		d_wline(l);
+		drw_wline(l);
 	}
-	d_pop();
+	drw_pop();
 }
 
-void d_wobject_strokeonly(WObject* obj)
+void drw_wobject_strokeonly(WObject* obj)
 {
 
-	// d_rect_w(obj->bounds);
+	// drw_rect_w(obj->bounds);
 
 	if (!obj)
 	{
@@ -1153,8 +1146,8 @@ void d_wobject_strokeonly(WObject* obj)
 		return;
 	}
 
-	d_push();
-	d_transform_apply(obj->transform);
+	drw_push();
+	drw_transform_apply(obj->transform);
 	int i;
 	for (i = 0; i < obj->num_lines; ++i)
 	{
@@ -1169,15 +1162,15 @@ void d_wobject_strokeonly(WObject* obj)
 			return;
 		}
 
-		d_wline_strokeonly(l);
+		drw_wline_strokeonly(l);
 	}
-	d_pop();
+	drw_pop();
 }
 
-void d_wobject_strokeonly_notransform(WObject* obj)
+void drw_wobject_strokeonly_notransform(WObject* obj)
 {
 
-	// d_rect_w(obj->bounds);
+	// drw_rect_w(obj->bounds);
 
 	if (!obj)
 	{
@@ -1190,8 +1183,8 @@ void d_wobject_strokeonly_notransform(WObject* obj)
 		return;
 	}
 
-	d_push();
-	//d_transform_apply(obj->transform);
+	drw_push();
+	//drw_transform_apply(obj->transform);
 	int i;
 	for (i = 0; i < obj->num_lines; ++i)
 	{
@@ -1206,41 +1199,41 @@ void d_wobject_strokeonly_notransform(WObject* obj)
 			return;
 		}
 
-		d_wline_strokeonly(l);
+		drw_wline_strokeonly(l);
 	}
-	d_pop();
+	drw_pop();
 }
 
-void d_verts_r(RLine* l)
+void drw_verts_r(RLine* l)
 {
 	int i;
 	for (i = 0; i < l->num; ++i)
 	{
 		RPoint* p = &l->data[i];
-		d_push();
-		d_translate2f(p->x, p->y);
+		drw_push();
+		drw_translate2f(p->x, p->y);
 		double pv = 10;
-		d_square(pv);
-		d_pop();
+		drw_square(pv);
+		drw_pop();
 	}
 }
 
-void d_verts(WLine* l)
+void drw_verts(WLine* l)
 {
 	int i;
 	for (i = 0; i < l->num; ++i)
 	{
 		WPoint* p = &l->data[i];
-		d_push();
-		d_translate2f(p->x, p->y);
+		drw_push();
+		drw_translate2f(p->x, p->y);
 		double pv = p->pressure;
 		pv *= 10;
-		d_square(pv);
-		d_pop();
+		drw_square(pv);
+		drw_pop();
 	}
 }
 
-void d_wobject_verts(WObject* obj)
+void drw_wobject_verts(WObject* obj)
 {
 	int i;
 	for (i = 0; i < obj->num_lines; i++)
@@ -1251,74 +1244,57 @@ void d_wobject_verts(WObject* obj)
 			printf("Error, bogus line!\n");
 			continue;
 		}
-		d_verts(line);
+		drw_verts(line);
 	}
 }
 
-void d_axis()
+void drw_axis()
 {
 	/// ones here used to be scale factor
 	int axis_render_radius = axis_radius * scale_factor;
-	// d_push();
-	// d_translate2f(x * 1,y * 1);
-	d_line(-axis_render_radius, 0, axis_render_radius, 0);
-	d_line(0, -axis_render_radius, 0, axis_render_radius);
-	// d_pop();
+	// drw_push();
+	// drw_translate2f(x * 1,y * 1);
+	drw_line(-axis_render_radius, 0, axis_render_radius, 0);
+	drw_line(0, -axis_render_radius, 0, axis_render_radius);
+	// drw_pop();
 }
 
-void d_axis_living()
+void drw_axis_living()
 {
 	static float r			= 0.f;
 	static float speed		= .01f;
-	float	  axis_render_radius = axis_radius * 1;
+	float	axis_render_radius = axis_radius * 1;
 
 	//axis_render_radius = axis_radius * 1;
 	r += speed;
-	// d_push();
-	// d_translate2f(x * 1,y * 1);
-	d_rotate_z(r * 90);
-	d_line(-axis_render_radius, 0, axis_render_radius, 0);
-	d_line(0, -axis_render_radius, 0, axis_render_radius);
-	d_rotate_z(-r * 90);
-	// d_pop();
+	// drw_push();
+	// drw_translate2f(x * 1,y * 1);
+	drw_rotate_z(r * 90);
+	drw_line(-axis_render_radius, 0, axis_render_radius, 0);
+	drw_line(0, -axis_render_radius, 0, axis_render_radius);
+	drw_rotate_z(-r * 90);
+	// drw_pop();
 }
 /*
 
- void d_rect_r(RRect r )
+ void drw_rect_r(RRect r )
  {
- d_rect(r.pos.x, r.pos.y, r.pos.x + r.size.x, r.pos.y + r.size.y);
+ drw_rect(r.pos.x, r.pos.y, r.pos.x + r.size.x, r.pos.y + r.size.y);
 
  }
  */
 
-void d_rect_w(WRect r)
+void drw_rect_w(WRect r)
 {
-	d_rect(r.pos.x, r.pos.y, r.pos.x + r.size.x, r.pos.y + r.size.y);
+	drw_rect(r.pos.x, r.pos.y, r.pos.x + r.size.x, r.pos.y + r.size.y);
 }
 
-void d_rect_r(RRect r)
+void drw_rect_r(RRect r)
 {
-	d_rect(r.pos.x, r.pos.y, r.pos.x + r.size.x, r.pos.y + r.size.y);
+	drw_rect(r.pos.x, r.pos.y, r.pos.x + r.size.x, r.pos.y + r.size.y);
 }
 
-void d_rect_wp(WPoint a, WPoint b)
-{
-	float arr[8];
-	arr[0] = a.x;
-	arr[1] = a.y;
-	arr[2] = b.x;
-	arr[3] = a.y;
-	arr[4] = b.x;
-	arr[5] = b.y;
-	arr[6] = a.x;
-	arr[7] = b.y;
-
-	glVertexPointer(2, GL_FLOAT, 0, &arr);
-	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
-	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
-}
-
-void d_rect_rp(RPoint a, RPoint b)
+void drw_rect_wp(WPoint a, WPoint b)
 {
 	float arr[8];
 	arr[0] = a.x;
@@ -1335,7 +1311,24 @@ void d_rect_rp(RPoint a, RPoint b)
 	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
 
-void d_rect(float ax, float ay, float bx, float by)
+void drw_rect_rp(RPoint a, RPoint b)
+{
+	float arr[8];
+	arr[0] = a.x;
+	arr[1] = a.y;
+	arr[2] = b.x;
+	arr[3] = a.y;
+	arr[4] = b.x;
+	arr[5] = b.y;
+	arr[6] = a.x;
+	arr[7] = b.y;
+
+	glVertexPointer(2, GL_FLOAT, 0, &arr);
+	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
+	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
+}
+
+void drw_rect(float ax, float ay, float bx, float by)
 {
 	float arr[8];
 	arr[0] = ax;
@@ -1352,7 +1345,7 @@ void d_rect(float ax, float ay, float bx, float by)
 	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
 
-void d_point(void)
+void drw_point(void)
 {
 	float arr[2];
 	glVertexPointer(2, GL_FLOAT, 0, &arr);
@@ -1360,9 +1353,9 @@ void d_point(void)
 	//  printf("~");
 }
 
-void d_square(float r)
+void drw_square(float r)
 {
-	d_rect(r * -.5, r * -.5, r * .5, r * .5);
+	drw_rect(r * -.5, r * -.5, r * .5, r * .5);
 }
 
 static void calculate_circle(int sides, int radius)
@@ -1385,9 +1378,9 @@ static void calculate_circle(int sides, int radius)
 	circle_defs[sides] = arr;
 }
 
-void d_circle(float r)
+void drw_circle(float r)
 {
-	d_ellipse(r, r);
+	drw_ellipse(r, r);
 	/*
 	float* circle = circle_defs[circle_precision];
 	if (circle == NULL) {
@@ -1398,7 +1391,7 @@ void d_circle(float r)
 	glVertexPointer(2, GL_FLOAT, 0, circle);
 
 	// cout << "c:" << circleArray[2] << endl;
-	d_scale_u(r);
+	drw_scale_u(r);
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, circle_precision)
 	     : glDrawArrays(GL_LINE_LOOP, 0, circle_precision);
 
@@ -1406,11 +1399,11 @@ void d_circle(float r)
 */
 }
 
-void d_ellipse(float _x, float _y)
+void drw_ellipse(float _x, float _y)
 {
 	/*if ( _x == _y )
 	{
-		d_circle(_x);
+		drw_circle(_x);
 		return;
 	}*/
 
@@ -1454,7 +1447,7 @@ void d_ellipse(float _x, float _y)
  void r_rrect(RRect rec)
  {
 
- d_rect(rec.pos.x, rec.pos.y, rec.pos.x + rec.size.x, rec.pos.y + rec.size.y);
+ drw_rect(rec.pos.x, rec.pos.y, rec.pos.x + rec.size.x, rec.pos.y + rec.size.y);
 
  }
  */
@@ -1509,7 +1502,7 @@ void d_ellipse(float _x, float _y)
 
  }
  */
-void d_rline(RLine* poly)
+void drw_rline(RLine* poly)
 {
 
 	const unsigned long long renderLineSize = (poly->num * 2);
@@ -1538,7 +1531,7 @@ void d_rline(RLine* poly)
 	free(arr);
 }
 
-void d_poly(WLine* line)
+void drw_poly(WLine* line)
 {
 	int			 i, j;
 	const unsigned long long renderLineSize = (line->num * 2);
@@ -1568,7 +1561,7 @@ void d_poly(WLine* line)
 	free(arr);
 }
 
-void d_poly_extras(WLine* line)
+void drw_poly_extras(WLine* line)
 {
 	if (!line)
 	{
@@ -1585,9 +1578,9 @@ void d_poly_extras(WLine* line)
 
 	if (line->closed)
 	{
-		d_set_fill(line->closed);
-		d_poly(line);
-		d_pop_fill();
+		drw_set_fill(line->closed);
+		drw_poly(line);
+		drw_pop_fill();
 	}
 #ifdef DISABLE_UNTIL_WORKLINE_REFACTOR_COMPLETE
 
@@ -1598,19 +1591,19 @@ void d_poly_extras(WLine* line)
 	else
 	{
 		// if (!line->closed)
-		d_set_fill(line->closed);
-		d_poly(line);
-		d_pop_fill();
+		drw_set_fill(line->closed);
+		drw_poly(line);
+		drw_pop_fill();
 	}
 
 	if (line->tess)
 	{
-		d_gpc_tristrip(line->tess);
+		drw_gpc_tristrip(line->tess);
 	}
 #endif
 }
 
-void d_gpc_polygon_outline(GPCRec* rec)
+void drw_gpc_polygon_outline(GPCRec* rec)
 {
 	gpc_polygon* poly = (gpc_polygon*)rec->polygon;
 	// gpc_polygon* poly = rec->polygon;
@@ -1645,7 +1638,7 @@ void d_gpc_polygon_outline(GPCRec* rec)
 	}
 }
 
-void d_gpc_polygon(GPCRec* rec)
+void drw_gpc_polygon(GPCRec* rec)
 {
 	gpc_polygon* poly = (gpc_polygon*)rec->polygon;
 	// gpc_polygon* poly = rec->polygon;
@@ -1679,7 +1672,7 @@ void d_gpc_polygon(GPCRec* rec)
 	}
 }
 
-void d_gpc_verts(void* dat)
+void drw_gpc_verts(void* dat)
 {
 	/*
 	 gpc_polygon poly
@@ -1694,9 +1687,9 @@ void d_gpc_verts(void* dat)
 	 double x = poly.contour[c].vertex[v].x;
 	 double y = poly.contour[c].vertex[v].y;
 
-	 d_translate2f(x,y);
-	 d_square(20);
-	 d_translate2f(-x,-y);
+	 drw_translate2f(x,y);
+	 drw_square(20);
+	 drw_translate2f(-x,-y);
 
 	 //printf("%f\n", x);
 	 glBegin(GL_LINE_LOOP);
@@ -1716,16 +1709,16 @@ void d_gpc_verts(void* dat)
 	 */
 }
 
-void d_gpc_triwire(void* dat)
+void drw_gpc_triwire(void* dat)
 {
 #ifndef RPLATFORM_IOS
 	glPolygonMode(GL_FRONT, GL_LINE);
-	d_gpc_tristrip(dat);
+	drw_gpc_tristrip(dat);
 	glPolygonMode(GL_FRONT, GL_FILL);
 #endif
 }
 
-void d_gpc_tristrip(void* dat)
+void drw_gpc_tristrip(void* dat)
 {
 	//#ifndef RPLATFORM_IOS
 	gpc_tristrip* tri = dat;
@@ -1753,7 +1746,7 @@ void d_gpc_tristrip(void* dat)
 	//#endif
 }
 
-void d_triangle_strip(WLine* poly)
+void drw_triangle_strip(WLine* poly)
 {
 
 	const unsigned long long renderLineSize = (poly->num * 2);
@@ -1775,7 +1768,7 @@ void d_triangle_strip(WLine* poly)
 	free(arr);
 }
 
-void d_tristrip_3d(double* arr, int num, bool closed)
+void drw_tristrip_3d(double* arr, int num, bool closed)
 {
 
 	// const unsigned long long renderLineSize = ( poly->num * 2);
@@ -1802,7 +1795,7 @@ void d_tristrip_3d(double* arr, int num, bool closed)
 	free(arr);
 }
 
-void d_tris_3d(double* arr, int num, bool closed)
+void drw_tris_3d(double* arr, int num, bool closed)
 {
 
 	glVertexPointer(3, VERTEX_POINTER_IDENT, 0, arr);
@@ -1811,7 +1804,7 @@ void d_tris_3d(double* arr, int num, bool closed)
 	free(arr);
 }
 
-void d_rawpoly_2d(double* arr, int num, bool closed)
+void drw_rawpoly_2d(double* arr, int num, bool closed)
 {
 
 	glVertexPointer(2, VERTEX_POINTER_IDENT, 0, arr);
@@ -1827,7 +1820,7 @@ void d_rawpoly_2d(double* arr, int num, bool closed)
 	}
 }
 
-void d_rawpoly_2f(float* arr, int num, bool closed)
+void drw_rawpoly_2f(float* arr, int num, bool closed)
 {
 
 	glVertexPointer(2, GL_FLOAT, 0, arr);
@@ -1843,7 +1836,7 @@ void d_rawpoly_2f(float* arr, int num, bool closed)
 	}
 }
 
-void d_rawpoly_3d(double* arr, int num, bool closed)
+void drw_rawpoly_3d(double* arr, int num, bool closed)
 {
 
 	glVertexPointer(3, VERTEX_POINTER_IDENT, 0, arr);
@@ -1859,7 +1852,7 @@ void d_rawpoly_3d(double* arr, int num, bool closed)
 	}
 }
 
-void d_rawpoly_3f(float* arr, int num, bool closed)
+void drw_rawpoly_3f(float* arr, int num, bool closed)
 {
 
 	glVertexPointer(3, GL_FLOAT, 0, arr);
@@ -1875,21 +1868,21 @@ void d_rawpoly_3f(float* arr, int num, bool closed)
 	}
 }
 
-void d_rawpoints_3d(double* arr, int num)
+void drw_rawpoints_3d(double* arr, int num)
 {
 
 	glVertexPointer(3, VERTEX_POINTER_IDENT, 0, arr);
 	glDrawArrays(GL_POINTS, 0, num);
 }
 
-void d_point3f(float x, float y, float z)
+void drw_point3f(float x, float y, float z)
 {
 	float arr[3] = {x, y, z};
 	glVertexPointer(3, GL_FLOAT, 0, arr);
 	glDrawArrays(GL_POINTS, 0, 3);
 }
 
-void d_rawpoints_3f(float* arr, int num)
+void drw_rawpoints_3f(float* arr, int num)
 {
 
 	glVertexPointer(3, GL_FLOAT, 0, arr);
@@ -1910,19 +1903,19 @@ void d_rgbtri(double gamma)
 	glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLubyte),
 		       GL_UNSIGNED_BYTE, indices);
 
-	d_set_circle_precision(3);
-	d_set_fill(true);
-	d_circle(1);
-	d_pop_fill();
+	drw_set_circle_precision(3);
+	drw_set_fill(true);
+	drw_circle(1);
+	drw_pop_fill();
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
-void d_grid(float size, int subdiv)
+void drw_grid(float size, int subdiv)
 {
 
-	// d_push();
-	// d_rotate_x(90);
-	// d_translate2f(size * -.5, size *-.5);
+	// drw_push();
+	// drw_rotate_x(90);
+	// drw_translate2f(size * -.5, size *-.5);
 	double x1, y1, x2, y2;
 
 	double sz = size / subdiv;
@@ -1938,7 +1931,7 @@ void d_grid(float size, int subdiv)
 		y1 -= size * .5;
 		x2 -= size * .5;
 		y2 -= size * .5;
-		d_line(x1, y1, x2, y2);
+		drw_line(x1, y1, x2, y2);
 	}
 
 	for (x = 0; x <= subdiv; ++x)
@@ -1952,10 +1945,10 @@ void d_grid(float size, int subdiv)
 		y1 -= size * .5;
 		x2 -= size * .5;
 		y2 -= size * .5;
-		d_line(x1, y1, x2, y2);
+		drw_line(x1, y1, x2, y2);
 	}
 
-	// d_pop();
+	// drw_pop();
 }
 
 void r_set_window(double w, double h)
@@ -1963,11 +1956,11 @@ void r_set_window(double w, double h)
 	window_width  = w;
 	window_height = h;
 
-	d_calculate_scale();
-	d_setup_view();
+	drw_calculate_scale();
+	drw_setup_view();
 }
 
-void d_set_ortho(bool val)
+void drw_set_ortho(bool val)
 {
 #ifdef DEBUG
 	printf("Setting ortho to %d\n", val);
@@ -1975,7 +1968,7 @@ void d_set_ortho(bool val)
 	_ortho = val;
 }
 
-void d_set_screenspace(bool val)
+void drw_set_screenspace(bool val)
 {
 #ifdef DEBUG
 	printf("Setting screenspace to %d\n", val);
@@ -1993,16 +1986,16 @@ void d_set_screenspace(bool val)
 	//r_set_ortho(val);
 }
 
-void d_setup_view(void)
+void drw_setup_view(void)
 {
 	if (_ortho)
 	{
-		d_setup_view_ortho();
+		drw_setup_view_ortho();
 	}
 	else
 	{
 
-		d_setup_view_persp();
+		drw_setup_view_persp();
 	}
 
 	int bits;
@@ -2012,7 +2005,7 @@ void d_setup_view(void)
 
 #include <glulookat/gluLookAt.h>
 
-void d_setup_view_persp()
+void drw_setup_view_persp()
 {
 	// if(debug_settings.render)
 	l_info("Setting up perspective projection.\n");
@@ -2120,11 +2113,9 @@ void d_setup_view_persp()
 	// glMatrixMode(GL_MODELVIEW);
 	// glLoadIdentity();
 	// glTranslatef(0.375f,0.375f,0.f);
-	
-	
 }
 
-void d_setup_view_ortho()
+void drw_setup_view_ortho()
 {
 	// if(debug_settings.render )
 
@@ -2194,11 +2185,11 @@ void d_setup_view_ortho()
 	 }
 	 */
 
-	d_get_gl_error();
+	drw_get_gl_error();
 
 	glLoadIdentity();
 
-	d_get_gl_error();
+	drw_get_gl_error();
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
@@ -2230,8 +2221,8 @@ void d_setup_view_ortho()
 	double r = width * .5;
 	double t = height * -.5;
 	double b = height * .5;
-	double n = 1048*-8;
-	double f = 1024*8;
+	double n = 1048 * -8;
+	double f = 1024 * 8;
 
 #ifdef RPLATFORM_IOS
 	glOrthof(l, r, t, b, n, f);
@@ -2247,7 +2238,7 @@ void d_setup_view_ortho()
 
 	//}
 
-	d_get_gl_error();
+	drw_get_gl_error();
 #ifndef RPLATFORM_IOS
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -2255,47 +2246,47 @@ void d_setup_view_ortho()
 #endif
 }
 
-void d_set_screensize(double w, double h)
+void drw_set_screensize(double w, double h)
 {
 	// printf("Setting renderer to %f %f\n", w, h);
 	window_width  = w;
 	window_height = h;
 
-	// d_calculate_scale();
-	// d_setup_view();
+	// drw_calculate_scale();
+	// drw_setup_view();
 }
-void d_set_framebuffer(double w, double h)
+void drw_set_framebuffer(double w, double h)
 {
 	// printf("Setting framebuffer to %f %f\n", w, h);
 	framebuffer_width  = w;
 	framebuffer_height = h;
 
-	// d_calculate_scale();
-	// d_setup_view();
+	// drw_calculate_scale();
+	// drw_setup_view();
 }
 
-void d_set_fov(double v)
+void drw_set_fov(double v)
 {
 	fov = v;
 }
 
-void d_set_downsample(double v)
+void drw_set_downsample(double v)
 {
 	scale_factor_downsample = v;
-	d_calculate_scale();
+	drw_calculate_scale();
 }
 
-void d_set_retina(double v)
+void drw_set_retina(double v)
 {
 	// if(debug_settings.render )
 	// printf("Setting retina scale: %f\n", v);
 	// scale_factor_retina = v;
-	d_calculate_scale();
+	drw_calculate_scale();
 	_retina_scale = v;
 	glLineWidth(1);
 }
 
-void d_calculate_scale()
+void drw_calculate_scale()
 {
 
 	scale_factor = scale_factor_downsample * _retina_scale;
@@ -2310,12 +2301,12 @@ void d_calculate_scale()
 	// glLineWidth(app_settings.scale_retina);
 }
 
-void d_set_circle_precision_override_limit(bool v)
+void drw_set_circle_precision_override_limit(bool v)
 {
 	override_circle_limit = v;
 }
 
-void d_set_circle_precision(int v)
+void drw_set_circle_precision(int v)
 {
 	if (v > PRECISION_WARNING_LIMIT)
 	{
@@ -2349,12 +2340,12 @@ void d_set_circle_precision(int v)
 	circle_precision = v;
 }
 
-void d_pop_fill()
+void drw_pop_fill()
 {
 	fill = prev_fill;
 }
 
-void d_set_fill(bool v)
+void drw_set_fill(bool v)
 {
 	prev_fill = fill;
 	fill      = v;
@@ -2362,25 +2353,25 @@ void d_set_fill(bool v)
 
 static void faces2(double r)
 {
-	d_push();
-	d_translate_z(r * -.5);
-	d_square(r);
-	d_translate_z(r);
-	d_square(r);
-	d_pop();
+	drw_push();
+	drw_translate_z(r * -.5);
+	drw_square(r);
+	drw_translate_z(r);
+	drw_square(r);
+	drw_pop();
 }
 
 static void cube(double r)
 {
 	//	the WORST poss impl but avoid shitty glut ness and I'm in a rush
-	d_push();
+	drw_push();
 	faces2(r);
-	d_rotate_x(90);
+	drw_rotate_x(90);
 	faces2(r);
-	d_rotate_y(90);
+	drw_rotate_y(90);
 	faces2(r);
 
-	d_pop();
+	drw_pop();
 }
 void d_cube(float r)
 {
@@ -2426,17 +2417,17 @@ void d_glut_init(void)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 
-	// glutInit(app_argc, app_argv);
+// glutInit(app_argc, app_argv);
 #endif
 }
 
 void d_tetrahedron(float v)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
-	d_push();
-	d_scale_u(v);
+	drw_push();
+	drw_scale_u(v);
 	(fill) ? glutSolidTetrahedron() : glutWireTetrahedron();
-	d_pop();
+	drw_pop();
 #endif
 }
 
@@ -2444,19 +2435,18 @@ void d_sphere(float v)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 	_check_glut_init();
-	glutWireSphere(v * 2 ,12,12);
+	glutWireSphere(v * 2, 12, 12);
 #endif
 }
-
 
 void d_octahedron(float v)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 
-	d_push();
-	d_scale_u(v);
+	drw_push();
+	drw_scale_u(v);
 	(fill) ? glutSolidOctahedron() : glutWireOctahedron();
-	d_pop();
+	drw_pop();
 #endif
 }
 
@@ -2464,10 +2454,10 @@ void d_dodecahedron(float v)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 
-	d_push();
-	d_scale_u(v);
+	drw_push();
+	drw_scale_u(v);
 	(fill) ? glutSolidDodecahedron() : glutWireDodecahedron();
-	d_pop();
+	drw_pop();
 #endif
 }
 
@@ -2475,19 +2465,19 @@ void d_icosahedron(float v)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 
-	d_push();
-	d_scale_u(v * 2);
+	drw_push();
+	drw_scale_u(v * 2);
 	(fill) ? glutSolidIcosahedron() : glutWireIcosahedron();
-	d_pop();
+	drw_pop();
 #endif
 }
 
-void d_teapot(float v)
+void drw_teapot(float v)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 
-	d_push();
+	drw_push();
 	glutWireTeapot(v);
-	d_pop();
+	drw_pop();
 #endif
 }

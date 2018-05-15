@@ -1,12 +1,12 @@
 //
-//  d_point.c
+//  drw_point.c
 //  drw
 //
 //  Created by vs on 5/1/18.
 //  Copyright © 2018 ruminant. All rights reserved.
 //
 
-#include "d_point.h"
+#include "drw_point.h"
 
 #include <drw/drw.h>
 
@@ -95,7 +95,7 @@ int mathUnprojectPoint(float* point, const float* restrict combinedmatrix, float
 // Get combinedmatrix with:
 //mathMulMatrix4fMatrix4f(combinedmatrix, modelviewmatrix, projectionmatrix);
 
-void d_point_3d_to_2d(double x, double y, double z, double* rx, double* ry, double* rz)
+void drw_point_3d_to_2d(double x, double y, double z, double* rx, double* ry, double* rz)
 {
 	float m[16];
 	float p[16];
@@ -175,7 +175,7 @@ void d_point_3d_to_2d(double x, double y, double z, double* rx, double* ry, doub
  }
  */
 
-void d_point_2d_to_3d(double x, double y, double* _rx, double* _ry, double* _rz)
+void drw_point_2d_to_3d(double x, double y, double* _rx, double* _ry, double* _rz)
 {
 	GLint viewport[4];
 

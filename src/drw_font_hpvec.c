@@ -1,12 +1,12 @@
 //
-//  d_font_hpvec.c
+//  drw_font_hpvec.c
 //  drw
 //
 //  Created by vs on 4/27/18.
 //  Copyright © 2018 ruminant. All rights reserved.
 //
 
-#include "d_font_hpvec.h"
+#include "drw_font_hpvec.h"
 #include <drw/drw.h>
 
 #include <hp/hp1345a.c>
@@ -20,7 +20,7 @@
 static int alignment_h = DRW_FONT_ALIGN_H_CENTER;
 static int alignment_v = DRW_FONT_ALIGN_V_CENTER;
 
-void d_font_hpvec_set_alignment(int h, int v)
+void drw_font_hpvec_set_alignment(int h, int v)
 {
 	if (h != -1)
 		alignment_h = h;
@@ -53,7 +53,7 @@ static void draw_hp_glyph(int idx)
 	free(arr);
 }
 
-void d_font_hpvec_draw(const char* text)
+void drw_font_hpvec_draw(const char* text)
 {
 	bool done = false;
 	int  i    = 0;
@@ -97,8 +97,8 @@ void d_font_hpvec_draw(const char* text)
 		break;
 	}
 
-	d_push();
-	d_translate(offx, offy, 0);
+	drw_push();
+	drw_translate(offx, offy, 0);
 
 	while (!done)
 	{
@@ -118,10 +118,10 @@ void d_font_hpvec_draw(const char* text)
 				printf("index [%c] %d\n", c, idx);
 			}
 			draw_hp_glyph(idx);
-			d_translate_x(HPVEC_FONT_SIZE);
+			drw_translate_x(HPVEC_FONT_SIZE);
 		}
 		i++;
 	}
 
-	d_pop();
+	drw_pop();
 }

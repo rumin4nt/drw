@@ -1,19 +1,19 @@
 //
-//  d_primitives.c
+//  drw_primitives.c
 //  drw
 //
 //  Created by vs on 5/12/18.
 //  Copyright © 2018 ruminant. All rights reserved.
 //
 
-#include "d_primitives.h"
+#include "drw_primitives.h"
 
-RLine* d_primitives_calculate_hexagon(double radius)
+RLine* drw_primitives_calculate_hexagon(double radius)
 {
-	return d_primitives_calculate_circle(6, radius);
+	return drw_primitives_calculate_circle(6, radius);
 }
 
-RLine* d_primitives_calculate_circle(int sides, double radius)
+RLine* drw_primitives_calculate_circle(int sides, double radius)
 {
 	RLine* res = r_line_create();
 	
@@ -27,7 +27,7 @@ RLine* d_primitives_calculate_circle(int sides, double radius)
 		float degInRad = deg2rad * (float)i;
 		float x	= cos(degInRad + M_PI * .5) * radius;
 		float y	= sin(degInRad + M_PI * .5) * radius;
-		r_line_add_point2f(res, x, y);
+		r_line_addrw_point2f(res, x, y);
 
 		
 	}

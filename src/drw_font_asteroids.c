@@ -1,16 +1,16 @@
 //
-//  d_font_asteroids.c
+//  drw_font_asteroids.c
 //  drw
 //
 //  Created by vs on 4/27/18.
 //  Copyright © 2018 ruminant. All rights reserved.
 //
 
-#include "d_font_asteroids.h"
+#include "drw_font_asteroids.h"
 
 #include <fonts/asteroids_font.c>
 
-void d_font_asteroids(const char* text)
+void drw_font_asteroids(const char* text)
 {
 
 	//const uint8_t * const pts = a

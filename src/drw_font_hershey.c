@@ -1,24 +1,24 @@
 //
-//  d_font_hershey.c
+//  drw_font_hershey.c
 //  drw
 //
 //  Created by vs on 1/11/18.
 //  Copyright © 2018 ruminant. All rights reserved.
 //
 
-#include "d_font_hershey.h"
+#include "drw_font_hershey.h"
 
 #include <drw/drw.h>
 #include <hershey/futural.h>
 #include <r4/src/r4_config.h>
 #include <stdbool.h>
 
-void d_font_hershey_draw(const char* text)
+void drw_font_hershey_draw(const char* text)
 {
 
 #ifdef RPLATFORM_DARWIN
 #ifdef __APPLE__
-	d_push();
+	drw_push();
 	char c    = (char)0;
 	bool done = false;
 	int  i    = 0;
@@ -77,12 +77,12 @@ void d_font_hershey_draw(const char* text)
 
 			//printf("\n");
 			i++;
-			d_translate(w, 0, 0);
+			drw_translate(w, 0, 0);
 		}
 	}
 	//for ( int i = 0 ;)
 	////float arr[8];
-	d_pop();
+	drw_pop();
 
 #endif
 #endif

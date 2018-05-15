@@ -1,6 +1,6 @@
 
 
-#include "d_font_ftgl.h"
+#include "drw_font_ftgl.h"
 
 #include <r4/r4.h>
 
@@ -22,13 +22,13 @@
 FTGLfont* font		= NULL;
 int       justification = 0;
 
-void d_font_init()
+void drw_font_init()
 {
 
 	// ummm guess we don't need this?
 }
 
-void d_font_deinit()
+void drw_font_deinit()
 {
 	if (font)
 	{
@@ -37,7 +37,7 @@ void d_font_deinit()
 	font = NULL;
 }
 
-void d_font_size(int sz, int resolution)
+void drw_font_size(int sz, int resolution)
 {
 	if (!font)
 	{
@@ -56,7 +56,7 @@ void d_font_size(int sz, int resolution)
 	// printf("res was %d\n", res );
 }
 
-int d_font_load(const char* path)
+int drw_font_load(const char* path)
 {
 
 	// if ( font )
@@ -69,12 +69,12 @@ int d_font_load(const char* path)
 	if (!font)
 		return -1;
 
-	// d_font_size(R_UI_FONT_SIZE * app_settings.scale_retina );
-	d_font_size(D_FONT_SIZE, 144);
+	// drw_font_size(R_UI_FONT_SIZE * app_settings.scale_retina );
+	drw_font_size(D_FONT_SIZE, 144);
 	return 0;
 }
 
-void d_font_draw(const char* str)
+void drw_font_draw(const char* str)
 {
 
 	if (!font)
@@ -86,18 +86,18 @@ void d_font_draw(const char* str)
 	}
 	// if ( !font )
 	//{
-	//	d_font_load("data/ttf/terminus.ttf");
+	//	drw_font_load("data/ttf/terminus.ttf");
 	//}
 	ftglRenderFont(font, str, FTGL_RENDER_ALL);
 	// printf( "%d\n", ftglGetFontFaceSize(font) );
 }
 
-void d_font_get_bbox(const char* str, int num, float* data)
+void drw_font_get_bbox(const char* str, int num, float* data)
 {
 	ftglGetFontBBox(font, str, num, data);
 };
 
-double d_font_get_width(const char* str)
+double drw_font_get_width(const char* str)
 {
 	int  count = 0;
 	bool done  = false;
@@ -120,7 +120,7 @@ double d_font_get_width(const char* str)
 	{
 		bounds[j] = 0;
 	}
-	d_font_get_bbox(str, count, bounds);
+	drw_font_get_bbox(str, count, bounds);
 	double v = bounds[3] - bounds[0];
 	free(bounds);
 	return v;
