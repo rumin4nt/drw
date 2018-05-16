@@ -18,9 +18,9 @@ RLine* drw_primitives_calculate_hexagon(double radius)
 RLine* drw_primitives_calculate_circle(int sides, double radius)
 {
 	RLine* res = r_line_create();
-	
+
 	float deg2rad = (M_PI / sides);
-	
+
 	const int renderLineSize = (sides * 2);
 
 	int i;
@@ -29,9 +29,7 @@ RLine* drw_primitives_calculate_circle(int sides, double radius)
 		float degInRad = deg2rad * (float)i;
 		float x	= cos(degInRad + M_PI * .5) * radius;
 		float y	= sin(degInRad + M_PI * .5) * radius;
-		r_line_addrw_point2f(res, x, y);
-
-		
+		r_line_add_point2f(res, x, y);
 	}
 	res->closed = true;
 	return res;

@@ -64,8 +64,8 @@ RLine* r_line_copy(RLine*);
 RPoint r_point_create(void);
 RPoint r_point_create2f(double x, double y);
 
-void r_line_addrw_point(RLine*, RPoint);
-void r_line_addrw_point2f(RLine*, double x, double y);
+void r_line_add_point(RLine*, RPoint);
+void r_line_add_point2f(RLine*, double x, double y);
 
 void r_line_subdivide(RLine*, double radius);
 void r_line_fuckup(RLine*, double radius);
@@ -76,8 +76,8 @@ RLine3* r_line3_copy(RLine3* line);
 void    r_line3_destroy(RLine3* line);
 void    r_line_destroy(RLine* line);
 
-void r_line3_addrw_point(RLine3*, RPoint3);
-void r_line3_addrw_point_3f(RLine3*, double x, double y, double z);
+void r_line3_add_point(RLine3*, RPoint3);
+void r_line3_add_point_3f(RLine3*, double x, double y, double z);
 void r_line3_clear(RLine3* line);
 void r_line_move(RLine* src, double x, double y);
 
@@ -90,7 +90,7 @@ void r_line_calculate_circle(RLine* line, RPoint* center, double* inner, double*
 /*
 
 void 		wsh_line_hnd_destroy(WLineHnd*);
-void		wsh_line_hnd_addrw_point(WLineHnd, WPoint);
+void		wsh_line_hnd_add_point(WLineHnd, WPoint);
 
 void		wsh_line_move(WLine* src, double x, double y);
 void		wsh_line_scale(WLine* src, double x, double y);

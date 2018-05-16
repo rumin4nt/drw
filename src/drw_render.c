@@ -760,6 +760,15 @@ void drw_transform_apply(WTransform t)
 	drw_rotate_wvec(t.rotation);
 }
 
+void drw_transform_apply_inverse(WTransform t)
+{
+	drw_rotate_wvec_inverse(t.rotation);
+	drw_scale_wvec_inverse(t.scale);
+	drw_translate_wvec_inverse(t.anchor);
+	drw_translate_wvec_inverse(t.position);
+
+}
+
 void drw_transform_deapply(WTransform t)
 {
 	/*drw_rotate_wvec(t.rotation);
@@ -791,24 +800,35 @@ void drw_scale_wvec(WVec3d v)
 	glScaled(v.x, v.y, v.z);
 }
 
-void drw_scale_vec3(vec3_t v)
-{
-	// printf("%f %f %f\n", v.x, v.y, v.z);
-	glScaled(v[0], v[1], v[2]);
-}
-/*
-void drw_rotate_vec3(vec3_t v)
-{
-	glRotated(v[0], 1, 0, 0);
-	glRotated(v[1], 0, 1, 0);
-	glRotated(v[2], 0, 0, 1);
-}
-*/
+
 void drw_rotate_wvec(WVec3d v)
 {
 	glRotated(v.x, 1, 0, 0);
 	glRotated(v.y, 0, 1, 0);
 	glRotated(v.z, 0, 0, 1);
+}
+void drw_translate_wvec_inverse(WVec3d v)
+{
+	glTranslated(-v.x, -v.y, -v.z);
+}
+
+void drw_scale_wvec_inverse(WVec3d v)
+{
+	// printf("%f %f %f\n", v.x, v.y, v.z);
+	glScaled(-v.x, -v.y, -v.z);
+}
+
+
+void drw_rotate_wvec_inverse(WVec3d v)
+{
+	glRotated(-v.x, 1, 0, 0);
+	glRotated(-v.y, 0, 1, 0);
+	glRotated(-v.z, 0, 0, 1);
+}
+void drw_scale_vec3(vec3_t v)
+{
+	// printf("%f %f %f\n", v.x, v.y, v.z);
+	glScaled(v[0], v[1], v[2]);
 }
 
 void drw_rotate_vec3(vec3_t vec)

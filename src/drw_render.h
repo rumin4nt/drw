@@ -96,15 +96,19 @@ void drw_push(void);
 void drw_pop(void);
 
 void drw_transform_apply(WTransform t);
+void drw_transform_apply_inverse(WTransform t);
 void drw_gtransform_apply(GTransform t);
 void drw_transform_deapply(WTransform t);
 void drw_gtransform_deapply(GTransform t);
 
 void drw_translate_wvec(WVec3d v);
 void drw_scale_wvec(WVec3d v);
-void drw_scale_vec3(vec3_t v);
 void drw_rotate_wvec(WVec3d v);
 void drw_rotate_vec3(vec3_t v);
+void drw_translate_wvec_inverse(WVec3d v);
+void drw_scale_wvec_inverse(WVec3d v);
+void drw_rotate_wvec_inverse(WVec3d v);
+//void drw_rotate_vec3(vec3_t v);
 
 void drw_scale(float, float, float);
 void drw_scale_2f(float, float);
@@ -112,6 +116,7 @@ void drw_scale_u(float);
 void drw_scale_x(float);
 void drw_scale_y(float);
 void drw_scale_z(float);
+void drw_scale_vec3(vec3_t v);
 
 void drw_translate_x(float);
 void drw_translate_y(float);
