@@ -7,7 +7,7 @@
 //
 
 #include "drw_font_hpvec.h"
-#include "../drw.h"
+#include "../../drw.h"
 
 #include <hp/hp1345a.c>
 
@@ -16,6 +16,8 @@
 #ifdef DEBUG
 #include <stdio.h>
 #endif
+
+#include <string.h>
 
 
 

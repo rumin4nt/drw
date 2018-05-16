@@ -18,6 +18,11 @@
 //#include "GL/glus.h"
 #define R4_ENABLE_RTMIDI
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdocumentation"
+#endif
+
 #define GLFW_EXPOSE_NATIVE_COCOA
 #include "GLFW/glfw3.h"
 #include <OpenGL/glu.h>
@@ -48,6 +53,20 @@
 #ifdef DRW_PLATFORM_IOS
 #include <OpenGLES/ES1/gl.h>
 #include <OpenGLES/ES3/gl.h>
+#endif
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
+
+#ifdef DRW_PLATFORM_IOS
+
+#define DRW_VERTEX_POINTER_IDENT GL_FLOAT
+#else
+//#ifndef DRW_PLATFORM_WIN
+//#error fuck
+#define DRW_VERTEX_POINTER_IDENT GL_DOUBLE
+//#endif
 #endif
 
 #endif /* drw_config_h */

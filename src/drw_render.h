@@ -17,7 +17,14 @@
 
 #pragma GCC visibility push(default)
 
+#ifndef RUMINANT4_PRESENT
 #include "drw_dummy.h"
+#else
+
+#include <grdn/grdn.h>
+
+#include <r4/r4.h>
+#endif
 
 //#include <wsh/wsh.h>
 
@@ -229,14 +236,6 @@ void d_rgbtri(double gamma);
 //	debug - strip this with a macro?
 int drw_checkmatrix(void);
 
-//#include <gpc/gpc.h>
-#ifdef RUMINANT4_PRESENT
-void drw_gpc_polygon_outline(GPCRec*);
-void drw_gpc_polygon(GPCRec*);
-void drw_gpc_verts(void*);
-void drw_gpc_triwire(void* dat);
-void drw_gpc_tristrip(void*);
-#endif
 
 
 #endif /* rended_h */

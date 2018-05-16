@@ -8,9 +8,10 @@
 
 #include "drw_render.h"
 
+#include <gpc/gpc.h>
 
 #include "drw_platform.h"
-
+#include "drw_config.h"
 //#include <r4/src/r4_config.h>
 //#include <r4/src/r4_platform.h>
 
@@ -35,12 +36,12 @@
 //#include <OpenGLES/ES1/gl.h>
 //#include <OpenGLES/ES3/gl.h>
 
-#include "drw_font_ftgles.h"
-#include "src/gluLookAt.h"
+#include "type/drw_font_ftgles.h"
+#include <glulookat/gluLookAt.h>
 #else
 #ifdef DRW_PLATFORM_DARWIN
 //#include <OpenGL/gl.h>
-#include "drw_font_ftgl.h"
+#include "type/drw_font_ftgl.h"
 //#undef DRW_PLATFORM_IOS
 #else
 
@@ -61,25 +62,16 @@
 #include <gl-matrix/gl-matrix.h>
 
 //#include <GL/glew.h>
-#include "drw_font_ftgl.h"
+#include "type/drw_font_ftgl.h"
 
 //#undef DRW_PLATFORM_IOS
 #endif
 #endif
 
-#ifdef DRW_PLATFORM_IOS
-
-#define VERTEX_POINTER_IDENT GL_FLOAT
-#else
-//#ifndef DRW_PLATFORM_WIN
-//#error fuck
-#define VERTEX_POINTER_IDENT GL_DOUBLE
-//#endif
-#endif
-
 #define TEXT_MAX 1024
 
 #include <math.h>
+#include <stdarg.h>
 #include <stdbool.h>
 
 //  these things used to be part of the app, have to talk now from across
@@ -205,9 +197,9 @@ int drw_get_gl_error()
 		printf("GL_INVALID_OPERATION\n");
 		break;
 
-	// case GL_INVALID_FRAMEBUFFER_OPERATION:
-	//    printf("invalid framebuffer\n");
-	//    break;
+		// case GL_INVALID_FRAMEBUFFER_OPERATION:
+		//    printf("invalid framebuffer\n");
+		//    break;
 
 	case GL_OUT_OF_MEMORY:
 		printf("out of memory\n");
@@ -845,6 +837,7 @@ void drw_text_size(int sz, int resolution)
 
 #endif
 }
+
 void drw_text(const char* format, ...)
 {
 	char buf[TEXT_MAX];
@@ -899,7 +892,7 @@ void drw_wobject_normal(WObject* obj)
 	// drw_color(1,1,1,.9);
 	drw_push();
 	drw_translate(obj->transform.position.x, obj->transform.position.y,
-		    obj->transform.position.z);
+		      obj->transform.position.z);
 
 	drw_scale_2f(obj->transform.scale.x, obj->transform.scale.y);
 	int i;
@@ -1614,206 +1607,10 @@ void drw_poly_extras(WLine* line)
 #endif
 }
 
-#ifdef RUMINANT4_PRESENT
-
-
-void drw_gpc_polygon_outline(GPCRec* rec)
-{
-	gpc_polygon* poly = (gpc_polygon*)rec->polygon;
-	// gpc_polygon* poly = rec->polygon;
-	// int	   j, s;
-	int i, k, j;
-
-	for (i = 0; i < poly->num_contours; i++)
-	{
-		// printf("c %d\n", i);
-		gpc_vertex_list contour = poly->contour[i];
-
-		GLfloat* arr =
-		    malloc(sizeof(GLfloat) * contour.num_vertices * 2);
-		for (k = 0, j = 0; k < contour.num_vertices; k++, j += 2)
-		{
-			if (!contour.vertex)
-			{
-				printf("ack!\n");
-			}
-			else
-			{
-				gpc_vertex v = contour.vertex[k];
-				arr[j]       = v.x;
-				arr[j + 1]   = v.y;
-			}
-		}
-
-		glVertexPointer(2, GL_FLOAT, 0, arr);
-
-		glDrawArrays(GL_LINE_LOOP, 0, contour.num_vertices);
-		free(arr);
-	}
-}
-
-void drw_gpc_polygon(GPCRec* rec)
-{
-	gpc_polygon* poly = (gpc_polygon*)rec->polygon;
-	// gpc_polygon* poly = rec->polygon;
-	// int	   j, s;
-	int i, j, k;
-	for (i = 0; i < poly->num_contours; i++)
-	{
-		// printf("c %d\n", i);
-		gpc_vertex_list contour = poly->contour[i];
-
-		GLfloat* arr =
-		    malloc(sizeof(GLfloat) * contour.num_vertices * 2);
-		for (k = 0, j = 0; k < contour.num_vertices; k++, j += 2)
-		{
-			if (!contour.vertex)
-			{
-				printf("ack!\n");
-			}
-			else
-			{
-				gpc_vertex v = contour.vertex[k];
-				arr[j]       = v.x;
-				arr[j + 1]   = v.y;
-			}
-		}
-
-		glVertexPointer(2, GL_FLOAT, 0, arr);
-
-		glDrawArrays(GL_LINE_LOOP, 0, contour.num_vertices);
-		free(arr);
-	}
-}
-
-void drw_gpc_verts(void* dat)
-{
-	/*
-	 gpc_polygon poly
-	 glLineWidth(2.0);
-	 int c, v;
-	 //double offset = 0;;
-	 for (c= 0; c < poly.num_contours; c++)
-	 {
-	 for (v= 0; v < poly.contour[c].num_vertices; v++)
-	 {
-
-	 double x = poly.contour[c].vertex[v].x;
-	 double y = poly.contour[c].vertex[v].y;
-
-	 drw_translate2f(x,y);
-	 drw_square(20);
-	 drw_translate2f(-x,-y);
-
-	 //printf("%f\n", x);
-	 glBegin(GL_LINE_LOOP);
-
-	 glVertex2d(poly.contour[c].vertex[v].x + offset,
-	 poly.contour[c].vertex[v].y);
-	 glVertex2d(poly.contour[c].vertex[v].x,
-	 poly.contour[c].vertex[v].y + offset);
-	 glVertex2d(poly.contour[c].vertex[v].x - offset,
-	 poly.contour[c].vertex[v].y);
-	 glVertex2d(poly.contour[c].vertex[v].x,
-	 poly.contour[c].vertex[v].y - offset);
-	 glEnd();
-
-	 }
-	 }
-	 */
-}
-
-void drw_gpc_triwire(void* dat)
-{
-#ifndef DRW_PLATFORM_IOS
-	glPolygonMode(GL_FRONT, GL_LINE);
-	drw_gpc_tristrip(dat);
-	glPolygonMode(GL_FRONT, GL_FILL);
-#endif
-}
-
-void drw_gpc_tristrip(void* dat)
-{
-	//#ifndef DRW_PLATFORM_IOS
-	gpc_tristrip* tri = dat;
-	int	   j, s, v;
-
-	for (s = 0; s < tri->num_strips; s++)
-	{
-
-		gpc_vertex_list str = tri->strip[s];
-		GLfloat*	arr = malloc(sizeof(GLfloat) * str.num_vertices * 2);
-
-		// glBegin(GL_TRIANGLE_STRIP);
-		for (v = 0, j = 0; v < str.num_vertices; v++, j += 2)
-		{
-			arr[j]     = str.vertex[v].x;
-			arr[j + 1] = str.vertex[v].y;
-
-			// glVertex2d(str.vertex[v].x, str.vertex[v].y);
-		}
-		glVertexPointer(2, GL_FLOAT, 0, arr);
-
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, str.num_vertices);
-		free(arr);
-	}
-	//#endif
-}
-
-void drw_triangle_strip(WLine* poly)
-{
-
-	const unsigned long long renderLineSize = (poly->num * 2);
-
-	// printf("poly is %d num\n", poly->num);
-	// GLfloat arr[ renderLineSize ];
-	GLfloat* arr = malloc(sizeof(GLfloat) * renderLineSize);
-	int      i, j;
-	for (i = 0, j = 0; i < poly->num; i++, j += 2)
-	{
-		WPoint* p  = &poly->data[i];
-		arr[j]     = p->x;
-		arr[j + 1] = p->y;
-	}
-
-	glVertexPointer(2, GL_FLOAT, 0, arr);
-
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, (int)poly->num);
-	free(arr);
-}
-#endif
-
-void drw_tristrip_3d(double* arr, int num, bool closed)
-{
-
-	// const unsigned long long renderLineSize = ( poly->num * 2);
-
-	// printf("poly is %d num\n", poly->num);
-	// GLfloat arr[ renderLineSize ];
-	// GLfloat* arr = malloc(sizeof(GLfloat) * renderLineSize);
-
-	/*
-	 for (int i=0,j=0; i < poly->num ; i++, j+=6 ) {
-
-
-	 arr[j] =  arr[
-	 arr[j+1] = p->y;
-	 arr[j+2] = p->z;
-	 arr[j+3] = p->x;
-	 arr[j+4] = p->y;
-	 arr[j+5] = p->z;
-	 }
-	 */
-	glVertexPointer(3, VERTEX_POINTER_IDENT, 0, arr);
-
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, num);
-	free(arr);
-}
-
 void drw_tris_3d(double* arr, int num, bool closed)
 {
 
-	glVertexPointer(3, VERTEX_POINTER_IDENT, 0, arr);
+	glVertexPointer(3, DRW_VERTEX_POINTER_IDENT, 0, arr);
 
 	glDrawArrays(GL_TRIANGLES, 0, num);
 	free(arr);
@@ -1822,7 +1619,7 @@ void drw_tris_3d(double* arr, int num, bool closed)
 void drw_rawpoly_2d(double* arr, int num, bool closed)
 {
 
-	glVertexPointer(2, VERTEX_POINTER_IDENT, 0, arr);
+	glVertexPointer(2, DRW_VERTEX_POINTER_IDENT, 0, arr);
 
 	if (fill)
 	{
@@ -1854,7 +1651,7 @@ void drw_rawpoly_2f(float* arr, int num, bool closed)
 void drw_rawpoly_3d(double* arr, int num, bool closed)
 {
 
-	glVertexPointer(3, VERTEX_POINTER_IDENT, 0, arr);
+	glVertexPointer(3, DRW_VERTEX_POINTER_IDENT, 0, arr);
 
 	if (fill)
 	{
@@ -1886,7 +1683,7 @@ void drw_rawpoly_3f(float* arr, int num, bool closed)
 void drw_rawpoints_3d(double* arr, int num)
 {
 
-	glVertexPointer(3, VERTEX_POINTER_IDENT, 0, arr);
+	glVertexPointer(3, DRW_VERTEX_POINTER_IDENT, 0, arr);
 	glDrawArrays(GL_POINTS, 0, num);
 }
 
@@ -2015,7 +1812,7 @@ void drw_setup_view(void)
 
 	int bits;
 	glGetIntegerv(GL_RED_BITS, &bits); //(GL_RED_BITS);
-	l_info("Bits is %d\n", bits);
+	printf("Bits is %d\n", bits);
 }
 
 #include <glulookat/gluLookAt.h>
@@ -2023,7 +1820,7 @@ void drw_setup_view(void)
 void drw_setup_view_persp()
 {
 	// if(debug_settings.render)
-	l_info("Setting up perspective projection.\n");
+	printf("Setting up perspective projection.\n");
 	// static int zoomFactor = 1;
 	float left, right, top, bottom, znear, zfar;
 	float x, y;
@@ -2343,7 +2140,7 @@ void drw_set_circle_precision(int v)
 					v, override_circle_limit);
 				// printf("are you sure you want a circle this
 				// precise?\n");
-				l_warning(buf);
+				printf(buf);
 				emit_warning_about_high_precision_circles_once =
 				    true;
 			}

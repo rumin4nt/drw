@@ -8,7 +8,7 @@
 #include "stdafx.h"
 #endif
 
-#include "../drw.h"
+#include "../../drw.h"
 
 #ifndef RPLATFORM_WIN
 

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5703D74C20ACBCBD007E1800 /* drw_ext_gpc.h in Headers */ = {isa = PBXBuildFile; fileRef = 5703D74A20ACBCBD007E1800 /* drw_ext_gpc.h */; };
+		5703D74D20ACBCBD007E1800 /* drw_ext_gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703D74B20ACBCBD007E1800 /* drw_ext_gpc.c */; };
+		5703DBA020ACBD5C007E1800 /* gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703DB1920ACBD5C007E1800 /* gpc.c */; };
+		5703DBA120ACBD5C007E1800 /* gpc.h in Headers */ = {isa = PBXBuildFile; fileRef = 5703DB1A20ACBD5C007E1800 /* gpc.h */; };
 		57BDF7E520AC7CD1004C154E /* drw_render.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF7D320AC7CD1004C154E /* drw_render.h */; };
 		57BDF7E620AC7CD1004C154E /* drw_wobject_ops.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */; };
 		57BDF7E720AC7CD1004C154E /* drw_point.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF7D520AC7CD1004C154E /* drw_point.c */; };
@@ -29,6 +33,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5703D74A20ACBCBD007E1800 /* drw_ext_gpc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_ext_gpc.h; sourceTree = "<group>"; };
+		5703D74B20ACBCBD007E1800 /* drw_ext_gpc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_ext_gpc.c; sourceTree = "<group>"; };
+		5703DB1920ACBD5C007E1800 /* gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gpc.c; sourceTree = "<group>"; };
+		5703DB1A20ACBD5C007E1800 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
 		57BDF7D320AC7CD1004C154E /* drw_render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render.h; sourceTree = "<group>"; };
 		57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_wobject_ops.h; sourceTree = "<group>"; };
 		57BDF7D520AC7CD1004C154E /* drw_point.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_point.c; sourceTree = "<group>"; };
@@ -73,20 +81,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5703D74920ACBCB1007E1800 /* ext */ = {
+			isa = PBXGroup;
+			children = (
+				5703D74A20ACBCBD007E1800 /* drw_ext_gpc.h */,
+				5703D74B20ACBCBD007E1800 /* drw_ext_gpc.c */,
+			);
+			path = ext;
+			sourceTree = "<group>";
+		};
+		5703DAAC20ACBD5C007E1800 /* deps */ = {
+			isa = PBXGroup;
+			children = (
+				5703DB1820ACBD5C007E1800 /* gpc */,
+			);
+			name = deps;
+			path = ../../../contrib/deps;
+			sourceTree = "<group>";
+		};
+		5703DB1820ACBD5C007E1800 /* gpc */ = {
+			isa = PBXGroup;
+			children = (
+				5703DB1920ACBD5C007E1800 /* gpc.c */,
+				5703DB1A20ACBD5C007E1800 /* gpc.h */,
+			);
+			path = gpc;
+			sourceTree = "<group>";
+		};
 		57BDF7D220AC7CD1004C154E /* src */ = {
 			isa = PBXGroup;
 			children = (
 				57BDF80B20ACA9A0004C154E /* type */,
+				5703D74920ACBCB1007E1800 /* ext */,
 				57BDF82020ACAC3F004C154E /* drw_dummy.h */,
 				57BDF80820ACA86A004C154E /* drw_platform.h */,
 				57BDF80A20ACA91E004C154E /* drw_config.h */,
 				57BDF7D320AC7CD1004C154E /* drw_render.h */,
 				57BDF7DD20AC7CD1004C154E /* drw_render.c */,
-				57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */,
+				57BDF7E020AC7CD1004C154E /* drw_point.h */,
 				57BDF7D520AC7CD1004C154E /* drw_point.c */,
+				57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */,
 				57BDF7DB20AC7CD1004C154E /* drw_primitives.h */,
 				57BDF7DC20AC7CD1004C154E /* drw_wobject_ops.c */,
-				57BDF7E020AC7CD1004C154E /* drw_point.h */,
 				57BDF7E220AC7CD1004C154E /* drw_primitives.c */,
 			);
 			name = src;
@@ -96,11 +132,11 @@
 		57BDF80B20ACA9A0004C154E /* type */ = {
 			isa = PBXGroup;
 			children = (
+				57BDF81020ACA9A0004C154E /* drw_font_ftgl.c */,
 				57BDF80C20ACA9A0004C154E /* drw_font_asteroids.c */,
 				57BDF80D20ACA9A0004C154E /* drw_font_hpvec.c */,
 				57BDF80E20ACA9A0004C154E /* drw_font_ftgles.h */,
 				57BDF80F20ACA9A0004C154E /* drw_font_hershey.c */,
-				57BDF81020ACA9A0004C154E /* drw_font_ftgl.c */,
 				57BDF81120ACA9A0004C154E /* drw_font_asteroids.h */,
 				57BDF81220ACA9A0004C154E /* drw_font_hpvec.h */,
 				57BDF81320ACA9A0004C154E /* drw_font_ftgles.cpp */,
@@ -113,6 +149,7 @@
 		D1A833521E99AD2B009AA5D2 = {
 			isa = PBXGroup;
 			children = (
+				5703DAAC20ACBD5C007E1800 /* deps */,
 				57BDF7D220AC7CD1004C154E /* src */,
 				D1AA9AB91EA00E1A00675C3A /* drw.h */,
 				D1A8335C1E99AD2C009AA5D2 /* Products */,
@@ -137,10 +174,12 @@
 			files = (
 				57BDF7E620AC7CD1004C154E /* drw_wobject_ops.h in Headers */,
 				57BDF7F220AC7CD1004C154E /* drw_point.h in Headers */,
+				5703DBA120ACBD5C007E1800 /* gpc.h in Headers */,
 				57BDF80920ACA86A004C154E /* drw_platform.h in Headers */,
 				57BDF7ED20AC7CD1004C154E /* drw_primitives.h in Headers */,
 				57BDF81820ACA9A0004C154E /* drw_font_ftgles.h in Headers */,
 				57BDF7E520AC7CD1004C154E /* drw_render.h in Headers */,
+				5703D74C20ACBCBD007E1800 /* drw_ext_gpc.h in Headers */,
 				57BDF81E20ACA9A0004C154E /* drw_font_ftgl.h in Headers */,
 				57BDF81C20ACA9A0004C154E /* drw_font_hpvec.h in Headers */,
 				57BDF81F20ACA9A0004C154E /* drw_font_hershey.h in Headers */,
@@ -242,11 +281,13 @@
 				57BDF7EE20AC7CD1004C154E /* drw_wobject_ops.c in Sources */,
 				57BDF81620ACA9A0004C154E /* drw_font_asteroids.c in Sources */,
 				57BDF81D20ACA9A0004C154E /* drw_font_ftgles.cpp in Sources */,
+				5703DBA020ACBD5C007E1800 /* gpc.c in Sources */,
 				57BDF7E720AC7CD1004C154E /* drw_point.c in Sources */,
 				57BDF81720ACA9A0004C154E /* drw_font_hpvec.c in Sources */,
 				57BDF7EF20AC7CD1004C154E /* drw_render.c in Sources */,
 				57BDF81920ACA9A0004C154E /* drw_font_hershey.c in Sources */,
 				57BDF7F420AC7CD1004C154E /* drw_primitives.c in Sources */,
+				5703D74D20ACBCBD007E1800 /* drw_ext_gpc.c in Sources */,
 				57BDF81A20ACA9A0004C154E /* drw_font_ftgl.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -310,10 +351,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(r4_root)/contrib/deps",
+					"$(r4_root)/libs/**",
+					"$(r4_root)/contrib/src",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				r4_root = "$(HOME)/art/r4";
 			};
 			name = Debug;
 		};
@@ -360,9 +407,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(r4_root)/contrib/deps",
+					"$(r4_root)/libs/**",
+					"$(r4_root)/contrib/src",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
+				r4_root = "$(HOME)/art/r4";
 			};
 			name = Release;
 		};
@@ -382,6 +435,8 @@
 					../../../../,
 					../../../,
 					../contrib/deps,
+					"$(r4_root)/contrib/deps",
+					"$(r4_root)/libs",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -406,6 +461,8 @@
 					../../../../,
 					../../../,
 					../contrib/deps,
+					"$(r4_root)/contrib/deps",
+					"$(r4_root)/libs",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";

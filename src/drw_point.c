@@ -11,6 +11,7 @@
 #include "drw_config.h"
 #include <stdlib.h>
 
+
 //#include "/drw.h>
 
 void mathInvertMatrix4f(float* restrict inv, const float* restrict m)
@@ -178,11 +179,16 @@ void drw_point_3d_to_2d(double x, double y, double z, double* rx, double* ry, do
  }
  */
 
+#ifdef DRW_PLATFORM_IOS
+#include <stdio.h>
+
+#endif
+
 void drw_point_2d_to_3d(double x, double y, double* _rx, double* _ry, double* _rz)
 {
 	GLint viewport[4];
 
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
 	GLfloat modelview[16];
 	GLfloat projection[16];
 
@@ -208,16 +214,17 @@ void drw_point_2d_to_3d(double x, double y, double* _rx, double* _ry, double* _r
 	winy = (float)y;
 	winz = 0.;
 
-#ifndef RPLATFORM_WIN
+#ifndef DRW_PLATFORM_WIN
 	
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
+
 	printf("Error, this is unsupported as hell on IOS\n");
 #else
 	gluUnProject(winx, winy, winz, modelview, projection, viewport, &worldx,
 		     &worldy, &worldz);
 #endif
 	
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
 // worldx += app_settings.current_window_x * .5;
 // worldy += app_settings.current_window_y * .5;
 #else

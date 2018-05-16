@@ -8,6 +8,8 @@
 
 #include "drw_wobject_ops.h"
 
+//	todo: get rid of this!
+#include <r4/src/core/r_random.h>
 
 WPoint drw_wobject_ops_randompointfromobject(WObject* obj, int* line_i,
 					   int* point_i)
