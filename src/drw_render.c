@@ -16,7 +16,13 @@
 #endif
 
 #ifdef ENABLE_OLD_HACKY_GLUT
+
+#ifdef RPLATFORM_DARWIN
 #include <GLUT/glut.h>
+#else
+#include <GL/glut.h>
+#endif
+
 #endif
 
 #ifdef RPLATFORM_IOS
