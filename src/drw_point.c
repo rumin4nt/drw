@@ -8,7 +8,10 @@
 
 #include "drw_point.h"
 
-#include <drw/drw.h>
+#include "drw_config.h"
+#include <stdlib.h>
+
+//#include "/drw.h>
 
 void mathInvertMatrix4f(float* restrict inv, const float* restrict m)
 {

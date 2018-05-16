@@ -1,6 +1,6 @@
 
 
-#include <r4/src/r4_config.h>
+#include "../drw_config.h"
 
 #ifdef RPLATFORM_IOS
 

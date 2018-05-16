@@ -3,9 +3,9 @@
 #ifndef drw_font_ftgl_h_
 #define drw_font_ftgl_h_
 
-#include <r4/src/r4_platform.h>
+#include "../drw_platform.h"
 
-#ifndef RPLATFORM_WIN
+#ifndef DRW_PLATFORM_WIN
 
 typedef enum {
 	RFontJustificationLeft,

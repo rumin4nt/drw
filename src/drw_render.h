@@ -13,17 +13,19 @@
 #include <stdlib.h>
 
 //	todo: get this out?  a lot of deps for a convenience
-#include <wsh/wsh.h>
+// #include <wsh/wsh.h>
 
 #pragma GCC visibility push(default)
 
-#include <wsh/wsh.h>
+#include "drw_dummy.h"
+
+//#include <wsh/wsh.h>
 
 //#include <r4/src/core/d_math.h>
-#include <grdn/grdn.h>
-#include <r4/r4.h>
+//#include <grdn/grdn.h>
+//#include <r4/r4.h>
 
-#include <gl-matrix/gl-matrix.h>
+//#include <gl-matrix/gl-matrix.h>
 
 enum
 {
@@ -186,7 +188,7 @@ void drw_wobject_strokeonly_notransform(WObject*);
 void drw_wobject_strokeonly(WObject*);
 void drw_wobject_notransform(WObject*);
 void drw_wobject_e(WObject*);
-void d_wsequence_e(WSequence*, int);
+//void d_wsequence_e(WSequence*, int);
 
 //	glut prims
 void d_glut_init(void);
@@ -227,12 +229,14 @@ void d_rgbtri(double gamma);
 //	debug - strip this with a macro?
 int drw_checkmatrix(void);
 
-#include <gpc/gpc.h>
-
+//#include <gpc/gpc.h>
+#ifdef RUMINANT4_PRESENT
 void drw_gpc_polygon_outline(GPCRec*);
 void drw_gpc_polygon(GPCRec*);
 void drw_gpc_verts(void*);
 void drw_gpc_triwire(void* dat);
 void drw_gpc_tristrip(void*);
+#endif
+
 
 #endif /* rended_h */

@@ -7,7 +7,7 @@
 //
 
 #include "drw_wobject_ops.h"
-#include <r4/r4.h>
+
 
 WPoint drw_wobject_ops_randompointfromobject(WObject* obj, int* line_i,
 					   int* point_i)

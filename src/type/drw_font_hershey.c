@@ -8,9 +8,10 @@
 
 #include "drw_font_hershey.h"
 
-#include <drw/drw.h>
+#include "../../drw.h"
+
 #include <hershey/futural.h>
-#include <r4/src/r4_config.h>
+//#include <r4/src/r4_config.h>
 #include <stdbool.h>
 
 void drw_font_hershey_draw(const char* text)

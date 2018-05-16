@@ -2,7 +2,7 @@
 
 #include "drw_font_ftgl.h"
 
-#include <r4/r4.h>
+//#include <r4/r4.h>
 
 #ifdef RPLATFORM_WIN
 #include "stdafx.h"

@@ -8,7 +8,6 @@
 
 #include "drw_font_asteroids.h"
 
-#include <fonts/asteroids_font.c>
 
 void drw_font_asteroids(const char* text)
 {

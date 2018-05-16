@@ -8,6 +8,8 @@
 
 #include "drw_primitives.h"
 
+#include <math.h>
+
 RLine* drw_primitives_calculate_hexagon(double radius)
 {
 	return drw_primitives_calculate_circle(6, radius);

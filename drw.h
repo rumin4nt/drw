@@ -13,9 +13,11 @@
 #define DRW_VERSION_MINOR 0
 #define DRW_VERSION_PATCH 1
 
-#include <r4/src/r4_platform.h>
+#include "src/drw_platform.h"
 
 #include "src/drw_render.h"
+#include "src/drw_config.h"
+
 //#include "src/r_hatch.h"
 
 #define D_FONT_SIZE 18
@@ -37,14 +39,14 @@ enum DRWAlignmentVertical
 };
 
 #ifdef RPLATFORM_IOS
-#include "src/drw_font_ftgles.h"
+#include "src/type/drw_font_ftgles.h"
 #else
-#include "src/drw_font_ftgl.h"
+#include "src/type/drw_font_ftgl.h"
 #endif
 
-#include "src/drw_font_asteroids.h"
-#include "src/drw_font_hershey.h"
-#include "src/drw_font_hpvec.h"
+#include "src/type/drw_font_asteroids.h"
+#include "src/type/drw_font_hershey.h"
+#include "src/type/drw_font_hpvec.h"
 
 //#include "src/d_glus.h"
 #include "src/drw_wobject_ops.h"

@@ -8,16 +8,19 @@
 
 #include "drw_render.h"
 
-#include <r4/src/r4_config.h>
-#include <r4/src/r4_platform.h>
 
-#ifndef RPLATFORM_IOS
+#include "drw_platform.h"
+
+//#include <r4/src/r4_config.h>
+//#include <r4/src/r4_platform.h>
+
+#ifndef DRW_PLATFORM_IOS
 #define ENABLE_OLD_HACKY_GLUT
 #endif
 
 #ifdef ENABLE_OLD_HACKY_GLUT
 
-#ifdef RPLATFORM_DARWIN
+#ifdef DRW_PLATFORM_DARWIN
 #include <GLUT/glut.h>
 #else
 #include <GL/glut.h>
@@ -25,7 +28,7 @@
 
 #endif
 
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
 
 //#include "../core/r_app_ios.h"
 
@@ -35,13 +38,13 @@
 #include "drw_font_ftgles.h"
 #include "src/gluLookAt.h"
 #else
-#ifdef RPLATFORM_DARWIN
+#ifdef DRW_PLATFORM_DARWIN
 //#include <OpenGL/gl.h>
 #include "drw_font_ftgl.h"
-//#undef RPLATFORM_IOS
+//#undef DRW_PLATFORM_IOS
 #else
 
-#ifdef RPLATFORM_WIN
+#ifdef DRW_PLATFORM_WIN
 #include "src/gluLookAt.h"
 //#include <GL/gl.h>
 #include <windows.h>
@@ -60,15 +63,15 @@
 //#include <GL/glew.h>
 #include "drw_font_ftgl.h"
 
-//#undef RPLATFORM_IOS
+//#undef DRW_PLATFORM_IOS
 #endif
 #endif
 
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
 
 #define VERTEX_POINTER_IDENT GL_FLOAT
 #else
-//#ifndef RPLATFORM_WIN
+//#ifndef DRW_PLATFORM_WIN
 //#error fuck
 #define VERTEX_POINTER_IDENT GL_DOUBLE
 //#endif
@@ -92,7 +95,7 @@ static double framebuffer_width;
 static double framebuffer_height;
 
 static bool color_bypass = false;
-#include <r4/r4.h>
+//#include <r4/r4.h>
 
 //  NOPE this belongs to a parent library.
 // extern DebugSettings debug_settings;
@@ -241,7 +244,7 @@ void drw_init()
 
 	drw_get_gl_error();
 	glEnable(GL_BLEND);
-#ifndef RPLATFORM_WIN
+#ifndef DRW_PLATFORM_WIN
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 #endif
 
@@ -251,11 +254,11 @@ void drw_init()
 	glEnable(GL_BLEND);
 
 	glEnableClientState(GL_VERTEX_ARRAY);
-#ifndef RPLATFORM_WIN
+#ifndef DRW_PLATFORM_WIN
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 #endif
 
-#ifndef RPLATFORM_IOS
+#ifndef DRW_PLATFORM_IOS
 	glHint(GL_POLYGON_SMOOTH_HINT, GL_FASTEST);
 	glEnable(GL_POLYGON_SMOOTH);
 #endif
@@ -325,7 +328,7 @@ void drw_text_load(const char* path)
 void drw_set_blend(int v)
 {
 
-#ifndef RPLATFORM_WIN
+#ifndef DRW_PLATFORM_WIN
 
 	switch (v)
 	{
@@ -421,7 +424,7 @@ void drw_set_colorbypass(bool v)
 void drw_color(double r, double g, double b, double a)
 {
 	_set_internal_colors(r, g, b, a);
-#ifndef RPLATFORM_IOS
+#ifndef DRW_PLATFORM_IOS
 	glColor4d(r, g, b, a);
 #else
 	glColor4f(r, g, b, a);
@@ -530,7 +533,7 @@ void drw_alpha_pop()
 	glColor4f(_r, _g, _b, _a);
 }
 
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
 #define MATRIX_STACK_MAX 16
 #else
 #define MATRIX_STACK_MAX 32
@@ -779,7 +782,7 @@ void drw_gtransform_deapply(GTransform t)
 {
 }
 
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
 #define glTranslated glTranslatef
 #define glScaled glScalef
 #define glRotated glRotatef
@@ -857,6 +860,7 @@ void drw_text(const char* format, ...)
 #endif
 }
 
+/*
 void d_wsequence_e(WSequence* seq, int frame)
 {
 
@@ -867,6 +871,7 @@ void d_wsequence_e(WSequence* seq, int frame)
 
 	//  do stuff here.
 }
+*/
 
 void drw_robject(RObject* obj)
 {
@@ -1609,6 +1614,9 @@ void drw_poly_extras(WLine* line)
 #endif
 }
 
+#ifdef RUMINANT4_PRESENT
+
+
 void drw_gpc_polygon_outline(GPCRec* rec)
 {
 	gpc_polygon* poly = (gpc_polygon*)rec->polygon;
@@ -1717,7 +1725,7 @@ void drw_gpc_verts(void* dat)
 
 void drw_gpc_triwire(void* dat)
 {
-#ifndef RPLATFORM_IOS
+#ifndef DRW_PLATFORM_IOS
 	glPolygonMode(GL_FRONT, GL_LINE);
 	drw_gpc_tristrip(dat);
 	glPolygonMode(GL_FRONT, GL_FILL);
@@ -1726,7 +1734,7 @@ void drw_gpc_triwire(void* dat)
 
 void drw_gpc_tristrip(void* dat)
 {
-	//#ifndef RPLATFORM_IOS
+	//#ifndef DRW_PLATFORM_IOS
 	gpc_tristrip* tri = dat;
 	int	   j, s, v;
 
@@ -1773,6 +1781,7 @@ void drw_triangle_strip(WLine* poly)
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, (int)poly->num);
 	free(arr);
 }
+#endif
 
 void drw_tristrip_3d(double* arr, int num, bool closed)
 {
@@ -2092,11 +2101,11 @@ void drw_setup_view_persp()
 
 // glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
 // near, far);  glFrustum(left,right,bottom,top,near, far);
-//#ifdef RPLATFORM_WIN
+//#ifdef DRW_PLATFORM_WIN
 
 //	printf("glu stuff doesn't link on windows >:[\n");
 //#else
-#ifndef RPLATFORM_IOS
+#ifndef DRW_PLATFORM_IOS
 	gluPerspective(fov, right / bottom, znear, zfar);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -2201,7 +2210,7 @@ void drw_setup_view_ortho()
 
 	// if ( _screenspace )
 	//{
-	//#ifdef RPLATFORM_IOS
+	//#ifdef DRW_PLATFORM_IOS
 	//    glOrthof(-width*.5, width*.5, height*-.5,height*.5, -10000,
 	// 10000); #else
 	//    glOrtho(-width*.5, width*.5, height*-.5,height*.5, -10000,
@@ -2213,7 +2222,7 @@ void drw_setup_view_ortho()
 	/*
 	 if ( !app_settings.screenspace ){
 
-	 #ifdef RPLATFORM_IOS
+	 #ifdef DRW_PLATFORM_IOS
 	 glOrthof(-width*.5, width*.5, height*-.5,height*.5, -10000, 10000);
 	 #else
 	 glOrtho(-width*.5, width*.5, height*-.5,height*.5, -10000, 10000);
@@ -2230,7 +2239,7 @@ void drw_setup_view_ortho()
 	double n = 1048 * -8;
 	double f = 1024 * 8;
 
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
 	glOrthof(l, r, t, b, n, f);
 #else
 
@@ -2245,7 +2254,7 @@ void drw_setup_view_ortho()
 	//}
 
 	drw_get_gl_error();
-#ifndef RPLATFORM_IOS
+#ifndef DRW_PLATFORM_IOS
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
@@ -2402,7 +2411,7 @@ void d_cube(float r)
 	 -> 1 triangle glDisableVertexAttribArray(0);
 
 	 */
-#ifndef RPLATFORM_IOS
+#ifndef DRW_PLATFORM_IOS
 //glutWireCube(v);
 #endif
 }

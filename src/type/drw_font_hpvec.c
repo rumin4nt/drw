@@ -7,7 +7,7 @@
 //
 
 #include "drw_font_hpvec.h"
-#include <drw/drw.h>
+#include "../drw.h"
 
 #include <hp/hp1345a.c>
 
@@ -16,6 +16,8 @@
 #ifdef DEBUG
 #include <stdio.h>
 #endif
+
+
 
 static int alignment_h = DRW_FONT_ALIGN_H_CENTER;
 static int alignment_v = DRW_FONT_ALIGN_V_CENTER;

@@ -9,7 +9,9 @@
 #ifndef drw_wobject_ops_h
 #define drw_wobject_ops_h
 
-#include <wsh/wsh.h>
+
+#include "drw_dummy.h"
+//#include <wsh/wsh.h>
 
 WPoint drw_wobject_ops_randompointfromobject(WObject*, int* line_i, int* point_i);
 WPoint drw_wobject_ops_randompointfromline(WLine*, int* point_i);

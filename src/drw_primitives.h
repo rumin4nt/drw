@@ -9,7 +9,16 @@
 #ifndef drw_primitives_h
 #define drw_primitives_h
 
-#include <r4/r4.h>
+//#include <r4/r4.h>
+
+#ifndef RUMINANT4_PRESENT
+//#error hi
+
+#include "dummy/r4/src/geo/r_line.h"
+
+#endif
+
+
 
 RLine* drw_primitives_calculate_hexagon(double radius);
 
