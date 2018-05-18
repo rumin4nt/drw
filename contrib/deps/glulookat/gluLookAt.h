@@ -56,6 +56,9 @@
 */
 
 #ifndef __APPLE__
+
+#include <GL/gl.h>
+
 void gluPerspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar);
 
 void gluLookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,

@@ -1,6 +1,7 @@
 
 
 #include "drw.h"
+#include <string.h>
 
 int drw_check_version_match(const char* header_generated_version)
 {

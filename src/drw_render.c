@@ -1720,6 +1720,7 @@ void drw_rawpoints_3f(float* arr, int num)
 	glVertexPointer(3, GL_FLOAT, 0, arr);
 	glDrawArrays(GL_POINTS, 0, num);
 }
+
 void d_rgbtri(double gamma)
 {
 	GLint vertices[] = {0, 1, 0, 0, 0, 1, 1, 0, 0};
