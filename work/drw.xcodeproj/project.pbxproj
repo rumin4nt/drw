@@ -11,6 +11,8 @@
 		5703D74D20ACBCBD007E1800 /* drw_ext_gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703D74B20ACBCBD007E1800 /* drw_ext_gpc.c */; };
 		5703DBA020ACBD5C007E1800 /* gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703DB1920ACBD5C007E1800 /* gpc.c */; };
 		5703DBA120ACBD5C007E1800 /* gpc.h in Headers */ = {isa = PBXBuildFile; fileRef = 5703DB1A20ACBD5C007E1800 /* gpc.h */; };
+		577858CC20B3661E00218129 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = 577858CA20B3661E00218129 /* vector.c */; };
+		577858CD20B3661E00218129 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 577858CB20B3661E00218129 /* vector.h */; };
 		57BDF7E520AC7CD1004C154E /* drw_render.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF7D320AC7CD1004C154E /* drw_render.h */; };
 		57BDF7E620AC7CD1004C154E /* drw_wobject_ops.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */; };
 		57BDF7E720AC7CD1004C154E /* drw_point.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF7D520AC7CD1004C154E /* drw_point.c */; };
@@ -37,6 +39,8 @@
 		5703D74B20ACBCBD007E1800 /* drw_ext_gpc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_ext_gpc.c; sourceTree = "<group>"; };
 		5703DB1920ACBD5C007E1800 /* gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gpc.c; sourceTree = "<group>"; };
 		5703DB1A20ACBD5C007E1800 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
+		577858CA20B3661E00218129 /* vector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vector.c; sourceTree = "<group>"; };
+		577858CB20B3661E00218129 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
 		57BDF7D320AC7CD1004C154E /* drw_render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render.h; sourceTree = "<group>"; };
 		57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_wobject_ops.h; sourceTree = "<group>"; };
 		57BDF7D520AC7CD1004C154E /* drw_point.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_point.c; sourceTree = "<group>"; };
@@ -93,6 +97,7 @@
 		5703DAAC20ACBD5C007E1800 /* deps */ = {
 			isa = PBXGroup;
 			children = (
+				577858C920B3661E00218129 /* vector */,
 				5703DB1820ACBD5C007E1800 /* gpc */,
 			);
 			name = deps;
@@ -106,6 +111,16 @@
 				5703DB1A20ACBD5C007E1800 /* gpc.h */,
 			);
 			path = gpc;
+			sourceTree = "<group>";
+		};
+		577858C920B3661E00218129 /* vector */ = {
+			isa = PBXGroup;
+			children = (
+				577858CA20B3661E00218129 /* vector.c */,
+				577858CB20B3661E00218129 /* vector.h */,
+			);
+			name = vector;
+			path = ../../libs/drw/contrib/deps/vector;
 			sourceTree = "<group>";
 		};
 		57BDF7D220AC7CD1004C154E /* src */ = {
@@ -177,6 +192,7 @@
 				5703DBA120ACBD5C007E1800 /* gpc.h in Headers */,
 				57BDF80920ACA86A004C154E /* drw_platform.h in Headers */,
 				57BDF7ED20AC7CD1004C154E /* drw_primitives.h in Headers */,
+				577858CD20B3661E00218129 /* vector.h in Headers */,
 				57BDF81820ACA9A0004C154E /* drw_font_ftgles.h in Headers */,
 				57BDF7E520AC7CD1004C154E /* drw_render.h in Headers */,
 				5703D74C20ACBCBD007E1800 /* drw_ext_gpc.h in Headers */,
@@ -286,6 +302,7 @@
 				57BDF81720ACA9A0004C154E /* drw_font_hpvec.c in Sources */,
 				57BDF7EF20AC7CD1004C154E /* drw_render.c in Sources */,
 				57BDF81920ACA9A0004C154E /* drw_font_hershey.c in Sources */,
+				577858CC20B3661E00218129 /* vector.c in Sources */,
 				57BDF7F420AC7CD1004C154E /* drw_primitives.c in Sources */,
 				5703D74D20ACBCBD007E1800 /* drw_ext_gpc.c in Sources */,
 				57BDF81A20ACA9A0004C154E /* drw_font_ftgl.c in Sources */,

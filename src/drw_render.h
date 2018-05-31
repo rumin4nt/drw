@@ -203,16 +203,16 @@ void drw_wobject_e(WObject*);
 //void d_wsequence_e(WSequence*, int);
 
 //	glut prims
-void d_glut_init(void);
-void d_tetrahedron(float r);
-void d_cube(float r);
-void d_sphere(float);
-void d_doda(float);
+void drw_glut_init(void);
+void drw_tetrahedron(float r);
+void drw_cube(float r);
+void drw_sphere(float);
+//void d_doda(float);
 void drw_teapot(float);
 void drw_teapot(float v);
-void d_octahedron(float v);
-void d_dodecahedron(float v);
-void d_icosahedron(float v);
+void drw_octahedron(float v);
+void drw_dodecahedron(float v);
+void drw_icosahedron(float v);
 
 //	debug
 void drw_grid(float, int);
@@ -236,11 +236,9 @@ void drw_set_screenspace(bool);
 void drw_set_screensize(double, double);
 void drw_set_framebuffer(double, double);
 
-void d_rgbtri(double gamma);
+void drw_rgbtri(double gamma);
 
 //	debug - strip this with a macro?
 int drw_checkmatrix(void);
-
-
 
 #endif /* rended_h */

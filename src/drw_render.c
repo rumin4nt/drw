@@ -10,8 +10,8 @@
 
 #include <gpc/gpc.h>
 
-#include "drw_platform.h"
 #include "drw_config.h"
+#include "drw_platform.h"
 //#include <r4/src/r4_config.h>
 //#include <r4/src/r4_platform.h>
 
@@ -766,7 +766,6 @@ void drw_transform_apply_inverse(WTransform t)
 	drw_scale_wvec_inverse(t.scale);
 	drw_translate_wvec_inverse(t.anchor);
 	drw_translate_wvec_inverse(t.position);
-
 }
 
 void drw_transform_deapply(WTransform t)
@@ -800,7 +799,6 @@ void drw_scale_wvec(WVec3d v)
 	glScaled(v.x, v.y, v.z);
 }
 
-
 void drw_rotate_wvec(WVec3d v)
 {
 	glRotated(v.x, 1, 0, 0);
@@ -817,7 +815,6 @@ void drw_scale_wvec_inverse(WVec3d v)
 	// printf("%f %f %f\n", v.x, v.y, v.z);
 	glScaled(-v.x, -v.y, -v.z);
 }
-
 
 void drw_rotate_wvec_inverse(WVec3d v)
 {
@@ -1721,7 +1718,7 @@ void drw_rawpoints_3f(float* arr, int num)
 	glDrawArrays(GL_POINTS, 0, num);
 }
 
-void d_rgbtri(double gamma)
+void drw_rgbtri(double gamma)
 {
 	GLint vertices[] = {0, 1, 0, 0, 0, 1, 1, 0, 0};
 
@@ -2206,7 +2203,7 @@ static void cube(double r)
 
 	drw_pop();
 }
-void d_cube(float r)
+void drw_cube(float r)
 {
 	cube(r);
 /*
@@ -2242,11 +2239,11 @@ void _check_glut_init(void)
 {
 	if (glut_initted)
 		return;
-	d_glut_init();
+	drw_glut_init();
 	glut_initted = true;
 }
 
-void d_glut_init(void)
+void drw_glut_init(void)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 
@@ -2254,7 +2251,7 @@ void d_glut_init(void)
 #endif
 }
 
-void d_tetrahedron(float v)
+void drw_tetrahedron(float v)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 	drw_push();
@@ -2264,7 +2261,7 @@ void d_tetrahedron(float v)
 #endif
 }
 
-void d_sphere(float v)
+void drw_sphere(float v)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 	_check_glut_init();
@@ -2272,7 +2269,7 @@ void d_sphere(float v)
 #endif
 }
 
-void d_octahedron(float v)
+void drw_octahedron(float v)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 
@@ -2283,7 +2280,7 @@ void d_octahedron(float v)
 #endif
 }
 
-void d_dodecahedron(float v)
+void drw_dodecahedron(float v)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 
@@ -2294,7 +2291,7 @@ void d_dodecahedron(float v)
 #endif
 }
 
-void d_icosahedron(float v)
+void drw_icosahedron(float v)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 
