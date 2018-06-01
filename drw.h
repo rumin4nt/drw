@@ -15,12 +15,11 @@
 
 #include "src/drw_platform.h"
 
-#include "src/drw_render.h"
 #include "src/drw_config.h"
+#include "src/drw_render.h"
 
 //#include "src/r_hatch.h"
 
-#define D_FONT_SIZE 18
 
 enum DRWAlignmentHorizontal
 {
@@ -49,8 +48,8 @@ enum DRWAlignmentVertical
 #include "src/type/drw_font_hpvec.h"
 
 //#include "src/d_glus.h"
-#include "src/drw_wobject_ops.h"
 #include "src/drw_point.h"
+#include "src/drw_wobject_ops.h"
 
 #include "src/drw_primitives.h"
 

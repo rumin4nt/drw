@@ -47,6 +47,12 @@ enum
 void drw_init(void);
 void drw_deinit(void);
 
+//	geometry
+double drw_query_aspectratio(void);
+bool 	drw_query_landscape(void);
+double 	drw_query_retina(void);
+
+
 //	color
 
 void drw_clear(void);
@@ -134,6 +140,8 @@ void drw_rotate_y(float);
 void drw_rotate_z(float);
 void drw_rotate_vec3(vec3_t vec);
 void drw_rotate(float, float, float);
+
+
 
 int drw_get_gl_error(void);
 

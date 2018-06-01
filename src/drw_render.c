@@ -9,7 +9,7 @@
 #include "drw_render.h"
 
 #include <gpc/gpc.h>
-
+#include <drw/drw.h>
 #include "drw_config.h"
 #include "drw_platform.h"
 //#include <r4/src/r4_config.h>
@@ -111,6 +111,7 @@ static double scale_factor_downsample = 1;
 static double scale_factor	    = 1;
 
 // replaced by these
+static bool _landscape   = false;
 static double _aspect       = 1;
 static double _retina_scale = 1;
 
@@ -197,9 +198,9 @@ int drw_get_gl_error()
 		printf("GL_INVALID_OPERATION\n");
 		break;
 
-		// case GL_INVALID_FRAMEBUFFER_OPERATION:
-		//    printf("invalid framebuffer\n");
-		//    break;
+	// case GL_INVALID_FRAMEBUFFER_OPERATION:
+	//    printf("invalid framebuffer\n");
+	//    break;
 
 	case GL_OUT_OF_MEMORY:
 		printf("out of memory\n");
@@ -295,6 +296,22 @@ void drw_deinit(void)
 	}
 }
 
+double 	drw_query_retina(void)
+{
+	return _retina_scale;
+}
+
+double drw_query_aspectratio(void)
+{
+	return _aspect;
+}
+
+bool 	drw_query_landscape(void)
+{
+	return _landscape;
+}
+
+
 void drw_set_line_width(float v)
 {
 	glLineWidth(v);
@@ -308,7 +325,7 @@ void drw_text_load(const char* path)
 // 0if ( path != NULL )
 //{
 // const char* path = r_resource_load("vs-junk","otf");
-#ifdef R4_ENABLE_FTGL
+#ifdef DRW_ENABLE_FTGL
 	drw_font_load(path);
 
 #endif
@@ -849,7 +866,7 @@ void drw_axis_nice()
 
 void drw_text_size(int sz, int resolution)
 {
-#ifdef R4_ENABLE_FTGL
+#ifdef DRW_ENABLE_FTGL
 	drw_font_size(sz, resolution);
 
 #endif
@@ -864,7 +881,7 @@ void drw_text(const char* format, ...)
 	vsprintf(buf, format, args);
 	va_end(args);
 
-#ifdef R4_ENABLE_FTGL
+#ifdef DRW_ENABLE_FTGL
 
 	drw_font_draw(buf);
 #endif
@@ -1872,20 +1889,20 @@ void drw_setup_view_persp()
 
 	float pixelAspect = 1.f;
 
-	bool landscape = true;
+	//bool landscape = true;
 
 	// landscape
 	if (x > y)
 	{
 		pixelAspect = (float)x / (float)y;
-		landscape   = true;
+		_landscape   = true;
 	}
 
 	// portrait
 	if (y > x)
 	{
 		pixelAspect = (float)y / (float)x;
-		landscape   = false;
+		_landscape   = false;
 	}
 
 	left = top = znear = -1.f;
@@ -1895,7 +1912,7 @@ void drw_setup_view_persp()
 	znear = 0.00001f;
 	zfar  = 1024.f;
 
-	if (landscape)
+	if (_landscape)
 	{
 		left *= pixelAspect;
 		right *= pixelAspect;
@@ -1963,21 +1980,23 @@ void drw_setup_view_ortho()
 	// dumb lazy in a hurry
 	// printf("%f %f\n", width, height );
 
-	float pixelAspect = 1.f;
+	//float pixelAspect = 1.f;
 
-	// bool landscape = true;
-
+	//bool landscape = false;
+	_landscape = false;
+	
 	// landscape
 	if (x > y)
 	{
-		pixelAspect = (float)x / (float)y;
-		// landscape = true;
+		_aspect = (float)x / (float)y;
+		_landscape = true;
 	}
 
 	// portrait
 	if (y > x)
 	{
-		pixelAspect = (float)y / (float)x;
+		_aspect = (float)y / (float)x;
+		
 	}
 
 	glViewport(0, 0, (int)width, (int)height);
@@ -1986,34 +2005,19 @@ void drw_setup_view_ortho()
 	if (!_screenspace)
 	{
 		// if(debug_settings.render )
-		printf("Not using screenspace(normals)\n");
+		printf("Not using screenspace(normals) %f\n", _aspect);
 		width  = 1.;
 		height = 1.;
+		
+		if ( _landscape )
+		{
+			width *= _aspect;
+		}else{
+			height *= _aspect;
+		}
+		
 	}
 
-	_aspect = pixelAspect;
-	/*
-	 if (true) {
-	 width = app_settings.current_window_x;
-	 height = app_settings.current_window_y;
-	 }else{
-	 height = app_settings.current_window_y;;
-	 width = app_settings.current_window_x;
-	 }
-
-	 */
-
-	/*
-
-	 //portrait
-	 if ( height > width ) {
-	 ratio = (float)height / (float)width;
-	 }else{
-	 //landscape
-	 ratio = (float)width / (float)height;
-	 //landscape = true;
-	 }
-	 */
 
 	drw_get_gl_error();
 
@@ -2045,7 +2049,7 @@ void drw_setup_view_ortho()
 
 	 }else{
 	 */
-	_aspect = pixelAspect;
+	//_aspect = pixelAspect;
 
 	double l = width * -.5;
 	double r = width * .5;

@@ -11,6 +11,10 @@
 
 #include "drw_platform.h"
 
+
+#define D_FONT_SIZE 18
+
+
 #ifdef DRW_PLATFORM_DARWIN
 
 //#include <GL/glew.h>
@@ -60,13 +64,17 @@
 #endif
 
 #ifdef DRW_PLATFORM_IOS
+#define DRW_ENABLE_FTGLES
 
 #define DRW_VERTEX_POINTER_IDENT GL_FLOAT
 #else
+#define DRW_ENABLE_FTGL
+
 //#ifndef DRW_PLATFORM_WIN
 //#error fuck
 #define DRW_VERTEX_POINTER_IDENT GL_DOUBLE
 //#endif
+
 #endif
 
 #endif /* drw_config_h */
