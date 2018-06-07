@@ -16,7 +16,6 @@
 
 
 #ifdef DRW_PLATFORM_DARWIN
-
 //#include <GL/glew.h>
 //#include <glad/glad.h>
 //#include "GL/glus.h"

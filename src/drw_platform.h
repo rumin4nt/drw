@@ -10,30 +10,27 @@
 #define drw_platform_h
 
 #ifdef _WIN64
-#define DRW_PLATFORM_WIN
+	#define DRW_PLATFORM_WIN
 #elif _WIN32
-#define DRW_PLATFORM_WIN
+	#define DRW_PLATFORM_WIN
 
 #elif __APPLE__
-#include <TargetConditionals.h>
+	#include <TargetConditionals.h>
+	#if TARGET_OS_IPHONE
+		#define DRW_PLATFORM_IOS
+	#elif TARGET_IPHONE_SIMULATOR
+		//#error hi
+		#define DRW_PLATFORM_IOS
+		//#include <TargetConditionals.h>
+		#ifndef PATH_MAX
+		#define PATH_MAX 2048
+		#endif
 
-#if TARGET_OS_IPHONE
-#define DRW_PLATFORM_IOS
-//#define DRW_PLATFORM_IOS
-#elif TARGET_IPHONE_SIMULATOR
-//#define DRW_PLATFORM_IOS_SIM
-//#define DRW_PLATFORM_IOS
-#define DRW_PLATFORM_IOS
-
-#ifndef PATH_MAX
-#define PATH_MAX 2048
-#endif
-
-#else
-
-#define DRW_PLATFORM_DARWIN 1
-#undef DRW_PLATFORM_IOS_SIM
-#undef DRW_PLATFORM_IOS
+	#else
+	
+		#define DRW_PLATFORM_DARWIN
+		#undef DRW_PLATFORM_IOS_SIM
+		#undef DRW_PLATFORM_IOS
 #endif
 
 #elif __linux
