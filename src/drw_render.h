@@ -49,9 +49,9 @@ void drw_deinit(void);
 
 //	geometry
 double drw_query_aspectratio(void);
-bool 	drw_query_landscape(void);
-double 	drw_query_retina(void);
-
+bool   drw_query_landscape(void);
+double drw_query_retina(void);
+void    drw_query_framebuffer(int*, int*);
 
 //	color
 
@@ -67,7 +67,7 @@ void drw_color_clear_color8(RColor8);
 void drw_color_clear_color16(RColor16);
 
 void drw_set_line_width(float v);
-
+//void drw_set_screenspace(bool v);
 void drw_set_colorbypass(bool v);
 
 void drw_color(double r, double g, double b, double a);
@@ -141,8 +141,6 @@ void drw_rotate_z(float);
 void drw_rotate_vec3(vec3_t vec);
 void drw_rotate(float, float, float);
 
-
-
 int drw_get_gl_error(void);
 
 //	primitives
@@ -192,7 +190,8 @@ void drw_triangle_strip(WLine*);
 
 //	fancy
 void drw_text(const char* text, ...);
-void drw_text_size(int, int);
+void drw_text_set_size(int, int);
+int  drw_text_get_size(void);
 void drw_text_load(const char* path);
 
 //	wash primitives
@@ -241,6 +240,7 @@ void drw_pop_fill(void);
 void drw_set_fov(double v);
 void drw_set_ortho(bool v);
 void drw_set_screenspace(bool);
+bool drw_get_screenspace(void);
 void drw_set_screensize(double, double);
 void drw_set_framebuffer(double, double);
 

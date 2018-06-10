@@ -8,10 +8,10 @@
 
 #include "drw_render.h"
 
-#include <gpc/gpc.h>
-#include <drw/drw.h>
 #include "drw_config.h"
 #include "drw_platform.h"
+#include <drw/drw.h>
+#include <gpc/gpc.h>
 //#include <r4/src/r4_config.h>
 //#include <r4/src/r4_platform.h>
 
@@ -78,6 +78,7 @@
 // the sea
 static bool _ortho;
 static bool _screenspace;
+static int _text_size;
 
 static double fov = 45;
 static double window_width;
@@ -111,7 +112,7 @@ static double scale_factor_downsample = 1;
 static double scale_factor	    = 1;
 
 // replaced by these
-static bool _landscape   = false;
+static bool   _landscape    = false;
 static double _aspect       = 1;
 static double _retina_scale = 1;
 
@@ -296,21 +297,25 @@ void drw_deinit(void)
 	}
 }
 
-double 	drw_query_retina(void)
+double drw_query_retina(void)
 {
 	return _retina_scale;
 }
-
+void    drw_query_framebuffer(int* w, int* h)
+{
+	*w = framebuffer_width;
+	*h = framebuffer_height;
+	
+}
 double drw_query_aspectratio(void)
 {
 	return _aspect;
 }
 
-bool 	drw_query_landscape(void)
+bool drw_query_landscape(void)
 {
 	return _landscape;
 }
-
 
 void drw_set_line_width(float v)
 {
@@ -864,12 +869,17 @@ void drw_axis_nice()
 	drw_pop();
 }
 
-void drw_text_size(int sz, int resolution)
+int drw_text_get_size(void)
+{
+	return _text_size;
+}
+
+void drw_text_set_size(int sz, int resolution)
 {
 #ifdef DRW_ENABLE_FTGL
 	drw_font_size(sz, resolution);
-
 #endif
+	_text_size = sz;
 }
 
 void drw_text(const char* format, ...)
@@ -1815,6 +1825,11 @@ void drw_set_ortho(bool val)
 	_ortho = val;
 }
 
+bool drw_get_screenspace(void)
+{
+	return _screenspace;
+}
+
 void drw_set_screenspace(bool val)
 {
 #ifdef DEBUG
@@ -1895,14 +1910,14 @@ void drw_setup_view_persp()
 	if (x > y)
 	{
 		pixelAspect = (float)x / (float)y;
-		_landscape   = true;
+		_landscape  = true;
 	}
 
 	// portrait
 	if (y > x)
 	{
 		pixelAspect = (float)y / (float)x;
-		_landscape   = false;
+		_landscape  = false;
 	}
 
 	left = top = znear = -1.f;
@@ -1984,11 +1999,11 @@ void drw_setup_view_ortho()
 
 	//bool landscape = false;
 	_landscape = false;
-	
+
 	// landscape
 	if (x > y)
 	{
-		_aspect = (float)x / (float)y;
+		_aspect    = (float)x / (float)y;
 		_landscape = true;
 	}
 
@@ -1996,7 +2011,6 @@ void drw_setup_view_ortho()
 	if (y > x)
 	{
 		_aspect = (float)y / (float)x;
-		
 	}
 
 	glViewport(0, 0, (int)width, (int)height);
@@ -2008,16 +2022,16 @@ void drw_setup_view_ortho()
 		printf("Not using screenspace(normals) %f\n", _aspect);
 		width  = 1.;
 		height = 1.;
-		
-		if ( _landscape )
+
+		if (_landscape)
 		{
 			width *= _aspect;
-		}else{
+		}
+		else
+		{
 			height *= _aspect;
 		}
-		
 	}
-
 
 	drw_get_gl_error();
 
