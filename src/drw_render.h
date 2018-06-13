@@ -249,4 +249,7 @@ void drw_rgbtri(double gamma);
 //	debug - strip this with a macro?
 int drw_checkmatrix(void);
 
+void drw_swap(void);
+void drw_finish(void);
+
 #endif /* rended_h */

@@ -2329,3 +2329,15 @@ void drw_teapot(float v)
 	drw_pop();
 #endif
 }
+
+
+
+void drw_swap(void)
+{
+	
+}
+void drw_finish(void)
+{
+	glFinish();
+}
+

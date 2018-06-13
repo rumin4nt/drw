@@ -22,7 +22,15 @@ bool drw_export_png(const char* path, int w, int h)
 	uint8_t *pixels = calloc(w*h*3, sizeof(uint8_t));
 	// copy pixels from screen
 	//	glBindTexture(GL_TEXTURE_2D, screenTex);
+	
+	
+#ifdef DRW_PLATFORM_IOS
+	
+	
+#else
 	glBindTexture(GL_TEXTURE_2D, 0);
+#endif
+	
 	glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0, w, h);
 	glPixelStorei(GL_PACK_ALIGNMENT, 1);
 	glReadPixels(0, 0, w, h, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid *)pixels);
