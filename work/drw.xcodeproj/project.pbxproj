@@ -13,6 +13,8 @@
 		5703DBA120ACBD5C007E1800 /* gpc.h in Headers */ = {isa = PBXBuildFile; fileRef = 5703DB1A20ACBD5C007E1800 /* gpc.h */; };
 		577858CC20B3661E00218129 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = 577858CA20B3661E00218129 /* vector.c */; };
 		577858CD20B3661E00218129 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 577858CB20B3661E00218129 /* vector.h */; };
+		57967B6120D17B3000003F66 /* drw_export.h in Headers */ = {isa = PBXBuildFile; fileRef = 57967B5F20D17B3000003F66 /* drw_export.h */; };
+		57967B6220D17B3000003F66 /* drw_export.c in Sources */ = {isa = PBXBuildFile; fileRef = 57967B6020D17B3000003F66 /* drw_export.c */; };
 		57BDF7E520AC7CD1004C154E /* drw_render.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF7D320AC7CD1004C154E /* drw_render.h */; };
 		57BDF7E620AC7CD1004C154E /* drw_wobject_ops.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */; };
 		57BDF7E720AC7CD1004C154E /* drw_point.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF7D520AC7CD1004C154E /* drw_point.c */; };
@@ -41,6 +43,8 @@
 		5703DB1A20ACBD5C007E1800 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
 		577858CA20B3661E00218129 /* vector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vector.c; sourceTree = "<group>"; };
 		577858CB20B3661E00218129 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
+		57967B5F20D17B3000003F66 /* drw_export.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_export.h; sourceTree = "<group>"; };
+		57967B6020D17B3000003F66 /* drw_export.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_export.c; sourceTree = "<group>"; };
 		57BDF7D320AC7CD1004C154E /* drw_render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render.h; sourceTree = "<group>"; };
 		57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_wobject_ops.h; sourceTree = "<group>"; };
 		57BDF7D520AC7CD1004C154E /* drw_point.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_point.c; sourceTree = "<group>"; };
@@ -126,19 +130,21 @@
 		57BDF7D220AC7CD1004C154E /* src */ = {
 			isa = PBXGroup;
 			children = (
-				57BDF80B20ACA9A0004C154E /* type */,
-				5703D74920ACBCB1007E1800 /* ext */,
-				57BDF82020ACAC3F004C154E /* drw_dummy.h */,
-				57BDF80820ACA86A004C154E /* drw_platform.h */,
 				57BDF80A20ACA91E004C154E /* drw_config.h */,
-				57BDF7D320AC7CD1004C154E /* drw_render.h */,
-				57BDF7DD20AC7CD1004C154E /* drw_render.c */,
-				57BDF7E020AC7CD1004C154E /* drw_point.h */,
+				57BDF82020ACAC3F004C154E /* drw_dummy.h */,
+				57967B6020D17B3000003F66 /* drw_export.c */,
+				57967B5F20D17B3000003F66 /* drw_export.h */,
+				57BDF80820ACA86A004C154E /* drw_platform.h */,
 				57BDF7D520AC7CD1004C154E /* drw_point.c */,
-				57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */,
-				57BDF7DB20AC7CD1004C154E /* drw_primitives.h */,
-				57BDF7DC20AC7CD1004C154E /* drw_wobject_ops.c */,
+				57BDF7E020AC7CD1004C154E /* drw_point.h */,
 				57BDF7E220AC7CD1004C154E /* drw_primitives.c */,
+				57BDF7DB20AC7CD1004C154E /* drw_primitives.h */,
+				57BDF7DD20AC7CD1004C154E /* drw_render.c */,
+				57BDF7D320AC7CD1004C154E /* drw_render.h */,
+				57BDF7DC20AC7CD1004C154E /* drw_wobject_ops.c */,
+				57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */,
+				5703D74920ACBCB1007E1800 /* ext */,
+				57BDF80B20ACA9A0004C154E /* type */,
 			);
 			name = src;
 			path = ../src;
@@ -193,6 +199,7 @@
 				57BDF80920ACA86A004C154E /* drw_platform.h in Headers */,
 				57BDF7ED20AC7CD1004C154E /* drw_primitives.h in Headers */,
 				577858CD20B3661E00218129 /* vector.h in Headers */,
+				57967B6120D17B3000003F66 /* drw_export.h in Headers */,
 				57BDF81820ACA9A0004C154E /* drw_font_ftgles.h in Headers */,
 				57BDF7E520AC7CD1004C154E /* drw_render.h in Headers */,
 				5703D74C20ACBCBD007E1800 /* drw_ext_gpc.h in Headers */,
@@ -296,6 +303,7 @@
 			files = (
 				57BDF7EE20AC7CD1004C154E /* drw_wobject_ops.c in Sources */,
 				57BDF81620ACA9A0004C154E /* drw_font_asteroids.c in Sources */,
+				57967B6220D17B3000003F66 /* drw_export.c in Sources */,
 				57BDF81D20ACA9A0004C154E /* drw_font_ftgles.cpp in Sources */,
 				5703DBA020ACBD5C007E1800 /* gpc.c in Sources */,
 				57BDF7E720AC7CD1004C154E /* drw_point.c in Sources */,

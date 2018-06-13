@@ -1,5 +1,7 @@
 build/*
+work/build
 
 .DS_Store
 *Breakpoints*
+*xcuserdata*
 

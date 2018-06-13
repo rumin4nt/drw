@@ -76,4 +76,7 @@
 
 #endif
 
+
+#define DRW_ENABLE_PNG
+
 #endif /* drw_config_h */
