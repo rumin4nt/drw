@@ -55,6 +55,10 @@
 		5770A16D20D2E22000B0CCEE /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		57967B6620D186A800003F66 /* drw_export.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_export.c; sourceTree = "<group>"; };
 		57967B6720D186AB00003F66 /* drw_export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_export.h; sourceTree = "<group>"; };
+<<<<<<< Updated upstream
+=======
+		57967B6B20D1881900003F66 /* libz.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libz.a; path = ../../../contrib/platform/ios/arm64/libz.a; sourceTree = "<group>"; };
+>>>>>>> Stashed changes
 		57B6B0C520CDBB13009B3BFB /* drw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drw.h; path = ../drw.h; sourceTree = "<group>"; };
 		57B6B0C620CDBB14009B3BFB /* drw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = drw.c; path = ../drw.c; sourceTree = "<group>"; };
 		57BDF7AF20AB99E0004C154E /* drw_render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render.h; sourceTree = "<group>"; };
@@ -74,7 +78,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				575B4E9720C9E95E00E875FE /* OpenGLES.framework in Frameworks */,
+<<<<<<< Updated upstream
 				5770A16E20D2E22000B0CCEE /* libz.tbd in Frameworks */,
+=======
+				57967B6520D1860800003F66 /* libpng.a in Frameworks */,
+				57967B6C20D1881A00003F66 /* libz.a in Frameworks */,
+>>>>>>> Stashed changes
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +119,10 @@
 		575B4E9520C9E95D00E875FE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+<<<<<<< Updated upstream
 				5770A16D20D2E22000B0CCEE /* libz.tbd */,
+=======
+>>>>>>> Stashed changes
 				575B4E9620C9E95E00E875FE /* OpenGLES.framework */,
 			);
 			name = Frameworks;
