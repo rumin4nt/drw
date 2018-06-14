@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 
 project(drw)
-set (drw_VERSION_MAJOR 0)
-set (drw_VERSION_MINOR 0)
-set (drw_VERSION_PATCH 1)
+set(drw_VERSION_MAJOR 0)
+set(drw_VERSION_MINOR 0)
+set(drw_VERSION_PATCH 1)
 
 file(GLOB_RECURSE sources drw.c src/*.c)
 
@@ -13,18 +13,18 @@ option(BuildLibrary "Build the brush library for embedding or linking" ON)
 option(BuildTest "BuildTest" ON)
 option(BuildDocumentation "BuildDocumentation" OFF)
 
+target_include_directories(drw
+                           PUBLIC
+                           ${CMAKE_CURRENT_SOURCE_DIR}/..
+                           ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/include
+                           ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib
+                           ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/deps
+                           /usr/include)
+
 if(${BuildTest})
   add_subdirectory("test")
 endif()
 
 set_property(TARGET drw PROPERTY C_STANDARD 99)
 
-target_link_libraries(drw
-                      LINK_PUBLIC
-                      glut)
-
-target_include_directories (drw PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/..)
-target_include_directories (drw PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/include)
-target_include_directories (drw PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib)
-target_include_directories (drw PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/deps)
-target_include_directories (drw PUBLIC /usr/include)
+target_link_libraries(drw LINK_PUBLIC glut)
