@@ -10,7 +10,7 @@
 
 #include "r_line.h"
 
-//#include <brsh/brsh.h>
+#include <brsh/brsh.h>
 
 typedef struct GPCRec
 {
