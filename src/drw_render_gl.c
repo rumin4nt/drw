@@ -199,9 +199,9 @@ int drw_get_gl_error()
 		printf("GL_INVALID_OPERATION\n");
 		break;
 
-	// case GL_INVALID_FRAMEBUFFER_OPERATION:
-	//    printf("invalid framebuffer\n");
-	//    break;
+		// case GL_INVALID_FRAMEBUFFER_OPERATION:
+		//    printf("invalid framebuffer\n");
+		//    break;
 
 	case GL_OUT_OF_MEMORY:
 		printf("out of memory\n");
@@ -677,7 +677,14 @@ void drw_line(float ax, float ay, float bx, float by)
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
 }
 
-void drw_line_p(WPoint a, WPoint b)
+void drw_line_rp(RPoint a, RPoint b)
+{
+	const GLfloat renderLine[] = {a.x, a.y, b.x, b.y};
+	glVertexPointer(2, GL_FLOAT, 0, renderLine);
+	glDrawArrays(GL_LINE_STRIP, 0, 2);
+}
+
+void drw_line_wp(WPoint a, WPoint b)
 {
 	const GLfloat renderLine[] = {a.x, a.y, b.x, b.y};
 	glVertexPointer(2, GL_FLOAT, 0, renderLine);

@@ -212,6 +212,7 @@
 				5741595F20D4221100E5498B /* drw_render.h in Headers */,
 				57BDF81E20ACA9A0004C154E /* drw_font_ftgl.h in Headers */,
 				57BDF81C20ACA9A0004C154E /* drw_font_hpvec.h in Headers */,
+				577DD21A20D3548D00623919 /* drw_render_gl.h in Headers */,
 				57BDF81F20ACA9A0004C154E /* drw_font_hershey.h in Headers */,
 				57BDF81B20ACA9A0004C154E /* drw_font_asteroids.h in Headers */,
 			);
