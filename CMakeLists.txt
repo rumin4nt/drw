@@ -7,10 +7,13 @@ set(drw_VERSION_PATCH 1)
 
 file(GLOB_RECURSE sources drw.c src/*.c)
 
+link_directories(${CMAKE_BINARY_DIR}
+                 ${CMAKE_SOURCE_DIR}/contrib/platform/darwin /usr/local/lib)
+
 add_library(drw STATIC ${sources})
 
 option(BuildLibrary "Build the brush library for embedding or linking" ON)
-option(BuildTest "BuildTest" ON)
+option(BuildDrwTest "BuildTest" OFF)
 option(BuildDocumentation "BuildDocumentation" OFF)
 
 target_include_directories(drw
@@ -19,12 +22,12 @@ target_include_directories(drw
                            ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/include
                            ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib
                            ${CMAKE_CURRENT_SOURCE_DIR}/../../contrib/deps
-                           /usr/include)
+                           )
 
-if(${BuildTest})
+if(${BuildDrwTest})
   add_subdirectory("test")
 endif()
 
 set_property(TARGET drw PROPERTY C_STANDARD 99)
 
-target_link_libraries(drw LINK_PUBLIC glut)
+# target_link_libraries(drw LINK_PUBLIC glut)

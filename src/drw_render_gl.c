@@ -41,7 +41,7 @@
 #else
 #ifdef DRW_PLATFORM_DARWIN
 //#include <OpenGL/gl.h>
-#include "type/drw_font_ftgl.h"
+//#include "type/drw_font_ftgl.h"
 //#undef DRW_PLATFORM_IOS
 #else
 
@@ -62,7 +62,7 @@
 #include <gl-matrix/gl-matrix.h>
 
 //#include <GL/glew.h>
-#include "type/drw_font_ftgl.h"
+//#include "type/drw_font_ftgl.h"
 
 //#undef DRW_PLATFORM_IOS
 #endif

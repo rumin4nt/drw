@@ -21,6 +21,8 @@
 
 //#include "src/r_hatch.h"
 
+//#define DRW_BUILD_STANDALONE
+
 enum DRWAlignmentHorizontal
 {
 	DRW_FONT_ALIGN_H_LEFT,
@@ -37,9 +39,11 @@ enum DRWAlignmentVertical
 	DRW_FONT_ALIGN_V_NONE
 };
 
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
+//#error ios
 #include "src/type/drw_font_ftgles.h"
 #else
+//#error macos
 #include "src/type/drw_font_ftgl.h"
 #endif
 
@@ -78,4 +82,8 @@ static inline char* drw_get_version_string_header(void)
 		DRW_VERSION_PATCH);
 	return buf;
 }
+
+int drw_lib_init(void);
+int drw_lib_deinit(void);
+
 #endif /* drw_h */

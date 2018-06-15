@@ -8,6 +8,7 @@
 
 #include "drw_wobject_ops.h"
 
+#ifdef DRW_BUILD_STANDALONE
 //	todo: get rid of this!
 #include <r4/src/core/r_random.h>
 
@@ -28,3 +29,6 @@ WPoint drw_wobject_ops_randompointfromline(WLine* line, int* point_i)
 		*point_i = which;
 	return line->data[which];
 }
+
+
+#endif

@@ -1,12 +1,12 @@
 
 
+#include <drw/drw.h>
 #include "../drw_config.h"
 
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
 
 #include "drw_font_ftgles.h"
 
-#include "../drw.h"
 #include "FTGL/ftgles.h"
 
 static FTPolygonFont* font  = 0;

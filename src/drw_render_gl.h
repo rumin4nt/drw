@@ -17,13 +17,13 @@
 
 #pragma GCC visibility push(default)
 
-#ifndef RUMINANT4_PRESENT
-#include "drw_dummy.h"
+#ifdef DRW_BUILD_STANDALONE
+	#include "drw_dummy.h"
 #else
+	#include <grdn/grdn.h>
+#include <r4/src/core/r_color.h>
 
-#include <grdn/grdn.h>
-
-#include <r4/r4.h>
+	//#include <r4/r4.h>
 #endif
 
 //#include <wsh/wsh.h>
