@@ -159,16 +159,16 @@
 		57BDF80B20ACA9A0004C154E /* type */ = {
 			isa = PBXGroup;
 			children = (
-				57BDF81020ACA9A0004C154E /* drw_font_ftgl.c */,
 				57BDF80C20ACA9A0004C154E /* drw_font_asteroids.c */,
-				57BDF80D20ACA9A0004C154E /* drw_font_hpvec.c */,
+				57BDF81120ACA9A0004C154E /* drw_font_asteroids.h */,
+				57BDF81020ACA9A0004C154E /* drw_font_ftgl.c */,
+				57BDF81420ACA9A0004C154E /* drw_font_ftgl.h */,
+				57BDF81320ACA9A0004C154E /* drw_font_ftgles.cpp */,
 				57BDF80E20ACA9A0004C154E /* drw_font_ftgles.h */,
 				57BDF80F20ACA9A0004C154E /* drw_font_hershey.c */,
-				57BDF81120ACA9A0004C154E /* drw_font_asteroids.h */,
-				57BDF81220ACA9A0004C154E /* drw_font_hpvec.h */,
-				57BDF81320ACA9A0004C154E /* drw_font_ftgles.cpp */,
-				57BDF81420ACA9A0004C154E /* drw_font_ftgl.h */,
 				57BDF81520ACA9A0004C154E /* drw_font_hershey.h */,
+				57BDF80D20ACA9A0004C154E /* drw_font_hpvec.c */,
+				57BDF81220ACA9A0004C154E /* drw_font_hpvec.h */,
 			);
 			path = type;
 			sourceTree = "<group>";

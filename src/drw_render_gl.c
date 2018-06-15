@@ -700,22 +700,27 @@ void drw_scale(float x, float y, float z)
 {
 	glScalef(x, y, z);
 }
+
 void drw_scale_u(float v)
 {
 	glScalef(v, v, v);
 }
+
 void drw_scale_x(float x)
 {
 	glScalef(x, 1, 1);
 }
+
 void drw_scale_y(float y)
 {
 	glScalef(1, y, 1);
 }
+
 void drw_scale_z(float z)
 {
 	glScalef(1, 1, z);
 }
+
 /*
  void drw_translate_vec2(Vec2* v)
  {
