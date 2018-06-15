@@ -10,10 +10,11 @@
 		5703D73D20ACBA55007E1800 /* drw_font_asteroids.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703D73320ACBA55007E1800 /* drw_font_asteroids.c */; };
 		5703D73E20ACBA55007E1800 /* drw_font_hpvec.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703D73420ACBA55007E1800 /* drw_font_hpvec.c */; };
 		5703D73F20ACBA55007E1800 /* drw_font_hershey.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703D73620ACBA55007E1800 /* drw_font_hershey.c */; };
-		5703D74020ACBA55007E1800 /* drw_font_ftgl.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703D73720ACBA55007E1800 /* drw_font_ftgl.c */; };
 		5703D74120ACBA55007E1800 /* drw_font_ftgles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5703D73A20ACBA55007E1800 /* drw_font_ftgles.cpp */; };
 		5703DBE820ACBF98007E1800 /* drw_ext_gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703DBE720ACBF98007E1800 /* drw_ext_gpc.c */; };
 		575B4E9720C9E95E00E875FE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 575B4E9620C9E95E00E875FE /* OpenGLES.framework */; };
+		577DD1FE20D350B100623919 /* libFTGLES.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 577DD1FD20D350B100623919 /* libFTGLES.a */; };
+		577DD22520D3577800623919 /* drw_render_gl.c in Sources */ = {isa = PBXBuildFile; fileRef = 577DD22420D3577800623919 /* drw_render_gl.c */; };
 		57967B6820D186AB00003F66 /* drw_export.c in Sources */ = {isa = PBXBuildFile; fileRef = 57967B6620D186A800003F66 /* drw_export.c */; };
 		57B6B0C720CDBB14009B3BFB /* drw.c in Sources */ = {isa = PBXBuildFile; fileRef = 57B6B0C620CDBB14009B3BFB /* drw.c */; };
 		57BDF7C120AB99E0004C154E /* drw_point.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF7B120AB99E0004C154E /* drw_point.c */; };
@@ -39,11 +40,9 @@
 		5703D73420ACBA55007E1800 /* drw_font_hpvec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_font_hpvec.c; sourceTree = "<group>"; };
 		5703D73520ACBA55007E1800 /* drw_font_ftgles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_font_ftgles.h; sourceTree = "<group>"; };
 		5703D73620ACBA55007E1800 /* drw_font_hershey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_font_hershey.c; sourceTree = "<group>"; };
-		5703D73720ACBA55007E1800 /* drw_font_ftgl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_font_ftgl.c; sourceTree = "<group>"; };
 		5703D73820ACBA55007E1800 /* drw_font_asteroids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_font_asteroids.h; sourceTree = "<group>"; };
 		5703D73920ACBA55007E1800 /* drw_font_hpvec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_font_hpvec.h; sourceTree = "<group>"; };
 		5703D73A20ACBA55007E1800 /* drw_font_ftgles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = drw_font_ftgles.cpp; sourceTree = "<group>"; };
-		5703D73B20ACBA55007E1800 /* drw_font_ftgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_font_ftgl.h; sourceTree = "<group>"; };
 		5703D73C20ACBA55007E1800 /* drw_font_hershey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_font_hershey.h; sourceTree = "<group>"; };
 		5703DBE620ACBF98007E1800 /* drw_ext_gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_ext_gpc.h; sourceTree = "<group>"; };
 		5703DBE720ACBF98007E1800 /* drw_ext_gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_ext_gpc.c; sourceTree = "<group>"; };
@@ -51,11 +50,14 @@
 		575B4E9320C9E69900E875FE /* drw_dummy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_dummy.h; sourceTree = "<group>"; };
 		575B4E9420C9E69900E875FE /* drw_platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_platform.h; sourceTree = "<group>"; };
 		575B4E9620C9E95E00E875FE /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		577DD1FD20D350B100623919 /* libFTGLES.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFTGLES.a; path = ../../../contrib/platform/ios/arm64/libFTGLES.a; sourceTree = "<group>"; };
+		577DD22320D3577700623919 /* drw_render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render.h; sourceTree = "<group>"; };
+		577DD22420D3577800623919 /* drw_render_gl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_render_gl.c; sourceTree = "<group>"; };
 		57967B6620D186A800003F66 /* drw_export.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_export.c; sourceTree = "<group>"; };
 		57967B6720D186AB00003F66 /* drw_export.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_export.h; sourceTree = "<group>"; };
 		57B6B0C520CDBB13009B3BFB /* drw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drw.h; path = ../drw.h; sourceTree = "<group>"; };
 		57B6B0C620CDBB14009B3BFB /* drw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = drw.c; path = ../drw.c; sourceTree = "<group>"; };
-		57BDF7AF20AB99E0004C154E /* drw_render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render.h; sourceTree = "<group>"; };
+		57BDF7AF20AB99E0004C154E /* drw_render_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render_gl.h; sourceTree = "<group>"; };
 		57BDF7B020AB99E0004C154E /* drw_wobject_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_wobject_ops.h; sourceTree = "<group>"; };
 		57BDF7B120AB99E0004C154E /* drw_point.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_point.c; sourceTree = "<group>"; };
 		57BDF7B720AB99E0004C154E /* drw_primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_primitives.h; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				577DD1FE20D350B100623919 /* libFTGLES.a in Frameworks */,
 				575B4E9720C9E95E00E875FE /* OpenGLES.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -83,8 +86,6 @@
 			children = (
 				5703D73320ACBA55007E1800 /* drw_font_asteroids.c */,
 				5703D73820ACBA55007E1800 /* drw_font_asteroids.h */,
-				5703D73720ACBA55007E1800 /* drw_font_ftgl.c */,
-				5703D73B20ACBA55007E1800 /* drw_font_ftgl.h */,
 				5703D73A20ACBA55007E1800 /* drw_font_ftgles.cpp */,
 				5703D73520ACBA55007E1800 /* drw_font_ftgles.h */,
 				5703D73620ACBA55007E1800 /* drw_font_hershey.c */,
@@ -115,6 +116,7 @@
 		57967B6320D185FD00003F66 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				577DD1FD20D350B100623919 /* libFTGLES.a */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -122,17 +124,19 @@
 		57BDF7AE20AB99E0004C154E /* src */ = {
 			isa = PBXGroup;
 			children = (
-				57967B6620D186A800003F66 /* drw_export.c */,
-				57967B6720D186AB00003F66 /* drw_export.h */,
 				575B4E9220C9E69900E875FE /* drw_config.h */,
 				575B4E9320C9E69900E875FE /* drw_dummy.h */,
+				57967B6620D186A800003F66 /* drw_export.c */,
+				57967B6720D186AB00003F66 /* drw_export.h */,
 				575B4E9420C9E69900E875FE /* drw_platform.h */,
 				57BDF7B120AB99E0004C154E /* drw_point.c */,
 				57BDF7BC20AB99E0004C154E /* drw_point.h */,
 				57BDF7BE20AB99E0004C154E /* drw_primitives.c */,
 				57BDF7B720AB99E0004C154E /* drw_primitives.h */,
+				577DD22420D3577800623919 /* drw_render_gl.c */,
+				577DD22320D3577700623919 /* drw_render.h */,
+				57BDF7AF20AB99E0004C154E /* drw_render_gl.h */,
 				57BDF7B920AB99E0004C154E /* drw_render.c */,
-				57BDF7AF20AB99E0004C154E /* drw_render.h */,
 				57BDF7B820AB99E0004C154E /* drw_wobject_ops.c */,
 				57BDF7B020AB99E0004C154E /* drw_wobject_ops.h */,
 				57B6B0C620CDBB14009B3BFB /* drw.c */,
@@ -226,12 +230,12 @@
 				57967B6820D186AB00003F66 /* drw_export.c in Sources */,
 				5703D74120ACBA55007E1800 /* drw_font_ftgles.cpp in Sources */,
 				57BDF7C720AB99E0004C154E /* drw_render.c in Sources */,
+				577DD22520D3577800623919 /* drw_render_gl.c in Sources */,
 				5703D73E20ACBA55007E1800 /* drw_font_hpvec.c in Sources */,
 				57BDF7C920AB99E0004C154E /* drw_primitives.c in Sources */,
 				5703D73F20ACBA55007E1800 /* drw_font_hershey.c in Sources */,
 				57BDF7C620AB99E0004C154E /* drw_wobject_ops.c in Sources */,
 				5703DBE820ACBF98007E1800 /* drw_ext_gpc.c in Sources */,
-				5703D74020ACBA55007E1800 /* drw_font_ftgl.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +349,7 @@
 		D13333071EA66418008284B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 42R5XUY266;
 				HEADER_SEARCH_PATHS = (
 					"$(r4_root)/contrib",
@@ -354,8 +359,11 @@
 					./../contrib/deps/libpng,
 				);
 				LIBRARY_SEARCH_PATHS = (
+					../,
 					../contrib/platform/ios/arm64,
 					../contrib/platform/ios,
+					../../../contrib/platform/ios/arm64,
+					../../../contrib/platform/ios,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -368,6 +376,7 @@
 		D13333081EA66418008284B1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 42R5XUY266;
 				HEADER_SEARCH_PATHS = (
 					"$(r4_root)/contrib",
@@ -377,8 +386,11 @@
 					./../contrib/deps/libpng,
 				);
 				LIBRARY_SEARCH_PATHS = (
+					../,
 					../contrib/platform/ios/arm64,
 					../contrib/platform/ios,
+					../../../contrib/platform/ios/arm64,
+					../../../contrib/platform/ios,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";

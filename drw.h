@@ -16,11 +16,10 @@
 #include "src/drw_platform.h"
 
 #include "src/drw_config.h"
-#include "src/drw_render.h"
 #include "src/drw_export.h"
+#include "src/drw_render_gl.h"
 
 //#include "src/r_hatch.h"
-
 
 enum DRWAlignmentHorizontal
 {
