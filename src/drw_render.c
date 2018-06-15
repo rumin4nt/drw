@@ -913,14 +913,15 @@ void d_wsequence_e(WSequence* seq, int frame)
 void drw_robject(RObject* obj)
 {
 
-	size_t num = obj->lines.length;
+	size_t num = obj->num;
 
-	RLine* l = r_line_create();
+	//RLine* l = r_line_create();
 	int    i;
 	for (i = 0; i < num; ++i)
 	{
-		vector_get(&obj->lines, i, l);
-		// RLine* l = obj->lines[i];
+		
+		//vector_get(&obj->lines, i, l);
+		RLine* l = obj->lines[i];
 		if (!l)
 		{
 			printf("ack!\n");

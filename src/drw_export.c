@@ -49,7 +49,7 @@ bool drw_export_png(const char* path, int w, int h)
 		}
 	}
 	*/
-	
+#ifdef DRW_ENABLE_PNG
 	// save the image
 	int err = drw_export_png_save(path, pixels, w, h);
 	if (err)
@@ -59,6 +59,10 @@ bool drw_export_png(const char* path, int w, int h)
 	{	printf("Failed\n");
 }
 	return err;
+#else
+	printf("PNG not enabled!\n");
+	return false;
+#endif
 }
 
 

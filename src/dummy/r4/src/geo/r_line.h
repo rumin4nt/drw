@@ -9,7 +9,7 @@
 #ifndef r_line_h
 #define r_line_h
 
-//#include <wsh/wsh.h>
+#include <wsh/wsh.h>
 
 #include "r_point.h"
 #include <stdbool.h>
@@ -59,8 +59,8 @@ RLineHnd* r_line_hnd_create(void);
 RLineHnd* r_line_hnd_copy(RLineHnd*);
 
 RLine* r_line_create(void);
-RLine* r_line_copy(RLine*);
-
+RLine* r_line_copy(RLine* line);
+void	r_line_clear(RLine* line);
 RPoint r_point_create(void);
 RPoint r_point_create2f(double x, double y);
 
@@ -84,7 +84,7 @@ void r_line_move(RLine* src, double x, double y);
 RPoint r_line_find_center_mean(RLine* line);
 RPoint r_line_find_center_avg(RLine* line);
 
-//RLine* r_line_from_wline(WLine* line);
+RLine* r_line_from_wline(WLine* line);
 
 void r_line_calculate_circle(RLine* line, RPoint* center, double* inner, double* outer);
 /*

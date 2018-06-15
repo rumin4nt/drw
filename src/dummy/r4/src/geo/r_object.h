@@ -11,17 +11,19 @@
 //	i sort of hate this, *this* is a rare perfect example of
 //	a template being the correct solution
 #include "r_line.h"
-#include <vector/vector.h>
+//#include <vector/vector.h>
 
 typedef struct RObject
 {
-	struct vector_t lines;
+	RLine** lines;
+	unsigned long num;
+	//struct vector_t lines;
 } RObject;
 
 RObject* r_object_create(void);
 RObject* r_object_create_from_wobject(WObject* obj);
 void     r_object_destroy(RObject* obj);
-void     r_object_addrw_line(RObject* obj, RLine* line);
+void     r_object_add_line(RObject* obj, RLine* line);
 void     r_object_remove_line(RObject* obj, RLine* line);
 
 #endif
