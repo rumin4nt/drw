@@ -67,6 +67,8 @@
 
 #define DRW_VERTEX_POINTER_IDENT GL_FLOAT
 #else
+
+//#define DRW_ENABLE_PNG_SCREENSHOT
 #define DRW_ENABLE_FTGL
 
 //#ifndef DRW_PLATFORM_WIN
@@ -77,6 +79,5 @@
 #endif
 
 
-//#define DRW_ENABLE_PNG
 
 #endif /* drw_config_h */

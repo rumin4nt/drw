@@ -14,7 +14,7 @@
 #include <drw/src/drw_config.h>
 #include <stdbool.h>
 
-#ifdef DRW_ENABLE_PNG
+#ifdef DRW_ENABLE_PNG_SCREENSHOT
 
 bool drw_export_png(const char *filename, int w, int h);
 bool drw_export_png_save(const char *filename, uint8_t *pixels, int w, int h);

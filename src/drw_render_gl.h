@@ -241,10 +241,15 @@ void drw_pop_fill(void);
 
 void drw_set_fov(double v);
 void drw_set_ortho(bool v);
+bool drw_get_ortho(void);
 void drw_set_screenspace(bool);
 bool drw_get_screenspace(void);
 void drw_set_screensize(double, double);
 void drw_set_framebuffer(double, double);
+
+//	this is for tr I guess (tiled render)
+void drw_get_screencoords(double* l, double* r, double* t, double* b, double* n, double* f);
+
 
 void drw_rgbtri(double gamma);
 

@@ -10,7 +10,7 @@
 
 #include <drw/drw.h>
 
-#ifdef DRW_ENABLE_PNG
+#ifdef DRW_ENABLE_PNG_SCREENSHOT
 #include <libpng/png.h>
 #endif
 
@@ -49,7 +49,7 @@ bool drw_export_png(const char* path, int w, int h)
 		}
 	}
 	*/
-#ifdef DRW_ENABLE_PNG
+#ifdef DRW_ENABLE_PNG_SCREENSHOT
 	// save the image
 	int err = drw_export_png_save(path, pixels, w, h);
 	if (err)
@@ -68,7 +68,7 @@ bool drw_export_png(const char* path, int w, int h)
 
 bool drw_export_png_save(const char *filename, uint8_t *pixels, int w, int h)
 {
-#ifndef DRW_ENABLE_PNG
+#ifndef DRW_ENABLE_PNG_SCREENSHOT
 	printf("No libpng! cannot save.\n");
 	return false;
 #else

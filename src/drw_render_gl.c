@@ -82,6 +82,12 @@ static bool _ortho;
 static bool _screenspace;
 static int  _text_size;
 
+static double _left = -1;
+static double _right = -1;
+static double _top = -1;
+static double _bottom = -1;
+static double _near = -1;
+static double _far = -1;
 static double fov = 45;
 static double window_width;
 static double window_height;
@@ -1840,6 +1846,11 @@ void r_set_window(double w, double h)
 	drw_setup_view();
 }
 
+bool drw_get_ortho(void)
+{
+	return _ortho;
+}
+
 void drw_set_ortho(bool val)
 {
 #ifdef DEBUG
@@ -1895,7 +1906,7 @@ void drw_setup_view_persp()
 	// if(debug_settings.render)
 	printf("Setting up perspective projection.\n");
 	// static int zoomFactor = 1;
-	float left, right, top, bottom, znear, zfar;
+	//float left, right, top, bottom, znear, zfar;
 	float x, y;
 
 	x = window_width * _retina_scale;
@@ -1943,28 +1954,28 @@ void drw_setup_view_persp()
 		_landscape  = false;
 	}
 
-	left = top = znear = -1.f;
-	right = bottom = zfar = 1.f;
+	_left = _top = _near = -1.f;
+	_right = _bottom = _far = 1.f;
 
-	znear = -1024.f;
-	znear = 0.00001f;
-	zfar  = 1024.f;
+	_near = -1024.f;
+	_near = 0.00001f;
+	_far  = 1024.f;
 
 	if (_landscape)
 	{
-		left *= pixelAspect;
-		right *= pixelAspect;
+		_left *= pixelAspect;
+		_right *= pixelAspect;
 	}
 	else
 	{
-		top *= pixelAspect;
-		bottom *= pixelAspect;
+		_top *= pixelAspect;
+		_bottom *= pixelAspect;
 	}
 	_aspect = pixelAspect;
-	left    = 0;
-	top     = 0;
-	right   = x;
-	bottom  = y;
+	_left    = 0;
+	_top     = 0;
+	_right   = x;
+	_bottom  = y;
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -1975,16 +1986,25 @@ void drw_setup_view_persp()
 
 //	printf("glu stuff doesn't link on windows >:[\n");
 //#else
+	/*
+	 _l = left;
+	_r = right;
+	_t = top;
+	_b = bottom;
+	_n = znear;
+	_f = zfar;
+	*/
+	
 #ifndef DRW_PLATFORM_IOS
-	gluPerspective(fov, right / bottom, znear, zfar);
+	gluPerspective(fov, _right / _bottom, _near, _far);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0, 0, y, 0, 0, 0.0, 0.0, znear, zfar);
+	gluLookAt(0, 0, y, 0, 0, 0.0, 0.0, _near, _far);
 #else
-	gluPerspective(fov, right / bottom, znear, zfar);
+	gluPerspective(fov, _right / _bottom, _near, _far);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0, 0, y, 0, 0, 0.0, 0.0, znear, zfar);
+	gluLookAt(0, 0, y, 0, 0, 0.0, 0.0, _near, _far);
 
 // printf("Error, gluLookAt doesn't exist on ios\n");
 //#endif
@@ -1999,6 +2019,8 @@ void drw_setup_view_persp()
 	// glLoadIdentity();
 	// glTranslatef(0.375f,0.375f,0.f);
 }
+
+
 
 void drw_setup_view_ortho()
 {
@@ -2088,18 +2110,17 @@ void drw_setup_view_ortho()
 	 */
 	//_aspect = pixelAspect;
 
-	double l = width * -.5;
-	double r = width * .5;
-	double t = height * -.5;
-	double b = height * .5;
-	double n = 1048 * -8;
-	double f = 1024 * 8;
+	_left = width * -.5;
+	_right = width * .5;
+	_top = height * -.5;
+	_bottom= height * .5;
+	_near = 1048 * -8;
+	_far = 1024 * 8;
 
 #ifdef DRW_PLATFORM_IOS
-	glOrthof(l, r, t, b, n, f);
+	glOrthof(_left, _right, _top, _bottom, _near, _far);
 #else
-
-	glOrtho(l, r, t, b, n, f);
+	glOrtho(_left, _right, _top, _bottom, _near, _far);
 #endif
 
 	if (_screenspace)
@@ -2115,6 +2136,18 @@ void drw_setup_view_ortho()
 	glLoadIdentity();
 
 #endif
+}
+
+void drw_get_screencoords(double* l, double* r, double* t, double* b, double* n, double* f)
+{
+	printf("Sanity check: %f %f %f %f %f %f\n", _left, _right, _top, _bottom, _near, _far);
+	
+	*l = _left;
+	*r = _right;
+	*t = _top;
+	*b = _bottom;
+	*n = _near;
+	*f = _far;
 }
 
 void drw_set_screensize(double w, double h)
