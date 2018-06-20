@@ -1,12 +1,16 @@
 
 
+extern "C"
+{
+	#include <drw/drw.h>
+}
+
 #include "../drw_config.h"
 
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
 
 #include "drw_font_ftgles.h"
 
-#include "../drw.h"
 #include "FTGL/ftgles.h"
 
 static FTPolygonFont* font  = 0;
@@ -81,8 +85,8 @@ int drw_font_load(const char* path)
 	return 0;
 }
 
-extern "C"
-{
+//extern "C"
+//{
 	void drw_font_draw(const char* str)
 	{
 		if (!str)
@@ -95,10 +99,48 @@ extern "C"
 			printf("Error, font not loaded!\n");
 			return;
 		}
+		
+		
+		/*
+		 if ( drw_get_screenspace() )
+		 {
+		 ftglRenderFont(font, str, FTGL_RENDER_ALL);
+		 
+		 }else{
+		 drw_push();
+		 int w, h;
+		 drw_query_framebuffer(&w, &h);
+		 int sz = drw_text_get_size();
+		 double dpi = drw_query_retina();
+		 double mult = h;
+		 double frac = 1.0 / mult;
+		 drw_scale_u(frac);
+		 ftglRenderFont(font, str, FTGL_RENDER_ALL);
+		 
+		 drw_pop();
+		 }
+		 */
+		if ( drw_get_screenspace() )
+		{
 		font->Render(str);
+		}else{
+			
+			drw_push();
+			int w, h;
+			drw_query_framebuffer(&w, &h);
+			int sz = drw_text_get_size();
+			double dpi = drw_query_retina();
+			double mult = h;
+			double frac = 1.0 / mult;
+			drw_scale_u(frac);
+			font->Render(str);
+
+			drw_pop();
+			
+		}
 		//tfont->Render(str);
 	}
-}
+//}
 
 void drw_font_get_bbox(const char* str, int num, float* data)
 {

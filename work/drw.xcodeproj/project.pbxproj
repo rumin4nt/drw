@@ -11,11 +11,11 @@
 		5703D74D20ACBCBD007E1800 /* drw_ext_gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703D74B20ACBCBD007E1800 /* drw_ext_gpc.c */; };
 		5703DBA020ACBD5C007E1800 /* gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703DB1920ACBD5C007E1800 /* gpc.c */; };
 		5703DBA120ACBD5C007E1800 /* gpc.h in Headers */ = {isa = PBXBuildFile; fileRef = 5703DB1A20ACBD5C007E1800 /* gpc.h */; };
+		5741595F20D4221100E5498B /* drw_render.h in Headers */ = {isa = PBXBuildFile; fileRef = 5741595E20D4221100E5498B /* drw_render.h */; };
 		577858CC20B3661E00218129 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = 577858CA20B3661E00218129 /* vector.c */; };
 		577858CD20B3661E00218129 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 577858CB20B3661E00218129 /* vector.h */; };
 		577DD21620D3546E00623919 /* drw_render_gl.h in Headers */ = {isa = PBXBuildFile; fileRef = 577DD21420D3546E00623919 /* drw_render_gl.h */; };
 		577DD21720D3546E00623919 /* drw_render.c in Sources */ = {isa = PBXBuildFile; fileRef = 577DD21520D3546E00623919 /* drw_render.c */; };
-		577DD21A20D3548D00623919 /* drw_render_gl.h in Headers */ = {isa = PBXBuildFile; fileRef = 577DD21820D3548D00623919 /* drw_render_gl.h */; };
 		577DD21B20D3548D00623919 /* drw_render_gl.c in Sources */ = {isa = PBXBuildFile; fileRef = 577DD21920D3548D00623919 /* drw_render_gl.c */; };
 		57967B6120D17B3000003F66 /* drw_export.h in Headers */ = {isa = PBXBuildFile; fileRef = 57967B5F20D17B3000003F66 /* drw_export.h */; };
 		57967B6220D17B3000003F66 /* drw_export.c in Sources */ = {isa = PBXBuildFile; fileRef = 57967B6020D17B3000003F66 /* drw_export.c */; };
@@ -43,11 +43,11 @@
 		5703D74B20ACBCBD007E1800 /* drw_ext_gpc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_ext_gpc.c; sourceTree = "<group>"; };
 		5703DB1920ACBD5C007E1800 /* gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gpc.c; sourceTree = "<group>"; };
 		5703DB1A20ACBD5C007E1800 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
+		5741595E20D4221100E5498B /* drw_render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render.h; sourceTree = "<group>"; };
 		577858CA20B3661E00218129 /* vector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vector.c; sourceTree = "<group>"; };
 		577858CB20B3661E00218129 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
 		577DD21420D3546E00623919 /* drw_render_gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_render_gl.h; sourceTree = "<group>"; };
 		577DD21520D3546E00623919 /* drw_render.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_render.c; sourceTree = "<group>"; };
-		577DD21820D3548D00623919 /* drw_render_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render_gl.h; sourceTree = "<group>"; };
 		577DD21920D3548D00623919 /* drw_render_gl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_render_gl.c; sourceTree = "<group>"; };
 		57967B5F20D17B3000003F66 /* drw_export.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_export.h; sourceTree = "<group>"; };
 		57967B6020D17B3000003F66 /* drw_export.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_export.c; sourceTree = "<group>"; };
@@ -144,9 +144,9 @@
 				57BDF7E220AC7CD1004C154E /* drw_primitives.c */,
 				57BDF7DB20AC7CD1004C154E /* drw_primitives.h */,
 				577DD21920D3548D00623919 /* drw_render_gl.c */,
-				577DD21820D3548D00623919 /* drw_render_gl.h */,
 				577DD21420D3546E00623919 /* drw_render_gl.h */,
 				577DD21520D3546E00623919 /* drw_render.c */,
+				5741595E20D4221100E5498B /* drw_render.h */,
 				57BDF7DC20AC7CD1004C154E /* drw_wobject_ops.c */,
 				57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */,
 				5703D74920ACBCB1007E1800 /* ext */,
@@ -159,16 +159,16 @@
 		57BDF80B20ACA9A0004C154E /* type */ = {
 			isa = PBXGroup;
 			children = (
-				57BDF81020ACA9A0004C154E /* drw_font_ftgl.c */,
 				57BDF80C20ACA9A0004C154E /* drw_font_asteroids.c */,
-				57BDF80D20ACA9A0004C154E /* drw_font_hpvec.c */,
+				57BDF81120ACA9A0004C154E /* drw_font_asteroids.h */,
+				57BDF81020ACA9A0004C154E /* drw_font_ftgl.c */,
+				57BDF81420ACA9A0004C154E /* drw_font_ftgl.h */,
+				57BDF81320ACA9A0004C154E /* drw_font_ftgles.cpp */,
 				57BDF80E20ACA9A0004C154E /* drw_font_ftgles.h */,
 				57BDF80F20ACA9A0004C154E /* drw_font_hershey.c */,
-				57BDF81120ACA9A0004C154E /* drw_font_asteroids.h */,
-				57BDF81220ACA9A0004C154E /* drw_font_hpvec.h */,
-				57BDF81320ACA9A0004C154E /* drw_font_ftgles.cpp */,
-				57BDF81420ACA9A0004C154E /* drw_font_ftgl.h */,
 				57BDF81520ACA9A0004C154E /* drw_font_hershey.h */,
+				57BDF80D20ACA9A0004C154E /* drw_font_hpvec.c */,
+				57BDF81220ACA9A0004C154E /* drw_font_hpvec.h */,
 			);
 			path = type;
 			sourceTree = "<group>";
@@ -209,6 +209,7 @@
 				57967B6120D17B3000003F66 /* drw_export.h in Headers */,
 				57BDF81820ACA9A0004C154E /* drw_font_ftgles.h in Headers */,
 				5703D74C20ACBCBD007E1800 /* drw_ext_gpc.h in Headers */,
+				5741595F20D4221100E5498B /* drw_render.h in Headers */,
 				57BDF81E20ACA9A0004C154E /* drw_font_ftgl.h in Headers */,
 				57BDF81C20ACA9A0004C154E /* drw_font_hpvec.h in Headers */,
 				577DD21A20D3548D00623919 /* drw_render_gl.h in Headers */,

@@ -15,15 +15,16 @@
 //	todo: get this out?  a lot of deps for a convenience
 // #include <wsh/wsh.h>
 
+
 #pragma GCC visibility push(default)
 
-#ifndef RUMINANT4_PRESENT
+#ifdef DRW_BUILD_STANDALONE
 #include "drw_dummy.h"
 #else
-
 #include <grdn/grdn.h>
+#include <r4/src/core/r_color.h>
 
-#include <r4/r4.h>
+//#include <r4/r4.h>
 #endif
 
 //#include <wsh/wsh.h>
@@ -51,7 +52,7 @@ void drw_deinit(void);
 double drw_query_aspectratio(void);
 bool   drw_query_landscape(void);
 double drw_query_retina(void);
-void    drw_query_framebuffer(int*, int*);
+void   drw_query_framebuffer(int*, int*);
 
 //	color
 
@@ -149,7 +150,8 @@ void drw_line_r(RLine* line);
 void drw_line3_r(RLine3* line);
 
 void drw_line(float, float, float, float);
-void drw_line_p(WPoint, WPoint);
+void drw_line_wp(WPoint, WPoint);
+void drw_line_rp(RPoint, RPoint);
 void drw_line_3f(float, float, float, float, float, float);
 void drw_tri(float, float, float, float, float, float);
 void drw_point(void);

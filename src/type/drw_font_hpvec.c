@@ -59,6 +59,12 @@ static void draw_hp_glyph(int idx)
 
 void drw_font_hpvec_draw(const char* text)
 {
+	//if(text == NULL)
+	if ( !text || 0 == strcmp("", text))
+	{
+		printf("Error, no text to draw!\n");
+		return;
+	}
 	bool done = false;
 	int  i    = 0;
 

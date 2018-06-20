@@ -9,7 +9,9 @@
 #ifndef drw_dummy_h
 #define drw_dummy_h
 
-#ifndef WSH_COMPAT
+//#include <r4/r4.h>
+//#ifndef RUMINANT4_PRESENT
+#ifndef WSH_PRESENT
 #include "dummy/wsh/src/geo/wsh_point.h"
 #include "dummy/wsh/src/geo/wsh_line.h"
 #include "dummy/wsh/src/geo/wsh_object.h"
@@ -28,5 +30,8 @@
 #ifndef RUMINANT_GRDN_PRESENT
 #include "dummy/grdn/src/env/g_transform.h"
 #endif
+
+//#endif
+
 
 #endif /* drw_dummy_h */

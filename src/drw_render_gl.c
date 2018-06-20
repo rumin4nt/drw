@@ -19,6 +19,8 @@
 #define ENABLE_OLD_HACKY_GLUT
 #endif
 
+#define DRW_ENABLE_SNOOP
+
 #ifdef ENABLE_OLD_HACKY_GLUT
 
 #ifdef DRW_PLATFORM_DARWIN
@@ -41,7 +43,7 @@
 #else
 #ifdef DRW_PLATFORM_DARWIN
 //#include <OpenGL/gl.h>
-#include "type/drw_font_ftgl.h"
+//#include "type/drw_font_ftgl.h"
 //#undef DRW_PLATFORM_IOS
 #else
 
@@ -62,7 +64,7 @@
 #include <gl-matrix/gl-matrix.h>
 
 //#include <GL/glew.h>
-#include "type/drw_font_ftgl.h"
+//#include "type/drw_font_ftgl.h"
 
 //#undef DRW_PLATFORM_IOS
 #endif
@@ -130,6 +132,12 @@ static double alpha_mult = 1.;
 // This will identify our vertex buffer
 GLuint vertexbuffer;
 
+#ifdef DRW_ENABLE_SNOOP
+
+typedef void (*snoop_record_fun)(double* data, int num);
+void drw_set_snoop_fun(snoop_record_fun fun);
+
+#endif
 // static bool initted = false;
 
 /*
@@ -199,9 +207,9 @@ int drw_get_gl_error()
 		printf("GL_INVALID_OPERATION\n");
 		break;
 
-	// case GL_INVALID_FRAMEBUFFER_OPERATION:
-	//    printf("invalid framebuffer\n");
-	//    break;
+		// case GL_INVALID_FRAMEBUFFER_OPERATION:
+		//    printf("invalid framebuffer\n");
+		//    break;
 
 	case GL_OUT_OF_MEMORY:
 		printf("out of memory\n");
@@ -677,7 +685,14 @@ void drw_line(float ax, float ay, float bx, float by)
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
 }
 
-void drw_line_p(WPoint a, WPoint b)
+void drw_line_rp(RPoint a, RPoint b)
+{
+	const GLfloat renderLine[] = {a.x, a.y, b.x, b.y};
+	glVertexPointer(2, GL_FLOAT, 0, renderLine);
+	glDrawArrays(GL_LINE_STRIP, 0, 2);
+}
+
+void drw_line_wp(WPoint a, WPoint b)
 {
 	const GLfloat renderLine[] = {a.x, a.y, b.x, b.y};
 	glVertexPointer(2, GL_FLOAT, 0, renderLine);
@@ -700,22 +715,27 @@ void drw_scale(float x, float y, float z)
 {
 	glScalef(x, y, z);
 }
+
 void drw_scale_u(float v)
 {
 	glScalef(v, v, v);
 }
+
 void drw_scale_x(float x)
 {
 	glScalef(x, 1, 1);
 }
+
 void drw_scale_y(float y)
 {
 	glScalef(1, y, 1);
 }
+
 void drw_scale_z(float z)
 {
 	glScalef(1, 1, z);
 }
+
 /*
  void drw_translate_vec2(Vec2* v)
  {
