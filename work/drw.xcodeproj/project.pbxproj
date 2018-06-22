@@ -12,6 +12,8 @@
 		5703DBA020ACBD5C007E1800 /* gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703DB1920ACBD5C007E1800 /* gpc.c */; };
 		5703DBA120ACBD5C007E1800 /* gpc.h in Headers */ = {isa = PBXBuildFile; fileRef = 5703DB1A20ACBD5C007E1800 /* gpc.h */; };
 		5741595F20D4221100E5498B /* drw_render.h in Headers */ = {isa = PBXBuildFile; fileRef = 5741595E20D4221100E5498B /* drw_render.h */; };
+		5767C01320DC64870022A676 /* drw_snoop.c in Sources */ = {isa = PBXBuildFile; fileRef = 5767C01120DC64870022A676 /* drw_snoop.c */; };
+		5767C01420DC64870022A676 /* drw_snoop.h in Headers */ = {isa = PBXBuildFile; fileRef = 5767C01220DC64870022A676 /* drw_snoop.h */; };
 		577858CC20B3661E00218129 /* vector.c in Sources */ = {isa = PBXBuildFile; fileRef = 577858CA20B3661E00218129 /* vector.c */; };
 		577858CD20B3661E00218129 /* vector.h in Headers */ = {isa = PBXBuildFile; fileRef = 577858CB20B3661E00218129 /* vector.h */; };
 		577DD21620D3546E00623919 /* drw_render_gl.h in Headers */ = {isa = PBXBuildFile; fileRef = 577DD21420D3546E00623919 /* drw_render_gl.h */; };
@@ -44,6 +46,8 @@
 		5703DB1920ACBD5C007E1800 /* gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gpc.c; sourceTree = "<group>"; };
 		5703DB1A20ACBD5C007E1800 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
 		5741595E20D4221100E5498B /* drw_render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render.h; sourceTree = "<group>"; };
+		5767C01120DC64870022A676 /* drw_snoop.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_snoop.c; sourceTree = "<group>"; };
+		5767C01220DC64870022A676 /* drw_snoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_snoop.h; sourceTree = "<group>"; };
 		577858CA20B3661E00218129 /* vector.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = vector.c; sourceTree = "<group>"; };
 		577858CB20B3661E00218129 /* vector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = vector.h; sourceTree = "<group>"; };
 		577DD21420D3546E00623919 /* drw_render_gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_render_gl.h; sourceTree = "<group>"; };
@@ -121,6 +125,15 @@
 			path = gpc;
 			sourceTree = "<group>";
 		};
+		5767C01020DC64870022A676 /* hacks */ = {
+			isa = PBXGroup;
+			children = (
+				5767C01120DC64870022A676 /* drw_snoop.c */,
+				5767C01220DC64870022A676 /* drw_snoop.h */,
+			);
+			path = hacks;
+			sourceTree = "<group>";
+		};
 		577858C920B3661E00218129 /* vector */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +147,7 @@
 		57BDF7D220AC7CD1004C154E /* src */ = {
 			isa = PBXGroup;
 			children = (
+				5767C01020DC64870022A676 /* hacks */,
 				57BDF80A20ACA91E004C154E /* drw_config.h */,
 				57BDF82020ACAC3F004C154E /* drw_dummy.h */,
 				57967B6020D17B3000003F66 /* drw_export.c */,
@@ -212,9 +226,9 @@
 				5741595F20D4221100E5498B /* drw_render.h in Headers */,
 				57BDF81E20ACA9A0004C154E /* drw_font_ftgl.h in Headers */,
 				57BDF81C20ACA9A0004C154E /* drw_font_hpvec.h in Headers */,
-				577DD21A20D3548D00623919 /* drw_render_gl.h in Headers */,
 				57BDF81F20ACA9A0004C154E /* drw_font_hershey.h in Headers */,
 				57BDF81B20ACA9A0004C154E /* drw_font_asteroids.h in Headers */,
+				5767C01420DC64870022A676 /* drw_snoop.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +330,7 @@
 				57BDF81D20ACA9A0004C154E /* drw_font_ftgles.cpp in Sources */,
 				5703DBA020ACBD5C007E1800 /* gpc.c in Sources */,
 				57BDF7E720AC7CD1004C154E /* drw_point.c in Sources */,
+				5767C01320DC64870022A676 /* drw_snoop.c in Sources */,
 				57BDF81720ACA9A0004C154E /* drw_font_hpvec.c in Sources */,
 				57BDF81920ACA9A0004C154E /* drw_font_hershey.c in Sources */,
 				577858CC20B3661E00218129 /* vector.c in Sources */,

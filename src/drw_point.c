@@ -113,8 +113,6 @@ void drw_point_3d_to_2d(double x, double y, double z, double* rx, double* ry, do
 	
 	float* v = calloc(3, sizeof(float));
 
-	
-	
 	mathProjectPoint(v, c, x, y, z);
 	
 	v[0] -= .5;

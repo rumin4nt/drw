@@ -78,6 +78,8 @@
 
 #endif
 
-
+#ifndef DRW_PLATFORM_IOS
+#define DRW_ENABLE_SNOOP
+#endif
 
 #endif /* drw_config_h */

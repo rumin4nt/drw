@@ -82,13 +82,13 @@ static bool _ortho;
 static bool _screenspace;
 static int  _text_size;
 
-static double _left = -1;
-static double _right = -1;
-static double _top = -1;
+static double _left   = -1;
+static double _right  = -1;
+static double _top    = -1;
 static double _bottom = -1;
-static double _near = -1;
-static double _far = -1;
-static double fov = 45;
+static double _near   = -1;
+static double _far    = -1;
+static double fov     = 45;
 static double window_width;
 static double window_height;
 
@@ -138,12 +138,6 @@ static double alpha_mult = 1.;
 // This will identify our vertex buffer
 GLuint vertexbuffer;
 
-#ifdef DRW_ENABLE_SNOOP
-
-typedef void (*snoop_record_fun)(double* data, int num);
-void drw_set_snoop_fun(snoop_record_fun fun);
-
-#endif
 // static bool initted = false;
 
 /*
@@ -689,6 +683,8 @@ void drw_line(float ax, float ay, float bx, float by)
 	const GLfloat renderLine[] = {ax, ay, bx, by};
 	glVertexPointer(2, GL_FLOAT, 0, renderLine);
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
+
+	
 }
 
 void drw_line_rp(RPoint a, RPoint b)
@@ -1610,6 +1606,14 @@ void drw_rline(RLine* poly)
 
 void drw_poly(WLine* line)
 {
+
+#ifdef DRW_ENABLE_SNOOP
+	if ( drw_snoop_get() )
+	{
+		drw_snoop_add(r_line_from_wline(line));
+	}
+#endif
+	
 	int			 i, j;
 	const unsigned long long renderLineSize = (line->num * 2);
 
@@ -1636,6 +1640,8 @@ void drw_poly(WLine* line)
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num)
 	     : glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
 	free(arr);
+	
+
 }
 
 void drw_poly_extras(WLine* line)
@@ -1972,20 +1978,20 @@ void drw_setup_view_persp()
 		_bottom *= pixelAspect;
 	}
 	_aspect = pixelAspect;
-	_left    = 0;
-	_top     = 0;
-	_right   = x;
-	_bottom  = y;
+	_left   = 0;
+	_top    = 0;
+	_right  = x;
+	_bottom = y;
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
-// near, far);  glFrustum(left,right,bottom,top,near, far);
-//#ifdef DRW_PLATFORM_WIN
+	// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
+	// near, far);  glFrustum(left,right,bottom,top,near, far);
+	//#ifdef DRW_PLATFORM_WIN
 
-//	printf("glu stuff doesn't link on windows >:[\n");
-//#else
+	//	printf("glu stuff doesn't link on windows >:[\n");
+	//#else
 	/*
 	 _l = left;
 	_r = right;
@@ -1994,7 +2000,7 @@ void drw_setup_view_persp()
 	_n = znear;
 	_f = zfar;
 	*/
-	
+
 #ifndef DRW_PLATFORM_IOS
 	gluPerspective(fov, _right / _bottom, _near, _far);
 	glMatrixMode(GL_MODELVIEW);
@@ -2019,8 +2025,6 @@ void drw_setup_view_persp()
 	// glLoadIdentity();
 	// glTranslatef(0.375f,0.375f,0.f);
 }
-
-
 
 void drw_setup_view_ortho()
 {
@@ -2110,12 +2114,12 @@ void drw_setup_view_ortho()
 	 */
 	//_aspect = pixelAspect;
 
-	_left = width * -.5;
-	_right = width * .5;
-	_top = height * -.5;
-	_bottom= height * .5;
-	_near = 1048 * -8;
-	_far = 1024 * 8;
+	_left   = width * -.5;
+	_right  = width * .5;
+	_top    = height * -.5;
+	_bottom = height * .5;
+	_near   = 1048 * -8;
+	_far    = 1024 * 8;
 
 #ifdef DRW_PLATFORM_IOS
 	glOrthof(_left, _right, _top, _bottom, _near, _far);
@@ -2141,7 +2145,7 @@ void drw_setup_view_ortho()
 void drw_get_screencoords(double* l, double* r, double* t, double* b, double* n, double* f)
 {
 	printf("Sanity check: %f %f %f %f %f %f\n", _left, _right, _top, _bottom, _near, _far);
-	
+
 	*l = _left;
 	*r = _right;
 	*t = _top;

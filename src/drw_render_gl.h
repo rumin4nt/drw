@@ -16,6 +16,7 @@
 // #include <wsh/wsh.h>
 
 
+
 #pragma GCC visibility push(default)
 
 #ifdef DRW_BUILD_STANDALONE
@@ -34,6 +35,11 @@
 //#include <r4/r4.h>
 
 //#include <gl-matrix/gl-matrix.h>
+
+#ifdef DRW_ENABLE_SNOOP
+#include "hacks/drw_snoop.h"
+#endif
+
 
 enum
 {
@@ -258,5 +264,7 @@ int drw_checkmatrix(void);
 
 void drw_swap(void);
 void drw_finish(void);
+
+
 
 #endif /* rended_h */
