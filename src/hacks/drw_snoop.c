@@ -8,12 +8,14 @@
 
 #include "drw_snoop.h"
 
+//	todo lose this it depends on r4
+#include <r4/src/output/r_svg.h>
 
 //#include <stdio.h>
 #ifdef DRW_ENABLE_SNOOP
 
 
-static RLine** snoopdata = NULL;
+static RLine3** snoopdata = NULL;
 static int snoopnum = 0;
 static bool _snooping = false;
 //typedef void (*snoop_record_fun)(RLine* l);
@@ -27,7 +29,23 @@ void drw_snoop_add(RLine* l)
 	}else{
 		snoopdata = realloc( snoopdata, snoopnum * sizeof(RLine));
 	}
-	snoopdata[snoopnum - 1] = l;
+	
+	double rx,ry,rz;
+	RLine3* rl = r_line3_create();
+	for ( int i = 0; i < l->num; i++ )
+	{
+		RPoint p = l->data[i];
+		
+		double x = p.x;
+		double y = p.y;
+		double z = 0;
+		
+		drw_point_3d_to_2d(x, y, z, &rx, &ry, &rz);
+		r_line3_add_point_3f(rl, rx, ry, rz);
+		
+	}
+	
+	snoopdata[snoopnum - 1] = rl;
 	
 	
 	
@@ -59,12 +77,17 @@ void drw_snoop_set(bool val)
 
 void drw_snoop_dump(const char* path)
 {
-	printf("Dumping snoop data!\n");
+	RSVGRec* rec = r_svg_open(path);
+	
+	printf("Dumping snoop data! %d lines\n", snoopnum);
 	for ( int i = 0; i < snoopnum; i++ )
 	{
-		RLine* l = snoopdata[i];
+		RLine3* l = snoopdata[i];
 		printf("%lu points\n", l->num);
+		r_svg_add_rline3(rec, l);
+		
 	}
+	r_svg_close(rec);
 	
 	free(snoopdata);
 	snoopdata = NULL;

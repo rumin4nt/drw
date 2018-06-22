@@ -9,11 +9,12 @@
 #ifndef drw_snoop_h
 #define drw_snoop_h
 
-//	todo, get rid of this dependency, replace with void*
+
 #include <drw/src/drw_config.h>
 
 #ifdef DRW_ENABLE_SNOOP
 
+//	todo, get rid of this dependency, replace with void*
 #include <r4/src/geo/r_line.h>
 
 
