@@ -129,7 +129,11 @@ void drw_point_3d_to_2d(double x, double y, double z, double* rx, double* ry, do
 	*rx = v[0];
 	*ry = v[1];
 	*rz = v[2];
+	
+	free(c);
 	free(v);
+	//free(p);
+	//free(v);
 	
 	/*
 	int w = viewport[2];

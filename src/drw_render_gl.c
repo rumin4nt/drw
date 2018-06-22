@@ -683,8 +683,6 @@ void drw_line(float ax, float ay, float bx, float by)
 	const GLfloat renderLine[] = {ax, ay, bx, by};
 	glVertexPointer(2, GL_FLOAT, 0, renderLine);
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
-
-	
 }
 
 void drw_line_rp(RPoint a, RPoint b)
@@ -1575,9 +1573,17 @@ void drw_ellipse(float _x, float _y)
 
  }
  */
+
 void drw_rline(RLine* poly)
 {
-
+	
+#ifdef DRW_ENABLE_SNOOP
+	if (drw_snoop_get())
+	{
+		drw_snoop_add(poly);
+	}
+#endif
+	
 	const unsigned long long renderLineSize = (poly->num * 2);
 
 	// printf("poly is %d num\n", poly->num);
@@ -1608,12 +1614,12 @@ void drw_poly(WLine* line)
 {
 
 #ifdef DRW_ENABLE_SNOOP
-	if ( drw_snoop_get() )
+	if (drw_snoop_get())
 	{
 		drw_snoop_add(r_line_from_wline(line));
 	}
 #endif
-	
+
 	int			 i, j;
 	const unsigned long long renderLineSize = (line->num * 2);
 
@@ -1640,8 +1646,6 @@ void drw_poly(WLine* line)
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num)
 	     : glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
 	free(arr);
-	
-
 }
 
 void drw_poly_extras(WLine* line)
