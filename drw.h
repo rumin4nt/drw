@@ -19,6 +19,7 @@
 #include "src/drw_export.h"
 #include "src/drw_render_gl.h"
 #include "src/drw_render.h"
+#include "src/drw_point.h"
 
 //#include "src/r_hatch.h"
 
