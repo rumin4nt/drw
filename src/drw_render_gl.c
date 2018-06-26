@@ -1511,14 +1511,14 @@ void drw_ellipse(float _x, float _y)
 		arr[i]	 = x;
 		arr[i + 1]     = y;
 	}
-	
+	/*
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
 	{
 		drw_snoop_add(drw_snoop_rline_from_f(arr, renderLineSize));
 	}
 #endif
-	
+	*/
 	glVertexPointer(2, GL_FLOAT, 0, arr);
 
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, circle_precision)
@@ -1528,6 +1528,9 @@ void drw_ellipse(float _x, float _y)
 
 
 }
+
+
+
 
 void drw_rline(RLine* poly)
 {
