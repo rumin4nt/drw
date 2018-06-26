@@ -19,7 +19,6 @@
 #define ENABLE_OLD_HACKY_GLUT
 #endif
 
-#define DRW_ENABLE_SNOOP
 
 #ifdef ENABLE_OLD_HACKY_GLUT
 
@@ -65,6 +64,8 @@
 
 //#include <GL/glew.h>
 //#include "type/drw_font_ftgl.h"
+
+#include "hacks/drw_snoop.h"
 
 //#undef DRW_PLATFORM_IOS
 #endif
@@ -683,8 +684,6 @@ void drw_line(float ax, float ay, float bx, float by)
 	const GLfloat renderLine[] = {ax, ay, bx, by};
 	glVertexPointer(2, GL_FLOAT, 0, renderLine);
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
-
-	
 }
 
 void drw_line_rp(RPoint a, RPoint b)
@@ -1352,7 +1351,7 @@ void drw_axis_living()
 
  void drw_rect_r(RRect r )
  {
- drw_rect(r.pos.x, r.pos.y, r.pos.x + r.size.x, r.pos.y + r.size.y);
+ 	drw_rect(r.pos.x, r.pos.y, r.pos.x + r.size.x, r.pos.y + r.size.y);
 
  }
  */
@@ -1416,6 +1415,17 @@ void drw_rect(float ax, float ay, float bx, float by)
 	glVertexPointer(2, GL_FLOAT, 0, &arr);
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
 	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
+	
+	/*
+#ifdef DRW_ENABLE_SNOOP
+	if (drw_snoop_get())
+	{
+		RLine* nl = drw_snoop_rline_from_f(arr, 8);
+		drw_snoop_add(nl);
+	}
+#endif
+	*/
+	
 }
 
 void drw_point(void)
@@ -1501,87 +1511,36 @@ void drw_ellipse(float _x, float _y)
 		arr[i]	 = x;
 		arr[i + 1]     = y;
 	}
-
-	// cout << '+';
+	
+#ifdef DRW_ENABLE_SNOOP
+	if (drw_snoop_get())
+	{
+		drw_snoop_add(drw_snoop_rline_from_f(arr, renderLineSize));
+	}
+#endif
+	
 	glVertexPointer(2, GL_FLOAT, 0, arr);
 
-	// cout << "c:" << circleArray[2] << endl;
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, circle_precision)
 	     : glDrawArrays(GL_LINE_LOOP, 0, circle_precision);
 
 	free(arr);
 
-	// fill ?
-	// glDrawArrays(GL_TRIANGLE_FAN, 0, circle_precision ):
-	// glDrawArrays(GL_LINE_LOOP, 0, circle_precision );
+
 }
 
-/*
- void r_rrect(RRect rec)
- {
-
- drw_rect(rec.pos.x, rec.pos.y, rec.pos.x + rec.size.x, rec.pos.y + rec.size.y);
-
- }
- */
-
-/*
- void r_vecline2(Vec2Line * vec)
- {
- const unsigned long long renderLineSize = ( vec->num * 2);
-
- GLfloat arr[ renderLineSize ];
-
- for (int i=0, j=0; i < vec->num ; i++, j+=2 ) {
- Vec2 *p = &vec->data[i];
- arr[j] = p->x;
- arr[j+1] = p->y;
- //arr[j+2] = p->z;
- }
-
- glVertexPointer(2, GL_FLOAT, 0, &arr);
-
- fill ?
- glDrawArrays(GL_TRIANGLE_FAN, 0, vec->num ):
- glDrawArrays(GL_LINE_STRIP, 0, vec->num );
-
-
-
- }
-
- void r_vecline3(Vec3Line * vec)
- {
-
- unsigned long long renderLineSize = ( vec->num * 3);
-
- GLfloat arr[ renderLineSize ];
- if ( vec->num <= 2 )
- return;
-
- for (unsigned long long i=0, j=0; i < vec->num ; i++, j+=3 ) {
- vec3_t *p = &vec->data[i];
- arr[j] = p->x;
- arr[j+1] = p->y;
- arr[j+2] = p->z;
- }
-
- glVertexPointer(3, GL_FLOAT, 0, &arr);
-
- fill ?
- glDrawArrays(GL_TRIANGLE_FAN, 0, (int)vec->num ):
- glDrawArrays(GL_LINE_STRIP, 0, (int)vec->num );
-
-
-
- }
- */
 void drw_rline(RLine* poly)
 {
-
+	
+#ifdef DRW_ENABLE_SNOOP
+	if (drw_snoop_get())
+	{
+		drw_snoop_add(poly);
+	}
+#endif
+	
 	const unsigned long long renderLineSize = (poly->num * 2);
 
-	// printf("poly is %d num\n", poly->num);
-	// GLfloat arr[ renderLineSize ];
 	GLfloat* arr = calloc(renderLineSize, sizeof(GLfloat));
 
 	int i, j;
@@ -1608,12 +1567,12 @@ void drw_poly(WLine* line)
 {
 
 #ifdef DRW_ENABLE_SNOOP
-	if ( drw_snoop_get() )
+	if (drw_snoop_get())
 	{
 		drw_snoop_add(r_line_from_wline(line));
 	}
 #endif
-	
+
 	int			 i, j;
 	const unsigned long long renderLineSize = (line->num * 2);
 
@@ -1640,8 +1599,6 @@ void drw_poly(WLine* line)
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num)
 	     : glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
 	free(arr);
-	
-
 }
 
 void drw_poly_extras(WLine* line)

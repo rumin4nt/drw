@@ -37,6 +37,7 @@
 //#include <gl-matrix/gl-matrix.h>
 
 #ifdef DRW_ENABLE_SNOOP
+
 #include "hacks/drw_snoop.h"
 #endif
 

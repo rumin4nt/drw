@@ -17,7 +17,6 @@
 //	todo, get rid of this dependency, replace with void*
 #include <r4/src/geo/r_line.h>
 
-
 typedef void (*snoop_record_fun)(RLine* l);
 
 bool drw_snoop_get(void);

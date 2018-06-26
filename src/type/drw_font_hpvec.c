@@ -39,9 +39,23 @@ static void draw_hp_glyph(int idx)
 
 	const int* points = hp1345a[idx];
 	int	num    = hp1345a_sizes[idx];
-
+	
+	RLine* l = r_line_create();
+	int j;
+	for (j = 0; j < num -1 ; j += 2)
+	{
+		
+		r_line_add_point2f(l, points[j], points[j+1]);
+		////arr[j]     = points[j];
+		//arr[j + 1] = points[j + 1];
+	}
+	
+	drw_rline(l);
+	r_line_destroy(l);
+	/*
 	const unsigned long long renderLineSize = num * 2;
-
+	
+	
 	GLfloat* arr = calloc(renderLineSize, sizeof(GLfloat));
 	int      j;
 	for (j = 0; j < num - 1; j += 2)
@@ -55,6 +69,9 @@ static void draw_hp_glyph(int idx)
 	glDrawArrays(GL_LINE_STRIP, 0, num);
 
 	free(arr);
+*/
+	
+	
 }
 
 void drw_font_hpvec_draw(const char* text)
