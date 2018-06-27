@@ -209,9 +209,9 @@ int drw_get_gl_error()
 		printf("GL_INVALID_OPERATION\n");
 		break;
 
-	// case GL_INVALID_FRAMEBUFFER_OPERATION:
-	//    printf("invalid framebuffer\n");
-	//    break;
+		// case GL_INVALID_FRAMEBUFFER_OPERATION:
+		//    printf("invalid framebuffer\n");
+		//    break;
 
 	case GL_OUT_OF_MEMORY:
 		printf("out of memory\n");
@@ -1874,16 +1874,62 @@ void drw_setup_view(void)
 
 #include <glulookat/gluLookAt.h>
 
+static void print_debug(void)
+{
+	char sc = (_screenspace) ? 'Y' : 'N';
+	char o = (_ortho) ? 'Y' : 'N';
+	printf("SCRN %c  ORTHO %c  AR:%f\n", sc, o, _aspect);
+}
+
 void drw_setup_view_persp()
 {
 	// if(debug_settings.render)
-	printf("Setting up perspective projection.\n");
+	printf("PERSP\n");
+	print_debug();
+	
 	// static int zoomFactor = 1;
 	//float left, right, top, bottom, znear, zfar;
-	float x, y;
+	glViewport(0, 0, framebuffer_width, framebuffer_height);
+	//glViewport(-.5 * framebuffer_width * _retina_scale, -.5 * framebuffer_height* _retina_scale, .5 * framebuffer_width * _retina_scale, .5 * framebuffer_height* _retina_scale);
 
-	x = window_width * _retina_scale;
-	y = window_height * _retina_scale;
+	float width, height;
+	
+	if (_screenspace)
+	{
+		//printf("screenspace: YES %f\n", _aspect);
+		
+		width  = framebuffer_width;
+		height = framebuffer_height;
+
+		if (width > height)
+		{
+			// landscape
+			_aspect    = (float)width / (float)height;
+			_landscape = true;
+		}
+		else
+		{
+			// portrait
+			
+			_aspect    = (float)height / (float)width;
+			_landscape = false;
+		}
+
+	}
+	else
+	{
+		if ( framebuffer_width > framebuffer_height )
+		{
+			_aspect = framebuffer_width / framebuffer_height;
+		}else{
+			_aspect = framebuffer_height / framebuffer_width ;
+
+		}
+		_landscape = ( framebuffer_width >= framebuffer_height);
+		//printf("screenspace: NO %f\n", _aspect);
+		width  = 1.;
+		height = 1.;
+	}
 
 	/// x = app_settings.current_window_x;
 	// y = app_settings.current_window_y;
@@ -1898,9 +1944,6 @@ void drw_setup_view_persp()
 	// x *= app_settings.scale_retina;
 	// y *= app_settings.scale_retina;
 
-	glViewport(0, 0, x, y);
-	glViewport(-.5 * x, -.5 * y, .5 * x, .5 * y);
-
 	// Select and setup the projection matrix
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
@@ -1909,57 +1952,72 @@ void drw_setup_view_persp()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	float pixelAspect = 1.f;
+	//float pixelAspect = 1.f;
 
 	//bool landscape = true;
 
 	// landscape
-	if (x > y)
-	{
-		pixelAspect = (float)x / (float)y;
-		_landscape  = true;
-	}
+	//if (x > y)
+	//{
+	//	pixelAspect = (float)x / (float)y;
+	//	_landscape  = true;
+	//}
 
 	// portrait
-	if (y > x)
-	{
-		pixelAspect = (float)y / (float)x;
-		_landscape  = false;
-	}
+	//if (y > x)
+	//{
+	//	pixelAspect = (float)y / (float)x;
+	//	_landscape  = false;
+	//}
+	double greater = (width > height) ? width : height;
 
-	_left = _top = _near = -1.f;
-	_right = _bottom = _far = 1.f;
+	//_aspect = pixelAspect;
+	if (_screenspace)
+	{
+		_left   = 0;
+		_top    = 0;
+		_right  = width;
+		_bottom = height;
+	}
+	else
+	{
+		_left   = greater * -.5;
+		_top    = greater * -.5;
+		_right  = greater * .5;
+		_bottom = greater * .5;
+	}
+	//_left = _top = _near = -1.f;
+	//_right = _bottom = _far = 1.f;
 
 	_near = -1024.f;
 	_near = 0.00001f;
 	_far  = 1024.f;
-
-	if (_landscape)
+	
+	//maybe this block can go entirely?
+	if ( _ortho)
 	{
-		_left *= pixelAspect;
-		_right *= pixelAspect;
+		if (_landscape)
+		{
+			_left *= _aspect;
+			_right *= _aspect;
+		}
+		else
+		{
+			_top *= _aspect;
+			_bottom *= _aspect;
+		}
 	}
-	else
-	{
-		_top *= pixelAspect;
-		_bottom *= pixelAspect;
-	}
-	_aspect = pixelAspect;
-	_left   = 0;
-	_top    = 0;
-	_right  = x;
-	_bottom = y;
-
+	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
-// near, far);  glFrustum(left,right,bottom,top,near, far);
-//#ifdef DRW_PLATFORM_WIN
+	// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
+	// near, far);  glFrustum(left,right,bottom,top,near, far);
+	//#ifdef DRW_PLATFORM_WIN
 
-//	printf("glu stuff doesn't link on windows >:[\n");
-//#else
-/*
+	//	printf("glu stuff doesn't link on windows >:[\n");
+	//#else
+	/*
 	 _l = left;
 	_r = right;
 	_t = top;
@@ -1969,73 +2027,51 @@ void drw_setup_view_persp()
 	*/
 
 #ifndef DRW_PLATFORM_IOS
-	gluPerspective(fov, _right / _bottom, _near, _far);
+	gluPerspective(fov, _aspect, _near, _far);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0, 0, y, 0, 0, 0.0, 0.0, _near, _far);
+	gluLookAt(0, 0, height, 0, 0, 0.0, 0.0, _near, _far);
 #else
-	gluPerspective(fov, _right / _bottom, _near, _far);
+	gluPerspective(fov, _aspect, _near, _far);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0, 0, y, 0, 0, 0.0, 0.0, _near, _far);
+	gluLookAt(0, 0, height, 0, 0, 0.0, 0.0, _near, _far);
 
-// printf("Error, gluLookAt doesn't exist on ios\n");
-//#endif
+
 #endif
-
-	// gluLookAt( right / 2 , bottom / 2, 400, right / 2, bottom / 2,
-	// 0.,0.0, 1.0, 0.0);
-
-	// cout << "FRUST" << endl;
-	// glFrustum(left,right,bottom,top,near, far);
-	// glMatrixMode(GL_MODELVIEW);
-	// glLoadIdentity();
-	// glTranslatef(0.375f,0.375f,0.f);
+	
 }
 
+//	this appears to work in both configurations.
 void drw_setup_view_ortho()
 {
-	// if(debug_settings.render )
-
-	// printf("Ortho view!\n");
-
-	// float ratio;
-	// float pixelAspect = 1.;
-
+	printf("ORTHO\n");
+	print_debug();
+	
 	float width, height;
 
 	width    = framebuffer_width;
 	height   = framebuffer_height;
-	double x = width;
-	double y = height;
-	// dumb lazy in a hurry
-	// printf("%f %f\n", width, height );
+	//double x = width;
+	//double y = height;
 
-	//float pixelAspect = 1.f;
-
-	//bool landscape = false;
-	_landscape = false;
-
-	// landscape
-	if (x > y)
+	if (width > height)
 	{
-		_aspect    = (float)x / (float)y;
+		// landscape
+		_aspect    = (float)width / (float)height;
 		_landscape = true;
 	}
-
-	// portrait
-	if (y > x)
+	else
 	{
-		_aspect = (float)y / (float)x;
+		// portrait
+		_aspect    = (float)height / (float)width;
+		_landscape = false;
 	}
 
 	glViewport(0, 0, (int)width, (int)height);
 
-	// if ( !app_settings.screenspace )
 	if (!_screenspace)
 	{
-		// if(debug_settings.render )
-		printf("Not using screenspace(normals) %f\n", _aspect);
 		width  = 1.;
 		height = 1.;
 
@@ -2054,32 +2090,9 @@ void drw_setup_view_ortho()
 	glLoadIdentity();
 
 	drw_get_gl_error();
+	
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-
-	// if ( _screenspace )
-	//{
-	//#ifdef DRW_PLATFORM_IOS
-	//    glOrthof(-width*.5, width*.5, height*-.5,height*.5, -10000,
-	// 10000); #else
-	//    glOrtho(-width*.5, width*.5, height*-.5,height*.5, -10000,
-	// 10000); #endif }else{
-
-	//  printf("IDK what happens. here.\n");
-	//}
-
-	/*
-	 if ( !app_settings.screenspace ){
-
-	 #ifdef DRW_PLATFORM_IOS
-	 glOrthof(-width*.5, width*.5, height*-.5,height*.5, -10000, 10000);
-	 #else
-	 glOrtho(-width*.5, width*.5, height*-.5,height*.5, -10000, 10000);
-	 #endif
-
-	 }else{
-	 */
-	//_aspect = pixelAspect;
 
 	_left   = width * -.5;
 	_right  = width * .5;
@@ -2098,8 +2111,6 @@ void drw_setup_view_ortho()
 	{
 		glTranslatef(0.375f, 0.375f, 0.f);
 	}
-
-	//}
 
 	drw_get_gl_error();
 #ifndef DRW_PLATFORM_IOS
