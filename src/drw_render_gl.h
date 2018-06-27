@@ -15,8 +15,6 @@
 //	todo: get this out?  a lot of deps for a convenience
 // #include <wsh/wsh.h>
 
-
-
 #pragma GCC visibility push(default)
 
 #ifdef DRW_BUILD_STANDALONE
@@ -40,7 +38,6 @@
 
 #include "hacks/drw_snoop.h"
 #endif
-
 
 enum
 {
@@ -67,7 +64,8 @@ void drw_clear(void);
 
 RColor8 drw_checkcolor(void);
 
-void drw_set_blend(int);
+void drw_blend_set(int);
+void drw_blend_pop(void);
 
 void drw_color_clear(float, float, float, float);
 void drw_color_clear_color(RColor);
@@ -257,7 +255,6 @@ void drw_set_framebuffer(double, double);
 //	this is for tr I guess (tiled render)
 void drw_get_screencoords(double* l, double* r, double* t, double* b, double* n, double* f);
 
-
 void drw_rgbtri(double gamma);
 
 //	debug - strip this with a macro?
@@ -265,7 +262,5 @@ int drw_checkmatrix(void);
 
 void drw_swap(void);
 void drw_finish(void);
-
-
 
 #endif /* rended_h */

@@ -19,7 +19,6 @@
 #define ENABLE_OLD_HACKY_GLUT
 #endif
 
-
 #ifdef ENABLE_OLD_HACKY_GLUT
 
 #ifdef DRW_PLATFORM_DARWIN
@@ -83,13 +82,14 @@ static bool _ortho;
 static bool _screenspace;
 static int  _text_size;
 
-static double _left   = -1;
-static double _right  = -1;
-static double _top    = -1;
-static double _bottom = -1;
-static double _near   = -1;
-static double _far    = -1;
-static double fov     = 45;
+static double _left       = -1;
+static double _right      = -1;
+static double _top	= -1;
+static double _bottom     = -1;
+static double _near       = -1;
+static double _far	= -1;
+static bool   _prev_blend = 0;
+static double fov	 = 45;
 static double window_width;
 static double window_height;
 
@@ -208,9 +208,9 @@ int drw_get_gl_error()
 		printf("GL_INVALID_OPERATION\n");
 		break;
 
-		// case GL_INVALID_FRAMEBUFFER_OPERATION:
-		//    printf("invalid framebuffer\n");
-		//    break;
+	// case GL_INVALID_FRAMEBUFFER_OPERATION:
+	//    printf("invalid framebuffer\n");
+	//    break;
 
 	case GL_OUT_OF_MEMORY:
 		printf("out of memory\n");
@@ -350,9 +350,10 @@ void drw_text_load(const char* path)
 	// }
 }
 
-void drw_set_blend(int v)
+void drw_blend_set(int v)
 {
 
+	_prev_blend = v;
 #ifndef DRW_PLATFORM_WIN
 
 	switch (v)
@@ -393,6 +394,11 @@ void drw_set_blend(int v)
 #else
 	printf("Blend modes not currently implemented in windows.\n");
 #endif
+}
+
+void drw_blend_pop(void)
+{
+	drw_blend_set(_prev_blend);
 }
 
 void drw_clear()
@@ -1415,7 +1421,7 @@ void drw_rect(float ax, float ay, float bx, float by)
 	glVertexPointer(2, GL_FLOAT, 0, &arr);
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
 	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
-	
+
 	/*
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
@@ -1425,7 +1431,6 @@ void drw_rect(float ax, float ay, float bx, float by)
 	}
 #endif
 	*/
-	
 }
 
 void drw_point(void)
@@ -1525,23 +1530,18 @@ void drw_ellipse(float _x, float _y)
 	     : glDrawArrays(GL_LINE_LOOP, 0, circle_precision);
 
 	free(arr);
-
-
 }
-
-
-
 
 void drw_rline(RLine* poly)
 {
-	
+
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
 	{
 		drw_snoop_add(poly);
 	}
 #endif
-	
+
 	const unsigned long long renderLineSize = (poly->num * 2);
 
 	GLfloat* arr = calloc(renderLineSize, sizeof(GLfloat));
@@ -1946,13 +1946,13 @@ void drw_setup_view_persp()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
-	// near, far);  glFrustum(left,right,bottom,top,near, far);
-	//#ifdef DRW_PLATFORM_WIN
+// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
+// near, far);  glFrustum(left,right,bottom,top,near, far);
+//#ifdef DRW_PLATFORM_WIN
 
-	//	printf("glu stuff doesn't link on windows >:[\n");
-	//#else
-	/*
+//	printf("glu stuff doesn't link on windows >:[\n");
+//#else
+/*
 	 _l = left;
 	_r = right;
 	_t = top;
