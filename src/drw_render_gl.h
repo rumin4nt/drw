@@ -65,6 +65,7 @@ void drw_clear(void);
 RColor8 drw_checkcolor(void);
 
 void drw_blend_set(int);
+void drw_blend_push(void);
 void drw_blend_pop(void);
 
 void drw_color_clear(float, float, float, float);

@@ -88,7 +88,8 @@ static double _top	= -1;
 static double _bottom     = -1;
 static double _near       = -1;
 static double _far	= -1;
-static bool   _prev_blend = 0;
+static int    _prev_blend = 0;
+static int    _blend      = 0;
 static double fov	 = 45;
 static double window_width;
 static double window_height;
@@ -353,7 +354,7 @@ void drw_text_load(const char* path)
 void drw_blend_set(int v)
 {
 
-	_prev_blend = v;
+	_blend = v;
 #ifndef DRW_PLATFORM_WIN
 
 	switch (v)
@@ -396,9 +397,15 @@ void drw_blend_set(int v)
 #endif
 }
 
+void drw_blend_push(void)
+{
+	_prev_blend = _blend;
+}
+
 void drw_blend_pop(void)
 {
 	drw_blend_set(_prev_blend);
+	_blend = _prev_blend;
 }
 
 void drw_clear()
