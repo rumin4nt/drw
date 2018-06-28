@@ -311,11 +311,13 @@ double drw_query_retina(void)
 {
 	return _retina_scale;
 }
+
 void drw_query_framebuffer(int* w, int* h)
 {
 	*w = framebuffer_width;
 	*h = framebuffer_height;
 }
+
 double drw_query_aspectratio(void)
 {
 	return _aspect;
@@ -978,7 +980,7 @@ void drw_wobject_normal(WObject* obj)
 	drw_scale_2f(obj->transform.scale.x, obj->transform.scale.y);
 	int i;
 
-	for (i = 0; i < obj->num_lines; ++i)
+	for (i = 0; i < obj->num; ++i)
 	{
 		WLine* l = obj->lines[i];
 		if (!l)
@@ -1011,7 +1013,7 @@ void drw_wobject_naive(WObject* obj)
 
 	int i;
 
-	for (i = 0; i < obj->num_lines; ++i)
+	for (i = 0; i < obj->num; ++i)
 	{
 		WLine* l = obj->lines[i];
 		if (!l)
@@ -1156,7 +1158,7 @@ void drw_wobject(WObject* obj)
 	drw_push();
 	drw_transform_apply(obj->transform);
 	int i;
-	for (i = 0; i < obj->num_lines; ++i)
+	for (i = 0; i < obj->num; ++i)
 	{
 
 		WLine* l = obj->lines[i];
@@ -1197,7 +1199,7 @@ void drw_wobject_notransform(WObject* obj)
 	drw_push();
 	//drw_transform_apply(obj->transform);
 	int i;
-	for (i = 0; i < obj->num_lines; ++i)
+	for (i = 0; i < obj->num; ++i)
 	{
 
 		WLine* l = obj->lines[i];
@@ -1234,7 +1236,7 @@ void drw_wobject_strokeonly(WObject* obj)
 	drw_push();
 	drw_transform_apply(obj->transform);
 	int i;
-	for (i = 0; i < obj->num_lines; ++i)
+	for (i = 0; i < obj->num; ++i)
 	{
 
 		WLine* l = obj->lines[i];
@@ -1271,7 +1273,7 @@ void drw_wobject_strokeonly_notransform(WObject* obj)
 	drw_push();
 	//drw_transform_apply(obj->transform);
 	int i;
-	for (i = 0; i < obj->num_lines; ++i)
+	for (i = 0; i < obj->num; ++i)
 	{
 
 		WLine* l = obj->lines[i];
@@ -1321,7 +1323,7 @@ void drw_verts(WLine* l)
 void drw_wobject_verts(WObject* obj)
 {
 	int i;
-	for (i = 0; i < obj->num_lines; i++)
+	for (i = 0; i < obj->num; i++)
 	{
 		WLine* line = obj->lines[i];
 		if (!line)
@@ -1877,7 +1879,7 @@ void drw_setup_view(void)
 static void print_debug(void)
 {
 	char sc = (_screenspace) ? 'Y' : 'N';
-	char o = (_ortho) ? 'Y' : 'N';
+	char o  = (_ortho) ? 'Y' : 'N';
 	printf("SCRN %c  ORTHO %c  AR:%f\n", sc, o, _aspect);
 }
 
@@ -1886,18 +1888,18 @@ void drw_setup_view_persp()
 	// if(debug_settings.render)
 	printf("PERSP\n");
 	print_debug();
-	
+
 	// static int zoomFactor = 1;
 	//float left, right, top, bottom, znear, zfar;
 	glViewport(0, 0, framebuffer_width, framebuffer_height);
 	//glViewport(-.5 * framebuffer_width * _retina_scale, -.5 * framebuffer_height* _retina_scale, .5 * framebuffer_width * _retina_scale, .5 * framebuffer_height* _retina_scale);
 
 	float width, height;
-	
+
 	if (_screenspace)
 	{
 		//printf("screenspace: YES %f\n", _aspect);
-		
+
 		width  = framebuffer_width;
 		height = framebuffer_height;
 
@@ -1910,22 +1912,22 @@ void drw_setup_view_persp()
 		else
 		{
 			// portrait
-			
+
 			_aspect    = (float)height / (float)width;
 			_landscape = false;
 		}
-
 	}
 	else
 	{
-		if ( framebuffer_width > framebuffer_height )
+		if (framebuffer_width > framebuffer_height)
 		{
 			_aspect = framebuffer_width / framebuffer_height;
-		}else{
-			_aspect = framebuffer_height / framebuffer_width ;
-
 		}
-		_landscape = ( framebuffer_width >= framebuffer_height);
+		else
+		{
+			_aspect = framebuffer_height / framebuffer_width;
+		}
+		_landscape = (framebuffer_width >= framebuffer_height);
 		//printf("screenspace: NO %f\n", _aspect);
 		width  = 1.;
 		height = 1.;
@@ -1992,9 +1994,9 @@ void drw_setup_view_persp()
 	_near = -1024.f;
 	_near = 0.00001f;
 	_far  = 1024.f;
-	
+
 	//maybe this block can go entirely?
-	if ( _ortho)
+	if (_ortho)
 	{
 		if (_landscape)
 		{
@@ -2007,7 +2009,7 @@ void drw_setup_view_persp()
 			_bottom *= _aspect;
 		}
 	}
-	
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
@@ -2037,9 +2039,7 @@ void drw_setup_view_persp()
 	glLoadIdentity();
 	gluLookAt(0, 0, height, 0, 0, 0.0, 0.0, _near, _far);
 
-
 #endif
-	
 }
 
 //	this appears to work in both configurations.
@@ -2047,11 +2047,11 @@ void drw_setup_view_ortho()
 {
 	printf("ORTHO\n");
 	print_debug();
-	
+
 	float width, height;
 
-	width    = framebuffer_width;
-	height   = framebuffer_height;
+	width  = framebuffer_width;
+	height = framebuffer_height;
 	//double x = width;
 	//double y = height;
 
@@ -2090,7 +2090,7 @@ void drw_setup_view_ortho()
 	glLoadIdentity();
 
 	drw_get_gl_error();
-	
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
@@ -2122,8 +2122,9 @@ void drw_setup_view_ortho()
 
 void drw_get_screencoords(double* l, double* r, double* t, double* b, double* n, double* f)
 {
-	printf("Sanity check: %f %f %f %f %f %f\n", _left, _right, _top, _bottom, _near, _far);
-
+#ifdef DEBUG
+	//printf("Sanity check: %f %f %f %f %f %f\n", _left, _right, _top, _bottom, _near, _far);
+#endif
 	*l = _left;
 	*r = _right;
 	*t = _top;
@@ -2147,6 +2148,7 @@ void drw_set_framebuffer(double w, double h)
 	framebuffer_width  = w;
 	framebuffer_height = h;
 
+	drw_color(0, 0, 0, 0);
 	// drw_calculate_scale();
 	// drw_setup_view();
 }

@@ -22,7 +22,7 @@ typedef struct WObject
 {
 	//	todo: clean this up!
 	bool		normalized;
-	int		num_lines;
+	int		num;
 	WLine**		lines;
 	struct WObject* parent;
 	WRect		bounds;
