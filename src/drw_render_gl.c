@@ -11,7 +11,12 @@
 #include "drw_config.h"
 #include "drw_platform.h"
 #include <drw/drw.h>
+
+
 #include <gpc/gpc.h>
+#include "ext/drw_ext_gpc.h"
+
+
 //#include <r4/src/r4_config.h>
 //#include <r4/src/r4_platform.h>
 
@@ -209,9 +214,9 @@ int drw_get_gl_error()
 		printf("GL_INVALID_OPERATION\n");
 		break;
 
-		// case GL_INVALID_FRAMEBUFFER_OPERATION:
-		//    printf("invalid framebuffer\n");
-		//    break;
+	// case GL_INVALID_FRAMEBUFFER_OPERATION:
+	//    printf("invalid framebuffer\n");
+	//    break;
 
 	case GL_OUT_OF_MEMORY:
 		printf("out of memory\n");
@@ -1061,6 +1066,13 @@ void drw_wline_strokeonly(WLine* l)
 	}
 
 	drw_poly(l);
+}
+
+
+void drw_tess(void* tess)
+{
+	drw_gpc_tristrip(tess);
+
 }
 
 void drw_wline(WLine* l)
@@ -2013,13 +2025,13 @@ void drw_setup_view_persp()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
-	// near, far);  glFrustum(left,right,bottom,top,near, far);
-	//#ifdef DRW_PLATFORM_WIN
+// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
+// near, far);  glFrustum(left,right,bottom,top,near, far);
+//#ifdef DRW_PLATFORM_WIN
 
-	//	printf("glu stuff doesn't link on windows >:[\n");
-	//#else
-	/*
+//	printf("glu stuff doesn't link on windows >:[\n");
+//#else
+/*
 	 _l = left;
 	_r = right;
 	_t = top;
@@ -2123,7 +2135,7 @@ void drw_setup_view_ortho()
 void drw_get_screencoords(double* l, double* r, double* t, double* b, double* n, double* f)
 {
 #ifdef DEBUG
-	//printf("Sanity check: %f %f %f %f %f %f\n", _left, _right, _top, _bottom, _near, _far);
+//printf("Sanity check: %f %f %f %f %f %f\n", _left, _right, _top, _bottom, _near, _far);
 #endif
 	*l = _left;
 	*r = _right;

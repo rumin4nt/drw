@@ -108,6 +108,7 @@ void drw_axis_living(void);
 void drw_push(void);
 void drw_pop(void);
 
+void drw_tess(void* tess);
 void drw_transform_apply(WTransform t);
 void drw_transform_apply_inverse(WTransform t);
 void drw_gtransform_apply(GTransform t);
