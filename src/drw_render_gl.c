@@ -764,6 +764,11 @@ void drw_scale_z(float z)
  }
 
  */
+void drw_translate_rvec(RVec* v)
+{
+	glTranslatef(v->x, v->y, v->z);
+}
+
 void drw_translate_vec3(vec3_t v)
 {
 	glTranslatef(v[0], v[1], v[2]);
@@ -2121,7 +2126,7 @@ void drw_setup_view_ortho()
 
 	if (_screenspace)
 	{
-		glTranslatef(0.375f, 0.375f, 0.f);
+		//glTranslatef(0.375f, 0.375f, 0.f);
 	}
 
 	drw_get_gl_error();

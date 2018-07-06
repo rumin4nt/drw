@@ -19,6 +19,7 @@ static RLine3** snoopdata = NULL;
 static int snoopnum = 0;
 static bool _snooping = false;
 //typedef void (*snoop_record_fun)(RLine* l);
+#include <drw/drw.h>
 
 void drw_snoop_add(RLine* l)
 {
@@ -77,6 +78,7 @@ void drw_snoop_set(bool val)
 
 void drw_snoop_dump(const char* path)
 {
+#ifdef R4_ENABLE_CAIROSVG
 	RSVGRec* rec = r_svg_open(path);
 	
 	printf("Dumping snoop data! %d lines\n", snoopnum);
@@ -92,6 +94,7 @@ void drw_snoop_dump(const char* path)
 	free(snoopdata);
 	snoopdata = NULL;
 	snoopnum = 0;
+#endif
 }
 
 void drw_snoop_fun_set(snoop_record_fun fun)
