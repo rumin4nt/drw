@@ -17,9 +17,9 @@
 
 #include "src/drw_config.h"
 #include "src/drw_export.h"
-#include "src/drw_render_gl.h"
-#include "src/drw_render.h"
 #include "src/drw_point.h"
+#include "src/drw_render.h"
+#include "src/drw_render_gl.h"
 
 //#include "src/r_hatch.h"
 
@@ -65,9 +65,6 @@ enum DRWAlignmentVertical
 
 #include "stdlib.h"
 
-
-
-
 int		    drw_check_version_match(const char* str);
 int		    drw_check_compat_match(const char* str);
 char*		    drw_get_version_string(void);
@@ -76,19 +73,22 @@ char*		    drw_get_compat_string(void);
 static inline char* drw_get_compat_string_header(void)
 {
 	char* buf = (char*)calloc(256, sizeof(char));
-	sprintf(buf, "%d_%d", DRW_VERSION_MAJOR, DRW_VERSION_MINOR);
+	sprintf(buf, "%d.%d", DRW_VERSION_MAJOR, DRW_VERSION_MINOR);
 	return buf;
 }
 
 static inline char* drw_get_version_string_header(void)
 {
 	char* buf = (char*)calloc(256, sizeof(char));
-	sprintf(buf, "%d_%d_%d", DRW_VERSION_MAJOR, DRW_VERSION_MINOR,
+	sprintf(buf, "%d.%d.%d", DRW_VERSION_MAJOR, DRW_VERSION_MINOR,
 		DRW_VERSION_PATCH);
 	return buf;
 }
 
 int drw_lib_init(void);
 int drw_lib_deinit(void);
+double drw_font_size_real_get(void);
+void drw_font_size_set(int sz);
+int drw_font_size_get(void);
 
 #endif /* drw_h */

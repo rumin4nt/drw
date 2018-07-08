@@ -13,11 +13,13 @@
 #ifndef RPLATFORM_WIN
 
 #include <FTGL/ftgl.h>
+#include <assert.h>
 
 // LL#include "../ui/r_sizing.h"
 //#include "../core/r_app.h"
 
 // extern AppSettings app_settings;
+
 
 FTGLfont* font		= NULL;
 int       justification = 0;
@@ -39,6 +41,13 @@ void drw_font_deinit()
 
 void drw_font_size(int sz, int resolution)
 {
+	//todo - eliminate this from public and force all font size through bottleneck
+	//	interface in drw.c
+	//
+	//	for now we just call it on behalf of the user (me)
+	
+	drw_font_size_set(sz);
+	
 	if (!font)
 	{
 		return;
@@ -58,7 +67,8 @@ void drw_font_size(int sz, int resolution)
 
 int drw_font_load(const char* path)
 {
-
+	assert(path);
+	
 	// if ( font )
 	//{
 	//	ftglDestroyFont(font);

@@ -38,6 +38,7 @@
 		57BDF81D20ACA9A0004C154E /* drw_font_ftgles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF81320ACA9A0004C154E /* drw_font_ftgles.cpp */; };
 		57BDF81E20ACA9A0004C154E /* drw_font_ftgl.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF81420ACA9A0004C154E /* drw_font_ftgl.h */; };
 		57BDF81F20ACA9A0004C154E /* drw_font_hershey.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF81520ACA9A0004C154E /* drw_font_hershey.h */; };
+		57E6659920F2CB54006E5BB2 /* drw.c in Sources */ = {isa = PBXBuildFile; fileRef = 57E6659820F2CB54006E5BB2 /* drw.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		57BDF81420ACA9A0004C154E /* drw_font_ftgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_font_ftgl.h; sourceTree = "<group>"; };
 		57BDF81520ACA9A0004C154E /* drw_font_hershey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_font_hershey.h; sourceTree = "<group>"; };
 		57BDF82020ACAC3F004C154E /* drw_dummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_dummy.h; sourceTree = "<group>"; };
+		57E6659820F2CB54006E5BB2 /* drw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = drw.c; path = ../drw.c; sourceTree = "<group>"; };
 		D1A8335B1E99AD2C009AA5D2 /* libdrw.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libdrw.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1A8368D1E99AEF3009AA5D2 /* libdrw.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libdrw.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AA9AB91EA00E1A00675C3A /* drw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = drw.h; path = ../drw.h; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				5703DAAC20ACBD5C007E1800 /* deps */,
 				57BDF7D220AC7CD1004C154E /* src */,
+				57E6659820F2CB54006E5BB2 /* drw.c */,
 				D1AA9AB91EA00E1A00675C3A /* drw.h */,
 				D1A8335C1E99AD2C009AA5D2 /* Products */,
 			);
@@ -326,6 +329,7 @@
 				577DD21B20D3548D00623919 /* drw_render_gl.c in Sources */,
 				57BDF7EE20AC7CD1004C154E /* drw_wobject_ops.c in Sources */,
 				57BDF81620ACA9A0004C154E /* drw_font_asteroids.c in Sources */,
+				57E6659920F2CB54006E5BB2 /* drw.c in Sources */,
 				57967B6220D17B3000003F66 /* drw_export.c in Sources */,
 				57BDF81D20ACA9A0004C154E /* drw_font_ftgles.cpp in Sources */,
 				5703DBA020ACBD5C007E1800 /* gpc.c in Sources */,

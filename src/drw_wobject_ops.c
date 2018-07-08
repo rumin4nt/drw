@@ -13,9 +13,9 @@
 #include <r4/src/core/r_random.h>
 
 WPoint drw_wobject_ops_randompointfromobject(WObject* obj, int* line_i,
-					   int* point_i)
+					     int* point_i)
 {
-	int num   = obj->num_lines;
+	int num   = obj->num;
 	int which = r_rand_double(NULL) * num;
 	if (line_i)
 		*line_i = which;
@@ -29,6 +29,5 @@ WPoint drw_wobject_ops_randompointfromline(WLine* line, int* point_i)
 		*point_i = which;
 	return line->data[which];
 }
-
 
 #endif

@@ -108,6 +108,7 @@ void drw_axis_living(void);
 void drw_push(void);
 void drw_pop(void);
 
+void drw_tess(void* tess);
 void drw_transform_apply(WTransform t);
 void drw_transform_apply_inverse(WTransform t);
 void drw_gtransform_apply(GTransform t);
@@ -135,6 +136,7 @@ void drw_translate_x(float);
 void drw_translate_y(float);
 void drw_translate_z(float);
 // void drw_translate_vec2(Vec2* vec);
+void drw_translate_rvec(RVec* vec);
 void drw_translate_vec3(vec3_t vec);
 void drw_translate_rp(RPoint p);
 void drw_translate_rp3(RPoint3 p);

@@ -125,6 +125,19 @@ void drw_font_hpvec_draw(const char* text)
 	}
 
 	drw_push();
+	int w, h;
+	
+	if ( !drw_get_screenspace() )
+	{
+		drw_query_framebuffer(&w, &h);
+		
+		double sz = drw_font_size_get();
+		
+		double sc = 1. / (h/sz*8);
+		
+		drw_scale_u(sc);
+	}
+	
 	drw_translate(offx, offy, 0);
 
 	while (!done)
@@ -150,5 +163,11 @@ void drw_font_hpvec_draw(const char* text)
 		i++;
 	}
 
+//	if ( !drw_get_screenspace() )
+////
+	//{
+	//	drw_pop();
+		
+	//}/
 	drw_pop();
 }

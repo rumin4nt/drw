@@ -11,12 +11,15 @@ int main(int argc, char** argv)
 	printf("making sure drw header matches library.\n");
 
 	char* buf = calloc(256, sizeof(char));
-	sprintf(buf, "%d_%d_%d", DRW_VERSION_MAJOR, DRW_VERSION_MINOR,
+	sprintf(buf, "%d.%d.%d", DRW_VERSION_MAJOR, DRW_VERSION_MINOR,
 		DRW_VERSION_PATCH);
 
-	if (drw_check_version_match(buf)) {
+	if (drw_check_version_match(buf))
+	{
 		printf("Version matches.\n");
-	} else {
+	}
+	else
+	{
 		printf("Version does not match!!\n");
 		return 88;
 	}

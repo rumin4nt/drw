@@ -131,7 +131,6 @@ void drw_gpc_triwire(void* dat)
 
 void drw_gpc_tristrip(void* dat)
 {
-	//#ifndef DRW_PLATFORM_IOS
 	gpc_tristrip* tri = dat;
 	int	   j, s, v;
 	
@@ -141,7 +140,9 @@ void drw_gpc_tristrip(void* dat)
 		gpc_vertex_list str = tri->strip[s];
 		GLfloat*	arr = malloc(sizeof(GLfloat) * str.num_vertices * 2);
 		
-		// glBegin(GL_TRIANGLE_STRIP);
+		if(str.num_vertices < 2 )
+			continue;
+		
 		for (v = 0, j = 0; v < str.num_vertices; v++, j += 2)
 		{
 			arr[j]     = str.vertex[v].x;
