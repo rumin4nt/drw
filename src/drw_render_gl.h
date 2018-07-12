@@ -108,6 +108,7 @@ void drw_axis_living(void);
 void drw_push(void);
 void drw_pop(void);
 
+
 void drw_tess(void* tess);
 void drw_transform_apply(WTransform t);
 void drw_transform_apply_inverse(WTransform t);
@@ -235,6 +236,7 @@ void drw_icosahedron(float v);
 void drw_grid(float, int);
 
 //	matrix helpers
+
 void drw_setup_view(void);
 void drw_setup_view_ortho(void);
 void drw_setup_view_persp(void);

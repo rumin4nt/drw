@@ -38,11 +38,9 @@ double drw_font_size_real_get(void)
 {
 	int w, h;
 	drw_query_framebuffer(&w, &h);
-	
+
 	double sz = drw_font_size_get();
-	
 	double sc = 1. / (h/sz*8);
-	
 	return sc;
 }
 
