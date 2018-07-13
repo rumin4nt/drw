@@ -235,6 +235,7 @@ void drw_icosahedron(float v);
 void drw_grid(float, int);
 
 //	matrix helpers
+
 void drw_setup_view(void);
 void drw_setup_view_ortho(void);
 void drw_setup_view_persp(void);
@@ -245,11 +246,11 @@ void drw_set_downsample(double);
 void drw_set_circle_precision_override_limit(bool v);
 void drw_set_circle_precision(int sides);
 void drw_set_fill(bool);
-void drw_pop_fill(void);
+void drw_fill_pop(void);
 
 void drw_set_fov(double v);
-void drw_set_ortho(bool v);
-bool drw_get_ortho(void);
+void drw_ortho_set(bool v);
+bool drw_ortho_get(void);
 void drw_set_screenspace(bool);
 bool drw_get_screenspace(void);
 void drw_set_screensize(double, double);

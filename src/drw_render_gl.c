@@ -12,10 +12,8 @@
 #include "drw_platform.h"
 #include <drw/drw.h>
 
-
-#include <gpc/gpc.h>
 #include "ext/drw_ext_gpc.h"
-
+#include <gpc/gpc.h>
 
 //#include <r4/src/r4_config.h>
 //#include <r4/src/r4_platform.h>
@@ -131,9 +129,9 @@ static bool   _landscape    = false;
 static double _aspect       = 1;
 static double _retina_scale = 1;
 
-static int  axis_radius = 64;
-static bool fill	= false;
-static bool prev_fill   = false;
+//static int  axis_radius = 64;
+static bool fill      = false;
+static bool prev_fill = false;
 
 static float  _r, _g, _b, _a;
 static WColor prev;
@@ -905,7 +903,9 @@ void drw_rotate_vec3(vec3_t vec)
 
 void drw_axis_nice()
 {
-	float x = axis_radius * scale_factor;
+	double axis_render_radius = (_screenspace) ? 32 : .125;
+
+	float x = axis_render_radius * scale_factor;
 
 	drw_push();
 	drw_line(x, 0, x * 2, 0);
@@ -1053,7 +1053,7 @@ void drw_wline_fill(WLine* l)
 {
 	drw_set_fill(true);
 	drw_poly(l);
-	drw_pop_fill();
+	drw_fill_pop();
 }
 
 /*
@@ -1073,11 +1073,9 @@ void drw_wline_strokeonly(WLine* l)
 	drw_poly(l);
 }
 
-
 void drw_tess(void* tess)
 {
 	drw_gpc_tristrip(tess);
-
 }
 
 void drw_wline(WLine* l)
@@ -1102,7 +1100,7 @@ void drw_wline(WLine* l)
 		{
 			drw_set_fill(l->closed);
 			drw_poly(l);
-			drw_pop_fill();
+			drw_fill_pop();
 		}
 		if (l->has_stroke)
 		{
@@ -1112,7 +1110,7 @@ void drw_wline(WLine* l)
 	else
 	{
 	}
-#ifdef DISABLE_UNTIL_WORKLINE_REFACTOR_COMPLETE
+	/*#ifdef DISABLE_UNTIL_WORKLINE_REFACTOR_COMPLETE
 
 	if (l->brush)
 	{
@@ -1152,8 +1150,11 @@ void drw_wline(WLine* l)
 		}
 	}
 #else
-	drw_poly(l);
 #endif
+*/
+
+	drw_poly(l);
+
 	//  TODO color pop?
 }
 
@@ -1355,7 +1356,7 @@ void drw_wobject_verts(WObject* obj)
 void drw_axis()
 {
 	/// ones here used to be scale factor
-	int axis_render_radius = axis_radius * scale_factor;
+	double axis_render_radius = (_screenspace) ? 32 : .125;
 	// drw_push();
 	// drw_translate2f(x * 1,y * 1);
 	drw_line(-axis_render_radius, 0, axis_render_radius, 0);
@@ -1367,7 +1368,7 @@ void drw_axis_living()
 {
 	static float r			= 0.f;
 	static float speed		= .01f;
-	float	axis_render_radius = axis_radius * 1;
+	double       axis_render_radius = (_screenspace) ? 32 : .125;
 
 	//axis_render_radius = axis_radius * 1;
 	r += speed;
@@ -1527,6 +1528,7 @@ void drw_ellipse(float _x, float _y)
 	// glBlendEquation(GL_FUNC_ADD);
 	// glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	//glGetFloatv(GL_COLOR_MATERIAL, <#GLfloat *params#>)
 	float deg2rad = (M_PI / circle_precision);
 
 	const int renderLineSize = (circle_precision * 2);
@@ -1649,7 +1651,7 @@ void drw_poly_extras(WLine* line)
 	{
 		drw_set_fill(line->closed);
 		drw_poly(line);
-		drw_pop_fill();
+		drw_fill_pop();
 	}
 #ifdef DISABLE_UNTIL_WORKLINE_REFACTOR_COMPLETE
 
@@ -1662,7 +1664,7 @@ void drw_poly_extras(WLine* line)
 		// if (!line->closed)
 		drw_set_fill(line->closed);
 		drw_poly(line);
-		drw_pop_fill();
+		drw_fill_pop();
 	}
 
 	if (line->tess)
@@ -1784,7 +1786,7 @@ void drw_rgbtri(double gamma)
 	drw_set_circle_precision(3);
 	drw_set_fill(true);
 	drw_circle(1);
-	drw_pop_fill();
+	drw_fill_pop();
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
@@ -1838,12 +1840,12 @@ void r_set_window(double w, double h)
 	drw_setup_view();
 }
 
-bool drw_get_ortho(void)
+bool drw_ortho_get(void)
 {
 	return _ortho;
 }
 
-void drw_set_ortho(bool val)
+void drw_ortho_set(bool val)
 {
 #ifdef DEBUG
 	printf("Setting ortho to %d\n", val);
@@ -2142,12 +2144,18 @@ void drw_get_screencoords(double* l, double* r, double* t, double* b, double* n,
 #ifdef DEBUG
 //printf("Sanity check: %f %f %f %f %f %f\n", _left, _right, _top, _bottom, _near, _far);
 #endif
-	*l = _left;
-	*r = _right;
-	*t = _top;
-	*b = _bottom;
-	*n = _near;
-	*f = _far;
+	if (l)
+		*l = _left;
+	if (r)
+		*r = _right;
+	if (t)
+		*t = _top;
+	if (b)
+		*b = _bottom;
+	if (n)
+		*n = _near;
+	if (f)
+		*f = _far;
 }
 
 void drw_set_screensize(double w, double h)
@@ -2245,7 +2253,7 @@ void drw_set_circle_precision(int v)
 	circle_precision = v;
 }
 
-void drw_pop_fill()
+void drw_fill_pop()
 {
 	fill = prev_fill;
 }
