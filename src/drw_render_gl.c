@@ -1,4 +1,5 @@
 //
+//
 //  render.c
 //  r4
 //
@@ -566,6 +567,8 @@ void drw_color_pop()
 
 void drw_alpha(float a)
 {
+	if ( a < 0 || a > 1 )
+		printf("INvalid value passed to alpha!\n");
 	prev_alpha = a;
 	glColor4f(_r, _g, _b, a);
 }
@@ -693,7 +696,17 @@ void drw_line3_r(RLine3* poly)
 
 	glVertexPointer(3, GL_FLOAT, 0, arr);
 
-	glDrawArrays(GL_LINE_STRIP, 0, (int)poly->num);
+	
+	if (fill)
+	{
+		glDrawArrays(GL_TRIANGLE_FAN, 0, poly->num);
+	}
+	else
+	{
+		poly->closed ? glDrawArrays(GL_LINE_LOOP, 0, poly->num)
+		: glDrawArrays(GL_LINE_STRIP, 0, poly->num);
+	}
+	//glDrawArrays(GL_LINE_STRIP, 0, (int)poly->num);
 	free(arr);
 }
 
@@ -1562,7 +1575,11 @@ void drw_ellipse(float _x, float _y)
 
 void drw_rline(RLine* poly)
 {
-
+	if ( poly->num == 0 )
+	{
+		printf("Trying to draw a poly with no points? what are you tryin to pull\n");
+		return;
+	}
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
 	{
@@ -1726,8 +1743,8 @@ void drw_rawpoly_3d(double* arr, int num, bool closed)
 	}
 	else
 	{
-		closed ? glDrawArrays(GL_LINE_LOOP, 0, (int)num * .5)
-		       : glDrawArrays(GL_LINE_STRIP, 0, (int)num * .5);
+		closed ? glDrawArrays(GL_LINE_LOOP, 0, (int)num * 1)
+		       : glDrawArrays(GL_LINE_STRIP, 0, (int)num * 1);
 	}
 }
 
