@@ -150,6 +150,7 @@ void drw_rotate_y(float);
 void drw_rotate_z(float);
 void drw_rotate_vec3(vec3_t vec);
 void drw_rotate(float, float, float);
+void drw_rotate_r(double, double, double);
 
 int drw_get_gl_error(void);
 

@@ -644,6 +644,21 @@ void drw_rotate(float x, float y, float z)
 	glRotatef(z, 0, 0, 1);
 }
 
+static inline double rad2deg(double input)
+{
+	return 180. * input / M_PI;
+}
+
+static inline double deg2rad(double input)
+{
+	return M_PI * input / 180.;
+}
+
+void drw_rotate_r(double x, double y, double z)
+{
+	drw_rotate(rad2deg(x), rad2deg(y), rad2deg(z));
+}
+
 #pragma mark primitives
 
 void drw_line_r(RLine* poly)
