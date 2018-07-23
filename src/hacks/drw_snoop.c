@@ -14,51 +14,88 @@
 //#include <stdio.h>
 #ifdef DRW_ENABLE_SNOOP
 
-
 static RLine3** snoopdata = NULL;
-static int snoopnum = 0;
-static bool _snooping = false;
+static int      snoopnum  = 0;
+static bool     _snooping = false;
 //typedef void (*snoop_record_fun)(RLine* l);
 #include <drw/drw.h>
 
-void drw_snoop_add(RLine* l)
+void drw_snoop_add_rline3(RLine3* line)
 {
 	snoopnum++;
-	if ( !snoopdata )
+	if (!snoopdata)
 	{
 		snoopdata = calloc(1, sizeof(RLine));
-	}else{
-		snoopdata = realloc( snoopdata, snoopnum * sizeof(RLine));
+	}
+	else
+	{
+		snoopdata = realloc(snoopdata, snoopnum * sizeof(RLine));
 	}
 	
-	double rx,ry,rz;
+	double  rx, ry, rz;
 	RLine3* rl = r_line3_create();
-	for ( int i = 0; i < l->num; i++ )
+	for (int i = 0; i < line->num; i++)
 	{
-		RPoint p = l->data[i];
+		RPoint3 p = line->data[i];
 		
 		double x = p.x;
 		double y = p.y;
-		double z = 0;
+		double z = p.z;
 		
 		drw_point_3d_to_2d(x, y, z, &rx, &ry, &rz);
 		r_line3_add_point_3f(rl, rx, ry, rz);
-		
+	}
+	
+	
+	if  (line->closed)
+	{
+		RPoint3 p = line->data[0];
+		double x = p.x;
+		double y = p.y;
+		double z = p.z;
+		drw_point_3d_to_2d(x, y, z, &rx, &ry, &rz);
+		r_line3_add_point_3f(rl, rx, ry, rz);
+
 	}
 	
 	snoopdata[snoopnum - 1] = rl;
-	
-	
-	
 }
 
+void drw_snoop_add_rline(RLine* l)
+{
+	snoopnum++;
+	if (!snoopdata)
+	{
+		snoopdata = calloc(1, sizeof(RLine));
+	}
+	else
+	{
+		snoopdata = realloc(snoopdata, snoopnum * sizeof(RLine));
+	}
+
+	double  rx, ry, rz;
+	RLine3* rl = r_line3_create();
+	for (int i = 0; i < l->num; i++)
+	{
+		RPoint p = l->data[i];
+
+		double x = p.x;
+		double y = p.y;
+		double z = 0;
+
+		drw_point_3d_to_2d(x, y, z, &rx, &ry, &rz);
+		r_line3_add_point_3f(rl, rx, ry, rz);
+	}
+
+	snoopdata[snoopnum - 1] = rl;
+}
 
 RLine* drw_snoop_rline_from_f(float* data, int num)
 {
-	RLine* l =  r_line_create();
-	for ( int i = 0 ; i < num; i+= 2)
+	RLine* l = r_line_create();
+	for (int i = 0; i < num; i += 2)
 	{
-		r_line_add_point2f(l, data[i], data[i+1]);
+		r_line_add_point2f(l, data[i], data[i + 1]);
 	}
 	return l;
 }
@@ -80,20 +117,19 @@ void drw_snoop_dump(const char* path)
 {
 #ifdef R4_ENABLE_CAIROSVG
 	RSVGRec* rec = r_svg_open(path);
-	
+
 	printf("Dumping snoop data! %d lines\n", snoopnum);
-	for ( int i = 0; i < snoopnum; i++ )
+	for (int i = 0; i < snoopnum; i++)
 	{
 		RLine3* l = snoopdata[i];
 		printf("%lu points\n", l->num);
 		r_svg_add_rline3(rec, l);
-		
 	}
 	r_svg_close(rec);
-	
+
 	free(snoopdata);
 	snoopdata = NULL;
-	snoopnum = 0;
+	snoopnum  = 0;
 #endif
 }
 
@@ -104,4 +140,3 @@ void drw_snoop_fun_set(snoop_record_fun fun)
 }
 
 #endif
-

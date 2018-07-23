@@ -567,7 +567,7 @@ void drw_color_pop()
 
 void drw_alpha(float a)
 {
-	if ( a < 0 || a > 1 )
+	if (a < 0 || a > 1)
 		printf("INvalid value passed to alpha!\n");
 	prev_alpha = a;
 	glColor4f(_r, _g, _b, a);
@@ -693,6 +693,14 @@ void drw_line_3f(float ax, float ay, float az, float bx, float by, float bz)
 void drw_line3_r(RLine3* poly)
 {
 
+#ifdef DRW_ENABLE_SNOOP
+	if (drw_snoop_get())
+	{
+		//RLine* nl = drw_snoop_rline_from_f(arr, 8);
+		drw_snoop_add_rline3(poly);
+	}
+#endif
+
 	const unsigned long long renderLineSize = (poly->num * 3);
 
 	// printf("poly is %d num\n", poly->num);
@@ -711,7 +719,6 @@ void drw_line3_r(RLine3* poly)
 
 	glVertexPointer(3, GL_FLOAT, 0, arr);
 
-	
 	if (fill)
 	{
 		glDrawArrays(GL_TRIANGLE_FAN, 0, poly->num);
@@ -719,7 +726,7 @@ void drw_line3_r(RLine3* poly)
 	else
 	{
 		poly->closed ? glDrawArrays(GL_LINE_LOOP, 0, poly->num)
-		: glDrawArrays(GL_LINE_STRIP, 0, poly->num);
+			     : glDrawArrays(GL_LINE_STRIP, 0, poly->num);
 	}
 	//glDrawArrays(GL_LINE_STRIP, 0, (int)poly->num);
 	free(arr);
@@ -1482,7 +1489,7 @@ void drw_rect(float ax, float ay, float bx, float by)
 	if (drw_snoop_get())
 	{
 		RLine* nl = drw_snoop_rline_from_f(arr, 8);
-		drw_snoop_add(nl);
+		drw_snoop_add_rline(nl);
 	}
 #endif
 	*/
@@ -1576,7 +1583,7 @@ void drw_ellipse(float _x, float _y)
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
 	{
-		drw_snoop_add(drw_snoop_rline_from_f(arr, renderLineSize));
+		drw_snoop_add_rline(drw_snoop_rline_from_f(arr, renderLineSize));
 	}
 #endif
 	*/
@@ -1590,7 +1597,7 @@ void drw_ellipse(float _x, float _y)
 
 void drw_rline(RLine* poly)
 {
-	if ( poly->num == 0 )
+	if (poly->num == 0)
 	{
 		printf("Trying to draw a poly with no points? what are you tryin to pull\n");
 		return;
@@ -1598,7 +1605,7 @@ void drw_rline(RLine* poly)
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
 	{
-		drw_snoop_add(poly);
+		drw_snoop_add_rline(poly);
 	}
 #endif
 
@@ -1632,7 +1639,7 @@ void drw_poly(WLine* line)
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
 	{
-		drw_snoop_add(r_line_from_wline(line));
+		drw_snoop_add_rline(r_line_from_wline(line));
 	}
 #endif
 
