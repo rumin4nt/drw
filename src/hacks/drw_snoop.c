@@ -85,8 +85,17 @@ void drw_snoop_add_rline(RLine* l)
 
 		drw_point_3d_to_2d(x, y, z, &rx, &ry, &rz);
 		r_line3_add_point_3f(rl, rx, ry, rz);
+		}
+	if(l->closed )
+	{	RPoint p = l->data[0];
+		
+		double x = p.x;
+		double y = p.y;
+		double z = 0;
+		
+		drw_point_3d_to_2d(x, y, z, &rx, &ry, &rz);
+		r_line3_add_point_3f(rl, rx, ry, rz);
 	}
-
 	snoopdata[snoopnum - 1] = rl;
 }
 
