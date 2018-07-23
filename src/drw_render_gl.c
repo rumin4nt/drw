@@ -719,7 +719,7 @@ void drw_line3_r(RLine3* poly)
 
 	glVertexPointer(3, GL_FLOAT, 0, arr);
 
-	if (fill)
+	if (fill || poly->filled )
 	{
 		glDrawArrays(GL_TRIANGLE_FAN, 0, poly->num);
 	}
