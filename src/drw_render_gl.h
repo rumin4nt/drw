@@ -41,12 +41,12 @@
 
 enum
 {
-	R4_BLEND_MODE_NONE,
-	R4_BLEND_MODE_NORMAL,
-	R4_BLEND_MODE_ADD,
-	R4_BLEND_MODE_MULTIPLY,
-	R4_BLEND_MODE_SCREEN,
-	R4_BLEND_MODE_SUBTRACT
+	DRW_BLEND_MODE_NONE,
+	DRW_BLEND_MODE_NORMAL,
+	DRW_BLEND_MODE_ADD,
+	DRW_BLEND_MODE_MULTIPLY,
+	DRW_BLEND_MODE_SCREEN,
+	DRW_BLEND_MODE_SUBTRACT
 };
 
 void drw_init(void);
@@ -107,7 +107,6 @@ void drw_axis_living(void);
 //	transforms
 void drw_push(void);
 void drw_pop(void);
-
 
 void drw_tess(void* tess);
 void drw_transform_apply(WTransform t);

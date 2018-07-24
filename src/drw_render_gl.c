@@ -367,29 +367,29 @@ void drw_blend_set(int v)
 	{
 	case 0:
 		glDisable(GL_BLEND);
-	case R4_BLEND_MODE_NORMAL:
+	case DRW_BLEND_MODE_NORMAL:
 		// printf("normal blend!\n");
 		glEnable(GL_BLEND);
 		glBlendEquation(GL_FUNC_ADD);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		break;
-	case R4_BLEND_MODE_ADD:
+	case DRW_BLEND_MODE_ADD:
 		glEnable(GL_BLEND);
 		glBlendEquation(GL_FUNC_ADD);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		break;
-	case R4_BLEND_MODE_MULTIPLY:
+	case DRW_BLEND_MODE_MULTIPLY:
 		glEnable(GL_BLEND);
 		glBlendEquation(GL_FUNC_ADD);
 		glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
 		break;
-	case R4_BLEND_MODE_SCREEN:
+	case DRW_BLEND_MODE_SCREEN:
 
 		glEnable(GL_BLEND);
 		glBlendEquation(GL_FUNC_ADD);
 		glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE);
 		break;
-	case R4_BLEND_MODE_SUBTRACT:
+	case DRW_BLEND_MODE_SUBTRACT:
 		glEnable(GL_BLEND);
 		glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -719,7 +719,7 @@ void drw_line3_r(RLine3* poly)
 
 	glVertexPointer(3, GL_FLOAT, 0, arr);
 
-	if (fill || poly->filled )
+	if (fill || poly->filled)
 	{
 		glDrawArrays(GL_TRIANGLE_FAN, 0, poly->num);
 	}
