@@ -644,19 +644,19 @@ void drw_rotate(float x, float y, float z)
 	glRotatef(z, 0, 0, 1);
 }
 
-static inline double rad2deg(double input)
+static inline double drw_rad2deg(double input)
 {
 	return 180. * input / M_PI;
 }
 
-static inline double deg2rad(double input)
+static inline double drw_deg2rad(double input)
 {
 	return M_PI * input / 180.;
 }
 
 void drw_rotate_r(double x, double y, double z)
 {
-	drw_rotate(rad2deg(x), rad2deg(y), rad2deg(z));
+	drw_rotate(drw_rad2deg(x), drw_rad2deg(y), drw_rad2deg(z));
 }
 
 #pragma mark primitives
@@ -1510,7 +1510,7 @@ void drw_square(float r)
 
 static void calculate_circle(int sides, int radius)
 {
-	float deg2rad = (M_PI / circle_precision);
+	float drw_deg2rad = (M_PI / circle_precision);
 
 	const int renderLineSize = (circle_precision * 2);
 
@@ -1519,7 +1519,7 @@ static void calculate_circle(int sides, int radius)
 	int i;
 	for (i = 0; i < renderLineSize; i += 2)
 	{
-		float degInRad = deg2rad * (float)i;
+		float degInRad = drw_deg2rad * (float)i;
 		float x	= cos(degInRad + M_PI * .5) * radius;
 		float y	= sin(degInRad + M_PI * .5) * radius;
 		arr[i]	 = x;
@@ -1564,7 +1564,7 @@ void drw_ellipse(float _x, float _y)
 	// glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 	//glGetFloatv(GL_COLOR_MATERIAL, <#GLfloat *params#>)
-	float deg2rad = (M_PI / circle_precision);
+	float drw_deg2rad = (M_PI / circle_precision);
 
 	const int renderLineSize = (circle_precision * 2);
 
@@ -1573,7 +1573,7 @@ void drw_ellipse(float _x, float _y)
 	int i;
 	for (i = 0; i < renderLineSize; i += 2)
 	{
-		float degInRad = deg2rad * (float)i;
+		float degInRad = drw_deg2rad * (float)i;
 		float x	= cos(degInRad + M_PI * .5) * (_x)*scale_factor;
 		float y	= sin(degInRad + M_PI * .5) * (_y)*scale_factor;
 		arr[i]	 = x;
