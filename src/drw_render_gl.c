@@ -1493,6 +1493,7 @@ void drw_rect(float ax, float ay, float bx, float by)
 	}
 #endif
 	*/
+	
 }
 
 void drw_point(void)
@@ -1659,15 +1660,31 @@ void drw_poly(WLine* line)
 
 	glVertexPointer(2, GL_FLOAT, 0, arr);
 
-	if (line->closed)
+	if ( fill )
 	{
 		glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num);
-		free(arr);
-		return;
-	}
 
+	}else{
+		(line->closed) ?
+			glDrawArrays(GL_LINE_LOOP, 0, (int)line->num):
+			glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
+	}
+	
+	/*
+	if (line->closed)
+	{
+		fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num)
+		: glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
+		//glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num);
+		//free(arr);
+		//return;
+	}else{
+	 
+	
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num)
 	     : glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
+	}
+	*/
 	free(arr);
 }
 
