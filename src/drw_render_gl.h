@@ -246,7 +246,7 @@ void drw_set_retina(double);
 void drw_set_downsample(double);
 void drw_set_circle_precision_override_limit(bool v);
 void drw_set_circle_precision(int sides);
-void drw_set_fill(bool);
+void drw_fill_set(bool);
 void drw_fill_pop(void);
 
 void drw_set_fov(double v);

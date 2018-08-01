@@ -124,6 +124,7 @@ void drw_snoop_set(bool val)
 
 void drw_snoop_dump(const char* path)
 {
+	
 #ifdef R4_ENABLE_CAIROSVG
 	RSVGRec* rec = r_svg_open(path);
 

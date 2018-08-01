@@ -1086,7 +1086,7 @@ void drw_wobject_e(WObject* obj)
 
 void drw_wline_fill(WLine* l)
 {
-	drw_set_fill(true);
+	drw_fill_set(true);
 	drw_poly(l);
 	drw_fill_pop();
 }
@@ -1133,7 +1133,7 @@ void drw_wline(WLine* l)
 		}
 		if (l->closed)
 		{
-			drw_set_fill(l->closed);
+			drw_fill_set(l->closed);
 			drw_poly(l);
 			drw_fill_pop();
 		}
@@ -1659,15 +1659,30 @@ void drw_poly(WLine* line)
 
 	glVertexPointer(2, GL_FLOAT, 0, arr);
 
-	if (line->closed)
+	if (fill)
 	{
 		glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num);
-		free(arr);
-		return;
 	}
+	else
+	{
+		(line->closed) ? glDrawArrays(GL_LINE_LOOP, 0, (int)line->num) : glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
+	}
+
+	/*
+	if (line->closed)
+	{
+		fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num)
+		: glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
+		//glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num);
+		//free(arr);
+		//return;
+	}else{
+
 
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num)
 	     : glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
+	}
+	*/
 	free(arr);
 }
 
@@ -1688,7 +1703,7 @@ void drw_poly_extras(WLine* line)
 
 	if (line->closed)
 	{
-		drw_set_fill(line->closed);
+		drw_fill_set(line->closed);
 		drw_poly(line);
 		drw_fill_pop();
 	}
@@ -1701,7 +1716,7 @@ void drw_poly_extras(WLine* line)
 	else
 	{
 		// if (!line->closed)
-		drw_set_fill(line->closed);
+		drw_fill_set(line->closed);
 		drw_poly(line);
 		drw_fill_pop();
 	}
@@ -1823,7 +1838,7 @@ void drw_rgbtri(double gamma)
 		       GL_UNSIGNED_BYTE, indices);
 
 	drw_set_circle_precision(3);
-	drw_set_fill(true);
+	drw_fill_set(true);
 	drw_circle(1);
 	drw_fill_pop();
 	glDisableClientState(GL_COLOR_ARRAY);
@@ -2297,7 +2312,7 @@ void drw_fill_pop()
 	fill = prev_fill;
 }
 
-void drw_set_fill(bool v)
+void drw_fill_set(bool v)
 {
 	prev_fill = fill;
 	fill      = v;
