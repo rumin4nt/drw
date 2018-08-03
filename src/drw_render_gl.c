@@ -1468,6 +1468,16 @@ void drw_rect_rp(RPoint a, RPoint b)
 	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
 
+static RLine* _snoop_rline_from_f(float* data, int num)
+{
+	RLine* l = r_line_create();
+	for (int i = 0; i < num; i += 2)
+	{
+		r_line_add_point2f(l, data[i], data[i + 1]);
+	}
+	return l;
+}
+
 void drw_rect(float ax, float ay, float bx, float by)
 {
 	float arr[8];
@@ -1484,15 +1494,16 @@ void drw_rect(float ax, float ay, float bx, float by)
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
 	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
 
-	/*
+	
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
 	{
-		RLine* nl = drw_snoop_rline_from_f(arr, 8);
-		drw_snoop_add_rline(nl);
+		RLine* line = _snoop_rline_from_f(arr,8);
+		line->closed = true;
+		drw_snoop_add_rline(line);
 	}
 #endif
-	*/
+	
 	
 }
 
