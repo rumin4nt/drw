@@ -24,6 +24,7 @@ void drw_snoop_dump(const char* path);
 void drw_snoop_fun_set(snoop_record_fun fun);
 void drw_snoop_add_rline(RLine* l);
 
+//RLine* drw_snoop_rline_from_f(float* data, int num);
 RLine* drw_snoop_rline_from_f(float* data, int num);
 
 #endif
