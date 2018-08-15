@@ -1110,6 +1110,10 @@ void drw_wline_strokeonly(WLine* l)
 
 void drw_tess(void* tess)
 {
+	if ( !tess )
+	{
+		printf("Can't draw a null tess\n");
+	}
 	drw_gpc_tristrip(tess);
 }
 
