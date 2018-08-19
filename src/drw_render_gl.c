@@ -102,6 +102,26 @@ static double framebuffer_width;
 static double framebuffer_height;
 
 static bool color_bypass = false;
+
+static RLine* _snoop_rline_from_f(float* data, int num)
+{
+	RLine* l = r_line_create();
+	for (int i = 0; i < num; i += 2)
+	{
+		r_line_add_point2f(l, data[i], data[i + 1]);
+	}
+	return l;
+}
+static RLine3* _snoop_rline3_from_f(float* data, int num)
+{
+	RLine3* l = r_line3_create();
+	for (int i = 0; i < num; i += 3)
+	{
+		r_line3_add_point3f(l, data[i], data[i + 1], data[i + 2]);
+	}
+	return l;
+}
+
 //#include <r4/r4.h>
 
 //  NOPE this belongs to a parent library.
@@ -685,9 +705,19 @@ void drw_line_r(RLine* poly)
 
 void drw_line_3f(float ax, float ay, float az, float bx, float by, float bz)
 {
-	const GLfloat renderLine[] = {ax, ay, az, bx, by, bz};
+
+	GLfloat renderLine[] = {ax, ay, az, bx, by, bz};
 	glVertexPointer(3, GL_FLOAT, 0, renderLine);
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
+
+#ifdef DRW_ENABLE_SNOOP
+	if (drw_snoop_get())
+	{
+		RLine3* nl = _snoop_rline3_from_f(renderLine, 6);
+		drw_snoop_add_rline3(nl);
+	}
+#endif
+	
 }
 
 void drw_line3_r(RLine3* poly)
@@ -1110,7 +1140,7 @@ void drw_wline_strokeonly(WLine* l)
 
 void drw_tess(void* tess)
 {
-	if ( !tess )
+	if (!tess)
 	{
 		printf("Can't draw a null tess\n");
 	}
@@ -1472,16 +1502,6 @@ void drw_rect_rp(RPoint a, RPoint b)
 	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
 
-static RLine* _snoop_rline_from_f(float* data, int num)
-{
-	RLine* l = r_line_create();
-	for (int i = 0; i < num; i += 2)
-	{
-		r_line_add_point2f(l, data[i], data[i + 1]);
-	}
-	return l;
-}
-
 void drw_rect(float ax, float ay, float bx, float by)
 {
 	float arr[8];
@@ -1498,17 +1518,14 @@ void drw_rect(float ax, float ay, float bx, float by)
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
 	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
 
-	
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
 	{
-		RLine* line = _snoop_rline_from_f(arr,8);
+		RLine* line  = _snoop_rline_from_f(arr, 8);
 		line->closed = true;
 		drw_snoop_add_rline(line);
 	}
 #endif
-	
-	
 }
 
 void drw_point(void)
@@ -1675,17 +1692,14 @@ void drw_poly(WLine* line)
 
 	glVertexPointer(2, GL_FLOAT, 0, arr);
 
-
-	if ( fill )
+	if (fill)
 	{
 		glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num);
-
-	}else{
-		(line->closed) ?
-			glDrawArrays(GL_LINE_LOOP, 0, (int)line->num):
-			glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
 	}
-	
+	else
+	{
+		(line->closed) ? glDrawArrays(GL_LINE_LOOP, 0, (int)line->num) : glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
+	}
 
 	free(arr);
 }

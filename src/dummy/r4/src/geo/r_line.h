@@ -60,7 +60,7 @@ RLineHnd* r_line_hnd_copy(RLineHnd*);
 
 RLine* r_line_create(void);
 RLine* r_line_copy(RLine* line);
-void	r_line_clear(RLine* line);
+void   r_line_clear(RLine* line);
 RPoint r_point_create(void);
 RPoint r_point_create2f(double x, double y);
 
@@ -77,7 +77,7 @@ void    r_line3_destroy(RLine3* line);
 void    r_line_destroy(RLine* line);
 
 void r_line3_add_point(RLine3*, RPoint3);
-void r_line3_add_point_3f(RLine3*, double x, double y, double z);
+void r_line3_add_point3f(RLine3*, double x, double y, double z);
 void r_line3_clear(RLine3* line);
 void r_line_move(RLine* src, double x, double y);
 

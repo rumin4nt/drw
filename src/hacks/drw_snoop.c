@@ -31,33 +31,31 @@ void drw_snoop_add_rline3(RLine3* line)
 	{
 		snoopdata = realloc(snoopdata, snoopnum * sizeof(RLine));
 	}
-	
+
 	double  rx, ry, rz;
 	RLine3* rl = r_line3_create();
 	for (int i = 0; i < line->num; i++)
 	{
 		RPoint3 p = line->data[i];
-		
+
 		double x = p.x;
 		double y = p.y;
 		double z = p.z;
-		
+
 		drw_point_3d_to_2d(x, y, z, &rx, &ry, &rz);
-		r_line3_add_point_3f(rl, rx, ry, rz);
+		r_line3_add_point3f(rl, rx, ry, rz);
 	}
-	
-	
-	if  (line->closed)
+
+	if (line->closed)
 	{
 		RPoint3 p = line->data[0];
-		double x = p.x;
-		double y = p.y;
-		double z = p.z;
+		double  x = p.x;
+		double  y = p.y;
+		double  z = p.z;
 		drw_point_3d_to_2d(x, y, z, &rx, &ry, &rz);
-		r_line3_add_point_3f(rl, rx, ry, rz);
-
+		r_line3_add_point3f(rl, rx, ry, rz);
 	}
-	
+
 	snoopdata[snoopnum - 1] = rl;
 }
 
@@ -84,18 +82,19 @@ void drw_snoop_add_rline(RLine* l)
 		double z = 0;
 
 		drw_point_3d_to_2d(x, y, z, &rx, &ry, &rz);
-		r_line3_add_point_3f(rl, rx, ry, rz);
-		}
-	
-	if(l->closed )
-	{	RPoint p = l->data[0];
-		
+		r_line3_add_point3f(rl, rx, ry, rz);
+	}
+
+	if (l->closed)
+	{
+		RPoint p = l->data[0];
+
 		double x = p.x;
 		double y = p.y;
 		double z = 0;
-		
+
 		drw_point_3d_to_2d(x, y, z, &rx, &ry, &rz);
-		r_line3_add_point_3f(rl, rx, ry, rz);
+		r_line3_add_point3f(rl, rx, ry, rz);
 	}
 	snoopdata[snoopnum - 1] = rl;
 }
@@ -125,7 +124,7 @@ void drw_snoop_set(bool val)
 
 void drw_snoop_dump(const char* path)
 {
-	
+
 #ifdef R4_ENABLE_CAIROSVG
 	RSVGRec* rec = r_svg_open(path);
 
