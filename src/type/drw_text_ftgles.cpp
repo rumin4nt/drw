@@ -2,14 +2,14 @@
 
 extern "C"
 {
-	#include <drw/drw.h>
+#include <drw/drw.h>
 }
 
 #include "../drw_config.h"
 
 #ifdef DRW_PLATFORM_IOS
 
-#include "drw_font_ftgles.h"
+#include "drw_text_ftgles.h"
 
 #include "FTGL/ftgles.h"
 
@@ -18,13 +18,13 @@ static FTTextureFont* tfont = 0;
 //static FTGLfont *font = NULL;
 //void* font = 0;
 
-void drw_font_init()
+void drw_text_init()
 {
 
 	//ummm guess we don't need this?
 }
 
-void drw_font_size(int sz, int garbage)
+void drw_text_size(int sz, int garbage)
 {
 	if (!font)
 	{
@@ -34,7 +34,7 @@ void drw_font_size(int sz, int garbage)
 	font->FaceSize(sz);
 }
 
-void drw_font_deinit()
+void drw_text_deinit()
 {
 	if (font)
 	{
@@ -43,7 +43,7 @@ void drw_font_deinit()
 	font = 0;
 }
 
-int drw_font_load(const char* path)
+int drw_text_ftgles_load(const char* path)
 {
 	printf("loading ftgles font %s.\n", path);
 	if (font)
@@ -87,25 +87,24 @@ int drw_font_load(const char* path)
 
 //extern "C"
 //{
-	void drw_font_draw(const char* str)
+void drw_text_draw(const char* str)
+{
+	if (!str)
 	{
-		if (!str)
-		{
-			printf("Tried to draw a NULL string\n");
-			return;
-		}
-		if (!font)
-		{
-			printf("Error, font not loaded!\n");
-			return;
-		}
-		
-		
-		/*
+		printf("Tried to draw a NULL string\n");
+		return;
+	}
+	if (!font)
+	{
+		printf("Error, font not loaded!\n");
+		return;
+	}
+
+	/*
 		 if ( drw_get_screenspace() )
 		 {
 		 ftglRenderFont(font, str, FTGL_RENDER_ALL);
-		 
+
 		 }else{
 		 drw_push();
 		 int w, h;
@@ -116,33 +115,34 @@ int drw_font_load(const char* path)
 		 double frac = 1.0 / mult;
 		 drw_scale_u(frac);
 		 ftglRenderFont(font, str, FTGL_RENDER_ALL);
-		 
+
 		 drw_pop();
 		 }
 		 */
-		if ( drw_get_screenspace() )
-		{
+	if (drw_get_screenspace())
+	{
 		font->Render(str);
-		}else{
-			
-			drw_push();
-			int w, h;
-			drw_query_framebuffer(&w, &h);
-			int sz = drw_text_get_size();
-			double dpi = drw_query_retina();
-			double mult = h;
-			double frac = 1.0 / mult;
-			drw_scale_u(frac);
-			font->Render(str);
-
-			drw_pop();
-			
-		}
-		//tfont->Render(str);
 	}
+	else
+	{
+
+		drw_push();
+		int w, h;
+		drw_query_framebuffer(&w, &h);
+		int    sz   = drw_text_get_size();
+		double dpi  = drw_query_retina();
+		double mult = h;
+		double frac = 1.0 / mult;
+		drw_scale_u(frac);
+		font->Render(str);
+
+		drw_pop();
+	}
+	//tfont->Render(str);
+}
 //}
 
-void drw_font_get_bbox(const char* str, int num, float* data)
+void drw_text_get_bbox(const char* str, int num, float* data)
 {
 	font->BBox(str, data[0], data[1], data[2], data[3], data[4], data[5]);
 

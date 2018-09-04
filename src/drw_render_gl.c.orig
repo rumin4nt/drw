@@ -40,12 +40,12 @@
 //#include <OpenGLES/ES1/gl.h>
 //#include <OpenGLES/ES3/gl.h>
 
-#include "type/drw_text_ftgles.h"
+#include "type/drw_font_ftgles.h"
 #include <glulookat/gluLookAt.h>
 #else
 #ifdef DRW_PLATFORM_DARWIN
 //#include <OpenGL/gl.h>
-//#include "type/drw_text_ftgl.h"
+//#include "type/drw_font_ftgl.h"
 //#undef DRW_PLATFORM_IOS
 #else
 
@@ -66,7 +66,7 @@
 #include <gl-matrix/gl-matrix.h>
 
 //#include <GL/glew.h>
-//#include "type/drw_text_ftgl.h"
+//#include "type/drw_font_ftgl.h"
 
 #include "hacks/drw_snoop.h"
 
@@ -102,26 +102,6 @@ static double framebuffer_width;
 static double framebuffer_height;
 
 static bool color_bypass = false;
-
-static RLine* _snoop_rline_from_f(float* data, int num)
-{
-	RLine* l = r_line_create();
-	for (int i = 0; i < num; i += 2)
-	{
-		r_line_add_point2f(l, data[i], data[i + 1]);
-	}
-	return l;
-}
-static RLine3* _snoop_rline3_from_f(float* data, int num)
-{
-	RLine3* l = r_line3_create();
-	for (int i = 0; i < num; i += 3)
-	{
-		r_line3_add_point3f(l, data[i], data[i + 1], data[i + 2]);
-	}
-	return l;
-}
-
 //#include <r4/r4.h>
 
 //  NOPE this belongs to a parent library.
@@ -233,9 +213,9 @@ int drw_get_gl_error()
 		printf("GL_INVALID_OPERATION\n");
 		break;
 
-		// case GL_INVALID_FRAMEBUFFER_OPERATION:
-		//    printf("invalid framebuffer\n");
-		//    break;
+	// case GL_INVALID_FRAMEBUFFER_OPERATION:
+	//    printf("invalid framebuffer\n");
+	//    break;
 
 	case GL_OUT_OF_MEMORY:
 		printf("out of memory\n");
@@ -304,7 +284,7 @@ void drw_init()
 	//{
 	// const char* path = r_resource_load("vs-junk","otf");
 	//  r_font_load(path);
-	//    drw_text_size(72 * app_settings.scale_retina);
+	//    drw_font_size(72 * app_settings.scale_retina);
 	// }
 
 	drw_get_gl_error();
@@ -366,14 +346,14 @@ void drw_text_load(const char* path)
 //{
 // const char* path = r_resource_load("vs-junk","otf");
 #ifdef DRW_ENABLE_FTGL
-	drw_text_ftgl_load(path);
+	drw_font_load(path);
 
 #endif
 #ifdef DRW_ENABLE_FTGLES
-	drw_text_ftgles_load(path);
+	drw_font_load(path);
 #endif
 
-	// drw_text_size(72);
+	// drw_font_size(72);
 	// }
 }
 
@@ -705,18 +685,9 @@ void drw_line_r(RLine* poly)
 
 void drw_line_3f(float ax, float ay, float az, float bx, float by, float bz)
 {
-
-	GLfloat renderLine[] = {ax, ay, az, bx, by, bz};
+	const GLfloat renderLine[] = {ax, ay, az, bx, by, bz};
 	glVertexPointer(3, GL_FLOAT, 0, renderLine);
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
-
-#ifdef DRW_ENABLE_SNOOP
-	if (drw_snoop_get())
-	{
-		RLine3* nl = _snoop_rline3_from_f(renderLine, 6);
-		drw_snoop_add_rline3(nl);
-	}
-#endif
 }
 
 void drw_line3_r(RLine3* poly)
@@ -894,10 +865,10 @@ void drw_transform_apply(WTransform t)
 
 void drw_transform_apply_inverse(WTransform t)
 {
-	drw_translate_wvec_inverse(t.position);
-	drw_translate_wvec_inverse(t.anchor);
 	drw_rotate_wvec_inverse(t.rotation);
 	drw_scale_wvec_inverse(t.scale);
+	drw_translate_wvec_inverse(t.anchor);
+	drw_translate_wvec_inverse(t.position);
 }
 
 void drw_transform_deapply(WTransform t)
@@ -989,7 +960,7 @@ int drw_text_get_size(void)
 void drw_text_set_size(int sz, int resolution)
 {
 #ifdef DRW_ENABLE_FTGL
-	drw_text_size(sz, resolution);
+	drw_font_size(sz, resolution);
 #endif
 	_text_size = sz;
 }
@@ -1005,7 +976,7 @@ void drw_text(const char* format, ...)
 
 #ifdef DRW_ENABLE_FTGL
 
-	drw_text_draw(buf);
+	drw_font_draw(buf);
 #endif
 }
 
@@ -1139,10 +1110,6 @@ void drw_wline_strokeonly(WLine* l)
 
 void drw_tess(void* tess)
 {
-	if (!tess)
-	{
-		printf("Can't draw a null tess\n");
-	}
 	drw_gpc_tristrip(tess);
 }
 
@@ -1501,6 +1468,16 @@ void drw_rect_rp(RPoint a, RPoint b)
 	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
 
+static RLine* _snoop_rline_from_f(float* data, int num)
+{
+	RLine* l = r_line_create();
+	for (int i = 0; i < num; i += 2)
+	{
+		r_line_add_point2f(l, data[i], data[i + 1]);
+	}
+	return l;
+}
+
 void drw_rect(float ax, float ay, float bx, float by)
 {
 	float arr[8];
@@ -1517,14 +1494,17 @@ void drw_rect(float ax, float ay, float bx, float by)
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
 	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
 
+	
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
 	{
-		RLine* line  = _snoop_rline_from_f(arr, 8);
+		RLine* line = _snoop_rline_from_f(arr,8);
 		line->closed = true;
 		drw_snoop_add_rline(line);
 	}
 #endif
+	
+	
 }
 
 void drw_point(void)
@@ -1678,7 +1658,7 @@ void drw_poly(WLine* line)
 	int			 i, j;
 	const unsigned long long renderLineSize = (line->num * 2);
 
-	GLfloat* arr = calloc(renderLineSize, sizeof(GLfloat));
+	GLfloat* arr = malloc(sizeof(GLfloat) * renderLineSize);
 
 	for (i = 0, j = 0; i < line->num; i++, j += 2)
 	{
@@ -1691,14 +1671,17 @@ void drw_poly(WLine* line)
 
 	glVertexPointer(2, GL_FLOAT, 0, arr);
 
-	if (fill)
+
+	if ( fill )
 	{
 		glDrawArrays(GL_TRIANGLE_FAN, 0, (int)line->num);
+
+	}else{
+		(line->closed) ?
+			glDrawArrays(GL_LINE_LOOP, 0, (int)line->num):
+			glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
 	}
-	else
-	{
-		(line->closed) ? glDrawArrays(GL_LINE_LOOP, 0, (int)line->num) : glDrawArrays(GL_LINE_STRIP, 0, (int)line->num);
-	}
+	
 
 	free(arr);
 }
@@ -2103,13 +2086,13 @@ void drw_setup_view_persp()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
-	// near, far);  glFrustum(left,right,bottom,top,near, far);
-	//#ifdef DRW_PLATFORM_WIN
+// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
+// near, far);  glFrustum(left,right,bottom,top,near, far);
+//#ifdef DRW_PLATFORM_WIN
 
-	//	printf("glu stuff doesn't link on windows >:[\n");
-	//#else
-	/*
+//	printf("glu stuff doesn't link on windows >:[\n");
+//#else
+/*
 	 _l = left;
 	_r = right;
 	_t = top;
@@ -2203,11 +2186,11 @@ void drw_setup_view_ortho()
 	}
 
 	drw_get_gl_error();
-	//#ifndef DRW_PLATFORM_IOS
+#ifndef DRW_PLATFORM_IOS
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	//#endif
+#endif
 }
 
 void drw_get_screencoords(double* l, double* r, double* t, double* b, double* n, double* f)

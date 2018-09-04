@@ -135,6 +135,7 @@ void drw_snoop_dump(const char* path)
 		printf("%lu points\n", l->num);
 		r_svg_add_rline3(rec, l);
 	}
+	
 	r_svg_close(rec);
 
 	free(snoopdata);

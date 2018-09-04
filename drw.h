@@ -27,31 +27,31 @@
 
 enum DRWAlignmentHorizontal
 {
-	DRW_FONT_ALIGN_H_LEFT,
-	DRW_FONT_ALIGN_H_CENTER,
-	DRW_FONT_ALIGN_H_RIGHT,
-	DRW_FONT_ALIGN_H_NONE
+	drw_text_ALIGN_H_LEFT,
+	drw_text_ALIGN_H_CENTER,
+	drw_text_ALIGN_H_RIGHT,
+	drw_text_ALIGN_H_NONE
 };
 
 enum DRWAlignmentVertical
 {
-	DRW_FONT_ALIGN_V_TOP,
-	DRW_FONT_ALIGN_V_CENTER,
-	DRW_FONT_ALIGN_V_BOTTOM,
-	DRW_FONT_ALIGN_V_NONE
+	drw_text_ALIGN_V_TOP,
+	drw_text_ALIGN_V_CENTER,
+	drw_text_ALIGN_V_BOTTOM,
+	drw_text_ALIGN_V_NONE
 };
 
 #ifdef DRW_PLATFORM_IOS
 //#error ios
-#include "src/type/drw_font_ftgles.h"
+#include "src/type/drw_text_ftgles.h"
 #else
 //#error macos
-#include "src/type/drw_font_ftgl.h"
+#include "src/type/drw_text_ftgl.h"
 #endif
 
-#include "src/type/drw_font_asteroids.h"
-#include "src/type/drw_font_hershey.h"
-#include "src/type/drw_font_hpvec.h"
+#include "src/type/drw_text_asteroids.h"
+#include "src/type/drw_text_hershey.h"
+#include "src/type/drw_text_hpvec.h"
 
 //#include "src/d_glus.h"
 #include "src/drw_point.h"
@@ -85,10 +85,10 @@ static inline char* drw_get_version_string_header(void)
 	return buf;
 }
 
-int drw_lib_init(void);
-int drw_lib_deinit(void);
-double drw_font_size_real_get(void);
-void drw_font_size_set(int sz);
-int drw_font_size_get(void);
+int    drw_lib_init(void);
+int    drw_lib_deinit(void);
+double drw_text_size_real_get(void);
+void   drw_text_size_set(int sz);
+int    drw_text_size_get(void);
 
 #endif /* drw_h */

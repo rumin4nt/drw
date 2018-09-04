@@ -5,11 +5,10 @@
 
 static int font_size = 12;
 
-
 int drw_check_version_match(const char* header_generated_version)
 {
-	char* v = drw_get_version_string();
-	bool res = (0 == strcmp(v, header_generated_version));
+	char* v   = drw_get_version_string();
+	bool  res = (0 == strcmp(v, header_generated_version));
 	free(v);
 	return res;
 }
@@ -28,23 +27,23 @@ void drw_print_version(void)
 	       DRW_VERSION_PATCH);
 }
 
-void drw_font_size_set(int sz)
+void drw_text_size_set(int sz)
 {
 	printf("Unified font size %d\n", sz);
 	font_size = sz;
 }
 
-double drw_font_size_real_get(void)
+double drw_text_size_real_get(void)
 {
 	int w, h;
 	drw_query_framebuffer(&w, &h);
 
-	double sz = drw_font_size_get();
-	double sc = 1. / (h/sz*8);
+	double sz = drw_text_size_get();
+	double sc = 1. / (h / sz * 8);
 	return sc;
 }
 
-int drw_font_size_get(void)
+int drw_text_size_get(void)
 {
 	return font_size;
 }
@@ -54,8 +53,8 @@ int drw_lib_init(void)
 	//	dummy method, gonna call the font functions to find out of dead code stripping
 	//	is the culprit for these link errors, or some other c++ fuckery?
 
-	drw_font_load("null_path");
-	drw_font_draw("hello");
+	drw_text_load("null_path");
+	drw_text_draw("hello");
 	return 0;
 }
 

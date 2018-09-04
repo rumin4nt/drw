@@ -1,6 +1,6 @@
 
 
-#include "drw_font_ftgl.h"
+#include "drw_text_ftgl.h"
 
 //#include <r4/r4.h>
 
@@ -20,17 +20,16 @@
 
 // extern AppSettings app_settings;
 
-
 FTGLfont* font		= NULL;
 int       justification = 0;
 
-void drw_font_init()
+void drw_text_init()
 {
 
 	// ummm guess we don't need this?
 }
 
-void drw_font_deinit()
+void drw_text_deinit()
 {
 	if (font)
 	{
@@ -39,15 +38,15 @@ void drw_font_deinit()
 	font = NULL;
 }
 
-void drw_font_size(int sz, int resolution)
+void drw_text_size(int sz, int resolution)
 {
 	//todo - eliminate this from public and force all font size through bottleneck
 	//	interface in drw.c
 	//
 	//	for now we just call it on behalf of the user (me)
-	
-	drw_font_size_set(sz);
-	
+
+	drw_text_size_set(sz);
+
 	if (!font)
 	{
 		return;
@@ -59,16 +58,16 @@ void drw_font_size(int sz, int resolution)
 		sz = 18;
 	}
 	// printf("Setting font size: %d %d\n", sz, resolution);
-	
+
 	ftglSetFontFaceSize(font, sz, resolution);
 	// int res = ftglSetFontFaceSize(font, sz, resolution);
 	// printf("res was %d\n", res );
 }
 
-int drw_font_load(const char* path)
+int drw_text_ftgl_load(const char* path)
 {
 	assert(path);
-	
+
 	// if ( font )
 	//{
 	//	ftglDestroyFont(font);
@@ -79,15 +78,15 @@ int drw_font_load(const char* path)
 	if (!font)
 		return -1;
 
-	// drw_font_size(R_UI_FONT_SIZE * app_settings.scale_retina );
-	
-	drw_font_size(D_FONT_SIZE, 144);
+	// drw_text_size(R_UI_FONT_SIZE * app_settings.scale_retina );
+
+	drw_text_size(D_FONT_SIZE, 144);
 	return 0;
 }
 
-void drw_font_draw(const char* str)
+void drw_text_draw(const char* str)
 {
-	
+
 	if (!font)
 	{
 		//	logging belongs to the application space
@@ -97,19 +96,20 @@ void drw_font_draw(const char* str)
 	}
 	// if ( !font )
 	//{
-	//	drw_font_load("data/ttf/terminus.ttf");
+	//	drw_text_load("data/ttf/terminus.ttf");
 	//}
-	
-	if ( drw_get_screenspace() )
+
+	if (drw_get_screenspace())
 	{
 		ftglRenderFont(font, str, FTGL_RENDER_ALL);
-
-	}else{
+	}
+	else
+	{
 		drw_push();
 		int w, h;
 		drw_query_framebuffer(&w, &h);
-		int sz = drw_text_get_size();
-		double dpi = drw_query_retina();
+		int    sz   = drw_text_get_size();
+		double dpi  = drw_query_retina();
 		double mult = h;
 		double frac = 1.0 / mult;
 		drw_scale_u(frac);
@@ -117,21 +117,20 @@ void drw_font_draw(const char* str)
 
 		drw_pop();
 	}
-	
-	
+
 	// printf( "%d\n", ftglGetFontFaceSize(font) );
 }
 
-void drw_font_get_bbox(const char* str, int num, float* data)
+void drw_text_get_bbox(const char* str, int num, float* data)
 {
 	ftglGetFontBBox(font, str, num, data);
-};
+}
 
-double drw_font_get_width(const char* str)
+double drw_text_get_width(const char* str)
 {
 	int  count = 0;
 	bool done  = false;
-	
+
 	// could probably ditch done here and merely do
 	// while() etc
 	while (!done)
@@ -150,7 +149,7 @@ double drw_font_get_width(const char* str)
 	{
 		bounds[j] = 0;
 	}
-	drw_font_get_bbox(str, count, bounds);
+	drw_text_get_bbox(str, count, bounds);
 	double v = bounds[3] - bounds[0];
 	free(bounds);
 	return v;
