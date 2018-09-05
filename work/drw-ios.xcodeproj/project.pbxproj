@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5703D73D20ACBA55007E1800 /* drw_font_asteroids.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703D73320ACBA55007E1800 /* drw_font_asteroids.c */; };
-		5703D73E20ACBA55007E1800 /* drw_font_hpvec.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703D73420ACBA55007E1800 /* drw_font_hpvec.c */; };
-		5703D73F20ACBA55007E1800 /* drw_font_hershey.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703D73620ACBA55007E1800 /* drw_font_hershey.c */; };
-		5703D74120ACBA55007E1800 /* drw_font_ftgles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5703D73A20ACBA55007E1800 /* drw_font_ftgles.cpp */; };
 		5703DBE820ACBF98007E1800 /* drw_ext_gpc.c in Sources */ = {isa = PBXBuildFile; fileRef = 5703DBE720ACBF98007E1800 /* drw_ext_gpc.c */; };
+		5706F5F421407ABD00E56506 /* drw_text_ftgl.c in Sources */ = {isa = PBXBuildFile; fileRef = 5706F5EB21407ABC00E56506 /* drw_text_ftgl.c */; };
+		5706F5F521407ABD00E56506 /* drw_text_hershey.c in Sources */ = {isa = PBXBuildFile; fileRef = 5706F5ED21407ABC00E56506 /* drw_text_hershey.c */; };
+		5706F5F621407ABD00E56506 /* drw_text_asteroids.c in Sources */ = {isa = PBXBuildFile; fileRef = 5706F5EF21407ABC00E56506 /* drw_text_asteroids.c */; };
+		5706F5F721407ABD00E56506 /* drw_text_hpvec.c in Sources */ = {isa = PBXBuildFile; fileRef = 5706F5F121407ABC00E56506 /* drw_text_hpvec.c */; };
+		5706F5F821407ABD00E56506 /* drw_text_ftgles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5706F5F221407ABC00E56506 /* drw_text_ftgles.cpp */; };
 		575B4E9720C9E95E00E875FE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 575B4E9620C9E95E00E875FE /* OpenGLES.framework */; };
 		577DD1FE20D350B100623919 /* libFTGLES.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 577DD1FD20D350B100623919 /* libFTGLES.a */; };
 		577DD22520D3577800623919 /* drw_render_gl.c in Sources */ = {isa = PBXBuildFile; fileRef = 577DD22420D3577800623919 /* drw_render_gl.c */; };
@@ -36,16 +37,18 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5703D73320ACBA55007E1800 /* drw_font_asteroids.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_font_asteroids.c; sourceTree = "<group>"; };
-		5703D73420ACBA55007E1800 /* drw_font_hpvec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_font_hpvec.c; sourceTree = "<group>"; };
-		5703D73520ACBA55007E1800 /* drw_font_ftgles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_font_ftgles.h; sourceTree = "<group>"; };
-		5703D73620ACBA55007E1800 /* drw_font_hershey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_font_hershey.c; sourceTree = "<group>"; };
-		5703D73820ACBA55007E1800 /* drw_font_asteroids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_font_asteroids.h; sourceTree = "<group>"; };
-		5703D73920ACBA55007E1800 /* drw_font_hpvec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_font_hpvec.h; sourceTree = "<group>"; };
-		5703D73A20ACBA55007E1800 /* drw_font_ftgles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = drw_font_ftgles.cpp; sourceTree = "<group>"; };
-		5703D73C20ACBA55007E1800 /* drw_font_hershey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_font_hershey.h; sourceTree = "<group>"; };
 		5703DBE620ACBF98007E1800 /* drw_ext_gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_ext_gpc.h; sourceTree = "<group>"; };
 		5703DBE720ACBF98007E1800 /* drw_ext_gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_ext_gpc.c; sourceTree = "<group>"; };
+		5706F5EA21407ABC00E56506 /* drw_text_hershey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_text_hershey.h; sourceTree = "<group>"; };
+		5706F5EB21407ABC00E56506 /* drw_text_ftgl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_text_ftgl.c; sourceTree = "<group>"; };
+		5706F5EC21407ABC00E56506 /* drw_text_asteroids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_text_asteroids.h; sourceTree = "<group>"; };
+		5706F5ED21407ABC00E56506 /* drw_text_hershey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_text_hershey.c; sourceTree = "<group>"; };
+		5706F5EE21407ABC00E56506 /* drw_text_hpvec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_text_hpvec.h; sourceTree = "<group>"; };
+		5706F5EF21407ABC00E56506 /* drw_text_asteroids.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_text_asteroids.c; sourceTree = "<group>"; };
+		5706F5F021407ABC00E56506 /* drw_text_ftgles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_text_ftgles.h; sourceTree = "<group>"; };
+		5706F5F121407ABC00E56506 /* drw_text_hpvec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_text_hpvec.c; sourceTree = "<group>"; };
+		5706F5F221407ABC00E56506 /* drw_text_ftgles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = drw_text_ftgles.cpp; sourceTree = "<group>"; };
+		5706F5F321407ABC00E56506 /* drw_text_ftgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_text_ftgl.h; sourceTree = "<group>"; };
 		575B4E9220C9E69900E875FE /* drw_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_config.h; sourceTree = "<group>"; };
 		575B4E9320C9E69900E875FE /* drw_dummy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_dummy.h; sourceTree = "<group>"; };
 		575B4E9420C9E69900E875FE /* drw_platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_platform.h; sourceTree = "<group>"; };
@@ -84,14 +87,16 @@
 		5703D73220ACBA55007E1800 /* type */ = {
 			isa = PBXGroup;
 			children = (
-				5703D73320ACBA55007E1800 /* drw_font_asteroids.c */,
-				5703D73820ACBA55007E1800 /* drw_font_asteroids.h */,
-				5703D73A20ACBA55007E1800 /* drw_font_ftgles.cpp */,
-				5703D73520ACBA55007E1800 /* drw_font_ftgles.h */,
-				5703D73620ACBA55007E1800 /* drw_font_hershey.c */,
-				5703D73C20ACBA55007E1800 /* drw_font_hershey.h */,
-				5703D73420ACBA55007E1800 /* drw_font_hpvec.c */,
-				5703D73920ACBA55007E1800 /* drw_font_hpvec.h */,
+				5706F5EF21407ABC00E56506 /* drw_text_asteroids.c */,
+				5706F5EC21407ABC00E56506 /* drw_text_asteroids.h */,
+				5706F5EB21407ABC00E56506 /* drw_text_ftgl.c */,
+				5706F5F321407ABC00E56506 /* drw_text_ftgl.h */,
+				5706F5F221407ABC00E56506 /* drw_text_ftgles.cpp */,
+				5706F5F021407ABC00E56506 /* drw_text_ftgles.h */,
+				5706F5ED21407ABC00E56506 /* drw_text_hershey.c */,
+				5706F5EA21407ABC00E56506 /* drw_text_hershey.h */,
+				5706F5F121407ABC00E56506 /* drw_text_hpvec.c */,
+				5706F5EE21407ABC00E56506 /* drw_text_hpvec.h */,
 			);
 			path = type;
 			sourceTree = "<group>";
@@ -224,18 +229,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5706F5F621407ABD00E56506 /* drw_text_asteroids.c in Sources */,
 				57B6B0C720CDBB14009B3BFB /* drw.c in Sources */,
 				57BDF7C120AB99E0004C154E /* drw_point.c in Sources */,
-				5703D73D20ACBA55007E1800 /* drw_font_asteroids.c in Sources */,
 				57967B6820D186AB00003F66 /* drw_export.c in Sources */,
-				5703D74120ACBA55007E1800 /* drw_font_ftgles.cpp in Sources */,
 				57BDF7C720AB99E0004C154E /* drw_render.c in Sources */,
+				5706F5F721407ABD00E56506 /* drw_text_hpvec.c in Sources */,
 				577DD22520D3577800623919 /* drw_render_gl.c in Sources */,
-				5703D73E20ACBA55007E1800 /* drw_font_hpvec.c in Sources */,
+				5706F5F521407ABD00E56506 /* drw_text_hershey.c in Sources */,
 				57BDF7C920AB99E0004C154E /* drw_primitives.c in Sources */,
-				5703D73F20ACBA55007E1800 /* drw_font_hershey.c in Sources */,
 				57BDF7C620AB99E0004C154E /* drw_wobject_ops.c in Sources */,
+				5706F5F421407ABD00E56506 /* drw_text_ftgl.c in Sources */,
 				5703DBE820ACBF98007E1800 /* drw_ext_gpc.c in Sources */,
+				5706F5F821407ABD00E56506 /* drw_text_ftgles.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

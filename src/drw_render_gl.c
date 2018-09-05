@@ -365,13 +365,20 @@ void drw_text_load(const char* path)
 // 0if ( path != NULL )
 //{
 // const char* path = r_resource_load("vs-junk","otf");
+#ifdef RPLATFORM_IOS
+//#error hi
+	drw_text_ftgles_load(path);
+#else
+
 #ifdef DRW_ENABLE_FTGL
 	drw_text_ftgl_load(path);
 
 #endif
-#ifdef DRW_ENABLE_FTGLES
-	drw_text_ftgles_load(path);
 #endif
+	
+//#ifdef DRW_ENABLE_FTGLES
+//	drw_text_ftgles_load(path);
+//#endif
 
 	// drw_text_size(72);
 	// }

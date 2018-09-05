@@ -127,12 +127,17 @@ void drw_snoop_dump(const char* path)
 
 #ifdef R4_ENABLE_CAIROSVG
 	RSVGRec* rec = r_svg_open(path);
-
+	
+	double dpi = drw_query_retina();
+	printf("are we scallllling our artwork by our stuuuupid high DPI display? %f\n", dpi);
+	double sc = 1.0 / dpi;
+	
 	printf("Dumping snoop data! %d lines\n", snoopnum);
 	for (int i = 0; i < snoopnum; i++)
 	{
 		RLine3* l = snoopdata[i];
-		printf("%lu points\n", l->num);
+		r_line3_scale(l, sc, sc, 1);
+		//printf("%lu points\n", l->num);
 		r_svg_add_rline3(rec, l);
 	}
 	

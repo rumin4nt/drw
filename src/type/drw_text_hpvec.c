@@ -19,8 +19,8 @@
 
 #include <string.h>
 
-static int alignment_h = drw_text_ALIGN_H_CENTER;
-static int alignment_v = drw_text_ALIGN_V_CENTER;
+static int alignment_h = DRW_TEXT_ALIGN_H_CENTER;
+static int alignment_v = DRW_TEXT_ALIGN_V_CENTER;
 
 void drw_text_hpvec_set_alignment(int h, int v)
 {
@@ -69,14 +69,14 @@ void drw_text_hpvec_draw(const char* text)
 
 	switch (alignment_h)
 	{
-	case drw_text_ALIGN_H_LEFT:
+	case DRW_TEXT_ALIGN_H_LEFT:
 		break;
-	case drw_text_ALIGN_H_CENTER:
+	case DRW_TEXT_ALIGN_H_CENTER:
 		offx += HPVEC_FONT_SIZE * len * -.5;
 		if (len % 2 == 0)
 			offx += HPVEC_FONT_SIZE * .25 * .5; //.3333333333;
 		break;
-	case drw_text_ALIGN_H_RIGHT:
+	case DRW_TEXT_ALIGN_H_RIGHT:
 		offx += HPVEC_FONT_SIZE * len * -1;
 
 		break;
@@ -86,15 +86,15 @@ void drw_text_hpvec_draw(const char* text)
 
 	switch (alignment_v)
 	{
-	case drw_text_ALIGN_V_TOP:
+	case DRW_TEXT_ALIGN_V_TOP:
 		offy = -HPVEC_FONT_SIZE;
 		break;
-	case drw_text_ALIGN_V_CENTER:
+	case DRW_TEXT_ALIGN_V_CENTER:
 		offy = HPVEC_FONT_SIZE * -.5;
 		offy += HPVEC_FONT_SIZE * .25 * -.5 * .5; //.3333333333;
 
 		break;
-	case drw_text_ALIGN_V_BOTTOM:
+	case DRW_TEXT_ALIGN_V_BOTTOM:
 		break;
 
 	default:
@@ -176,14 +176,14 @@ void drw_text_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 
 	switch (alignment_h)
 	{
-	case drw_text_ALIGN_H_LEFT:
+	case DRW_TEXT_ALIGN_H_LEFT:
 		break;
-	case drw_text_ALIGN_H_CENTER:
+	case DRW_TEXT_ALIGN_H_CENTER:
 		offx += HPVEC_FONT_SIZE * len * -.5;
 		if (len % 2 == 0)
 			offx += HPVEC_FONT_SIZE * .25 * .5; //.3333333333;
 		break;
-	case drw_text_ALIGN_H_RIGHT:
+	case DRW_TEXT_ALIGN_H_RIGHT:
 		offx += HPVEC_FONT_SIZE * len * -1;
 
 		break;
@@ -193,15 +193,15 @@ void drw_text_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 
 	switch (alignment_v)
 	{
-	case drw_text_ALIGN_V_TOP:
+	case DRW_TEXT_ALIGN_V_TOP:
 		offy = -HPVEC_FONT_SIZE;
 		break;
-	case drw_text_ALIGN_V_CENTER:
+	case DRW_TEXT_ALIGN_V_CENTER:
 		offy = HPVEC_FONT_SIZE * -.5;
 		offy += HPVEC_FONT_SIZE * .25 * -.5 * .5; //.3333333333;
 
 		break;
-	case drw_text_ALIGN_V_BOTTOM:
+	case DRW_TEXT_ALIGN_V_BOTTOM:
 		break;
 
 	default:

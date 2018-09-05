@@ -27,18 +27,18 @@
 
 enum DRWAlignmentHorizontal
 {
-	drw_text_ALIGN_H_LEFT,
-	drw_text_ALIGN_H_CENTER,
-	drw_text_ALIGN_H_RIGHT,
-	drw_text_ALIGN_H_NONE
+	DRW_TEXT_ALIGN_H_LEFT,
+	DRW_TEXT_ALIGN_H_CENTER,
+	DRW_TEXT_ALIGN_H_RIGHT,
+	DRW_TEXT_ALIGN_H_NONE
 };
 
 enum DRWAlignmentVertical
 {
-	drw_text_ALIGN_V_TOP,
-	drw_text_ALIGN_V_CENTER,
-	drw_text_ALIGN_V_BOTTOM,
-	drw_text_ALIGN_V_NONE
+	DRW_TEXT_ALIGN_V_TOP,
+	DRW_TEXT_ALIGN_V_CENTER,
+	DRW_TEXT_ALIGN_V_BOTTOM,
+	DRW_TEXT_ALIGN_V_NONE
 };
 
 #ifdef DRW_PLATFORM_IOS
