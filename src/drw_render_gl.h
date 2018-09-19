@@ -20,6 +20,7 @@
 #ifdef DRW_BUILD_STANDALONE
 #include "drw_dummy.h"
 #else
+
 #include <grdn/grdn.h>
 #include <r4/src/core/r_color.h>
 
