@@ -365,7 +365,7 @@ void drw_text_load(const char* path)
 // 0if ( path != NULL )
 //{
 // const char* path = r_resource_load("vs-junk","otf");
-#ifdef RPLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
 //#error hi
 	drw_text_ftgles_load(path);
 #else
@@ -730,6 +730,7 @@ void drw_line3_r(RLine3* poly)
 {
 
 #ifdef DRW_ENABLE_SNOOP
+
 	if (drw_snoop_get())
 	{
 		//RLine* nl = drw_snoop_rline_from_f(arr, 8);
