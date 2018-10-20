@@ -63,7 +63,7 @@
 //#include <GLFW/glfw3.h>
 //#include <GL/glut.h>
 
-#include <gl-matrix/gl-matrix.h>
+#include <deps/gl-matrix/gl-matrix.h>
 
 //#include <GL/glew.h>
 //#include "type/drw_text_ftgl.h"

@@ -482,6 +482,7 @@
 					../contrib/deps,
 					"$(r4_root)/contrib/deps",
 					"$(r4_root)/libs",
+					../contrib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -508,6 +509,7 @@
 					../contrib/deps,
 					"$(r4_root)/contrib/deps",
 					"$(r4_root)/libs",
+					../contrib,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";

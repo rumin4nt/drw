@@ -33,7 +33,7 @@
 //#include <grdn/grdn.h>
 //#include <r4/r4.h>
 
-//#include <gl-matrix/gl-matrix.h>
+//#include <deps/gl-matrix/gl-matrix.h>
 
 #ifdef DRW_ENABLE_SNOOP
 
