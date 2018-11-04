@@ -42,6 +42,14 @@
 
 enum
 {
+	DRW_TEXT_PROVIDER_FTGL,
+	DRW_TEXT_PROVIDER_HPVEC,
+	DRW_TEXT_PROVIDER_ASTEROIDS,
+	DRW_TEXT_PROVIDER_NONE
+};
+
+enum
+{
 	DRW_BLEND_MODE_NONE,
 	DRW_BLEND_MODE_NORMAL,
 	DRW_BLEND_MODE_ADD,
@@ -201,6 +209,7 @@ void drw_tristrip_3d(double* arr, int num, bool closed);
 void drw_triangle_strip(WLine*);
 
 //	fancy
+void drw_text_set_provider(unsigned int type);
 void drw_text(const char* text, ...);
 void drw_text_set_size(int, int);
 int  drw_text_get_size(void);

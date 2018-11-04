@@ -82,9 +82,11 @@
 
 //  these things used to be part of the app, have to talk now from across
 // the sea
+
 static bool _ortho;
 static bool _screenspace;
 static int  _text_size;
+static unsigned int _text_provider_type = 0;
 
 static double _left       = -1;
 static double _right      = -1;
@@ -359,6 +361,15 @@ void drw_set_line_width(float v)
 	drw_get_gl_error();
 }
 
+void drw_text_set_provider(unsigned int type)
+{
+	if ( type >= DRW_TEXT_PROVIDER_NONE )
+	{
+		printf("Invalid ask in %s\n", __func__);
+		return;
+	}
+	_text_provider_type = type;
+}
 void drw_text_load(const char* path)
 {
 
