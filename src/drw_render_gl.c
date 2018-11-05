@@ -370,6 +370,7 @@ void drw_text_set_provider(unsigned int type)
 	}
 	_text_provider_type = type;
 }
+
 void drw_text_load(const char* path)
 {
 
@@ -1015,6 +1016,9 @@ void drw_text_set_size(int sz, int resolution)
 
 void drw_text(const char* format, ...)
 {
+	if ( _text_provider_type == DRW_TEXT_PROVIDER_NONE)
+		return;
+	
 	char buf[TEXT_MAX];
 	sprintf(buf, "%s", format);
 	va_list args;
@@ -1022,10 +1026,28 @@ void drw_text(const char* format, ...)
 	vsprintf(buf, format, args);
 	va_end(args);
 
+	switch (_text_provider_type) {
+		//case DRW_TEXT_PROVIDER_NONE:
+		//	return;
+		//	break; //haha
+		case DRW_TEXT_PROVIDER_HPVEC:
+			drw_text_hpvec_draw(buf);
+			break;
+		case DRW_TEXT_PROVIDER_FTGL:
+		{
 #ifdef DRW_ENABLE_FTGL
-
-	drw_text_draw(buf);
+			drw_text_draw(buf);
 #endif
+			break;
+		}
+		default:
+			break;
+	}
+
+//#ifdef DRW_ENABLE_FTGL
+//	drw_text_draw(buf);
+//
+//#endif
 }
 
 /*
