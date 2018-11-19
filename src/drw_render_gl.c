@@ -83,9 +83,9 @@
 //  these things used to be part of the app, have to talk now from across
 // the sea
 
-static bool _ortho;
-static bool _screenspace;
-static int  _text_size;
+static bool	 _ortho;
+static bool	 _screenspace;
+static int	  _text_size;
 static unsigned int _text_provider_type = 0;
 
 static double _left       = -1;
@@ -156,6 +156,9 @@ static double _retina_scale = 1;
 static bool fill      = false;
 static bool prev_fill = false;
 
+static double fg_r, fg_g, fg_b, fg_a;
+static double bg_r, bg_g, bg_b, bg_a;
+
 static float  _r, _g, _b, _a;
 static WColor prev;
 static float  prev_alpha;
@@ -223,31 +226,31 @@ int drw_get_gl_error()
 		break;
 
 	case GL_INVALID_ENUM:
-		printf("GL_INVALID_ENUM\n");
+		drw_log("GL_INVALID_ENUM");
 		break;
 
 	case GL_INVALID_VALUE:
-		printf("GL_INVALID_VALUE\n");
+		drw_log("GL_INVALID_VALUE");
 
 		break;
 
 	case GL_INVALID_OPERATION:
-		printf("GL_INVALID_OPERATION\n");
+		drw_log("GL_INVALID_OPERATION");
 		break;
 
-		// case GL_INVALID_FRAMEBUFFER_OPERATION:
-		//    printf("invalid framebuffer\n");
-		//    break;
+	// case GL_INVALID_FRAMEBUFFER_OPERATION:
+	//    printf("invalid framebuffer\n");
+	//    break;
 
 	case GL_OUT_OF_MEMORY:
-		printf("out of memory\n");
+		drw_log("out of memory");
 		break;
 
 	case GL_STACK_UNDERFLOW:
-		printf("underflow\n");
+		drw_log("underflow");
 		break;
 	case GL_STACK_OVERFLOW:
-		printf("overflow\n");
+		drw_log("overflow");
 		break;
 
 	default:
@@ -263,6 +266,9 @@ void drw_init()
 	{
 		circle_defs[i] = NULL;
 	}
+
+	drw_text_set_provider(DRW_TEXT_PROVIDER_HPVEC);
+
 	// glBlendEquation =
 	// (PFNGLBLENDEQUATIONPROC)wglGetProcAddress("glBlendEquation");
 
@@ -363,9 +369,9 @@ void drw_set_line_width(float v)
 
 void drw_text_set_provider(unsigned int type)
 {
-	if ( type >= DRW_TEXT_PROVIDER_NONE )
+	if (type >= DRW_TEXT_PROVIDER_NONE)
 	{
-		printf("Invalid ask in %s\n", __func__);
+		drw_log("Invalid ask in %s", __func__);
 		return;
 	}
 	_text_provider_type = type;
@@ -378,7 +384,7 @@ void drw_text_load(const char* path)
 //{
 // const char* path = r_resource_load("vs-junk","otf");
 #ifdef DRW_PLATFORM_IOS
-//#error hi
+	//#error hi
 	drw_text_ftgles_load(path);
 #else
 
@@ -387,10 +393,10 @@ void drw_text_load(const char* path)
 
 #endif
 #endif
-	
-//#ifdef DRW_ENABLE_FTGLES
-//	drw_text_ftgles_load(path);
-//#endif
+
+	//#ifdef DRW_ENABLE_FTGLES
+	//	drw_text_ftgles_load(path);
+	//#endif
 
 	// drw_text_size(72);
 	// }
@@ -434,11 +440,11 @@ void drw_blend_set(int v)
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 		break;
 	default:
-		printf("Unhandled blend mode!\n");
+		drw_log("Unhandled blend mode!");
 		break;
 	}
 #else
-	printf("Blend modes not currently implemented in windows.\n");
+	drw_log("Blend modes not currently implemented in windows.");
 #endif
 }
 
@@ -451,6 +457,16 @@ void drw_blend_pop(void)
 {
 	drw_blend_set(_prev_blend);
 	_blend = _prev_blend;
+}
+
+void drw_depth_enable(void)
+{
+	glEnable(GL_DEPTH);
+}
+
+void drw_depth_disable(void)
+{
+	glDisable(GL_DEPTH);
 }
 
 void drw_clear()
@@ -502,6 +518,32 @@ void _set_internal_colors(float r, float g, float b, float a)
 void drw_set_colorbypass(bool v)
 {
 	color_bypass = v;
+}
+
+void drw_color_bg(void)
+{
+	drw_color4f(bg_r, bg_g, bg_b, bg_a);
+}
+
+void drw_color_fg(void)
+{
+	drw_color4f(fg_r, fg_g, fg_b, fg_a);
+}
+
+void drw_color_bg_set(double r, double g, double b, double a)
+{
+	bg_r = r;
+	bg_g = g;
+	bg_b = b;
+	bg_a = a;
+}
+
+void drw_color_fg_set(double r, double g, double b, double a)
+{
+	fg_r = r;
+	fg_g = g;
+	fg_b = b;
+	fg_a = a;
 }
 
 void drw_color(double r, double g, double b, double a)
@@ -607,7 +649,7 @@ void drw_color_pop()
 void drw_alpha(float a)
 {
 	if (a < 0 || a > 1)
-		printf("INvalid value passed to alpha!\n");
+		drw_log("INvalid value passed to alpha!");
 	prev_alpha = a;
 	glColor4f(_r, _g, _b, a);
 }
@@ -646,7 +688,7 @@ void drw_push()
 	matrix_stack_count++;
 	if (matrix_stack_count > MATRIX_STACK_MAX)
 	{
-		printf("Matrix overflowed! %d\n", matrix_stack_count);
+		drw_log("Matrix overflowed! %d", matrix_stack_count);
 	}
 	glPushMatrix();
 }
@@ -656,7 +698,7 @@ void drw_pop()
 	matrix_stack_count--;
 	if (matrix_stack_count < 0)
 	{
-		printf("Matrix underflowed!\n");
+		drw_log("Matrix underflowed!");
 	}
 	glPopMatrix();
 }
@@ -876,6 +918,11 @@ void drw_translate2f(float x, float y)
 	glTranslatef(x, y, 0);
 }
 
+void drw_translated(double x, double y, double z)
+{
+	glTranslated(x,y,z);
+}
+
 void drw_translate(float x, float y, float z)
 {
 	glTranslatef(x, y, z);
@@ -1016,9 +1063,9 @@ void drw_text_set_size(int sz, int resolution)
 
 void drw_text(const char* format, ...)
 {
-	if ( _text_provider_type == DRW_TEXT_PROVIDER_NONE)
+	if (_text_provider_type == DRW_TEXT_PROVIDER_NONE)
 		return;
-	
+
 	char buf[TEXT_MAX];
 	sprintf(buf, "%s", format);
 	va_list args;
@@ -1026,28 +1073,33 @@ void drw_text(const char* format, ...)
 	vsprintf(buf, format, args);
 	va_end(args);
 
-	switch (_text_provider_type) {
-		//case DRW_TEXT_PROVIDER_NONE:
-		//	return;
-		//	break; //haha
-		case DRW_TEXT_PROVIDER_HPVEC:
-			drw_text_hpvec_draw(buf);
-			break;
-		case DRW_TEXT_PROVIDER_FTGL:
-		{
+	switch (_text_provider_type)
+	{
+	//case DRW_TEXT_PROVIDER_NONE:
+	//	return;
+	//	break; //haha
+	case DRW_TEXT_PROVIDER_HPVEC:
+		drw_text_hpvec_draw(buf);
+		break;
+	case DRW_TEXT_PROVIDER_ASTEROIDS:
+		drw_text_asteroids(buf);
+		break;
+
+	case DRW_TEXT_PROVIDER_FTGL:
+	{
 #ifdef DRW_ENABLE_FTGL
-			drw_text_draw(buf);
+		drw_text_draw(buf);
 #endif
-			break;
-		}
-		default:
-			break;
+		break;
+	}
+	default:
+		break;
 	}
 
-//#ifdef DRW_ENABLE_FTGL
-//	drw_text_draw(buf);
-//
-//#endif
+	//#ifdef DRW_ENABLE_FTGL
+	//	drw_text_draw(buf);
+	//
+	//#endif
 }
 
 /*
@@ -1077,7 +1129,7 @@ void drw_robject(RObject* obj)
 		RLine* l = obj->lines[i];
 		if (!l)
 		{
-			printf("ack!\n");
+			drw_log("ack!");
 			return;
 		}
 
@@ -1100,7 +1152,7 @@ void drw_wobject_normal(WObject* obj)
 		WLine* l = obj->lines[i];
 		if (!l)
 		{
-			printf("ack!\n");
+			drw_log("ack!");
 			return;
 		}
 
@@ -1117,12 +1169,12 @@ void drw_wobject_naive(WObject* obj)
 
 	if (!obj)
 	{
-		printf("Error, tried to render a null obj!\n");
+		drw_log("Error, tried to render a null obj!");
 		return;
 	}
 	if (!obj->lines)
 	{
-		printf("no lines either!?\n");
+		drw_log("no lines either!?");
 		return;
 	}
 
@@ -1133,7 +1185,7 @@ void drw_wobject_naive(WObject* obj)
 		WLine* l = obj->lines[i];
 		if (!l)
 		{
-			printf("ack!\n");
+			drw_log("ack!");
 			return;
 		}
 
@@ -1171,7 +1223,7 @@ void drw_wline_strokeonly(WLine* l)
 {
 	if (l == NULL)
 	{
-		printf("Tried to render a null line!\n");
+		drw_log("Tried to render a null line!");
 		return;
 	}
 
@@ -1182,7 +1234,7 @@ void drw_tess(void* tess)
 {
 	if (!tess)
 	{
-		printf("Can't draw a null tess\n");
+		drw_log("Can't draw a null tess");
 	}
 	drw_gpc_tristrip(tess);
 }
@@ -1191,7 +1243,7 @@ void drw_wline(WLine* l)
 {
 	if (l == NULL)
 	{
-		printf("Tried to render a null line!\n");
+		drw_log("Tried to render a null line!");
 		return;
 	}
 
@@ -1273,7 +1325,7 @@ void drw_wobject(WObject* obj)
 	// drw_rect_w(obj->bounds);
 	if (!obj)
 	{
-		printf("Error, tried to render a null obj!\n");
+		drw_log("Error, tried to render a null obj!");
 		return;
 	}
 	if (!obj->lines)
@@ -1294,12 +1346,12 @@ void drw_wobject(WObject* obj)
 
 		if (!l)
 		{
-			printf("ack!\n");
+			drw_log("ack!");
 			continue;
 		}
 		if (!l->data)
 		{
-			printf("AAACK\n");
+			drw_log("AAACK");
 			continue;
 		}
 		drw_wline(l);
@@ -1314,7 +1366,7 @@ void drw_wobject_notransform(WObject* obj)
 
 	if (!obj)
 	{
-		printf("Error, tried to render a null obj!\n");
+		drw_log("Error, tried to render a null obj!");
 		return;
 	}
 	if (!obj->lines)
@@ -1335,7 +1387,7 @@ void drw_wobject_notransform(WObject* obj)
 
 		if (!l)
 		{
-			printf("ack!\n");
+			drw_log("ack!");
 			return;
 		}
 
@@ -1351,7 +1403,7 @@ void drw_wobject_strokeonly(WObject* obj)
 
 	if (!obj)
 	{
-		printf("Error, tried to render a null obj!\n");
+		drw_log("Error, tried to render a null obj!");
 		return;
 	}
 	if (!obj->lines)
@@ -1372,7 +1424,7 @@ void drw_wobject_strokeonly(WObject* obj)
 
 		if (!l)
 		{
-			printf("ack!\n");
+			drw_log("ack!");
 			return;
 		}
 
@@ -1388,7 +1440,7 @@ void drw_wobject_strokeonly_notransform(WObject* obj)
 
 	if (!obj)
 	{
-		printf("Error, tried to render a null obj!\n");
+		drw_log("Error, tried to render a null obj!");
 		return;
 	}
 	if (!obj->lines)
@@ -1409,7 +1461,7 @@ void drw_wobject_strokeonly_notransform(WObject* obj)
 
 		if (!l)
 		{
-			printf("ack!\n");
+			drw_log("ack!");
 			return;
 		}
 
@@ -1455,7 +1507,7 @@ void drw_wobject_verts(WObject* obj)
 		WLine* line = obj->lines[i];
 		if (!line)
 		{
-			printf("Error, bogus line!\n");
+			drw_log("Error, bogus line!");
 			continue;
 		}
 		drw_verts(line);
@@ -1672,7 +1724,7 @@ void drw_rline(RLine* poly)
 {
 	if (poly->num == 0)
 	{
-		printf("Trying to draw a poly with no points? what are you tryin to pull\n");
+		drw_log("Trying to draw a poly with no points? what are you tryin to pull");
 		return;
 	}
 #ifdef DRW_ENABLE_SNOOP
@@ -1748,14 +1800,14 @@ void drw_poly_extras(WLine* line)
 {
 	if (!line)
 	{
-		printf("wat");
+		drw_log("wat");
 		return;
 	}
 
 	if (line->num < 2)
 	{
 		// if ( debug_settings.render )
-		printf("Can't draw a poly with a single point!\n");
+		drw_log("Can't draw a poly with a single point!");
 		return;
 	}
 
@@ -1788,11 +1840,15 @@ void drw_poly_extras(WLine* line)
 
 void drw_tris_3d(double* arr, int num, bool closed)
 {
-
 	glVertexPointer(3, DRW_VERTEX_POINTER_IDENT, 0, arr);
-
 	glDrawArrays(GL_TRIANGLES, 0, num);
-	free(arr);
+	//free(arr);
+}
+
+void drw_tristrip_3d(double* arr, int num, bool closed)
+{
+	glVertexPointer(3, DRW_VERTEX_POINTER_IDENT, 0, arr);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, num);
 }
 
 void drw_rawpoly_2d(double* arr, int num, bool closed)
@@ -1960,7 +2016,7 @@ bool drw_ortho_get(void)
 void drw_ortho_set(bool val)
 {
 #ifdef DEBUG
-	printf("Setting ortho to %d\n", val);
+	drw_log("Setting ortho to %d", val);
 #endif
 	_ortho = val;
 }
@@ -1973,7 +2029,7 @@ bool drw_get_screenspace(void)
 void drw_set_screenspace(bool val)
 {
 #ifdef DEBUG
-	printf("Setting screenspace to %d\n", val);
+	drw_log("Setting screenspace to %d", val);
 #endif
 	/*
 	 if ( val ){
@@ -2002,7 +2058,7 @@ void drw_setup_view(void)
 
 	int bits;
 	glGetIntegerv(GL_RED_BITS, &bits); //(GL_RED_BITS);
-	printf("Bits is %d\n", bits);
+	drw_log("Bits is %d", bits);
 }
 
 #include <glulookat/gluLookAt.h>
@@ -2011,13 +2067,13 @@ static void print_debug(void)
 {
 	char sc = (_screenspace) ? 'Y' : 'N';
 	char o  = (_ortho) ? 'Y' : 'N';
-	printf("SCRN %c  ORTHO %c  AR:%f\n", sc, o, _aspect);
+	drw_log("SCRN %c  ORTHO %c  AR:%f", sc, o, _aspect);
 }
 
 void drw_setup_view_persp()
 {
 	// if(debug_settings.render)
-	printf("PERSP\n");
+	drw_log("PERSP");
 	print_debug();
 
 	// static int zoomFactor = 1;
@@ -2144,13 +2200,13 @@ void drw_setup_view_persp()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
-	// near, far);  glFrustum(left,right,bottom,top,near, far);
-	//#ifdef DRW_PLATFORM_WIN
+// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
+// near, far);  glFrustum(left,right,bottom,top,near, far);
+//#ifdef DRW_PLATFORM_WIN
 
-	//	printf("glu stuff doesn't link on windows >:[\n");
-	//#else
-	/*
+//	printf("glu stuff doesn't link on windows >:[\n");
+//#else
+/*
 	 _l = left;
 	_r = right;
 	_t = top;
@@ -2176,7 +2232,7 @@ void drw_setup_view_persp()
 //	this appears to work in both configurations.
 void drw_setup_view_ortho()
 {
-	printf("ORTHO\n");
+	drw_log("ORTHO");
 	print_debug();
 
 	float width, height;
@@ -2353,7 +2409,7 @@ void drw_set_circle_precision(int v)
 					v, override_circle_limit);
 				// printf("are you sure you want a circle this
 				// precise?\n");
-				printf(buf);
+				drw_log(buf);
 				emit_warning_about_high_precision_circles_once =
 				    true;
 			}

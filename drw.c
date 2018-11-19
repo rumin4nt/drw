@@ -5,6 +5,29 @@
 
 static int font_size = 12;
 
+//16:24 <                       gruebite@> #define ERR(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__)
+
+#define DRW_LOG_MAX 256
+#include <stdarg.h>
+
+void drw_log(char* format, ...)
+{
+
+	char buf[DRW_LOG_MAX];
+	sprintf(buf, "%s", format);
+	va_list args;
+	va_start(args, format);
+	vsprintf(buf, format, args);
+	va_end(args);
+
+#ifdef DEBUG
+	printf("[drw]: %s\n", buf);
+#else
+	printf("DO NOTHING LATER: %s\n", buf);
+#endif
+}
+
+
 int drw_check_version_match(const char* header_generated_version)
 {
 	char* v   = drw_get_version_string();
@@ -23,13 +46,12 @@ char* drw_get_version_string(void)
 
 void drw_print_version(void)
 {
-	printf("%d.%d.%d\n", DRW_VERSION_MAJOR, DRW_VERSION_MINOR,
-	       DRW_VERSION_PATCH);
+	drw_log("%d.%d.%d", DRW_VERSION_MAJOR, DRW_VERSION_MINOR, DRW_VERSION_PATCH);
 }
 
 void drw_text_size_set(int sz)
 {
-	printf("Unified font size %d\n", sz);
+	drw_log("Unified font size %d", sz);
 	font_size = sz;
 }
 

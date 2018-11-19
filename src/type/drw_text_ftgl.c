@@ -72,8 +72,8 @@ int drw_text_ftgl_load(const char* path)
 	//{
 	//	ftglDestroyFont(font);
 	//}
-	font = ftglCreateTextureFont(path);
-	// font = ftglCreatePolygonFont(path);
+	//font = ftglCreateTextureFont(path);
+	font = ftglCreatePolygonFont(path);
 
 	if (!font)
 		return -1;
@@ -101,7 +101,8 @@ void drw_text_draw(const char* str)
 
 	if (drw_get_screenspace())
 	{
-		ftglRenderFont(font, str, FTGL_RENDER_ALL);
+		//ftglRenderFont(font, str, FTGL_RENDER_ALL);
+		ftglRenderFont(font, str, FTGL_RENDER_SIDE);
 	}
 	else
 	{
@@ -113,7 +114,8 @@ void drw_text_draw(const char* str)
 		double mult = h;
 		double frac = 1.0 / mult;
 		drw_scale_u(frac);
-		ftglRenderFont(font, str, FTGL_RENDER_ALL);
+		//ftglRenderFont(font, str, FTGL_RENDER_ALL);
+		ftglRenderFont(font, str, FTGL_RENDER_SIDE);
 
 		drw_pop();
 	}

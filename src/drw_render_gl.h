@@ -77,6 +77,9 @@ void drw_blend_set(int);
 void drw_blend_push(void);
 void drw_blend_pop(void);
 
+void drw_depth_enable(void);
+void drw_depth_disable(void);
+
 void drw_color_clear(float, float, float, float);
 void drw_color_clear_color(RColor);
 void drw_color_clear_color8(RColor8);
@@ -85,6 +88,11 @@ void drw_color_clear_color16(RColor16);
 void drw_set_line_width(float v);
 //void drw_set_screenspace(bool v);
 void drw_set_colorbypass(bool v);
+
+void drw_color_bg(void);
+void drw_color_fg(void);
+void drw_color_bg_set(double r, double g, double b, double a);
+void drw_color_fg_set(double r, double g, double b, double a);
 
 void drw_color(double r, double g, double b, double a);
 void drw_color4f(float, float, float, float);

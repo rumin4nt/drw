@@ -84,6 +84,12 @@ static inline char* drw_get_version_string_header(void)
 		DRW_VERSION_PATCH);
 	return buf;
 }
+//16:24 <                       gruebite@> #define ERR(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__)
+
+//#define drw_log(fmt, ...) _drw_log(fprintf(stderr, fmt, __VA_ARGS__))
+void drw_log(char* fmt, ...);
+
+//void	drw_log(char* fmt, ...);
 
 int    drw_lib_init(void);
 int    drw_lib_deinit(void);
