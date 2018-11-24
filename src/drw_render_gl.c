@@ -2335,6 +2335,8 @@ void drw_set_screensize(double w, double h)
 	// drw_calculate_scale();
 	// drw_setup_view();
 }
+
+
 void drw_set_framebuffer(double w, double h)
 {
 	// printf("Setting framebuffer to %f %f\n", w, h);

@@ -21,7 +21,7 @@ void drw_log(char* format, ...)
 	va_end(args);
 
 #ifdef DEBUG
-	printf("[drw]: %s\n", buf);
+	printf("[drw ]: %s\n", buf);
 #else
 	printf("DO NOTHING LATER: %s\n", buf);
 #endif

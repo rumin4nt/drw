@@ -56,7 +56,7 @@ void drw_text_hpvec_draw(const char* text)
 {
 	if (!text || 0 == strcmp("", text))
 	{
-		printf("Error, no text to draw!\n");
+		drw_log("Error, no text to draw!");
 		return;
 	}
 	bool done = false;
