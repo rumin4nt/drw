@@ -17,6 +17,7 @@
 #elif __APPLE__
 	#include <TargetConditionals.h>
 	#if TARGET_OS_IPHONE
+//#error hi
 		#define DRW_PLATFORM_IOS
 	#elif TARGET_IPHONE_SIMULATOR
 		//#error hi

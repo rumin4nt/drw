@@ -35,6 +35,13 @@
 
 #ifdef DRW_PLATFORM_IOS
 
+
+//#ifdef DRW_PLATFORM_IOS
+#define glTranslated glTranslatef
+#define glScaled glScalef
+#define glRotated glRotatef
+//#endif
+
 //#include "../core/r_app_ios.h"
 
 //#include <OpenGLES/ES1/gl.h>
@@ -59,6 +66,7 @@
  PFNGLBLENDEQUATIONPROC glBlendEquation = NULL;
  */
 #endif
+
 
 //#include <GLFW/glfw3.h>
 //#include <GL/glut.h>
@@ -920,6 +928,7 @@ void drw_translate2f(float x, float y)
 
 void drw_translated(double x, double y, double z)
 {
+
 	glTranslated(x,y,z);
 }
 
@@ -980,12 +989,6 @@ void drw_transform_deapply(WTransform t)
 void drw_gtransform_deapply(GTransform t)
 {
 }
-
-#ifdef DRW_PLATFORM_IOS
-#define glTranslated glTranslatef
-#define glScaled glScalef
-#define glRotated glRotatef
-#endif
 
 void drw_translate_wvec(WVec3d v)
 {
