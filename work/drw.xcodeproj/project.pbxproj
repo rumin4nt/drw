@@ -70,7 +70,6 @@
 		57BDF7E220AC7CD1004C154E /* drw_primitives.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_primitives.c; sourceTree = "<group>"; };
 		57BDF80820ACA86A004C154E /* drw_platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_platform.h; sourceTree = "<group>"; };
 		57BDF80A20ACA91E004C154E /* drw_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_config.h; sourceTree = "<group>"; };
-		57BDF82020ACAC3F004C154E /* drw_dummy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_dummy.h; sourceTree = "<group>"; };
 		57E6659820F2CB54006E5BB2 /* drw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = drw.c; path = ../drw.c; sourceTree = "<group>"; };
 		D1A8335B1E99AD2C009AA5D2 /* libdrw.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libdrw.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1A8368D1E99AEF3009AA5D2 /* libdrw.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libdrw.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,7 +146,6 @@
 			children = (
 				5767C01020DC64870022A676 /* hacks */,
 				57BDF80A20ACA91E004C154E /* drw_config.h */,
-				57BDF82020ACAC3F004C154E /* drw_dummy.h */,
 				57967B6020D17B3000003F66 /* drw_export.c */,
 				57967B5F20D17B3000003F66 /* drw_export.h */,
 				57BDF80820ACA86A004C154E /* drw_platform.h */,
