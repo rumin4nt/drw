@@ -43,15 +43,15 @@ enum DRWAlignmentVertical
 
 #ifdef DRW_PLATFORM_IOS
 //#error ios
-#include "src/type/drw_text_ftgles.h"
+#include "src/type/drw_type_ftgles.h"
 #else
 //#error macos
-#include "src/type/drw_text_ftgl.h"
+#include "src/type/drw_type_ftgl.h"
 #endif
 
-#include "src/type/drw_text_asteroids.h"
-#include "src/type/drw_text_hershey.h"
-#include "src/type/drw_text_hpvec.h"
+#include "src/type/drw_type_asteroids.h"
+#include "src/type/drw_type_hershey.h"
+#include "src/type/drw_type_hpvec.h"
 
 //#include "src/d_glus.h"
 #include "src/drw_point.h"
@@ -93,8 +93,8 @@ void drw_log(char* fmt, ...);
 
 int    drw_lib_init(void);
 int    drw_lib_deinit(void);
-double drw_text_size_real_get(void);
-void   drw_text_size_set(int sz);
-int    drw_text_size_get(void);
+double drw_type_size_real_get(void);
+void   drw_type_size_set(int sz);
+int    drw_type_size_get(void);
 
 #endif /* drw_h */

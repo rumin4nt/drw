@@ -1,12 +1,12 @@
 //
-//  drw_text_hershey.c
+//  drw_type_hershey.c
 //  drw
 //
 //  Created by vs on 1/11/18.
 //  Copyright © 2018 ruminant. All rights reserved.
 //
 
-#include "drw_text_hershey.h"
+#include "drw_type_hershey.h"
 
 #ifdef DRW_TEXT_PROVIDER_ENABLE_HERSHEY
 
@@ -16,7 +16,7 @@
 //#include <r4/src/r4_config.h>
 #include <stdbool.h>
 
-void drw_text_hershey_draw(const char* text)
+void drw_type_hershey_draw(const char* text)
 {
 
 #ifdef RPLATFORM_DARWIN

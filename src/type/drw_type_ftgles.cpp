@@ -9,7 +9,7 @@ extern "C"
 
 #ifdef DRW_PLATFORM_IOS
 
-#include "drw_text_ftgles.h"
+#include "drw_type_ftgles.h"
 
 #include "FTGL/ftgles.h"
 
@@ -18,13 +18,13 @@ static FTTextureFont* tfont = 0;
 //static FTGLfont *font = NULL;
 //void* font = 0;
 
-void drw_text_init()
+void drw_type_init()
 {
 
 	//ummm guess we don't need this?
 }
 
-void drw_text_size(int sz, int garbage)
+void drw_type_size(int sz, int garbage)
 {
 	if (!font)
 	{
@@ -34,7 +34,7 @@ void drw_text_size(int sz, int garbage)
 	font->FaceSize(sz);
 }
 
-void drw_text_deinit()
+void drw_type_deinit()
 {
 	if (font)
 	{
@@ -43,7 +43,7 @@ void drw_text_deinit()
 	font = 0;
 }
 
-int drw_text_ftgles_load(const char* path)
+int drw_type_ftgles_load(const char* path)
 {
 	printf("loading ftgles font %s.\n", path);
 	if (font)
@@ -87,7 +87,7 @@ int drw_text_ftgles_load(const char* path)
 
 //extern "C"
 //{
-void drw_text_draw(const char* str)
+void drw_type_draw(const char* str)
 {
 	if (!str)
 	{
@@ -109,7 +109,7 @@ void drw_text_draw(const char* str)
 		 drw_push();
 		 int w, h;
 		 drw_query_framebuffer(&w, &h);
-		 int sz = drw_text_get_size();
+		 int sz = drw_type_get_size();
 		 double dpi = drw_query_retina();
 		 double mult = h;
 		 double frac = 1.0 / mult;
@@ -129,7 +129,7 @@ void drw_text_draw(const char* str)
 		drw_push();
 		int w, h;
 		drw_query_framebuffer(&w, &h);
-		int    sz   = drw_text_get_size();
+		int    sz   = drw_type_get_size();
 		double dpi  = drw_query_retina();
 		double mult = h;
 		double frac = 1.0 / mult;
@@ -142,7 +142,7 @@ void drw_text_draw(const char* str)
 }
 //}
 
-void drw_text_get_bbox(const char* str, unsigned int num, float* data)
+void drw_type_get_bbox(const char* str, unsigned int num, float* data)
 {
 	font->BBox(str, data[0], data[1], data[2], data[3], data[4], data[5]);
 

@@ -40,8 +40,7 @@
 #include "hacks/drw_snoop.h"
 #endif
 
-#include "type/drw_text.h"
-
+#include "type/drw_type.h"
 
 enum
 {
@@ -212,11 +211,11 @@ void drw_tristrip_3d(double* arr, int num, bool closed);
 void drw_triangle_strip(WLine*);
 
 //	fancy
-void drw_text_set_provider(unsigned int type);
-void drw_text(const char* text, ...);
-void drw_text_set_size(int, int);
-int  drw_text_get_size(void);
-void drw_text_load(const char* path);
+void drw_type_set_provider(unsigned int type);
+void drw_type(const char* text, ...);
+void drw_type_set_size(int, int);
+int  drw_type_get_size(void);
+void drw_type_load(const char* path);
 
 //	wash primitives
 void drw_verts(WLine*);

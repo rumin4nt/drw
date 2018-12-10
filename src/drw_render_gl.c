@@ -14,8 +14,8 @@
 #include <drw/drw.h>
 
 #include "ext/drw_ext_gpc.h"
+#include "type/drw_type.h"
 #include <gpc/gpc.h>
-#include "type/drw_text.h"
 
 //#include <r4/src/r4_config.h>
 //#include <r4/src/r4_platform.h>
@@ -36,7 +36,6 @@
 
 #ifdef DRW_PLATFORM_IOS
 
-
 //#ifdef DRW_PLATFORM_IOS
 #define glTranslated glTranslatef
 #define glScaled glScalef
@@ -48,12 +47,12 @@
 //#include <OpenGLES/ES1/gl.h>
 //#include <OpenGLES/ES3/gl.h>
 
-#include "type/drw_text_ftgles.h"
+#include "type/drw_type_ftgles.h"
 #include <glulookat/gluLookAt.h>
 #else
 #ifdef DRW_PLATFORM_DARWIN
 //#include <OpenGL/gl.h>
-//#include "type/drw_text_ftgl.h"
+//#include "type/drw_type_ftgl.h"
 //#undef DRW_PLATFORM_IOS
 #else
 
@@ -68,14 +67,13 @@
  */
 #endif
 
-
 //#include <GLFW/glfw3.h>
 //#include <GL/glut.h>
 
 #include <deps/gl-matrix/gl-matrix.h>
 
 //#include <GL/glew.h>
-//#include "type/drw_text_ftgl.h"
+//#include "type/drw_type_ftgl.h"
 
 #include "hacks/drw_snoop.h"
 
@@ -247,9 +245,9 @@ int drw_get_gl_error()
 		drw_log("GL_INVALID_OPERATION");
 		break;
 
-	// case GL_INVALID_FRAMEBUFFER_OPERATION:
-	//    printf("invalid framebuffer\n");
-	//    break;
+		// case GL_INVALID_FRAMEBUFFER_OPERATION:
+		//    printf("invalid framebuffer\n");
+		//    break;
 
 	case GL_OUT_OF_MEMORY:
 		drw_log("out of memory");
@@ -276,8 +274,8 @@ void drw_init()
 		circle_defs[i] = NULL;
 	}
 
-	if ( _text_provider_type == -1 )
-		drw_text_set_provider(DRW_TEXT_PROVIDER_HPVEC);
+	if (_text_provider_type == -1)
+		drw_type_set_provider(DRW_TEXT_PROVIDER_HPVEC);
 
 	// glBlendEquation =
 	// (PFNGLBLENDEQUATIONPROC)wglGetProcAddress("glBlendEquation");
@@ -322,7 +320,7 @@ void drw_init()
 	//{
 	// const char* path = r_resource_load("vs-junk","otf");
 	//  r_font_load(path);
-	//    drw_text_size(72 * app_settings.scale_retina);
+	//    drw_type_size(72 * app_settings.scale_retina);
 	// }
 
 	drw_get_gl_error();
@@ -377,7 +375,7 @@ void drw_set_line_width(float v)
 	drw_get_gl_error();
 }
 
-void drw_text_set_provider(unsigned int type)
+void drw_type_set_provider(unsigned int type)
 {
 	if (type >= DRW_TEXT_PROVIDER_NONE)
 	{
@@ -385,11 +383,11 @@ void drw_text_set_provider(unsigned int type)
 		return;
 	}
 	drw_log("Setting provider: %d", type);
-	
+
 	_text_provider_type = type;
 }
 
-void drw_text_load(const char* path)
+void drw_type_load(const char* path)
 {
 
 // 0if ( path != NULL )
@@ -397,20 +395,20 @@ void drw_text_load(const char* path)
 // const char* path = r_resource_load("vs-junk","otf");
 #ifdef DRW_PLATFORM_IOS
 	//#error hi
-	drw_text_ftgles_load(path);
+	drw_type_ftgles_load(path);
 #else
 
 #ifdef DRW_ENABLE_FTGL
-	drw_text_ftgl_load(path);
+	drw_type_ftgl_load(path);
 
 #endif
 #endif
 
 	//#ifdef DRW_ENABLE_FTGLES
-	//	drw_text_ftgles_load(path);
+	//	drw_type_ftgles_load(path);
 	//#endif
 
-	// drw_text_size(72);
+	// drw_type_size(72);
 	// }
 }
 
@@ -933,7 +931,7 @@ void drw_translate2f(float x, float y)
 void drw_translated(double x, double y, double z)
 {
 
-	glTranslated(x,y,z);
+	glTranslated(x, y, z);
 }
 
 void drw_translate(float x, float y, float z)
@@ -1055,20 +1053,20 @@ void drw_axis_nice()
 	drw_pop();
 }
 
-int drw_text_get_size(void)
+int drw_type_get_size(void)
 {
 	return _text_size;
 }
 
-void drw_text_set_size(int sz, int resolution)
+void drw_type_set_size(int sz, int resolution)
 {
 #ifdef DRW_ENABLE_FTGL
-	drw_text_size(sz, resolution);
+	drw_type_size(sz, resolution);
 #endif
 	_text_size = sz;
 }
 
-void drw_text(const char* format, ...)
+void drw_type(const char* format, ...)
 {
 	if (_text_provider_type == DRW_TEXT_PROVIDER_NONE)
 		return;
@@ -1086,16 +1084,16 @@ void drw_text(const char* format, ...)
 	//	return;
 	//	break; //haha
 	case DRW_TEXT_PROVIDER_HPVEC:
-		drw_text_hpvec_draw(buf);
+		drw_type_hpvec_draw(buf);
 		break;
 	case DRW_TEXT_PROVIDER_ASTEROIDS:
-		drw_text_asteroids(buf);
+		drw_type_asteroids(buf);
 		break;
 
 	case DRW_TEXT_PROVIDER_FTGL:
 	{
 #ifdef DRW_ENABLE_FTGL
-		drw_text_draw(buf);
+		drw_type_draw(buf);
 #endif
 		break;
 	}
@@ -1104,7 +1102,7 @@ void drw_text(const char* format, ...)
 	}
 
 	//#ifdef DRW_ENABLE_FTGL
-	//	drw_text_draw(buf);
+	//	drw_type_draw(buf);
 	//
 	//#endif
 }
@@ -2207,13 +2205,13 @@ void drw_setup_view_persp()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
-// near, far);  glFrustum(left,right,bottom,top,near, far);
-//#ifdef DRW_PLATFORM_WIN
+	// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
+	// near, far);  glFrustum(left,right,bottom,top,near, far);
+	//#ifdef DRW_PLATFORM_WIN
 
-//	printf("glu stuff doesn't link on windows >:[\n");
-//#else
-/*
+	//	printf("glu stuff doesn't link on windows >:[\n");
+	//#else
+	/*
 	 _l = left;
 	_r = right;
 	_t = top;
@@ -2342,7 +2340,6 @@ void drw_set_screensize(double w, double h)
 	// drw_calculate_scale();
 	// drw_setup_view();
 }
-
 
 void drw_set_framebuffer(double w, double h)
 {

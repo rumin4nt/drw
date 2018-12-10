@@ -1,6 +1,6 @@
 
 
-#include "drw_text_ftgl.h"
+#include "drw_type_ftgl.h"
 
 //#include <r4/r4.h>
 
@@ -23,13 +23,13 @@
 FTGLfont* font		= NULL;
 int       justification = 0;
 
-void drw_text_init()
+void drw_type_init()
 {
 
 	// ummm guess we don't need this?
 }
 
-void drw_text_deinit()
+void drw_type_deinit()
 {
 	if (font)
 	{
@@ -38,14 +38,14 @@ void drw_text_deinit()
 	font = NULL;
 }
 
-void drw_text_size(int sz, int resolution)
+void drw_type_size(int sz, int resolution)
 {
 	//todo - eliminate this from public and force all font size through bottleneck
 	//	interface in drw.c
 	//
 	//	for now we just call it on behalf of the user (me)
 
-	drw_text_size_set(sz);
+	drw_type_size_set(sz);
 
 	if (!font)
 	{
@@ -64,7 +64,7 @@ void drw_text_size(int sz, int resolution)
 	// printf("res was %d\n", res );
 }
 
-int drw_text_ftgl_load(const char* path)
+int drw_type_ftgl_load(const char* path)
 {
 	assert(path);
 
@@ -78,13 +78,13 @@ int drw_text_ftgl_load(const char* path)
 	if (!font)
 		return -1;
 
-	// drw_text_size(R_UI_FONT_SIZE * app_settings.scale_retina );
+	// drw_type_size(R_UI_FONT_SIZE * app_settings.scale_retina );
 
-	drw_text_size(D_FONT_SIZE, 144);
+	drw_type_size(D_FONT_SIZE, 144);
 	return 0;
 }
 
-void drw_text_draw(const char* str)
+void drw_type_draw(const char* str)
 {
 
 	if (!font)
@@ -96,7 +96,7 @@ void drw_text_draw(const char* str)
 	}
 	// if ( !font )
 	//{
-	//	drw_text_load("data/ttf/terminus.ttf");
+	//	drw_type_load("data/ttf/terminus.ttf");
 	//}
 
 	if (drw_get_screenspace())
@@ -109,7 +109,7 @@ void drw_text_draw(const char* str)
 		drw_push();
 		int w, h;
 		drw_query_framebuffer(&w, &h);
-		int    sz   = drw_text_get_size();
+		int    sz   = drw_type_get_size();
 		double dpi  = drw_query_retina();
 		double mult = h;
 		double frac = 1.0 / mult;
@@ -123,12 +123,12 @@ void drw_text_draw(const char* str)
 	// printf( "%d\n", ftglGetFontFaceSize(font) );
 }
 
-void drw_text_get_bbox(const char* str, unsigned int num, float* data)
+void drw_type_get_bbox(const char* str, unsigned int num, float* data)
 {
 	ftglGetFontBBox(font, str, num, data);
 }
 
-double drw_text_get_width(const char* str)
+double drw_type_get_width(const char* str)
 {
 	int  count = 0;
 	bool done  = false;
@@ -151,7 +151,7 @@ double drw_text_get_width(const char* str)
 	{
 		bounds[j] = 0;
 	}
-	drw_text_get_bbox(str, count, bounds);
+	drw_type_get_bbox(str, count, bounds);
 	double v = bounds[3] - bounds[0];
 	free(bounds);
 	return v;

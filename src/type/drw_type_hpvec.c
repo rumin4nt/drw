@@ -1,12 +1,12 @@
 //
-//  drw_text_hpvec.c
+//  drw_type_hpvec.c
 //  drw
 //
 //  Created by vs on 4/27/18.
 //  Copyright © 2018 ruminant. All rights reserved.
 //
 
-#include "drw_text_hpvec.h"
+#include "drw_type_hpvec.h"
 #include "../../drw.h"
 
 #include <hp/hp1345a.c>
@@ -31,7 +31,7 @@
 static int alignment_h = DRW_TEXT_ALIGN_H_CENTER;
 static int alignment_v = DRW_TEXT_ALIGN_V_CENTER;
 
-void drw_text_hpvec_set_alignment(int h, int v)
+void drw_type_hpvec_set_alignment(int h, int v)
 {
 	if (h != -1)
 		alignment_h = h;
@@ -61,7 +61,7 @@ static void draw_hp_glyph(int idx)
 	r_line_destroy(l);
 }
 
-void drw_text_hpvec_draw(const char* text)
+void drw_type_hpvec_draw(const char* text)
 {
 	if (!text || 0 == strcmp("", text))
 	{
@@ -117,7 +117,7 @@ void drw_text_hpvec_draw(const char* text)
 	{
 		drw_query_framebuffer(&w, &h);
 
-		double sz = drw_text_size_get();
+		double sz = drw_type_size_get();
 
 		double sc = 1. / (h / sz * 8);
 
@@ -176,7 +176,7 @@ static HPGlyph* render_hp_glyph(unsigned long idx)
 	return glyph;
 }
 
-void drw_text_hpvec_get_offset_scale(const char* text, double* ox, double* oy, double* scale)
+void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, double* scale)
 {
 	int offx = 0;
 	int offy = 0;
@@ -226,7 +226,7 @@ void drw_text_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 	{
 		drw_query_framebuffer(&w, &h);
 
-		double sz = drw_text_size_get();
+		double sz = drw_type_size_get();
 
 		double sc = 1. / (h / sz * 8);
 
@@ -239,7 +239,7 @@ void drw_text_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 	}
 }
 
-HPGlyph** drw_text_hpvec_render(const char* text)
+HPGlyph** drw_type_hpvec_render(const char* text)
 {
 	unsigned long len = strlen(text);
 

@@ -1,16 +1,16 @@
 //
-//  drw_text_asteroids.c
+//  drw_type_asteroids.c
 //  drw
 //
 //  Created by vs on 4/27/18.
 //  Copyright © 2018 ruminant. All rights reserved.
 //
 
-#include "drw_text_asteroids.h"
+#include "drw_type_asteroids.h"
 
 #ifdef DRW_TEXT_PROVIDER_ENABLE_ASTEROIDS
 
-void drw_text_asteroids(const char* text)
+void drw_type_asteroids(const char* text)
 {
 
 	//const uint8_t * const pts = a
