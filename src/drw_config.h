@@ -11,9 +11,7 @@
 
 #include "drw_platform.h"
 
-
 #define D_FONT_SIZE 18
-
 
 #ifdef DRW_PLATFORM_DARWIN
 //#include <GL/glew.h>
@@ -78,9 +76,19 @@
 
 #endif
 
-#ifndef DRW_PLATFORM_IOS
+#ifdef DRW_PLATFORM_IOS
+#define DRW_TEXT_PROVIDER_ENABLE_FTGLES
+#else
+#define DRW_TEXT_PROVIDER_ENABLE_FTGL
+#endif
 
+#define DRW_TEXT_PROVIDER_ENABLE_HERSHEY
+#define DRW_TEXT_PROVIDER_ENABLE_HPVEC
+#define DRW_TEXT_PROVIDER_ENABLE_ASTEROIDS
+
+#ifndef DRW_PLATFORM_IOS
 #define DRW_ENABLE_SNOOP
+
 #endif
 
 #endif /* drw_config_h */

@@ -9,16 +9,9 @@
 #ifndef drw_text_hershey_h
 #define drw_text_hershey_h
 
-
-
-#define DRW_TEXT_PROVIDER_ENABLE_HERSHEY
-
-
-
 #ifdef DRW_TEXT_PROVIDER_ENABLE_HERSHEY
 void drw_text_hershey_initialize(void);
 #endif
-
 
 void drw_text_hershey_draw(const char* text);
 

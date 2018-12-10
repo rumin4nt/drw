@@ -10,11 +10,6 @@ extern "C"
 {
 #endif
 
-	
-#define DRW_TEXT_PROVIDER_ENABLE_FTGLES
-	
-	
-	
 #ifdef DRW_TEXT_PROVIDER_ENABLE_FTGLES
 	void drw_text_ftgles_initialize(void);
 #endif

@@ -9,6 +9,12 @@
 #ifndef drw_text_h
 #define drw_text_h
 
+#define DRW_TEXT_PROVIDER_ENABLE_ASTEROIDS
+
+#include "drw_text_asteroids.h"
+#include "drw_text_hershey.h"
+#include "drw_text_hpvec.h"
+
 enum
 {
 	DRW_TEXT_PROVIDER_FTGL,
@@ -18,12 +24,11 @@ enum
 	DRW_TEXT_PROVIDER_NONE
 };
 
-
 void   drw_text_get_bbox(const char*, unsigned int, float*);
 double drw_text_get_width(const char*);
 int    drw_text_get_fontsize(void);
 void   drw_text_set_align(int, int);
 
-int	drw_text_register_provider(void);
+int drw_text_register_provider(void);
 
 #endif /* drw_text_h */

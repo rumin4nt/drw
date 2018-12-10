@@ -17,11 +17,8 @@ void drw_text_get_align(int* x, int* y)
 	*y = align_y;
 }
 
-void   drw_text_set_align(int x, int y)
+void drw_text_set_align(int x, int y)
 {
 	align_x = x;
 	align_y = y;
 }
-
-
-

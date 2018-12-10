@@ -8,12 +8,13 @@
 
 #include "drw_text_hershey.h"
 
+#ifdef DRW_TEXT_PROVIDER_ENABLE_HERSHEY
+
 #include "../../drw.h"
 
 #include <hershey/futural.h>
 //#include <r4/src/r4_config.h>
 #include <stdbool.h>
-
 
 void drw_text_hershey_draw(const char* text)
 {
@@ -93,3 +94,5 @@ void drw_text_hershey_draw(const char* text)
 	//glDrawArrays(GL_LINES, 0, 4);
 	//: glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
+
+#endif

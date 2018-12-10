@@ -8,6 +8,8 @@
 
 #include "drw_text_asteroids.h"
 
+#ifdef DRW_TEXT_PROVIDER_ENABLE_ASTEROIDS
+
 void drw_text_asteroids(const char* text)
 {
 
@@ -42,3 +44,5 @@ void drw_text_asteroids(const char* text)
 	return 12 * size;
 	*/
 }
+
+#endif
