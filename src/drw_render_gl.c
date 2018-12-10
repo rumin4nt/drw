@@ -15,6 +15,7 @@
 
 #include "ext/drw_ext_gpc.h"
 #include <gpc/gpc.h>
+#include "type/drw_text.h"
 
 //#include <r4/src/r4_config.h>
 //#include <r4/src/r4_platform.h>
@@ -94,7 +95,7 @@
 static bool	 _ortho;
 static bool	 _screenspace;
 static int	  _text_size;
-static unsigned int _text_provider_type = 0;
+static unsigned int _text_provider_type = -1;
 
 static double _left       = -1;
 static double _right      = -1;
@@ -275,7 +276,8 @@ void drw_init()
 		circle_defs[i] = NULL;
 	}
 
-	drw_text_set_provider(DRW_TEXT_PROVIDER_HPVEC);
+	if ( _text_provider_type == -1 )
+		drw_text_set_provider(DRW_TEXT_PROVIDER_HPVEC);
 
 	// glBlendEquation =
 	// (PFNGLBLENDEQUATIONPROC)wglGetProcAddress("glBlendEquation");
@@ -382,6 +384,8 @@ void drw_text_set_provider(unsigned int type)
 		drw_log("Invalid ask in %s", __func__);
 		return;
 	}
+	drw_log("Setting provider: %d", type);
+	
 	_text_provider_type = type;
 }
 

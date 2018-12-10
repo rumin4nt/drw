@@ -7,22 +7,33 @@
 
 #ifndef DRW_PLATFORM_WIN
 
-typedef enum
-{
-	RFontJustificationLeft,
-	RFontJustificationCenter,
-	RFontJustificationRight
-} FontJustification;
+#define DRW_TEXT_PROVIDER_ENABLE_FTGL
 
-void   drw_text_set_align(int);
+
+
+#ifdef DRW_TEXT_PROVIDER_ENABLE_FTGL
+void drw_text_ftgl_initialize(void);
+#endif
+
+//	this will all go away
 void   drw_text_init(void);
 void   drw_text_deinit(void);
 int    drw_text_ftgl_load(const char*);
 void   drw_text_draw(const char*);
 void   drw_text_size(int, int);
-void   drw_text_get_bbox(const char*, int, float*);
-double drw_text_get_width(const char*);
-int    drw_text_get_fontsize(void);
+
+
+
+
+/*
+ typedef enum
+ {
+ RFontJustificationLeft,
+ RFontJustificationCenter,
+ RFontJustificationRight
+ } FontJustification;
+ */
+
 
 #endif
 

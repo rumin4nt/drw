@@ -142,7 +142,7 @@ void drw_text_draw(const char* str)
 }
 //}
 
-void drw_text_get_bbox(const char* str, int num, float* data)
+void drw_text_get_bbox(const char* str, unsigned int num, float* data)
 {
 	font->BBox(str, data[0], data[1], data[2], data[3], data[4], data[5]);
 

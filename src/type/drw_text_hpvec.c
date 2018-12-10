@@ -19,6 +19,15 @@
 
 #include <string.h>
 
+
+/*
+ 
+ 	courtesy of http://phk.freebsd.dk/hacks/Wargames/
+ 
+ 
+ */
+
+
 static int alignment_h = DRW_TEXT_ALIGN_H_CENTER;
 static int alignment_v = DRW_TEXT_ALIGN_V_CENTER;
 

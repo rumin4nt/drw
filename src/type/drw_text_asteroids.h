@@ -9,6 +9,14 @@
 #ifndef drw_text_asteroids_h
 #define drw_text_asteroids_h
 
+#define DRW_TEXT_PROVIDER_ENABLE_ASTEROIDS
+#ifdef DRW_TEXT_PROVIDER_ENABLE_ASTEROIDS
+
+
+
 void drw_text_asteroids(const char* text);
+
+
+#endif
 
 #endif /* drw_text_asteroids_h */

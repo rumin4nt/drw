@@ -123,7 +123,7 @@ void drw_text_draw(const char* str)
 	// printf( "%d\n", ftglGetFontFaceSize(font) );
 }
 
-void drw_text_get_bbox(const char* str, int num, float* data)
+void drw_text_get_bbox(const char* str, unsigned int num, float* data)
 {
 	ftglGetFontBBox(font, str, num, data);
 }

@@ -40,13 +40,8 @@
 #include "hacks/drw_snoop.h"
 #endif
 
-enum
-{
-	DRW_TEXT_PROVIDER_FTGL,
-	DRW_TEXT_PROVIDER_HPVEC,
-	DRW_TEXT_PROVIDER_ASTEROIDS,
-	DRW_TEXT_PROVIDER_NONE
-};
+#include "type/drw_text.h"
+
 
 enum
 {
