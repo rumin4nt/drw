@@ -25,22 +25,6 @@
 
 //#define DRW_BUILD_STANDALONE
 
-enum DRWAlignmentHorizontal
-{
-	DRW_TEXT_ALIGN_H_LEFT,
-	DRW_TEXT_ALIGN_H_CENTER,
-	DRW_TEXT_ALIGN_H_RIGHT,
-	DRW_TEXT_ALIGN_H_NONE
-};
-
-enum DRWAlignmentVertical
-{
-	DRW_TEXT_ALIGN_V_TOP,
-	DRW_TEXT_ALIGN_V_CENTER,
-	DRW_TEXT_ALIGN_V_BOTTOM,
-	DRW_TEXT_ALIGN_V_NONE
-};
-
 #ifdef DRW_PLATFORM_IOS
 //#error ios
 #include "src/type/drw_type_ftgles.h"
@@ -84,12 +68,9 @@ static inline char* drw_get_version_string_header(void)
 		DRW_VERSION_PATCH);
 	return buf;
 }
-//16:24 <                       gruebite@> #define ERR(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__)
 
-//#define drw_log(fmt, ...) _drw_log(fprintf(stderr, fmt, __VA_ARGS__))
-void drw_log(char* fmt, ...);
 
-//void	drw_log(char* fmt, ...);
+
 
 int    drw_lib_init(void);
 int    drw_lib_deinit(void);

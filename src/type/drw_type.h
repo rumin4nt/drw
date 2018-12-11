@@ -9,26 +9,54 @@
 #ifndef drw_type_h
 #define drw_type_h
 
-#define DRW_TEXT_PROVIDER_ENABLE_ASTEROIDS
+#define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
 
 #include "drw_type_asteroids.h"
 #include "drw_type_hershey.h"
 #include "drw_type_hpvec.h"
 
-enum
+enum DRWAlignmentHorizontal
 {
-	DRW_TEXT_PROVIDER_FTGL,
-	DRW_TEXT_PROVIDER_HPVEC,
-	DRW_TEXT_PROVIDER_HERSHEY,
-	DRW_TEXT_PROVIDER_ASTEROIDS,
-	DRW_TEXT_PROVIDER_NONE
+	DRW_TYPE_ALIGN_H_LEFT,
+	DRW_TYPE_ALIGN_H_CENTER,
+	DRW_TYPE_ALIGN_H_RIGHT,
+	DRW_TYPE_ALIGN_H_NONE
 };
 
-void   drw_type_get_bbox(const char*, unsigned int, float*);
-double drw_type_get_width(const char*);
-int    drw_type_get_fontsize(void);
-void   drw_type_set_align(int, int);
+enum DRWAlignmentVertical
+{
+	DRW_TYPE_ALIGN_V_TOP,
+	DRW_TYPE_ALIGN_V_CENTER,
+	DRW_TYPE_ALIGN_V_BOTTOM,
+	DRW_TYPE_ALIGN_V_NONE
+};
 
-int drw_type_register_provider(void);
+enum
+{
+	DRW_TYPE_PROVIDER_FTGL,
+	DRW_TYPE_PROVIDER_HPVEC,
+	DRW_TYPE_PROVIDER_HERSHEY,
+	DRW_TYPE_PROVIDER_ASTEROIDS,
+	DRW_TYPE_PROVIDER_NONE
+};
+
+typedef void (*drw_type_draw_fun)(const char*);
+typedef void (*drw_type_bbox_fun)(const char*, unsigned long, float*);
+
+void drw_type_init(void);
+void drw_type_deinit(void);
+
+void   drw_type_draw(const char* text, ...);
+void   drw_type_get_bbox(const char*, unsigned long sz, float*);
+double drw_type_get_width(const char*);
+int    drw_type_get_size(void);
+void   drw_type_set_align(int, int);
+void   drw_type_set_size(int, int);
+
+void drw_type_load_ttf(const char* path);
+
+int  drw_type_provider_register(const char* ident, drw_type_draw_fun render, drw_type_bbox_fun bbox);
+int  drw_type_provider_count(void);
+void drw_type_provider_select(unsigned int index);
 
 #endif /* drw_type_h */

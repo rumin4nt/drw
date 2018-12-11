@@ -3,29 +3,11 @@
 #include "drw.h"
 #include <string.h>
 
+#include "src/drw_log.h"
+
 static int font_size = 12;
 
 //16:24 <                       gruebite@> #define ERR(fmt, ...) fprintf(stderr, fmt, __VA_ARGS__)
-
-#define DRW_LOG_MAX 256
-#include <stdarg.h>
-
-void drw_log(char* format, ...)
-{
-
-	char buf[DRW_LOG_MAX];
-	sprintf(buf, "%s", format);
-	va_list args;
-	va_start(args, format);
-	vsprintf(buf, format, args);
-	va_end(args);
-
-#ifdef DEBUG
-	printf("[drw ]: %s\n", buf);
-#else
-	printf("DO NOTHING LATER: %s\n", buf);
-#endif
-}
 
 int drw_check_version_match(const char* header_generated_version)
 {
@@ -74,8 +56,8 @@ int drw_lib_init(void)
 	//	dummy method, gonna call the font functions to find out of dead code stripping
 	//	is the culprit for these link errors, or some other c++ fuckery?
 
-	drw_type_load("null_path");
-	drw_type_draw("hello");
+	//drw_type_load_ttf("null_path");
+	//drw_type_draw("hello");
 	return 0;
 }
 

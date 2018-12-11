@@ -10,7 +10,7 @@ extern "C"
 #ifdef DRW_PLATFORM_IOS
 
 #include "drw_type_ftgles.h"
-
+//#include "../drw_log.h"
 #include "FTGL/ftgles.h"
 
 static FTPolygonFont* font  = 0;
@@ -18,13 +18,18 @@ static FTTextureFont* tfont = 0;
 //static FTGLfont *font = NULL;
 //void* font = 0;
 
-void drw_type_init()
+void drw_type_ftgles_initialize(void)
+{
+	drw_type_provider_register("ftgles", drw_type_ftgles_draw, drw_type_ftgles_bbox);
+}
+
+void drw_type_ftgles_init()
 {
 
 	//ummm guess we don't need this?
 }
 
-void drw_type_size(int sz, int garbage)
+void drw_type_ftgles_size(int sz, int garbage)
 {
 	if (!font)
 	{
@@ -34,7 +39,7 @@ void drw_type_size(int sz, int garbage)
 	font->FaceSize(sz);
 }
 
-void drw_type_deinit()
+void drw_type_ftgles_deinit()
 {
 	if (font)
 	{
@@ -87,7 +92,7 @@ int drw_type_ftgles_load(const char* path)
 
 //extern "C"
 //{
-void drw_type_draw(const char* str)
+void drw_type_ftgles_draw(const char* str)
 {
 	if (!str)
 	{
@@ -142,8 +147,13 @@ void drw_type_draw(const char* str)
 }
 //}
 
-void drw_type_get_bbox(const char* str, unsigned int num, float* data)
+void drw_type_ftgles_bbox(const char* str, unsigned long num, float* data)
 {
+	if (!font)
+	{
+		printf("Error, bbox called on an unloaded font!\n");
+		return;
+	}
 	font->BBox(str, data[0], data[1], data[2], data[3], data[4], data[5]);
 
 	//ftglGetFontBBox(font, str, num, data);

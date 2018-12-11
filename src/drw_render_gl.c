@@ -13,6 +13,10 @@
 #include "drw_platform.h"
 #include <drw/drw.h>
 
+#ifdef DEBUG
+#include <drw/src/drw_log.h>
+#endif
+
 #include "ext/drw_ext_gpc.h"
 #include "type/drw_type.h"
 #include <gpc/gpc.h>
@@ -81,19 +85,16 @@
 #endif
 #endif
 
-#define TEXT_MAX 1024
 
 #include <math.h>
-#include <stdarg.h>
+//#include <stdarg.h>
 #include <stdbool.h>
 
 //  these things used to be part of the app, have to talk now from across
 // the sea
 
-static bool	 _ortho;
-static bool	 _screenspace;
-static int	  _text_size;
-static unsigned int _text_provider_type = -1;
+static bool _ortho;
+static bool _screenspace;
 
 static double _left       = -1;
 static double _right      = -1;
@@ -273,9 +274,10 @@ void drw_init()
 	{
 		circle_defs[i] = NULL;
 	}
-
+	/*
 	if (_text_provider_type == -1)
-		drw_type_set_provider(DRW_TEXT_PROVIDER_HPVEC);
+		drw_type_set_provider(DRW_TYPE_PROVIDER_HPVEC);
+*/
 
 	// glBlendEquation =
 	// (PFNGLBLENDEQUATIONPROC)wglGetProcAddress("glBlendEquation");
@@ -320,7 +322,7 @@ void drw_init()
 	//{
 	// const char* path = r_resource_load("vs-junk","otf");
 	//  r_font_load(path);
-	//    drw_type_size(72 * app_settings.scale_retina);
+	//    drw_type_set_size(72 * app_settings.scale_retina);
 	// }
 
 	drw_get_gl_error();
@@ -374,10 +376,10 @@ void drw_set_line_width(float v)
 
 	drw_get_gl_error();
 }
-
+/*
 void drw_type_set_provider(unsigned int type)
 {
-	if (type >= DRW_TEXT_PROVIDER_NONE)
+	if (type >= DRW_TYPE_PROVIDER_NONE)
 	{
 		drw_log("Invalid ask in %s", __func__);
 		return;
@@ -386,8 +388,9 @@ void drw_type_set_provider(unsigned int type)
 
 	_text_provider_type = type;
 }
-
-void drw_type_load(const char* path)
+*/
+/*
+void drw_type_load_ttf(const char* path)
 {
 
 // 0if ( path != NULL )
@@ -408,9 +411,10 @@ void drw_type_load(const char* path)
 	//	drw_type_ftgles_load(path);
 	//#endif
 
-	// drw_type_size(72);
+	// drw_type_set_size(72);
 	// }
 }
+*/
 
 void drw_blend_set(int v)
 {
@@ -1052,7 +1056,7 @@ void drw_axis_nice()
 	drw_rotate_z(120.0);
 	drw_pop();
 }
-
+/*
 int drw_type_get_size(void)
 {
 	return _text_size;
@@ -1061,15 +1065,17 @@ int drw_type_get_size(void)
 void drw_type_set_size(int sz, int resolution)
 {
 #ifdef DRW_ENABLE_FTGL
-	drw_type_size(sz, resolution);
+	//drw_type_ftgl_size(sz, resolution);
 #endif
-	_text_size = sz;
+	//_text_size = sz;
 }
 
-void drw_type(const char* format, ...)
+ */
+/*
+void drw_type_draw(const char* format, ...)
 {
-	if (_text_provider_type == DRW_TEXT_PROVIDER_NONE)
-		return;
+	//if (_text_provider_type == DRW_TYPE_PROVIDER_NONE)
+	//	return;
 
 	char buf[TEXT_MAX];
 	sprintf(buf, "%s", format);
@@ -1078,19 +1084,22 @@ void drw_type(const char* format, ...)
 	vsprintf(buf, format, args);
 	va_end(args);
 
+	drw_type_draw(buf);
+
+	
 	switch (_text_provider_type)
 	{
-	//case DRW_TEXT_PROVIDER_NONE:
+	//case DRW_TYPE_PROVIDER_NONE:
 	//	return;
 	//	break; //haha
-	case DRW_TEXT_PROVIDER_HPVEC:
+	case DRW_TYPE_PROVIDER_HPVEC:
 		drw_type_hpvec_draw(buf);
 		break;
-	case DRW_TEXT_PROVIDER_ASTEROIDS:
+	case DRW_TYPE_PROVIDER_ASTEROIDS:
 		drw_type_asteroids(buf);
 		break;
 
-	case DRW_TEXT_PROVIDER_FTGL:
+	case DRW_TYPE_PROVIDER_FTGL:
 	{
 #ifdef DRW_ENABLE_FTGL
 		drw_type_draw(buf);
@@ -1105,7 +1114,8 @@ void drw_type(const char* format, ...)
 	//	drw_type_draw(buf);
 	//
 	//#endif
-}
+	
+}*/
 
 /*
 void d_wsequence_e(WSequence* seq, int frame)

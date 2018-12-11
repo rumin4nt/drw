@@ -11,7 +11,7 @@
 
 #include "../drw_config.h"
 
-#ifdef DRW_TEXT_PROVIDER_ENABLE_HPVEC
+#ifdef DRW_TYPE_PROVIDER_ENABLE_HPVEC
 void drw_type_hpvec_initialize(void);
 
 #define HPVEC_FONT_SIZE 16

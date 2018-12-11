@@ -9,7 +9,7 @@
 #ifndef drw_type_hershey_h
 #define drw_type_hershey_h
 
-#ifdef DRW_TEXT_PROVIDER_ENABLE_HERSHEY
+#ifdef DRW_TYPE_PROVIDER_ENABLE_HERSHEY
 void drw_type_hershey_initialize(void);
 #endif
 

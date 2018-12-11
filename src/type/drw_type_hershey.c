@@ -8,7 +8,7 @@
 
 #include "drw_type_hershey.h"
 
-#ifdef DRW_TEXT_PROVIDER_ENABLE_HERSHEY
+#ifdef DRW_TYPE_PROVIDER_ENABLE_HERSHEY
 
 #include "../../drw.h"
 

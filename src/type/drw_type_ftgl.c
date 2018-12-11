@@ -23,13 +23,13 @@
 FTGLfont* font		= NULL;
 int       justification = 0;
 
-void drw_type_init()
+void drw_type_ftgl_init()
 {
 
 	// ummm guess we don't need this?
 }
 
-void drw_type_deinit()
+void drw_type_ftgl_deinit()
 {
 	if (font)
 	{
@@ -38,7 +38,7 @@ void drw_type_deinit()
 	font = NULL;
 }
 
-void drw_type_size(int sz, int resolution)
+void drw_type_ftgl_size(int sz, int resolution)
 {
 	//todo - eliminate this from public and force all font size through bottleneck
 	//	interface in drw.c
@@ -78,13 +78,13 @@ int drw_type_ftgl_load(const char* path)
 	if (!font)
 		return -1;
 
-	// drw_type_size(R_UI_FONT_SIZE * app_settings.scale_retina );
+	// drw_type_set_size(R_UI_FONT_SIZE * app_settings.scale_retina );
 
-	drw_type_size(D_FONT_SIZE, 144);
+	drw_type_set_size(D_FONT_SIZE, 144);
 	return 0;
 }
 
-void drw_type_draw(const char* str)
+void drw_type_ftgl_draw(const char* str)
 {
 
 	if (!font)
@@ -96,7 +96,7 @@ void drw_type_draw(const char* str)
 	}
 	// if ( !font )
 	//{
-	//	drw_type_load("data/ttf/terminus.ttf");
+	//	drw_type_load_ttf("data/ttf/terminus.ttf");
 	//}
 
 	if (drw_get_screenspace())
@@ -123,12 +123,12 @@ void drw_type_draw(const char* str)
 	// printf( "%d\n", ftglGetFontFaceSize(font) );
 }
 
-void drw_type_get_bbox(const char* str, unsigned int num, float* data)
+void drw_type_ftgl_get_bbox(const char* str, unsigned long num, float* data)
 {
 	ftglGetFontBBox(font, str, num, data);
 }
 
-double drw_type_get_width(const char* str)
+double drw_type_ftgl_get_width(const char* str)
 {
 	int  count = 0;
 	bool done  = false;

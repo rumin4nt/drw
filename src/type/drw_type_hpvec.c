@@ -14,8 +14,12 @@
 #include <stdbool.h>
 
 #ifdef DEBUG
+#include "../drw_log.h"
 #include <stdio.h>
+
 #endif
+
+#include "drw_type.h"
 
 #include <string.h>
 
@@ -26,10 +30,26 @@
 
  */
 
-#ifdef DRW_TEXT_PROVIDER_ENABLE_HPVEC
+#ifdef DRW_TYPE_PROVIDER_ENABLE_HPVEC
+// 	???
+#define HPVEC_GRID_SIZE 16
+static int alignment_h = DRW_TYPE_ALIGN_H_CENTER;
+static int alignment_v = DRW_TYPE_ALIGN_V_CENTER;
 
-static int alignment_h = DRW_TEXT_ALIGN_H_CENTER;
-static int alignment_v = DRW_TEXT_ALIGN_V_CENTER;
+void drw_type_hpvec_bbox(const char* text, unsigned long sz, float* data)
+{
+	data[0] = 0;
+	data[1] = 0;
+	data[2] = 0;
+	data[3] = sz * HPVEC_GRID_SIZE;
+	data[4] = HPVEC_GRID_SIZE;
+	data[5] = 0;
+}
+
+void drw_type_hpvec_initialize(void)
+{
+	drw_type_provider_register("hpvec", drw_type_hpvec_draw, drw_type_hpvec_bbox);
+}
 
 void drw_type_hpvec_set_alignment(int h, int v)
 {
@@ -75,17 +95,17 @@ void drw_type_hpvec_draw(const char* text)
 	int offy = 0;
 
 	unsigned long len = strlen(text);
-
+	/*
 	switch (alignment_h)
 	{
-	case DRW_TEXT_ALIGN_H_LEFT:
+	case DRW_TYPE_ALIGN_H_LEFT:
 		break;
-	case DRW_TEXT_ALIGN_H_CENTER:
+	case DRW_TYPE_ALIGN_H_CENTER:
 		offx += HPVEC_FONT_SIZE * len * -.5;
 		if (len % 2 == 0)
 			offx += HPVEC_FONT_SIZE * .25 * .5; //.3333333333;
 		break;
-	case DRW_TEXT_ALIGN_H_RIGHT:
+	case DRW_TYPE_ALIGN_H_RIGHT:
 		offx += HPVEC_FONT_SIZE * len * -1;
 
 		break;
@@ -95,21 +115,21 @@ void drw_type_hpvec_draw(const char* text)
 
 	switch (alignment_v)
 	{
-	case DRW_TEXT_ALIGN_V_TOP:
+	case DRW_TYPE_ALIGN_V_TOP:
 		offy = -HPVEC_FONT_SIZE;
 		break;
-	case DRW_TEXT_ALIGN_V_CENTER:
+	case DRW_TYPE_ALIGN_V_CENTER:
 		offy = HPVEC_FONT_SIZE * -.5;
 		offy += HPVEC_FONT_SIZE * .25 * -.5 * .5; //.3333333333;
 
 		break;
-	case DRW_TEXT_ALIGN_V_BOTTOM:
+	case DRW_TYPE_ALIGN_V_BOTTOM:
 		break;
 
 	default:
 		break;
 	}
-
+*/
 	drw_push();
 	int w, h;
 
@@ -185,14 +205,14 @@ void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 
 	switch (alignment_h)
 	{
-	case DRW_TEXT_ALIGN_H_LEFT:
+	case DRW_TYPE_ALIGN_H_LEFT:
 		break;
-	case DRW_TEXT_ALIGN_H_CENTER:
+	case DRW_TYPE_ALIGN_H_CENTER:
 		offx += HPVEC_FONT_SIZE * len * -.5;
 		if (len % 2 == 0)
 			offx += HPVEC_FONT_SIZE * .25 * .5; //.3333333333;
 		break;
-	case DRW_TEXT_ALIGN_H_RIGHT:
+	case DRW_TYPE_ALIGN_H_RIGHT:
 		offx += HPVEC_FONT_SIZE * len * -1;
 
 		break;
@@ -202,15 +222,15 @@ void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 
 	switch (alignment_v)
 	{
-	case DRW_TEXT_ALIGN_V_TOP:
+	case DRW_TYPE_ALIGN_V_TOP:
 		offy = -HPVEC_FONT_SIZE;
 		break;
-	case DRW_TEXT_ALIGN_V_CENTER:
+	case DRW_TYPE_ALIGN_V_CENTER:
 		offy = HPVEC_FONT_SIZE * -.5;
 		offy += HPVEC_FONT_SIZE * .25 * -.5 * .5; //.3333333333;
 
 		break;
-	case DRW_TEXT_ALIGN_V_BOTTOM:
+	case DRW_TYPE_ALIGN_V_BOTTOM:
 		break;
 
 	default:
