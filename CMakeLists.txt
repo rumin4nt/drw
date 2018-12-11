@@ -5,14 +5,14 @@ set(drw_VERSION_MAJOR 0)
 set(drw_VERSION_MINOR 0)
 set(drw_VERSION_PATCH 1)
 
-file(GLOB_RECURSE sources drw.c src/*.c)
+file(GLOB_RECURSE sources drw.c src/*.c src/*.cpp)
 
 link_directories(${CMAKE_BINARY_DIR}
                  ${CMAKE_SOURCE_DIR}/contrib/platform/darwin /usr/local/lib)
 
 add_library(drw STATIC ${sources})
 
-option(BuildLibrary "Build the brush library for embedding or linking" ON)
+option(BuildLibrary "Build the drw library for embedding or linking" ON)
 option(BuildDrwTest "BuildTest" OFF)
 option(BuildDocumentation "BuildDocumentation" OFF)
 
