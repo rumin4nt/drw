@@ -1,7 +1,6 @@
 
 
-extern "C"
-{
+extern "C" {
 #include <drw/drw.h>
 }
 
@@ -9,6 +8,7 @@ extern "C"
 
 #ifdef DRW_PLATFORM_IOS
 
+#ifdef DRW_TYPE_PROVIDER_ENABLE_FTGLES
 #include "drw_type_ftgles.h"
 //#include "../drw_log.h"
 #include "FTGL/ftgles.h"
@@ -159,4 +159,5 @@ void drw_type_ftgles_bbox(const char* str, unsigned long num, float* data)
 	//ftglGetFontBBox(font, str, num, data);
 }
 
+#endif
 #endif

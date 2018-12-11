@@ -57,6 +57,6 @@ void drw_type_load_ttf(const char* path);
 
 int  drw_type_provider_register(const char* ident, drw_type_draw_fun render, drw_type_bbox_fun bbox);
 int  drw_type_provider_count(void);
-void drw_type_provider_select(unsigned int index);
+void drw_type_provider_select(signed index);
 
 #endif /* drw_type_h */

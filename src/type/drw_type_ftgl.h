@@ -9,6 +9,8 @@
 #ifndef DRW_PLATFORM_WIN
 
 #ifdef DRW_TYPE_PROVIDER_ENABLE_FTGL
+//#error hi
+
 void drw_type_ftgl_initialize(void);
 #endif
 
@@ -18,7 +20,7 @@ void drw_type_ftgl_deinit(void);
 int  drw_type_ftgl_load(const char*);
 void drw_type_ftgl_draw(const char*);
 void drw_type_ftgl_size(int, int);
-void drw_type_ftgl_get_bbox(const char* str, unsigned long num, float* data);
+void drw_type_ftgl_bbox(const char* str, unsigned long num, float* data);
 
 /*
  typedef enum

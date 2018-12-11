@@ -8,11 +8,12 @@
 
 #include "drw_type.h"
 
-#ifdef DEBUG
+//#ifdef DEBUG
 #include "../drw_log.h"
-#endif
+//#endif
 
-#include "../drw_log.h"
+//#include "../drw_log.h"
+#include "../drw_config.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -21,6 +22,7 @@
 #else
 #include "drw_type_ftgl.h"
 #endif
+
 #define TEXT_MAX 1024
 #define PROVIDER_ID_MAX 32
 #include <stdarg.h>
@@ -37,11 +39,14 @@ drw_type_bbox_fun* bbox_funcs    = NULL;
 static int	 _text_size;
 const char**       provider_ids = NULL;
 
-void drw_type_provider_select(unsigned int index)
+void drw_type_provider_select(signed index)
 {
 	if (index < 0 || index >= num_providers)
+#ifdef DEBUG
 		return drw_log("Invalid font provider requested: %d [%d] \n", index, num_providers);
-
+#else
+		return;
+#endif
 	type_provider = index;
 }
 
@@ -56,7 +61,7 @@ void drw_type_init(void)
 #endif
 
 #ifdef DRW_TYPE_PROVIDER_ENABLE_FTGL
-	drw_type_ftgles_initialize();
+	drw_type_ftgl_initialize();
 #endif
 
 	drw_type_provider_select(0);
@@ -160,44 +165,45 @@ void drw_type_draw(const char* format, ...)
 	va_start(args, format);
 	vsprintf(buf, format, args);
 	va_end(args);
-	
+
 	float bounds[6];
 	drw_type_get_bbox(buf, strlen(buf), bounds);
 	//if ( align_x)
 	double wx = bounds[3] - bounds[0];
 	double wy = bounds[4] - bounds[1];
 	double wz = bounds[5] - bounds[2];
-	
+
 	drw_type_draw_fun fun = *draw_funcs[type_provider];
-	double tx =0, ty = 0;
-	
-	switch (align_x) {
-		case DRW_TYPE_ALIGN_H_LEFT:
-			tx = wx * -1;
-			break;
-		case DRW_TYPE_ALIGN_H_CENTER:
-			tx = wx * -.5;
-			break;
-		case DRW_TYPE_ALIGN_H_RIGHT:
-			//tx = 0;
-			break;
-		default:
-			break;
+	double		  tx = 0, ty = 0;
+
+	switch (align_x)
+	{
+	case DRW_TYPE_ALIGN_H_LEFT:
+		tx = wx * -1;
+		break;
+	case DRW_TYPE_ALIGN_H_CENTER:
+		tx = wx * -.5;
+		break;
+	case DRW_TYPE_ALIGN_H_RIGHT:
+		//tx = 0;
+		break;
+	default:
+		break;
 	}
-	
-	
-	switch (align_y) {
-		case DRW_TYPE_ALIGN_V_TOP:
-			//ty = wy * -1;
-			break;
-		case DRW_TYPE_ALIGN_V_CENTER:
-			ty = wy * -.5;
-			break;
-		case DRW_TYPE_ALIGN_V_BOTTOM:
-			ty = wy * -1;
-			break;
-		default:
-			break;
+
+	switch (align_y)
+	{
+	case DRW_TYPE_ALIGN_V_TOP:
+		//ty = wy * -1;
+		break;
+	case DRW_TYPE_ALIGN_V_CENTER:
+		ty = wy * -.5;
+		break;
+	case DRW_TYPE_ALIGN_V_BOTTOM:
+		ty = wy * -1;
+		break;
+	default:
+		break;
 	}
 	drw_push();
 	drw_translate2f(tx, ty);

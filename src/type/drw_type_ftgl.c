@@ -4,13 +4,14 @@
 
 //#include <r4/r4.h>
 
-#ifdef RPLATFORM_WIN
+#ifdef DRW_PLATFORM_WIN
 #include "stdafx.h"
 #endif
 
 #include "../../drw.h"
+#include <drw/src/drw_config.h>
 
-#ifndef RPLATFORM_WIN
+#ifndef DRW_PLATFORM_WIN
 
 #include <FTGL/ftgl.h>
 #include <assert.h>
@@ -22,6 +23,11 @@
 
 FTGLfont* font		= NULL;
 int       justification = 0;
+
+void drw_type_ftgl_initialize(void)
+{
+	drw_type_provider_register("ftgl", drw_type_ftgl_draw, drw_type_ftgl_bbox);
+}
 
 void drw_type_ftgl_init()
 {
@@ -123,7 +129,7 @@ void drw_type_ftgl_draw(const char* str)
 	// printf( "%d\n", ftglGetFontFaceSize(font) );
 }
 
-void drw_type_ftgl_get_bbox(const char* str, unsigned long num, float* data)
+void drw_type_ftgl_bbox(const char* str, unsigned long num, float* data)
 {
 	ftglGetFontBBox(font, str, num, data);
 }

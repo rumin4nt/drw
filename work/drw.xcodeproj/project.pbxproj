@@ -19,14 +19,20 @@
 		577DD21620D3546E00623919 /* drw_render_gl.h in Headers */ = {isa = PBXBuildFile; fileRef = 577DD21420D3546E00623919 /* drw_render_gl.h */; };
 		577DD21720D3546E00623919 /* drw_render.c in Sources */ = {isa = PBXBuildFile; fileRef = 577DD21520D3546E00623919 /* drw_render.c */; };
 		577DD21B20D3548D00623919 /* drw_render_gl.c in Sources */ = {isa = PBXBuildFile; fileRef = 577DD21920D3548D00623919 /* drw_render_gl.c */; };
-		57932B81213F1D99002BE104 /* drw_text_hershey.h in Headers */ = {isa = PBXBuildFile; fileRef = 57932B77213F1D98002BE104 /* drw_text_hershey.h */; };
-		57932B82213F1D99002BE104 /* drw_text_hpvec.c in Sources */ = {isa = PBXBuildFile; fileRef = 57932B78213F1D98002BE104 /* drw_text_hpvec.c */; };
-		57932B83213F1D99002BE104 /* drw_text_hershey.c in Sources */ = {isa = PBXBuildFile; fileRef = 57932B79213F1D98002BE104 /* drw_text_hershey.c */; };
-		57932B84213F1D99002BE104 /* drw_text_hpvec.h in Headers */ = {isa = PBXBuildFile; fileRef = 57932B7A213F1D98002BE104 /* drw_text_hpvec.h */; };
-		57932B85213F1D99002BE104 /* drw_text_asteroids.h in Headers */ = {isa = PBXBuildFile; fileRef = 57932B7B213F1D98002BE104 /* drw_text_asteroids.h */; };
-		57932B87213F1D99002BE104 /* drw_text_ftgl.h in Headers */ = {isa = PBXBuildFile; fileRef = 57932B7D213F1D98002BE104 /* drw_text_ftgl.h */; };
-		57932B88213F1D99002BE104 /* drw_text_asteroids.c in Sources */ = {isa = PBXBuildFile; fileRef = 57932B7E213F1D98002BE104 /* drw_text_asteroids.c */; };
-		57932B8A213F1D99002BE104 /* drw_text_ftgl.c in Sources */ = {isa = PBXBuildFile; fileRef = 57932B80213F1D99002BE104 /* drw_text_ftgl.c */; };
+		57939B2521BF56C500F74BF4 /* drw_type_ftgl.h in Headers */ = {isa = PBXBuildFile; fileRef = 57939B1921BF56C400F74BF4 /* drw_type_ftgl.h */; };
+		57939B2621BF56C500F74BF4 /* drw_type_hershey.h in Headers */ = {isa = PBXBuildFile; fileRef = 57939B1A21BF56C500F74BF4 /* drw_type_hershey.h */; };
+		57939B2721BF56C500F74BF4 /* drw_type_asteroids.h in Headers */ = {isa = PBXBuildFile; fileRef = 57939B1B21BF56C500F74BF4 /* drw_type_asteroids.h */; };
+		57939B2821BF56C500F74BF4 /* drw_type.c in Sources */ = {isa = PBXBuildFile; fileRef = 57939B1C21BF56C500F74BF4 /* drw_type.c */; };
+		57939B2921BF56C500F74BF4 /* drw_type_ftgl.c in Sources */ = {isa = PBXBuildFile; fileRef = 57939B1D21BF56C500F74BF4 /* drw_type_ftgl.c */; };
+		57939B2A21BF56C500F74BF4 /* drw_type_ftgles.h in Headers */ = {isa = PBXBuildFile; fileRef = 57939B1E21BF56C500F74BF4 /* drw_type_ftgles.h */; };
+		57939B2B21BF56C500F74BF4 /* drw_type_hpvec.c in Sources */ = {isa = PBXBuildFile; fileRef = 57939B1F21BF56C500F74BF4 /* drw_type_hpvec.c */; };
+		57939B2C21BF56C500F74BF4 /* drw_type_ftgles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57939B2021BF56C500F74BF4 /* drw_type_ftgles.cpp */; };
+		57939B2D21BF56C500F74BF4 /* drw_type_hershey.c in Sources */ = {isa = PBXBuildFile; fileRef = 57939B2121BF56C500F74BF4 /* drw_type_hershey.c */; };
+		57939B2E21BF56C500F74BF4 /* drw_type_hpvec.h in Headers */ = {isa = PBXBuildFile; fileRef = 57939B2221BF56C500F74BF4 /* drw_type_hpvec.h */; };
+		57939B2F21BF56C500F74BF4 /* drw_type.h in Headers */ = {isa = PBXBuildFile; fileRef = 57939B2321BF56C500F74BF4 /* drw_type.h */; };
+		57939B3021BF56C500F74BF4 /* drw_type_asteroids.c in Sources */ = {isa = PBXBuildFile; fileRef = 57939B2421BF56C500F74BF4 /* drw_type_asteroids.c */; };
+		57939B3B21BF584B00F74BF4 /* drw_log.h in Headers */ = {isa = PBXBuildFile; fileRef = 57939B3921BF584B00F74BF4 /* drw_log.h */; };
+		57939B3C21BF584B00F74BF4 /* drw_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 57939B3A21BF584B00F74BF4 /* drw_log.c */; };
 		57967B6120D17B3000003F66 /* drw_export.h in Headers */ = {isa = PBXBuildFile; fileRef = 57967B5F20D17B3000003F66 /* drw_export.h */; };
 		57967B6220D17B3000003F66 /* drw_export.c in Sources */ = {isa = PBXBuildFile; fileRef = 57967B6020D17B3000003F66 /* drw_export.c */; };
 		57BDF7E620AC7CD1004C154E /* drw_wobject_ops.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */; };
@@ -52,14 +58,20 @@
 		577DD21420D3546E00623919 /* drw_render_gl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_render_gl.h; sourceTree = "<group>"; };
 		577DD21520D3546E00623919 /* drw_render.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_render.c; sourceTree = "<group>"; };
 		577DD21920D3548D00623919 /* drw_render_gl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_render_gl.c; sourceTree = "<group>"; };
-		57932B77213F1D98002BE104 /* drw_text_hershey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_text_hershey.h; sourceTree = "<group>"; };
-		57932B78213F1D98002BE104 /* drw_text_hpvec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_text_hpvec.c; sourceTree = "<group>"; };
-		57932B79213F1D98002BE104 /* drw_text_hershey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_text_hershey.c; sourceTree = "<group>"; };
-		57932B7A213F1D98002BE104 /* drw_text_hpvec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_text_hpvec.h; sourceTree = "<group>"; };
-		57932B7B213F1D98002BE104 /* drw_text_asteroids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_text_asteroids.h; sourceTree = "<group>"; };
-		57932B7D213F1D98002BE104 /* drw_text_ftgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_text_ftgl.h; sourceTree = "<group>"; };
-		57932B7E213F1D98002BE104 /* drw_text_asteroids.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_text_asteroids.c; sourceTree = "<group>"; };
-		57932B80213F1D99002BE104 /* drw_text_ftgl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_text_ftgl.c; sourceTree = "<group>"; };
+		57939B1921BF56C400F74BF4 /* drw_type_ftgl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_type_ftgl.h; sourceTree = "<group>"; };
+		57939B1A21BF56C500F74BF4 /* drw_type_hershey.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_type_hershey.h; sourceTree = "<group>"; };
+		57939B1B21BF56C500F74BF4 /* drw_type_asteroids.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_type_asteroids.h; sourceTree = "<group>"; };
+		57939B1C21BF56C500F74BF4 /* drw_type.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_type.c; sourceTree = "<group>"; };
+		57939B1D21BF56C500F74BF4 /* drw_type_ftgl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_type_ftgl.c; sourceTree = "<group>"; };
+		57939B1E21BF56C500F74BF4 /* drw_type_ftgles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_type_ftgles.h; sourceTree = "<group>"; };
+		57939B1F21BF56C500F74BF4 /* drw_type_hpvec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_type_hpvec.c; sourceTree = "<group>"; };
+		57939B2021BF56C500F74BF4 /* drw_type_ftgles.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = drw_type_ftgles.cpp; sourceTree = "<group>"; };
+		57939B2121BF56C500F74BF4 /* drw_type_hershey.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_type_hershey.c; sourceTree = "<group>"; };
+		57939B2221BF56C500F74BF4 /* drw_type_hpvec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_type_hpvec.h; sourceTree = "<group>"; };
+		57939B2321BF56C500F74BF4 /* drw_type.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_type.h; sourceTree = "<group>"; };
+		57939B2421BF56C500F74BF4 /* drw_type_asteroids.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_type_asteroids.c; sourceTree = "<group>"; };
+		57939B3921BF584B00F74BF4 /* drw_log.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_log.h; sourceTree = "<group>"; };
+		57939B3A21BF584B00F74BF4 /* drw_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_log.c; sourceTree = "<group>"; };
 		57967B5F20D17B3000003F66 /* drw_export.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_export.h; sourceTree = "<group>"; };
 		57967B6020D17B3000003F66 /* drw_export.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_export.c; sourceTree = "<group>"; };
 		57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_wobject_ops.h; sourceTree = "<group>"; };
@@ -145,6 +157,8 @@
 			isa = PBXGroup;
 			children = (
 				5767C01020DC64870022A676 /* hacks */,
+				57939B3A21BF584B00F74BF4 /* drw_log.c */,
+				57939B3921BF584B00F74BF4 /* drw_log.h */,
 				57BDF80A20ACA91E004C154E /* drw_config.h */,
 				57967B6020D17B3000003F66 /* drw_export.c */,
 				57967B5F20D17B3000003F66 /* drw_export.h */,
@@ -169,14 +183,18 @@
 		57BDF80B20ACA9A0004C154E /* type */ = {
 			isa = PBXGroup;
 			children = (
-				57932B7E213F1D98002BE104 /* drw_text_asteroids.c */,
-				57932B7B213F1D98002BE104 /* drw_text_asteroids.h */,
-				57932B80213F1D99002BE104 /* drw_text_ftgl.c */,
-				57932B7D213F1D98002BE104 /* drw_text_ftgl.h */,
-				57932B79213F1D98002BE104 /* drw_text_hershey.c */,
-				57932B77213F1D98002BE104 /* drw_text_hershey.h */,
-				57932B78213F1D98002BE104 /* drw_text_hpvec.c */,
-				57932B7A213F1D98002BE104 /* drw_text_hpvec.h */,
+				57939B2421BF56C500F74BF4 /* drw_type_asteroids.c */,
+				57939B1B21BF56C500F74BF4 /* drw_type_asteroids.h */,
+				57939B1D21BF56C500F74BF4 /* drw_type_ftgl.c */,
+				57939B1921BF56C400F74BF4 /* drw_type_ftgl.h */,
+				57939B2021BF56C500F74BF4 /* drw_type_ftgles.cpp */,
+				57939B1E21BF56C500F74BF4 /* drw_type_ftgles.h */,
+				57939B2121BF56C500F74BF4 /* drw_type_hershey.c */,
+				57939B1A21BF56C500F74BF4 /* drw_type_hershey.h */,
+				57939B1F21BF56C500F74BF4 /* drw_type_hpvec.c */,
+				57939B2221BF56C500F74BF4 /* drw_type_hpvec.h */,
+				57939B1C21BF56C500F74BF4 /* drw_type.c */,
+				57939B2321BF56C500F74BF4 /* drw_type.h */,
 			);
 			path = type;
 			sourceTree = "<group>";
@@ -209,20 +227,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				577DD21620D3546E00623919 /* drw_render_gl.h in Headers */,
+				57939B2621BF56C500F74BF4 /* drw_type_hershey.h in Headers */,
 				57BDF7E620AC7CD1004C154E /* drw_wobject_ops.h in Headers */,
 				57BDF7F220AC7CD1004C154E /* drw_point.h in Headers */,
-				57932B81213F1D99002BE104 /* drw_text_hershey.h in Headers */,
-				57932B85213F1D99002BE104 /* drw_text_asteroids.h in Headers */,
+				57939B2F21BF56C500F74BF4 /* drw_type.h in Headers */,
+				57939B2521BF56C500F74BF4 /* drw_type_ftgl.h in Headers */,
 				5703DBA120ACBD5C007E1800 /* gpc.h in Headers */,
+				57939B3B21BF584B00F74BF4 /* drw_log.h in Headers */,
 				57BDF80920ACA86A004C154E /* drw_platform.h in Headers */,
 				57BDF7ED20AC7CD1004C154E /* drw_primitives.h in Headers */,
+				57939B2A21BF56C500F74BF4 /* drw_type_ftgles.h in Headers */,
+				57939B2E21BF56C500F74BF4 /* drw_type_hpvec.h in Headers */,
 				577858CD20B3661E00218129 /* vector.h in Headers */,
 				57967B6120D17B3000003F66 /* drw_export.h in Headers */,
 				5703D74C20ACBCBD007E1800 /* drw_ext_gpc.h in Headers */,
 				5741595F20D4221100E5498B /* drw_render.h in Headers */,
-				57932B87213F1D99002BE104 /* drw_text_ftgl.h in Headers */,
-				57932B84213F1D99002BE104 /* drw_text_hpvec.h in Headers */,
 				5767C01420DC64870022A676 /* drw_snoop.h in Headers */,
+				57939B2721BF56C500F74BF4 /* drw_type_asteroids.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,21 +338,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57939B2B21BF56C500F74BF4 /* drw_type_hpvec.c in Sources */,
+				57939B3021BF56C500F74BF4 /* drw_type_asteroids.c in Sources */,
 				577DD21B20D3548D00623919 /* drw_render_gl.c in Sources */,
+				57939B2921BF56C500F74BF4 /* drw_type_ftgl.c in Sources */,
 				57BDF7EE20AC7CD1004C154E /* drw_wobject_ops.c in Sources */,
-				57932B82213F1D99002BE104 /* drw_text_hpvec.c in Sources */,
-				57932B83213F1D99002BE104 /* drw_text_hershey.c in Sources */,
 				57E6659920F2CB54006E5BB2 /* drw.c in Sources */,
 				57967B6220D17B3000003F66 /* drw_export.c in Sources */,
 				5703DBA020ACBD5C007E1800 /* gpc.c in Sources */,
+				57939B2821BF56C500F74BF4 /* drw_type.c in Sources */,
+				57939B2D21BF56C500F74BF4 /* drw_type_hershey.c in Sources */,
 				57BDF7E720AC7CD1004C154E /* drw_point.c in Sources */,
 				5767C01320DC64870022A676 /* drw_snoop.c in Sources */,
-				57932B8A213F1D99002BE104 /* drw_text_ftgl.c in Sources */,
 				577858CC20B3661E00218129 /* vector.c in Sources */,
 				57BDF7F420AC7CD1004C154E /* drw_primitives.c in Sources */,
+				57939B2C21BF56C500F74BF4 /* drw_type_ftgles.cpp in Sources */,
 				577DD21720D3546E00623919 /* drw_render.c in Sources */,
+				57939B3C21BF584B00F74BF4 /* drw_log.c in Sources */,
 				5703D74D20ACBCBD007E1800 /* drw_ext_gpc.c in Sources */,
-				57932B88213F1D99002BE104 /* drw_text_asteroids.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
