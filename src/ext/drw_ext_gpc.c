@@ -135,12 +135,12 @@ void drw_gpc_tristrip(void* dat)
 
 	for (s = 0; s < tri->num_strips; s++)
 	{
-
 		gpc_vertex_list str = tri->strip[s];
-		GLfloat*	arr = malloc(sizeof(GLfloat) * str.num_vertices * 2);
 
 		if (str.num_vertices < 2)
 			continue;
+
+		GLfloat*	arr = calloc(str.num_vertices * 2, sizeof(GLfloat));
 
 		for (v = 0, j = 0; v < str.num_vertices; v++, j += 2)
 		{
