@@ -85,7 +85,6 @@
 #endif
 #endif
 
-
 #include <math.h>
 //#include <stdarg.h>
 #include <stdbool.h>
@@ -246,9 +245,9 @@ int drw_get_gl_error()
 		drw_log("GL_INVALID_OPERATION");
 		break;
 
-		// case GL_INVALID_FRAMEBUFFER_OPERATION:
-		//    printf("invalid framebuffer\n");
-		//    break;
+	// case GL_INVALID_FRAMEBUFFER_OPERATION:
+	//    printf("invalid framebuffer\n");
+	//    break;
 
 	case GL_OUT_OF_MEMORY:
 		drw_log("out of memory");
@@ -902,7 +901,7 @@ void drw_scale_z(float z)
  }
 
  */
-void drw_translate_rvec(RVec* v)
+void drw_translate_rvec(VVec* v)
 {
 	glTranslatef(v->x, v->y, v->z);
 }
@@ -1086,7 +1085,7 @@ void drw_type_draw(const char* format, ...)
 
 	drw_type_draw(buf);
 
-	
+
 	switch (_text_provider_type)
 	{
 	//case DRW_TYPE_PROVIDER_NONE:
@@ -1114,7 +1113,7 @@ void drw_type_draw(const char* format, ...)
 	//	drw_type_draw(buf);
 	//
 	//#endif
-	
+
 }*/
 
 /*
@@ -2215,13 +2214,13 @@ void drw_setup_view_persp()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-	// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
-	// near, far);  glFrustum(left,right,bottom,top,near, far);
-	//#ifdef DRW_PLATFORM_WIN
+// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
+// near, far);  glFrustum(left,right,bottom,top,near, far);
+//#ifdef DRW_PLATFORM_WIN
 
-	//	printf("glu stuff doesn't link on windows >:[\n");
-	//#else
-	/*
+//	printf("glu stuff doesn't link on windows >:[\n");
+//#else
+/*
 	 _l = left;
 	_r = right;
 	_t = top;

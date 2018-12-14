@@ -64,7 +64,11 @@ void drw_type_init(void)
 	drw_type_ftgl_initialize();
 #endif
 
-	drw_type_provider_select(0);
+	int n = drw_type_provider_count();
+	if ( n > 0 )
+		drw_type_provider_select(n-1);
+	
+	drw_type_set_align(DRW_TYPE_ALIGN_H_RIGHT, DRW_TYPE_ALIGN_V_BOTTOM);
 }
 
 void drw_type_deinit(void)

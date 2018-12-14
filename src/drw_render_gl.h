@@ -21,13 +21,21 @@
 #include "drw_dummy.h"
 #else
 
-#include <grdn/grdn.h>
+//#include <grdn/grdn.h>
 #include <r4/src/core/r_color.h>
 
 //#include <r4/r4.h>
 #endif
 
 //#include <wsh/wsh.h>
+
+//	this is HORRIBLE
+#include <grdn/src/env/g_transform.h>
+#include <r4/src/geo/r_object.h>
+#include <r4/src/geo/r_rect.h>
+#include <r4/src/geo/r_vec.h>
+#include <wsh/src/geo/wsh_object.h>
+#include <vbl/src/geo/v_vec.h>
 
 //#include <r4/src/core/d_math.h>
 //#include <grdn/grdn.h>
@@ -147,7 +155,8 @@ void drw_translate_x(float);
 void drw_translate_y(float);
 void drw_translate_z(float);
 // void drw_translate_vec2(Vec2* vec);
-void drw_translate_rvec(RVec* vec);
+
+void drw_translate_rvec(VVec* vec);
 void drw_translate_vec3(vec3_t vec);
 void drw_translate_rp(RPoint p);
 void drw_translate_rp3(RPoint3 p);
