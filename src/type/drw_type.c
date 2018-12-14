@@ -43,7 +43,7 @@ void drw_type_provider_select(signed index)
 {
 	if (index < 0 || index >= num_providers)
 #ifdef DEBUG
-		return drw_log("Invalid font provider requested: %d [%d] \n", index, num_providers);
+		drw_log("Invalid font provider requested: %d [%d] \n", index, num_providers);
 #else
 		return;
 #endif
@@ -65,9 +65,9 @@ void drw_type_init(void)
 #endif
 
 	int n = drw_type_provider_count();
-	if ( n > 0 )
-		drw_type_provider_select(n-1);
-	
+	if (n > 0)
+		drw_type_provider_select(n - 1);
+
 	drw_type_set_align(DRW_TYPE_ALIGN_H_RIGHT, DRW_TYPE_ALIGN_V_BOTTOM);
 }
 
@@ -134,10 +134,15 @@ int drw_type_provider_register(const char* ident, drw_type_draw_fun render, drw_
 void drw_type_get_bbox(const char* text, unsigned long sz, float* bounds)
 {
 	if (type_provider == -1)
-		return drw_log("NO type provider specified, return.");
-
+	{
+		drw_log("NO type provider specified, return.");
+		return;
+	}
 	if (num_providers == 0)
-		return drw_log("NO providers registered, return.");
+	{
+		drw_log("NO providers registered, return.");
+		return;
+	}
 
 	drw_type_bbox_fun fun = bbox_funcs[type_provider];
 	(*fun)(text, sz, bounds);
@@ -155,11 +160,14 @@ void drw_type_get_bbox(const char* text, unsigned long sz, float* bounds)
 void drw_type_draw(const char* format, ...)
 {
 	if (type_provider == -1)
-		return drw_log("NO type provider specified, return.");
 
+	{
+		drw_log("NO type provider specified, return.");
+	}
 	if (num_providers == 0)
-		return drw_log("NO providers registered, return.");
-
+	{
+		drw_log("NO providers registered, return.");
+	}
 	//if (_text_provider_type == DRW_TYPE_PROVIDER_NONE)
 	//	return;
 

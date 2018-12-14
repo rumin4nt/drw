@@ -8,27 +8,26 @@
 
 #include "drw_log.h"
 
-#define DRW_LOG_MAX 256
 #include <stdarg.h>
 
-#ifndef DEBUG
-void drw_log(char* format, ...)
-{
-	return;
-}
-#else
+#ifdef DEBUG
+#include <stdio.h>
 
-void drw_log(char* format, ...)
-{
+/*
 
+ #define DRW_LOG_MAX 256
+ void drw_log(char* format, ...)
+{
+	
 	char buf[DRW_LOG_MAX];
 	sprintf(buf, "%s", format);
 	va_list args;
 	va_start(args, format);
 	vsprintf(buf, format, args);
 	va_end(args);
-
+	
 	printf("[drw ]: %s\n", buf);
 }
+*/
 
 #endif

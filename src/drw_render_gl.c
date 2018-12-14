@@ -13,9 +13,9 @@
 #include "drw_platform.h"
 #include <drw/drw.h>
 
-#ifdef DEBUG
+//#ifdef DEBUG
 #include <drw/src/drw_log.h>
-#endif
+//#endif
 
 #include "ext/drw_ext_gpc.h"
 #include "type/drw_type.h"
@@ -233,7 +233,9 @@ int drw_get_gl_error()
 		break;
 
 	case GL_INVALID_ENUM:
-		drw_log("GL_INVALID_ENUM");
+#ifdef DEBUG
+			drw_log("GL_INVALID_ENUM");
+#endif
 		break;
 
 	case GL_INVALID_VALUE:
@@ -2417,14 +2419,16 @@ void drw_set_circle_precision(int v)
 				false;
 			if (!emit_warning_about_high_precision_circles_once)
 			{
-				char buf[256];
-				sprintf(buf,
-					"are you sure you want a circle this "
-					"precise? (%d)\nsetting circ to max %d",
-					v, override_circle_limit);
+//				char buf[256];
+//				sprintf(buf,
+//					"are you sure you want a circle this "
+//					"precise? (%d)\nsetting circ to max %d",
+//					v, override_circle_limit);
 				// printf("are you sure you want a circle this
 				// precise?\n");
-				drw_log(buf);
+				drw_log("are you sure you want a circle this "
+					"precise? (%d)\nsetting circ to max %d",
+					v, override_circle_limit);
 				emit_warning_about_high_precision_circles_once =
 				    true;
 			}
