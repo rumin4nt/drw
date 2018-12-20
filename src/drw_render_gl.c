@@ -176,7 +176,7 @@ static double alpha_mult = 1.;
 // This will identify our vertex buffer
 GLuint vertexbuffer;
 
-// static bool initted = false;
+// static bool initialized = false;
 
 /*
 
@@ -234,7 +234,7 @@ int drw_get_gl_error()
 
 	case GL_INVALID_ENUM:
 #ifdef DEBUG
-			drw_log("GL_INVALID_ENUM");
+		drw_log("GL_INVALID_ENUM");
 #endif
 		break;
 
@@ -2419,11 +2419,11 @@ void drw_set_circle_precision(int v)
 				false;
 			if (!emit_warning_about_high_precision_circles_once)
 			{
-//				char buf[256];
-//				sprintf(buf,
-//					"are you sure you want a circle this "
-//					"precise? (%d)\nsetting circ to max %d",
-//					v, override_circle_limit);
+				//				char buf[256];
+				//				sprintf(buf,
+				//					"are you sure you want a circle this "
+				//					"precise? (%d)\nsetting circ to max %d",
+				//					v, override_circle_limit);
 				// printf("are you sure you want a circle this
 				// precise?\n");
 				drw_log("are you sure you want a circle this "
@@ -2503,14 +2503,14 @@ void drw_cube(float r)
 
 extern char** app_argv;
 extern int    app_argc;
-static bool   glut_initted = false;
+static bool   glut_initialized = false;
 
 void _check_glut_init(void)
 {
-	if (glut_initted)
+	if (glut_initialized)
 		return;
 	drw_glut_init();
-	glut_initted = true;
+	glut_initialized = true;
 }
 
 void drw_glut_init(void)

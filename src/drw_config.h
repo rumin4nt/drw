@@ -61,13 +61,17 @@
 #endif
 
 #ifdef DRW_PLATFORM_IOS
+#ifndef TARGET_IPHONE_SIMULATOR
 #define DRW_ENABLE_FTGLES
+#endif
 
 #define DRW_VERTEX_POINTER_IDENT GL_FLOAT
 #else
 
 //#define DRW_ENABLE_PNG_SCREENSHOT
+#ifndef DRW_PLATFORM_IOS
 #define DRW_ENABLE_FTGL
+#endif
 
 //#ifndef DRW_PLATFORM_WIN
 //#error fuck
@@ -77,7 +81,11 @@
 #endif
 
 #ifdef DRW_PLATFORM_IOS
+#include <TargetConditionals.h>
+#ifndef TARGET_IPHONE_SIMULATOR
 #define DRW_TYPE_PROVIDER_ENABLE_FTGLES
+#endif
+
 #else
 #define DRW_TYPE_PROVIDER_ENABLE_FTGL
 #endif

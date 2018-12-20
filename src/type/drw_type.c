@@ -17,9 +17,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#ifdef DRW_PLATFORM_IOS
+#ifdef DRW_TYPE_PROVIDER_ENABLE_FTGLES
 #include "drw_type_ftgles.h"
-#else
+#endif
+
+#ifndef DRW_PLATFORM_IOS
 #include "drw_type_ftgl.h"
 #endif
 
@@ -97,11 +99,11 @@ int drw_type_get_size(void)
 void drw_type_set_size(int sz, int resolution)
 {
 #ifdef DRW_ENABLE_FTGLES
-
 	drw_type_ftgles_size(sz, resolution);
-#else
+#endif
+	
+#ifdef DRW_ENABLE_FTGL
 	drw_type_ftgl_size(sz, resolution);
-
 #endif
 	_text_size = sz;
 }
@@ -227,9 +229,11 @@ void drw_type_draw(const char* format, ...)
 
 void drw_type_load_ttf(const char* path)
 {
-#ifdef DRW_PLATFORM_IOS
+#ifdef DRW_ENABLE_FTGLES
 	drw_type_ftgles_load(path);
-#else
+#endif
+	
+#ifdef DRW_ENABLE_FTGL
 	drw_type_ftgl_load(path);
 #endif
 }

@@ -13,11 +13,11 @@
 
 #include <stdbool.h>
 
-#ifdef DEBUG
+//#ifdef DEBUG
 #include "../drw_log.h"
-#include <stdio.h>
+//#include <stdio.h>
 
-#endif
+//#endif
 
 #include "drw_type.h"
 

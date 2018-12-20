@@ -9,11 +9,11 @@
 #ifndef drw_log_h
 #define drw_log_h
 
-#define DEBUG 3
+//#define DEBUG 3
 
 #if defined(DEBUG) && DEBUG > 0
-#define drw_log(fmt, args...) fprintf(stderr, "DEBUG: %s:%d:%s(): \n" fmt, \
-__FILE__, __LINE__, __func__, ##args)
+#define drw_log(fmt, args...) fprintf(stderr, "DEBUG: %s:%d:%s(): " fmt, \
+__FILE__, __LINE__, __func__, ##args, "\n")
 #else
 #define drw_log(fmt, args...) /* Don't do anything in release builds */
 #endif
