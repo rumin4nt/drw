@@ -183,8 +183,8 @@ void drw_type_hpvec_draw(const char* text)
 
 static HPGlyph* render_hp_glyph(unsigned long idx)
 {
-	if (idx < 0)
-		return NULL;
+	//if (idx < 0)
+	//	return NULL;
 
 	const int* points = hp1345a[idx];
 	int	num    = hp1345a_sizes[idx];
