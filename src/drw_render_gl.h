@@ -34,8 +34,8 @@
 #include <r4/src/geo/r_object.h>
 #include <r4/src/geo/r_rect.h>
 #include <r4/src/geo/r_vec.h>
-#include <wsh/src/geo/wsh_object.h>
 #include <vbl/src/geo/v_vec.h>
+#include <wsh/src/geo/wsh_object.h>
 
 //#include <r4/src/core/d_math.h>
 //#include <grdn/grdn.h>
@@ -266,8 +266,10 @@ void drw_setup_view_persp(void);
 void drw_calculate_scale(void);
 void drw_set_retina(double);
 void drw_set_downsample(double);
-void drw_set_circle_precision_override_limit(bool v);
-void drw_set_circle_precision(int sides);
+
+void drw_circle_precision_set_override_limit(bool v);
+void drw_circle_precision_set(int sides);
+void drw_circle_precision_pop(void);
 
 void drw_fill_set(bool);
 void drw_fill_pop(void);

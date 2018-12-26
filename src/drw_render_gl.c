@@ -46,7 +46,7 @@
 #define glRotated glRotatef
 //#endif
 
-//#include "../core/r_app_ios.h"
+//#include "../app/r_app_ios.h"
 
 //#include <OpenGLES/ES1/gl.h>
 //#include <OpenGLES/ES3/gl.h>
@@ -147,7 +147,8 @@ static RLine3* _snoop_rline3_from_f(float* data, int num)
 static int override_circle_limit = PRECISION_WARNING_LIMIT;
 
 static float* circle_defs[MAX_CIRCLE_PRECISION];
-static int    circle_precision = 12;
+static int    circle_precision  = 12;
+static int    _circle_precision = 12;
 
 // static double scale_factor_retina = 1;
 //  these will be leaving
@@ -1967,10 +1968,13 @@ void drw_rgbtri(double gamma)
 	glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(GLubyte),
 		       GL_UNSIGNED_BYTE, indices);
 
-	drw_set_circle_precision(3);
+	int prev = _circle_precision;
+	drw_circle_precision_set(3);
+
 	drw_fill_set(true);
 	drw_circle(1);
 	drw_fill_pop();
+	drw_circle_precision_set(prev);
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
@@ -2399,18 +2403,19 @@ void drw_calculate_scale()
 	// glLineWidth(app_settings.scale_retina);
 }
 
-void drw_set_circle_precision_override_limit(bool v)
+void drw_circle_precision_set_override_limit(bool v)
 {
 	override_circle_limit = v;
 }
 
-void drw_set_circle_precision(int v)
+void drw_circle_precision_set(int v)
 {
 	if (v > PRECISION_WARNING_LIMIT)
 	{
 		if (v < override_circle_limit)
 		{
-			circle_precision = v;
+			_circle_precision = circle_precision;
+			circle_precision  = v;
 		}
 		else
 		{
@@ -2437,7 +2442,13 @@ void drw_set_circle_precision(int v)
 			return;
 		}
 	}
-	circle_precision = v;
+	_circle_precision = circle_precision;
+	circle_precision  = v;
+}
+
+void drw_circle_precision_pop(void)
+{
+	circle_precision = _circle_precision;
 }
 
 void drw_fill_pop()

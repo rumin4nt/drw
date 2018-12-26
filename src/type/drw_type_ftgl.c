@@ -17,7 +17,7 @@
 #include <assert.h>
 
 // LL#include "../ui/r_sizing.h"
-//#include "../core/r_app.h"
+//#include "../app/r_app.h"
 
 // extern AppSettings app_settings;
 
