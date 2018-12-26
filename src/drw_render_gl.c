@@ -2041,12 +2041,12 @@ void drw_ortho_set(bool val)
 	_ortho = val;
 }
 
-bool drw_get_screenspace(void)
+bool drw_screenspace_get(void)
 {
 	return _screenspace;
 }
 
-void drw_set_screenspace(bool val)
+void drw_screenspace_set(bool val)
 {
 #ifdef DEBUG
 	drw_log("Setting screenspace to %d", val);
@@ -2346,7 +2346,7 @@ void drw_get_screencoords(double* l, double* r, double* t, double* b, double* n,
 		*f = _far;
 }
 
-void drw_set_screensize(double w, double h)
+void drw_screensize_set(double w, double h)
 {
 	// printf("Setting renderer to %f %f\n", w, h);
 	window_width  = w;
@@ -2354,6 +2354,12 @@ void drw_set_screensize(double w, double h)
 
 	// drw_calculate_scale();
 	// drw_setup_view();
+}
+
+void drw_screensize_get(unsigned int* w, unsigned int* h)
+{
+	*w = window_width;
+	*h = window_height;
 }
 
 void drw_set_framebuffer(double w, double h)

@@ -8,7 +8,6 @@ extern "C" {
 
 #ifdef DRW_PLATFORM_IOS
 
-
 #ifdef DRW_TYPE_PROVIDER_ENABLE_FTGLES
 #include "drw_type_ftgles.h"
 //#include "../drw_log.h"
@@ -107,7 +106,7 @@ void drw_type_ftgles_draw(const char* str)
 	}
 
 	/*
-		 if ( drw_get_screenspace() )
+		 if ( drw_screenspace_get() )
 		 {
 		 ftglRenderFont(font, str, FTGL_RENDER_ALL);
 
@@ -125,7 +124,7 @@ void drw_type_ftgles_draw(const char* str)
 		 drw_pop();
 		 }
 		 */
-	if (drw_get_screenspace())
+	if (drw_screenspace_get())
 	{
 		font->Render(str);
 	}

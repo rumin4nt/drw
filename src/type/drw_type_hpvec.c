@@ -135,7 +135,7 @@ void drw_type_hpvec_draw(const char* text)
 	drw_push();
 	int w, h;
 
-	if (!drw_get_screenspace())
+	if (!drw_screenspace_get())
 	{
 		drw_query_framebuffer(&w, &h);
 
@@ -171,7 +171,7 @@ void drw_type_hpvec_draw(const char* text)
 		i++;
 	}
 
-	//	if ( !drw_get_screenspace() )
+	//	if ( !drw_screenspace_get() )
 	////
 	//{
 	//	drw_pop();
@@ -244,7 +244,7 @@ void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 	*ox = offx;
 	*oy = offy;
 
-	if (!drw_get_screenspace())
+	if (!drw_screenspace_get())
 	{
 		drw_query_framebuffer(&w, &h);
 

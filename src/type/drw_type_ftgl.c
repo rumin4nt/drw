@@ -105,7 +105,7 @@ void drw_type_ftgl_draw(const char* str)
 	//	drw_type_load_ttf("data/ttf/terminus.ttf");
 	//}
 
-	if (drw_get_screenspace())
+	if (drw_screenspace_get())
 	{
 		//ftglRenderFont(font, str, FTGL_RENDER_ALL);
 		ftglRenderFont(font, str, FTGL_RENDER_SIDE);

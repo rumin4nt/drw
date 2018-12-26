@@ -88,7 +88,7 @@ void drw_color_clear_color8(RColor8);
 void drw_color_clear_color16(RColor16);
 
 void drw_set_line_width(float v);
-//void drw_set_screenspace(bool v);
+//void drw_screenspace_set(bool v);
 void drw_set_colorbypass(bool v);
 
 void drw_color_bg(void);
@@ -277,9 +277,11 @@ void drw_fill_pop(void);
 void drw_set_fov(double v);
 void drw_ortho_set(bool v);
 bool drw_ortho_get(void);
-void drw_set_screenspace(bool);
-bool drw_get_screenspace(void);
-void drw_set_screensize(double, double);
+void drw_screenspace_set(bool);
+bool drw_screenspace_get(void);
+void drw_screensize_set(double, double);
+void drw_screensize_get(unsigned int* w, unsigned int* h);
+
 void drw_set_framebuffer(double, double);
 
 //	this is for tr I guess (tiled render)
