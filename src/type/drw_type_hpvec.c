@@ -265,7 +265,7 @@ HPGlyph** drw_type_hpvec_render(const char* text)
 {
 	unsigned long len = strlen(text);
 
-	HPGlyph** glyphs = calloc(len, sizeof(HPGlyph));
+	HPGlyph** glyphs = calloc(len, sizeof(HPGlyph*));
 
 	for (unsigned long i = 0; i < len; i++)
 	{

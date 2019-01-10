@@ -115,15 +115,15 @@ int drw_type_provider_register(const char* ident, drw_type_draw_fun render, drw_
 	num_providers++;
 	if (provider_ids == NULL)
 	{
-		provider_ids = calloc(num_providers, PROVIDER_ID_MAX * sizeof(char));
-		draw_funcs   = calloc(num_providers, sizeof(draw_funcs));
-		bbox_funcs   = calloc(num_providers, sizeof(bbox_funcs));
+		provider_ids = calloc(num_providers, PROVIDER_ID_MAX * sizeof(char*));
+		draw_funcs   = calloc(num_providers, sizeof(drw_type_draw_fun));
+		bbox_funcs   = calloc(num_providers, sizeof(drw_type_bbox_fun));
 	}
 	else
 	{
-		provider_ids = realloc(provider_ids, num_providers * PROVIDER_ID_MAX * sizeof(char));
-		draw_funcs   = realloc(draw_funcs, num_providers * sizeof(draw_funcs));
-		bbox_funcs   = realloc(bbox_funcs, num_providers * sizeof(bbox_funcs));
+		provider_ids = realloc(provider_ids, num_providers * PROVIDER_ID_MAX * sizeof(char*));
+		draw_funcs   = realloc(draw_funcs, num_providers * sizeof(drw_type_draw_fun));
+		bbox_funcs   = realloc(bbox_funcs, num_providers * sizeof(drw_type_bbox_fun));
 	}
 
 	int idx		  = num_providers - 1;
@@ -181,11 +181,12 @@ void drw_type_draw(const char* format, ...)
 	va_end(args);
 
 	float bounds[6];
+	bounds[0] = bounds[1] = bounds[2] = bounds[3] = bounds[4] = bounds[5] = -1;
 	drw_type_get_bbox(buf, strlen(buf), bounds);
 	//if ( align_x)
 	double wx = bounds[3] - bounds[0];
 	double wy = bounds[4] - bounds[1];
-	double wz = bounds[5] - bounds[2];
+	//double wz = bounds[5] - bounds[2];
 
 	drw_type_draw_fun fun = *draw_funcs[type_provider];
 	double		  tx = 0, ty = 0;

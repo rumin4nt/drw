@@ -25,11 +25,11 @@ void drw_snoop_add_rline3(RLine3* line)
 	snoopnum++;
 	if (!snoopdata)
 	{
-		snoopdata = calloc(1, sizeof(RLine));
+		snoopdata = calloc(1, sizeof(RLine3*));
 	}
 	else
 	{
-		snoopdata = realloc(snoopdata, snoopnum * sizeof(RLine));
+		snoopdata = realloc(snoopdata, snoopnum * sizeof(RLine3*));
 	}
 
 	double  rx, ry, rz;
@@ -64,11 +64,11 @@ void drw_snoop_add_rline(RLine* l)
 	snoopnum++;
 	if (!snoopdata)
 	{
-		snoopdata = calloc(1, sizeof(RLine));
+		snoopdata = calloc(1, sizeof(RLine3*));
 	}
 	else
 	{
-		snoopdata = realloc(snoopdata, snoopnum * sizeof(RLine));
+		snoopdata = realloc(snoopdata, snoopnum * sizeof(RLine3*));
 	}
 
 	double  rx, ry, rz;

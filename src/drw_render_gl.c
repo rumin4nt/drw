@@ -812,7 +812,7 @@ void drw_line3_r(RLine3* poly)
 
 	// printf("poly is %d num\n", poly->num);
 	// GLfloat arr[ renderLineSize ];
-	GLfloat* arr = malloc(sizeof(GLfloat) * renderLineSize);
+	GLfloat* arr = calloc(renderLineSize, sizeof(GLfloat) );
 
 	int i, j;
 
@@ -1045,11 +1045,13 @@ void drw_rotate_vec3(vec3_t vec)
 
 void drw_axis_nice()
 {
+	
 	double axis_render_radius = (_screenspace) ? 32 : .125;
 
 	float x = axis_render_radius * scale_factor;
 
 	drw_push();
+	drw_rotate(0,0,90);
 	drw_line(x, 0, x * 2, 0);
 	drw_rotate_z(120.0);
 	drw_line(x, 0, x * 2, 0);

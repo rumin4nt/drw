@@ -9,6 +9,23 @@
 #include "drw_primitives.h"
 
 #include <math.h>
+RLine* drw_primitives_calculate_square(double radius)
+{
+	RLine* res = r_line_create();
+	
+	r_line_add_point2f(res, radius * -.5, radius * -.5 );
+	r_line_add_point2f(res, radius *  .5, radius * -.5 );
+	r_line_add_point2f(res, radius *  .5, radius *  .5 );
+	r_line_add_point2f(res, radius * -.5, radius *  .5 );
+	return res;
+	
+	//return drw_primitives_calculate_circle(4, radius);
+}
+
+RLine* drw_primitives_calculate_triangle(double radius)
+{
+	return drw_primitives_calculate_circle(3, radius);
+}
 
 RLine* drw_primitives_calculate_hexagon(double radius)
 {
