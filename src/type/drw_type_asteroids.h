@@ -15,6 +15,8 @@
 void drw_type_asteroids_initialize(void);
 
 void drw_type_asteroids(const char* text);
+void drw_type_asteroids_bbox(const char*, unsigned long, float*);
+void drw_type_asteroids_draw(const char*);
 
 #endif
 

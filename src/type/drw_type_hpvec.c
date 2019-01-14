@@ -38,11 +38,23 @@ static int alignment_v = DRW_TYPE_ALIGN_V_CENTER;
 
 void drw_type_hpvec_bbox(const char* text, unsigned long sz, float* data)
 {
+	double x = HPVEC_GRID_SIZE * sz;
+	double y  = HPVEC_GRID_SIZE;
+	unsigned w,h;
+	
+	if ( !drw_screenspace_get())
+	{
+		drw_screensize_get(&w, &h);
+		x /= w;
+		y /= w;
+		x *= .5;
+		y *= .5;
+	}
 	data[0] = 0;
 	data[1] = 0;
 	data[2] = 0;
-	data[3] = sz * HPVEC_GRID_SIZE;
-	data[4] = HPVEC_GRID_SIZE;
+	data[3] = x;
+	data[4] = y;
 	data[5] = 0;
 }
 
@@ -81,6 +93,19 @@ static void draw_hp_glyph(int idx)
 	r_line_destroy(l);
 }
 
+static void draw_debug(const char* text)
+{
+	float *dims = calloc(6, sizeof(float));
+	
+	drw_type_hpvec_bbox(text, strlen(text), dims);
+	double wx = dims[3] - dims[0];
+	double wy = dims[2] - dims[1];
+	
+	drw_rect(dims[0], dims[1], wx, wy);
+	
+	free(dims);
+}
+
 void drw_type_hpvec_draw(const char* text)
 {
 	if (!text || 0 == strcmp("", text))
@@ -90,6 +115,9 @@ void drw_type_hpvec_draw(const char* text)
 #endif
 		return;
 	}
+	if ( drw_type_debug )
+		draw_debug(text);
+	
 	bool done = false;
 	int  i    = 0;
 
@@ -142,11 +170,11 @@ void drw_type_hpvec_draw(const char* text)
 		double sz = drw_type_size_get();
 
 		double sc = 1. / (h / sz * 8);
-
+		sc *= .5;
 		drw_scale_u(sc);
 	}
 
-	drw_translate(offx, offy, 0);
+	//drw_translate(offx, offy, 0);
 
 	while (!done)
 	{

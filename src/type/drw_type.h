@@ -43,8 +43,12 @@ enum
 typedef void (*drw_type_draw_fun)(const char*);
 typedef void (*drw_type_bbox_fun)(const char*, unsigned long, float*);
 
+
+extern int drw_type_debug;
 void drw_type_init(void);
 void drw_type_deinit(void);
+
+void drw_type_debug_set(int v);
 
 void   drw_type_draw(const char* text, ...);
 void   drw_type_get_bbox(const char*, unsigned long sz, float*);
