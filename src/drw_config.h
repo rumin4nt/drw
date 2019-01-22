@@ -17,7 +17,7 @@
 //#include <GL/glew.h>
 //#include <glad/glad.h>
 //#include "GL/glus.h"
-#define R4_ENABLE_RTMIDI
+//#define R4_ENABLE_RTMIDI
 
 #ifdef __clang__
 #pragma clang diagnostic push
