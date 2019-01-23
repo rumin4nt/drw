@@ -8,6 +8,7 @@
 
 #include "drw_type_asteroids.h"
 
+
 #ifdef DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
 
 void drw_type_asteroids_initialize(void)

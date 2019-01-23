@@ -12,6 +12,8 @@
 #include "../drw_config.h"
 
 #ifdef DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
+#include "drw_type.h"
+
 void drw_type_asteroids_initialize(void);
 
 void drw_type_asteroids(const char* text);
