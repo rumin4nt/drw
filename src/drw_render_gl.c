@@ -1641,9 +1641,10 @@ void drw_rect(float ax, float ay, float bx, float by)
 
 void drw_point(void)
 {
-	float arr[2];
-	glVertexPointer(2, GL_FLOAT, 0, &arr);
-	glDrawArrays(GL_POINTS, 0, 4);
+	float arr[3];
+	arr[0] = arr[1] = arr[2] = 0;
+	glVertexPointer(3, GL_FLOAT, sizeof(GLfloat), &arr);
+	glDrawArrays(GL_POINTS, 0, 1);
 	//  printf("~");
 }
 
