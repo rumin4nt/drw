@@ -72,8 +72,10 @@ void drw_type_ftgl_size(int sz, int resolution)
 
 int drw_type_ftgl_load(const char* path)
 {
-	assert(path);
-
+	//assert(path);
+	if ( !path )
+		return -1;
+	
 	// if ( font )
 	//{
 	//	ftglDestroyFont(font);
