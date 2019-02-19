@@ -25,7 +25,8 @@
 #endif
 
 #define GLFW_EXPOSE_NATIVE_COCOA
-//#include "GLFW/glfw3.h"
+
+#define GL_GLEXT_PROTOTYPES 1
 #include <OpenGL/glu.h>
 
 //#include <GLUT/glut.h>

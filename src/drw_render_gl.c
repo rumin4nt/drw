@@ -248,9 +248,9 @@ int drw_get_gl_error()
 		drw_log("GL_INVALID_OPERATION");
 		break;
 
-	// case GL_INVALID_FRAMEBUFFER_OPERATION:
-	//    printf("invalid framebuffer\n");
-	//    break;
+		// case GL_INVALID_FRAMEBUFFER_OPERATION:
+		//    printf("invalid framebuffer\n");
+		//    break;
 
 	case GL_OUT_OF_MEMORY:
 		drw_log("out of memory");
@@ -812,7 +812,7 @@ void drw_line3_r(RLine3* poly)
 
 	// printf("poly is %d num\n", poly->num);
 	// GLfloat arr[ renderLineSize ];
-	GLfloat* arr = calloc(renderLineSize, sizeof(GLfloat) );
+	GLfloat* arr = calloc(renderLineSize, sizeof(GLfloat));
 
 	int i, j;
 
@@ -954,6 +954,15 @@ void drw_translate_rp3(RPoint3 p)
 {
 	glTranslatef(p.x, p.y, p.z);
 }
+void drw_translate_cp(CPoint p)
+{
+	glTranslatef(p.x, p.y, 0);
+}
+
+void drw_translate_cp3(CPoint3 p)
+{
+	glTranslatef(p.x, p.y, p.z);
+}
 
 void drw_translate3f(float x, float y, float z)
 {
@@ -1045,13 +1054,13 @@ void drw_rotate_vec3(vec3_t vec)
 
 void drw_axis_nice()
 {
-	
+
 	double axis_render_radius = (_screenspace) ? 32 : .125;
 
 	float x = axis_render_radius * scale_factor;
 
 	drw_push();
-	drw_rotate(0,0,90);
+	drw_rotate(0, 0, 90);
 	drw_line(x, 0, x * 2, 0);
 	drw_rotate_z(120.0);
 	drw_line(x, 0, x * 2, 0);
@@ -1858,14 +1867,32 @@ void drw_poly_extras(WLine* line)
 #endif
 }
 
-void drw_tris_3d(double* arr, int num, bool closed)
+void drw_tris_2d(double* arr, int num)
+{
+	glVertexPointer(2, DRW_VERTEX_POINTER_IDENT, 0, arr);
+	glDrawArrays(GL_TRIANGLES, 0, num);
+}
+
+void drw_tris_3d(double* arr, int num)
 {
 	glVertexPointer(3, DRW_VERTEX_POINTER_IDENT, 0, arr);
 	glDrawArrays(GL_TRIANGLES, 0, num);
 	//free(arr);
 }
 
-void drw_tristrip_3d(double* arr, int num, bool closed)
+void drw_tristrip_2df(float* arr, int num)
+{
+	glVertexPointer(2, DRW_VERTEX_POINTER_IDENT, 0, arr);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, num);
+}
+
+void drw_tristrip_2d(double* arr, int num)
+{
+	glVertexPointer(2, DRW_VERTEX_POINTER_IDENT, 0, arr);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, num);
+}
+
+void drw_tristrip_3d(double* arr, int num)
 {
 	glVertexPointer(3, DRW_VERTEX_POINTER_IDENT, 0, arr);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, num);
@@ -1887,7 +1914,7 @@ void drw_rawpoly_2d(double* arr, int num, bool closed)
 	}
 }
 
-void drw_rawpoly_2f(float* arr, int num, bool closed)
+void drw_rawpoly_2df(float* arr, int num, bool closed)
 {
 
 	glVertexPointer(2, GL_FLOAT, 0, arr);
@@ -2223,13 +2250,13 @@ void drw_setup_view_persp()
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 
-// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
-// near, far);  glFrustum(left,right,bottom,top,near, far);
-//#ifdef DRW_PLATFORM_WIN
+	// glOrtho(left*zoomFactor, right*zoomFactor, top*zoomFactor, bottom*zoomFactor,
+	// near, far);  glFrustum(left,right,bottom,top,near, far);
+	//#ifdef DRW_PLATFORM_WIN
 
-//	printf("glu stuff doesn't link on windows >:[\n");
-//#else
-/*
+	//	printf("glu stuff doesn't link on windows >:[\n");
+	//#else
+	/*
 	 _l = left;
 	_r = right;
 	_t = top;
@@ -2493,6 +2520,7 @@ static void cube(double r)
 
 	drw_pop();
 }
+
 void drw_cube(float r)
 {
 	cube(r);

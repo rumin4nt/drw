@@ -22,6 +22,7 @@
 #else
 
 //#include <grdn/grdn.h>
+#include <coer/coer.h>
 #include <r4/src/core/r_color.h>
 
 //#include <r4/r4.h>
@@ -160,6 +161,8 @@ void drw_translate_rvec(VVec* vec);
 void drw_translate_vec3(vec3_t vec);
 void drw_translate_rp(RPoint p);
 void drw_translate_rp3(RPoint3 p);
+void drw_translate_cp(CPoint);
+void drw_translate_cp3(CPoint3);
 
 void drw_translate2f(float, float);
 void drw_translate(float, float, float);
@@ -215,8 +218,11 @@ void drw_rawpoints_3d(double*, int);
 
 // void	d_vecline2(Vec2Line *);
 // void	d_vecline3(Vec3Line *);
-void drw_tris_3d(double* arr, int num, bool closed);
-void drw_tristrip_3d(double* arr, int num, bool closed);
+void drw_tris_2d(double* arr, int num);
+void drw_tris_3d(double* arr, int num);
+void drw_tristrip_2df(float* arr, int num);
+void drw_tristrip_2d(double* arr, int num);
+void drw_tristrip_3d(double* arr, int num);
 void drw_triangle_strip(WLine*);
 
 //	fancy
