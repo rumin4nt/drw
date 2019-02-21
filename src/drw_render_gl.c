@@ -665,7 +665,7 @@ void drw_color_pop()
 void drw_alpha(float a)
 {
 	if (a < 0 || a > 1)
-		drw_log("INvalid value passed to alpha!");
+		drw_log("Invalid value passed to alpha!");
 	prev_alpha = a;
 	glColor4f(_r, _g, _b, a);
 }
