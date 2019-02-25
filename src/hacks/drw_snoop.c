@@ -128,7 +128,7 @@ void drw_snoop_dump(const char* path)
 #ifdef R4_ENABLE_CAIROSVG
 	RSVGRec* rec = r_svg_open(path);
 	
-	double dpi = drw_query_retina();
+	double dpi = drw_query_dpi();
 	printf("are we scallllling our artwork by our stuuuupid high DPI display? %f\n", dpi);
 	double sc = 1.0 / dpi;
 	

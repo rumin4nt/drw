@@ -115,7 +115,7 @@ void drw_type_ftgles_draw(const char* str)
 		 int w, h;
 		 drw_query_framebuffer(&w, &h);
 		 int sz = drw_type_get_size();
-		 double dpi = drw_query_retina();
+		 double dpi = drw_query_dpi();
 		 double mult = h;
 		 double frac = 1.0 / mult;
 		 drw_scale_u(frac);
@@ -135,7 +135,7 @@ void drw_type_ftgles_draw(const char* str)
 		int w, h;
 		drw_query_framebuffer(&w, &h);
 		int    sz   = drw_type_get_size();
-		double dpi  = drw_query_retina();
+		double dpi  = drw_query_dpi();
 		double mult = h;
 		double frac = 1.0 / mult;
 		drw_scale_u(frac);

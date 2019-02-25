@@ -351,7 +351,7 @@ void drw_deinit(void)
 	}
 }
 
-double drw_query_retina(void)
+double drw_query_dpi(void)
 {
 	return _retina_scale;
 }

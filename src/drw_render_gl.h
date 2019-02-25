@@ -67,7 +67,7 @@ void drw_deinit(void);
 //	geometry
 double drw_query_aspectratio(void);
 bool   drw_query_landscape(void);
-double drw_query_retina(void);
+double drw_query_dpi(void);
 void   drw_query_framebuffer(int*, int*);
 
 //	color
