@@ -505,6 +505,7 @@
 					"$(r4_root)/contrib/deps",
 					"$(r4_root)/libs",
 					../contrib,
+					../../../contrib/include/freetype2,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -532,6 +533,7 @@
 					"$(r4_root)/contrib/deps",
 					"$(r4_root)/libs",
 					../contrib,
+					../../../contrib/include/freetype2,
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";

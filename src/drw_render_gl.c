@@ -1728,8 +1728,8 @@ void drw_ellipse(float _x, float _y)
 	for (i = 0; i < renderLineSize; i += 2)
 	{
 		float degInRad = drw_deg2rad * (float)i;
-		float x	= cos(degInRad + M_PI * .5) * (_x)*scale_factor;
-		float y	= sin(degInRad + M_PI * .5) * (_y)*scale_factor;
+		float x	= cos(degInRad + M_PI * .5) * (_x) * 1;
+		float y	= sin(degInRad + M_PI * .5) * (_y) * 1;
 		arr[i]	 = x;
 		arr[i + 1]     = y;
 	}
@@ -2419,8 +2419,8 @@ void drw_set_retina(double v)
 	// if(debug_settings.render )
 	// printf("Setting retina scale: %f\n", v);
 	// scale_factor_retina = v;
-	drw_calculate_scale();
 	_retina_scale = v;
+	drw_calculate_scale();
 	glLineWidth(1);
 }
 

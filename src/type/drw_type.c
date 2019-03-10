@@ -169,12 +169,14 @@ void drw_type_get_bbox(const char* text, unsigned long sz, float* bounds)
 		drw_log("NO type provider specified, return.");
 		return;
 	}
+	
 	if (num_providers == 0)
 	{
 		drw_log("NO providers registered, return.");
 		return;
 	}
-	if ( num_providers > num_providers )
+	
+	if ( type_provider >= num_providers )
 	{
 		drw_log("Requested out of range type provider.\n");
 		return;
@@ -183,30 +185,20 @@ void drw_type_get_bbox(const char* text, unsigned long sz, float* bounds)
 	drw_type_bbox_fun fun = bbox_funcs[type_provider];
 	(*fun)(text, sz, bounds);
 
-	/*switch (type_provider) {
-		case <#constant#>:
-			<#statements#>
-			break;
-
-		default:
-			break;
-	}*/
 }
 
 void drw_type_draw(const char* format, ...)
 {
 	if (type_provider == -1)
-
 	{
 		drw_log("NO type provider specified, return.");
 	}
+	
 	if (num_providers == 0)
 	{
 		drw_log("NO providers registered, return.");
 	}
-	//if (_text_provider_type == DRW_TYPE_PROVIDER_NONE)
-	//	return;
-
+	
 	char buf[TEXT_MAX];
 	sprintf(buf, "%s", format);
 	va_list args;
