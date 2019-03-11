@@ -9,6 +9,7 @@
 #include "drw_primitives.h"
 
 #include <math.h>
+
 RLine* drw_primitives_calculate_square(double radius)
 {
 	RLine* res = r_line_create();
