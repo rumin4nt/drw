@@ -54,8 +54,8 @@ void   drw_type_draw(const char* text, ...);
 void   drw_type_get_bbox(const char*, unsigned long sz, float*);
 double drw_type_get_width(const char*);
 int    drw_type_get_size(void);
-void   drw_type_set_align(int, int);
-void   drw_type_set_size(int, int);
+void   drw_type_set_align(int w , int h);
+void   drw_type_set_size(int x , int y);
 
 void drw_type_load_ttf(const char* path);
 

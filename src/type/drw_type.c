@@ -224,10 +224,10 @@ void drw_type_draw(const char* format, ...)
 		tx = wx * -1;
 		break;
 	case DRW_TYPE_ALIGN_H_CENTER:
-		tx = wx * 0;
+		tx = wx * -.5;
 		break;
 	case DRW_TYPE_ALIGN_H_RIGHT:
-		tx = wx * 1;
+		tx = wx * 0;
 		break;
 	default:
 		break;
@@ -236,13 +236,13 @@ void drw_type_draw(const char* format, ...)
 	switch (align_y)
 	{
 	case DRW_TYPE_ALIGN_V_TOP:
-		ty = wy * -2.;
+		ty = wy * -.1;
 		break;
 	case DRW_TYPE_ALIGN_V_CENTER:
-		ty = 0 ;
+		ty = wy * -.5 ;
 		break;
 	case DRW_TYPE_ALIGN_V_BOTTOM:
-		ty = wy * 1;
+		ty = wy * 0;
 		break;
 	default:
 		break;
