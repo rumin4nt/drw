@@ -21,8 +21,8 @@
 #endif
 
 RLine* drw_primitives_calculate_square(double radius);
-RLine* drw_primitives_calculate_triangle(double radius);
-RLine* drw_primitives_calculate_hexagon(double radius);
-RLine* drw_primitives_calculate_circle(int sides, double radius);
+RLine* drw_primitives_calculate_triangle(double radius, double offset);
+RLine* drw_primitives_calculate_hexagon(double radius, double offset);
+RLine* drw_primitives_calculate_circle(int sides, double radius, double offset);
 
 #endif /* drw_primitives_h */

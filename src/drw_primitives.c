@@ -23,17 +23,17 @@ RLine* drw_primitives_calculate_square(double radius)
 	//return drw_primitives_calculate_circle(4, radius);
 }
 
-RLine* drw_primitives_calculate_triangle(double radius)
+RLine* drw_primitives_calculate_triangle(double radius, double offset)
 {
-	return drw_primitives_calculate_circle(3, radius);
+	return drw_primitives_calculate_circle(3, radius, offset);
 }
 
-RLine* drw_primitives_calculate_hexagon(double radius)
+RLine* drw_primitives_calculate_hexagon(double radius, double offset)
 {
-	return drw_primitives_calculate_circle(6, radius);
+	return drw_primitives_calculate_circle(6, radius, offset);
 }
 
-RLine* drw_primitives_calculate_circle(int sides, double radius)
+RLine* drw_primitives_calculate_circle(int sides, double radius, double offset)
 {
 	RLine* res = r_line_create();
 
