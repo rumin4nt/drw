@@ -785,7 +785,7 @@ void drw_line_3f(float ax, float ay, float az, float bx, float by, float bz)
 
 	GLfloat renderLine[] = {ax, ay, az, bx, by, bz};
 	glVertexPointer(3, GL_FLOAT, 0, renderLine);
-	glDrawArrays(GL_LINE_STRIP, 0, 2);
+	glDrawArrays(GL_LINES, 0, 2);
 
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
@@ -1500,13 +1500,15 @@ void drw_wobject_strokeonly_notransform(WObject* obj)
 
 void drw_verts_r(RLine* l)
 {
+	
 	int i;
 	for (i = 0; i < l->num; ++i)
 	{
 		RPoint* p = &l->data[i];
 		drw_push();
 		drw_translate2f(p->x, p->y);
-		double pv = 10;
+		double pv = ( _screenspace) ? 10 : .01;
+		
 		drw_square(pv);
 		drw_pop();
 	}
@@ -1973,7 +1975,7 @@ void drw_point3f(float x, float y, float z)
 {
 	float arr[3] = {x, y, z};
 	glVertexPointer(3, GL_FLOAT, 0, arr);
-	glDrawArrays(GL_POINTS, 0, 3);
+	glDrawArrays(GL_POINTS, 0, 1);
 }
 
 void drw_rawpoints_3f(float* arr, int num)
