@@ -16,11 +16,23 @@
 //#include <r4/src/r4_config.h>
 #include <stdbool.h>
 
+void drw_type_hershey_initialize(void)
+{
+	drw_type_provider_register("hershey", drw_type_hershey_draw, drw_type_hershey_bbox);
+
+}
+
+void drw_type_hershey_bbox(const char* str, unsigned long num, float* data)
+{
+	
+}
+
+
 void drw_type_hershey_draw(const char* text)
 {
 
-#ifdef RPLATFORM_DARWIN
-#ifdef __APPLE__
+//#ifdef RPLATFORM_DARWIN
+//#ifdef __APPLE__
 	drw_push();
 	char c    = (char)0;
 	bool done = false;
@@ -44,12 +56,17 @@ void drw_type_hershey_draw(const char* text)
 			idx -= 32; //hershey fonts don't have the 32 nonprintables
 			//idx -= 1; //not sure what this is about
 			//const char* local     = &futural;
-			int	 corrected = -1 + idx;
+			
+//			int	 corrected = -1 + idx;
+			int	 corrected = 0 + idx;
+			if ( corrected < 0 )
+				break;
 			int	 sz	= futural_size[corrected];
 			const char* data      = futural[corrected];
 			const char  w	 = futural_width[corrected];
 			//printf("width is %d\n", w);
-
+			drw_push();
+			drw_scale(1,-1,1);
 			for (int i2 = 0; i2 < sz; i2 += 4)
 			{
 				const char a  = data[i2];
@@ -71,7 +88,7 @@ void drw_type_hershey_draw(const char* text)
 				glVertexPointer(2, GL_INT, 0, &arr);
 				glDrawArrays(GL_LINES, 0, 4);
 			}
-
+			drw_pop();
 			//todo: bring this back
 			// glColor4f(1,0,1,1);
 			//glTranslated(16,0,0);
@@ -87,8 +104,8 @@ void drw_type_hershey_draw(const char* text)
 	////float arr[8];
 	drw_pop();
 
-#endif
-#endif
+//#endif
+//#endif
 
 	//glVertexPointer(2, GL_FLOAT, 0, &arr);
 	//glDrawArrays(GL_LINES, 0, 4);

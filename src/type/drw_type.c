@@ -60,6 +60,12 @@ void drw_type_debug_set(int v)
 
 void drw_type_init(void)
 {
+	
+	
+#ifdef DRW_TYPE_PROVIDER_ENABLE_HERSHEY
+	drw_type_hershey_initialize();
+#endif
+
 #ifdef DRW_TYPE_PROVIDER_ENABLE_HPVEC
 	drw_type_hpvec_initialize();
 #endif
@@ -77,8 +83,12 @@ void drw_type_init(void)
 #endif
 
 	int n = drw_type_provider_count();
-	if (n > 0)
-		drw_type_provider_select(n - 1);
+	if (n == 0)
+	{
+		drw_log("NO type providers...provided!");
+		return;
+	}
+	drw_type_provider_select(0);
 
 	drw_type_set_align(DRW_TYPE_ALIGN_H_RIGHT, DRW_TYPE_ALIGN_V_BOTTOM);
 }
