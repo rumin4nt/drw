@@ -38,6 +38,10 @@
 
 #endif
 
+#ifdef DEBUG
+static signed fill_stack = 0;
+#endif
+
 #ifdef DRW_PLATFORM_IOS
 
 //#ifdef DRW_PLATFORM_IOS
@@ -2491,11 +2495,26 @@ void drw_circle_precision_pop(void)
 
 void drw_fill_pop()
 {
+#ifdef DEBUG
+	fill_stack--;
+	if ( fill_stack < 0 )
+	{
+		printf("Fill stack underflow!\n");
+	}
+#endif
 	fill = prev_fill;
 }
 
 void drw_fill_set(bool v)
 {
+#ifdef DEBUG
+	fill_stack++;
+	if ( fill_stack > 1 )
+	{
+		printf("Fill stack overflow!\n");
+		
+	}
+#endif
 	prev_fill = fill;
 	fill      = v;
 }
