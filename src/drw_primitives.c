@@ -45,8 +45,8 @@ RLine* drw_primitives_calculate_circle(int sides, double radius, double offset)
 	for (i = 0; i < renderLineSize; i += 2)
 	{
 		float degInRad = deg2rad * (float)i;
-		float x	= cos(degInRad + M_PI * .5) * radius;
-		float y	= sin(degInRad + M_PI * .5) * radius;
+		float x	= cos(offset + degInRad + M_PI * .5) * radius;
+		float y	= sin(offset + degInRad + M_PI * .5) * radius;
 		r_line_add_point2f(res, x, y);
 	}
 	res->closed = true;

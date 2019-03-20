@@ -47,8 +47,8 @@ void drw_type_hpvec_bbox(const char* text, unsigned long sz, float* data)
 		drw_screensize_get(&w, &h);
 		x /= w;
 		y /= w;
-		x *= .5;
-		y *= .5;
+//		x *= .5;
+//		y *= .5;
 	}
 	data[0] = 0;
 	data[1] = 0;

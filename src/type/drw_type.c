@@ -70,9 +70,9 @@ void drw_type_init(void)
 	drw_type_hpvec_initialize();
 #endif
 	
-//#ifdef DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
-//	drw_type_asteroids_initialize();
-//#endif
+#ifdef DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
+	drw_type_asteroids_initialize();
+#endif
 	
 #ifdef DRW_TYPE_PROVIDER_ENABLE_FTGLES
 	drw_type_ftgles_initialize();
@@ -88,7 +88,7 @@ void drw_type_init(void)
 		drw_log("NO type providers...provided!");
 		return;
 	}
-	drw_type_provider_select(0);
+	drw_type_provider_select(1);
 
 	drw_type_set_align(DRW_TYPE_ALIGN_H_RIGHT, DRW_TYPE_ALIGN_V_BOTTOM);
 }
