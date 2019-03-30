@@ -33,9 +33,6 @@
 #include "src/type/drw_type_ftgl.h"
 #endif
 
-#include "src/type/drw_type_asteroids.h"
-#include "src/type/drw_type_hershey.h"
-#include "src/type/drw_type_hpvec.h"
 
 //#include "src/d_glus.h"
 #include "src/drw_point.h"

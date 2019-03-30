@@ -9,11 +9,7 @@
 #ifndef drw_type_h
 #define drw_type_h
 
-#define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
-
-#include "drw_type_asteroids.h"
-#include "drw_type_hershey.h"
-#include "drw_type_hpvec.h"
+#include <stdbool.h>
 
 enum DRWAlignmentHorizontal
 {
@@ -56,6 +52,7 @@ double drw_type_get_width(const char*);
 int    drw_type_get_size(void);
 void   drw_type_set_align(int w , int h);
 void   drw_type_set_size(int x , int y);
+void   drw_type_set_righttoleft(bool v);
 
 void drw_type_load_ttf(const char* path);
 

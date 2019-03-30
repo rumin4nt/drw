@@ -5,7 +5,33 @@ set(drw_VERSION_MAJOR 0)
 set(drw_VERSION_MINOR 0)
 set(drw_VERSION_PATCH 1)
 
-file(GLOB_RECURSE sources drw.c src/*.c src/*.cpp)
+
+if(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+        set(OperatingSystem "macos")
+endif()
+
+if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+        set(OperatingSystem "linux")
+endif()
+
+if(WIN32)
+        set(OperatingSystem "windows")
+endif()
+
+file(GLOB sources drw.c src/*.c src/*.cpp
+src/type/drw_type.c
+src/type/drw_type_hpvec.c
+src/type/drw_type_asteroids.c
+)
+
+if(${OperatingSystem} MATCHES "macos")
+	file(GLOB sources ${sources}
+	src/type/drw_type_ftgl.c
+	src/ext/*.c
+	src/hacks/*.c
+)
+
+endif()
 
 link_directories(${CMAKE_BINARY_DIR}
                  ${CMAKE_SOURCE_DIR}/contrib/platform/darwin /usr/local/lib)
