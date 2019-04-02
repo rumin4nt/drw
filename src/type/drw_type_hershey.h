@@ -13,9 +13,8 @@
 
 #ifdef DRW_TYPE_PROVIDER_ENABLE_HERSHEY
 void drw_type_hershey_initialize(void);
-#endif
-
 void drw_type_hershey_draw(const char* text);
 void drw_type_hershey_bbox(const char*, unsigned long, float*);
+#endif
 
 #endif /* drw_type_hershey_h */

@@ -25,6 +25,15 @@
 #include "drw_type_ftgl.h"
 #endif
 
+#define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
+
+#include "drw_type_asteroids.h"
+#ifdef DRW_TYPE_PROVIDER_ENABLE_HERSHEY
+#include "drw_type_hershey.h"
+#endif
+
+
+#include "drw_type_hpvec.h"
 #define TEXT_MAX 1024
 #define PROVIDER_ID_MAX 32
 #include <stdarg.h>
@@ -41,6 +50,13 @@ drw_type_draw_fun* draw_funcs    = NULL;
 drw_type_bbox_fun* bbox_funcs    = NULL;
 static int	 _text_size;
 const char**       provider_ids = NULL;
+
+static bool right_to_left = false;
+
+void   drw_type_set_righttoleft(bool v)
+{
+	right_to_left = v;
+}
 
 void drw_type_provider_select(signed index)
 {
@@ -62,6 +78,14 @@ void drw_type_init(void)
 {
 	
 	
+#ifdef DRW_TYPE_PROVIDER_ENABLE_FTGLES
+	drw_type_ftgles_initialize();
+#endif
+	
+#ifdef DRW_TYPE_PROVIDER_ENABLE_FTGL
+	drw_type_ftgl_initialize();
+#endif
+
 #ifdef DRW_TYPE_PROVIDER_ENABLE_HERSHEY
 	drw_type_hershey_initialize();
 #endif
@@ -74,21 +98,13 @@ void drw_type_init(void)
 	drw_type_asteroids_initialize();
 #endif
 	
-#ifdef DRW_TYPE_PROVIDER_ENABLE_FTGLES
-	drw_type_ftgles_initialize();
-#endif
-
-#ifdef DRW_TYPE_PROVIDER_ENABLE_FTGL
-	drw_type_ftgl_initialize();
-#endif
-
 	int n = drw_type_provider_count();
 	if (n == 0)
 	{
 		drw_log("NO type providers...provided!");
 		return;
 	}
-	drw_type_provider_select(1);
+ 	drw_type_provider_select(0);
 
 	drw_type_set_align(DRW_TYPE_ALIGN_H_RIGHT, DRW_TYPE_ALIGN_V_BOTTOM);
 }
@@ -111,10 +127,28 @@ void drw_type_set_align(int x, int y)
 {
 	int tx, ty = -1;
 	
-	if ( x > -1 && x < 3 )
+	if ( x > -1 && x < DRW_TYPE_ALIGN_H_NONE )
+	{
 		align_x = x;
-	if ( y > -1 && y < 3 )
+	}
+	#ifdef DEBUG
+	else{
+		drw_log("invalid horizontal type alignment requested!\n");
+		
+	}
+#endif
+	
+	if ( y > -1 && y < DRW_TYPE_ALIGN_V_NONE )
+	{
 		align_y = y;
+	}
+#ifdef DEBUG
+	else{
+		drw_log("invalid vertical type alignment requested!\n");
+
+	}
+#endif
+	
 	/*
 #ifdef DEBUG
 	if ( x < 0 || x > 2 || y < 0 || y > 2 )
@@ -269,11 +303,12 @@ void drw_type_draw(const char* format, ...)
 
 void drw_type_load_ttf(const char* path)
 {
-#ifdef DRW_ENABLE_FTGLES
+#ifdef DRW_TYPE_PROVIDER_ENABLE_FTGLES
+
 	drw_type_ftgles_load(path);
 #endif
 	
-#ifdef DRW_ENABLE_FTGL
+#ifdef DRW_TYPE_PROVIDER_ENABLE_FTGL
 	drw_type_ftgl_load(path);
 #endif
 }
