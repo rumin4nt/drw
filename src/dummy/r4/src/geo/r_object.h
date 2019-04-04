@@ -15,13 +15,13 @@
 
 typedef struct RObject
 {
-	RLine** lines;
+	RLine**       lines;
 	unsigned long num;
 	//struct vector_t lines;
 } RObject;
 
 RObject* r_object_create(void);
-RObject* r_object_create_from_wobject(WObject* obj);
+RObject* r_geo_interop_robject_from_wobject(WObject* obj);
 void     r_object_destroy(RObject* obj);
 void     r_object_add_line(RObject* obj, RLine* line);
 void     r_object_remove_line(RObject* obj, RLine* line);

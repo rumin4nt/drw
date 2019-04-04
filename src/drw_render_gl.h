@@ -185,6 +185,7 @@ void drw_line(float, float, float, float);
 void drw_line_wp(WPoint, WPoint);
 void drw_line_rp(RPoint, RPoint);
 void drw_line_3f(float, float, float, float, float, float);
+void drw_line_rp3(RPoint3 a, RPoint3 b);
 void drw_tri(float, float, float, float, float, float);
 void drw_point(void);
 
@@ -236,6 +237,7 @@ void drw_type_load_ttf(const char* path);
 //	wash primitives
 void drw_verts(WLine*);
 void drw_verts_r(RLine*);
+void drw_robject_verts(RObject* obj);
 void drw_wobject_verts(WObject* obj);
 void drw_robject(RObject* obj);
 void drw_wline_fill(WLine* line);

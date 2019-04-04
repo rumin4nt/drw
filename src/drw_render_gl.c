@@ -799,6 +799,20 @@ void drw_line_3f(float ax, float ay, float az, float bx, float by, float bz)
 	}
 #endif
 }
+void drw_line_rp3(RPoint3 a, RPoint3 b)
+{
+	GLfloat renderLine[] = {a.x, a.y, a.z, b.x, b.y, b.z};
+	glVertexPointer(3, GL_FLOAT, 0, renderLine);
+	glDrawArrays(GL_LINES, 0, 2);
+	
+#ifdef DRW_ENABLE_SNOOP
+	if (drw_snoop_get())
+	{
+		RLine3* nl = _snoop_rline3_from_f(renderLine, 6);
+		drw_snoop_add_rline3(nl);
+	}
+#endif
+}
 
 void drw_line3_r(RLine3* poly)
 {
@@ -1149,10 +1163,8 @@ void d_wsequence_e(WSequence* seq, int frame)
 
 void drw_robject(RObject* obj)
 {
-
 	size_t num = obj->num;
 
-	//RLine* l = r_line_create();
 	int i;
 	for (i = 0; i < num; ++i)
 	{
@@ -1502,6 +1514,7 @@ void drw_wobject_strokeonly_notransform(WObject* obj)
 	drw_pop();
 }
 
+
 void drw_verts_r(RLine* l)
 {
 	
@@ -1514,6 +1527,8 @@ void drw_verts_r(RLine* l)
 		double pv = ( _screenspace) ? 10 : .01;
 		
 		drw_square(pv);
+		//drw_scale_u(4);
+		//drw_type_draw("%d", i);
 		drw_pop();
 	}
 }
@@ -1530,6 +1545,21 @@ void drw_verts(WLine* l)
 		pv *= 10;
 		drw_square(pv);
 		drw_pop();
+	}
+}
+
+void drw_robject_verts(RObject* obj)
+{
+	int i;
+	for (i = 0; i < obj->num; i++)
+	{
+		RLine* line = obj->lines[i];
+		if (!line)
+		{
+			drw_log("Error, bogus line!");
+			continue;
+		}
+		drw_verts_r(line);
 	}
 }
 
@@ -2512,7 +2542,6 @@ void drw_fill_set(bool v)
 	if ( fill_stack > 1 )
 	{
 		printf("Fill stack overflow!\n");
-		
 	}
 #endif
 	prev_fill = fill;

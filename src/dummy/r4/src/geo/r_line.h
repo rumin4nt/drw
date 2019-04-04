@@ -79,7 +79,7 @@ void    r_line_destroy(RLine* line);
 void r_line3_add_point(RLine3*, RPoint3);
 void r_line3_add_point3f(RLine3*, double x, double y, double z);
 void r_line3_clear(RLine3* line);
-void r_line_move(RLine* src, double x, double y);
+void r_line_translate(RLine* src, double x, double y);
 
 RPoint r_line_find_center_mean(RLine* line);
 RPoint r_line_find_center_avg(RLine* line);
