@@ -67,7 +67,7 @@ RPoint r_point_create2f(double x, double y);
 void r_line_add_point(RLine*, RPoint);
 void r_line_add_point2f(RLine*, double x, double y);
 
-void r_line_subdivide(RLine*, double radius);
+void r_line_ops_subdivide(RLine*, double radius);
 void r_line_fuckup(RLine*, double radius);
 
 RPoint3 r_point3_create(void);

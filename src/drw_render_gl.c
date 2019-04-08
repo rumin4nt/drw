@@ -40,6 +40,7 @@
 
 #ifdef DEBUG
 static signed fill_stack = 0;
+static signed alpha_stack = 0;
 #endif
 
 #ifdef DRW_PLATFORM_IOS
@@ -668,6 +669,13 @@ void drw_color_pop()
 
 void drw_alpha(float a)
 {
+#ifdef DEBUG
+	alpha_stack++;
+	if ( alpha_stack > 1 )
+	{
+		printf("alpha stack overflow\n");
+	}
+#endif
 	if (a < 0 || a > 1)
 		drw_log("Invalid value passed to alpha!");
 	prev_alpha = a;
@@ -676,6 +684,14 @@ void drw_alpha(float a)
 
 void drw_alpha_pop()
 {
+#ifdef DEBUG
+	alpha_stack--;
+	if ( alpha_stack < 0 )
+	{
+		printf("alpha stack underflow\n");
+	}
+#endif
+	
 	_a = prev_alpha;
 	glColor4f(_r, _g, _b, _a);
 }
@@ -1282,6 +1298,7 @@ void drw_tess(void* tess)
 	}
 	drw_gpc_tristrip(tess);
 }
+
 
 void drw_wline(WLine* l)
 {
@@ -2457,6 +2474,7 @@ void drw_set_retina(double v)
 	// scale_factor_retina = v;
 	_retina_scale = v;
 	drw_calculate_scale();
+	//	GLAMTECH hack
 	glLineWidth(1);
 }
 
