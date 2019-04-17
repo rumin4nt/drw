@@ -114,7 +114,7 @@ void drw_color_push(void);
 // void drw_color_c(RColor*);
 // void drw_color_c8(RColor8*);
 // void drw_color_c16(RColor16*);
-void drw_alpha(float);
+void drw_alpha(double a);
 void drw_alpha_pop(void);
 void drw_alpha_mult(double v);
 void drw_alpha_mult_pop(void);
@@ -203,8 +203,8 @@ void drw_ellipse(float, float);
 
 // void d_rrect(RRect);
 
-void drw_rline(RLine*);
-void drw_poly(WLine*);
+void drw_rline(const RLine*);
+void drw_poly(const WLine*);
 void drw_poly_extras(WLine* line);
 
 void drw_polyfill(WLine*);
@@ -241,7 +241,7 @@ void drw_robject_verts(RObject* obj);
 void drw_wobject_verts(WObject* obj);
 void drw_robject(RObject* obj);
 void drw_wline_fill(WLine* line);
-void drw_wline(WLine* line);
+void drw_wline(const WLine* line);
 void drw_wline_strokeonly(WLine* line);
 void drw_wobject(WObject*);
 void drw_wobject_strokeonly_notransform(WObject*);

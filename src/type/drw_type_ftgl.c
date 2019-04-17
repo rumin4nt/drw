@@ -133,7 +133,13 @@ void drw_type_ftgl_draw(const char* str)
 
 void drw_type_ftgl_bbox(const char* str, unsigned long num, float* data)
 {
-	ftglGetFontBBox(font, str, num, data);
+	if ( !font )
+	{
+		printf("Error, can't get bbox, no font\n");
+		return;
+		
+	}
+	ftglGetFontBBox(font, str, (int)num, data);
 }
 
 double drw_type_ftgl_get_width(const char* str)

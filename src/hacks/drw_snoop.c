@@ -125,13 +125,13 @@ void drw_snoop_set(bool val)
 void drw_snoop_dump(const char* path)
 {
 
-#ifdef R4_ENABLE_CAIROSVG
+#ifdef R4_ENABLE_CAIRO
 	RSVGRec* rec = r_svg_open(path);
-	
+
 	double dpi = drw_query_dpi();
 	printf("are we scallllling our artwork by our stuuuupid high DPI display? %f\n", dpi);
 	double sc = 1.0 / dpi;
-	
+
 	printf("Dumping snoop data! %d lines\n", snoopnum);
 	for (int i = 0; i < snoopnum; i++)
 	{
@@ -140,7 +140,7 @@ void drw_snoop_dump(const char* path)
 		//printf("%lu points\n", l->num);
 		r_svg_add_rline3(rec, l);
 	}
-	
+
 	r_svg_close(rec);
 
 	free(snoopdata);

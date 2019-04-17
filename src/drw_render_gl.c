@@ -667,7 +667,7 @@ void drw_color_pop()
  }
  */
 
-void drw_alpha(float a)
+void drw_alpha(double a)
 {
 #ifdef DEBUG
 	alpha_stack++;
@@ -1300,7 +1300,8 @@ void drw_tess(void* tess)
 }
 
 
-void drw_wline(WLine* l)
+
+void drw_wline(const WLine* l)
 {
 	if (l == NULL)
 	{
@@ -1802,7 +1803,7 @@ void drw_ellipse(float _x, float _y)
 	free(arr);
 }
 
-void drw_rline(RLine* poly)
+void drw_rline(const RLine* poly)
 {
 	if (poly->num == 0)
 	{
@@ -1840,13 +1841,13 @@ void drw_rline(RLine* poly)
 	free(arr);
 }
 
-void drw_poly(WLine* line)
+void drw_poly(const WLine* line)
 {
 
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
 	{
-		drw_snoop_add_rline(r_line_from_wline(line));
+		drw_snoop_add_rline(r_geo_interop_rline_from_wline(line));
 	}
 #endif
 
