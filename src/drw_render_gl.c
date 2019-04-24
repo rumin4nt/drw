@@ -667,6 +667,11 @@ void drw_color_pop()
  }
  */
 
+double drw_alpha_get(void)
+{
+	return _a;
+}
+
 void drw_alpha(double a)
 {
 #ifdef DEBUG
@@ -1181,7 +1186,7 @@ void drw_robject(RObject* obj)
 {
 	size_t num = obj->num;
 
-	int i;
+	unsigned long i;
 	for (i = 0; i < num; ++i)
 	{
 
@@ -1657,6 +1662,68 @@ void drw_rect_wp(WPoint a, WPoint b)
 	glVertexPointer(2, GL_FLOAT, 0, &arr);
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
 	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
+}
+
+static void edge_cp(CPoint a, CPoint b, double sz)
+{
+	
+	//double sz = gui_default_ui(cmp->root);
+	//sz *= .33333;
+	
+	drw_line(a.x, a.y, a.x + sz, a.y);
+	drw_line(a.x, a.y, a.x, a.y + sz);
+	drw_line(b.x, b.y, b.x - sz, b.y);
+	drw_line(b.x, b.y, b.x, b.y - sz);
+	
+}
+
+static void edge(double ax, double ay, double bx, double by, double sz)
+{
+	
+	//double sz = gui_default_ui(cmp->root);
+	//sz *= .33333;
+	
+	drw_line(ax, ay, ax + sz, ay);
+	drw_line(ax, ay, ax, ay + sz);
+	drw_line(bx, by, bx - sz, by);
+	drw_line(bx, by, bx, by - sz);
+	
+}
+
+void drw_rect_corners(double ax, double ay, double bx, double by, double sz)
+{
+	
+	drw_push();
+	edge(ax, ay, bx, by, sz);
+	drw_scale(-1, 1, 1);
+	edge(ax, ay, bx, by, sz);
+	drw_pop();
+}
+
+void drw_rect_corners_cp(CPoint a, CPoint b, double sz)
+{
+	drw_push();
+	edge_cp(a, b, sz);
+	drw_scale(-1, 1, 1);
+	edge_cp(a, b, sz);
+	drw_pop();
+}
+
+void drw_rect_cp(CPoint a, CPoint b)
+{
+	float arr[8];
+	arr[0] = a.x;
+	arr[1] = a.y;
+	arr[2] = b.x;
+	arr[3] = a.y;
+	arr[4] = b.x;
+	arr[5] = b.y;
+	arr[6] = a.x;
+	arr[7] = b.y;
+	
+	glVertexPointer(2, GL_FLOAT, 0, &arr);
+	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
+	: glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
 
 void drw_rect_rp(RPoint a, RPoint b)

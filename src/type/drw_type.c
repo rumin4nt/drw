@@ -244,6 +244,7 @@ void drw_type_draw(const char* format, ...)
 	}
 	
 	char buf[TEXT_MAX];
+	memset(buf, 0, sizeof(strlen(buf)));
 	sprintf(buf, "%s", format);
 	va_list args;
 	va_start(args, format);

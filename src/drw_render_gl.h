@@ -114,6 +114,7 @@ void drw_color_push(void);
 // void drw_color_c(RColor*);
 // void drw_color_c8(RColor8*);
 // void drw_color_c16(RColor16*);
+double drw_alpha_get(void);
 void drw_alpha(double a);
 void drw_alpha_pop(void);
 void drw_alpha_mult(double v);
@@ -194,8 +195,12 @@ void drw_rect_w(WRect);
 void drw_rect_r(RRect);
 
 void drw_rect(float, float, float, float);
+void drw_rect_cp(CPoint a, CPoint b);
 void drw_rect_rp(RPoint a, RPoint b);
 void drw_rect_wp(WPoint a, WPoint b);
+void drw_rect_corners(double ax, double ay, double bx, double by, double sz);
+void drw_rect_corners_cp(CPoint a, CPoint b, double sz);
+
 void drw_square(float);
 void drw_square_at(float, float, float);
 void drw_circle(float);
