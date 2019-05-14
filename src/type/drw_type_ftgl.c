@@ -117,8 +117,8 @@ void drw_type_ftgl_draw(const char* str)
 		drw_push();
 		int w, h;
 		drw_query_framebuffer(&w, &h);
-		int    sz   = drw_type_get_size();
-		double dpi  = drw_query_dpi();
+		//int    sz   = drw_type_get_size();
+		//double dpi  = drw_query_dpi();
 		double mult = h;
 		double frac = 1.0 / mult;
 		drw_scale_u(frac);

@@ -446,7 +446,7 @@ void drw_blend_set(int v)
 		break;
 	case DRW_BLEND_MODE_MULTIPLY:
 		glEnable(GL_BLEND);
-		glBlendEquation(GL_FUNC_ADD);
+		glBlendEquation(GL_FUNC_SUBTRACT);
 		glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
 		break;
 	case DRW_BLEND_MODE_SCREEN:
@@ -2408,6 +2408,7 @@ void drw_setup_view_ortho()
 
 	float width, height;
 
+	
 	width  = framebuffer_width;
 	height = framebuffer_height;
 	//double x = width;
@@ -2427,12 +2428,14 @@ void drw_setup_view_ortho()
 	}
 
 	glViewport(0, 0, (int)width, (int)height);
-
+	_near = 1024;
+	_far = 1024;
 	if (!_screenspace)
 	{
 		width  = 1.;
 		height = 1.;
-
+		_near = -1024;
+		_far = 1024;
 		if (_landscape)
 		{
 			width *= _aspect;
@@ -2456,7 +2459,7 @@ void drw_setup_view_ortho()
 	_right  = width * .5;
 	_top    = height * -.5;
 	_bottom = height * .5;
-	_near   = 1048 * -8;
+	_near   = 1024 * -8;
 	_far    = 1024 * 8;
 
 #ifdef DRW_PLATFORM_IOS
@@ -2467,7 +2470,7 @@ void drw_setup_view_ortho()
 
 	if (_screenspace)
 	{
-		//glTranslatef(0.375f, 0.375f, 0.f);
+		glTranslatef(0.375f, 0.375f, 0.f);
 	}
 
 	drw_get_gl_error();

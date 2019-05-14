@@ -15,6 +15,7 @@
 		570FA31721BF234800F945F7 /* drw_type_ftgles.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 570FA31021BF234800F945F7 /* drw_type_ftgles.cpp */; };
 		570FA31821BF234800F945F7 /* drw_type_asteroids.c in Sources */ = {isa = PBXBuildFile; fileRef = 570FA31121BF234800F945F7 /* drw_type_asteroids.c */; };
 		570FA31B21BF262500F945F7 /* drw_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 570FA31A21BF262500F945F7 /* drw_log.c */; };
+		574C45D522826B5C00F4A8F2 /* drw_render_gl_barrier.c in Sources */ = {isa = PBXBuildFile; fileRef = 574C45D422826B5C00F4A8F2 /* drw_render_gl_barrier.c */; };
 		575B4E9720C9E95E00E875FE /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 575B4E9620C9E95E00E875FE /* OpenGLES.framework */; };
 		577DD1FE20D350B100623919 /* libFTGLES.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 577DD1FD20D350B100623919 /* libFTGLES.a */; };
 		577DD22520D3577800623919 /* drw_render_gl.c in Sources */ = {isa = PBXBuildFile; fileRef = 577DD22420D3577800623919 /* drw_render_gl.c */; };
@@ -55,6 +56,8 @@
 		570FA31221BF234800F945F7 /* drw_type_hpvec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_type_hpvec.h; sourceTree = "<group>"; };
 		570FA31921BF262500F945F7 /* drw_log.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_log.h; sourceTree = "<group>"; };
 		570FA31A21BF262500F945F7 /* drw_log.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_log.c; sourceTree = "<group>"; };
+		574C45D322826B5C00F4A8F2 /* drw_render_gl_barrier.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_render_gl_barrier.h; sourceTree = "<group>"; };
+		574C45D422826B5C00F4A8F2 /* drw_render_gl_barrier.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_render_gl_barrier.c; sourceTree = "<group>"; };
 		575B4E9220C9E69900E875FE /* drw_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_config.h; sourceTree = "<group>"; };
 		575B4E9320C9E69900E875FE /* drw_dummy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_dummy.h; sourceTree = "<group>"; };
 		575B4E9420C9E69900E875FE /* drw_platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_platform.h; sourceTree = "<group>"; };
@@ -166,6 +169,8 @@
 		D13332F41EA66418008284B1 = {
 			isa = PBXGroup;
 			children = (
+				574C45D322826B5C00F4A8F2 /* drw_render_gl_barrier.h */,
+				574C45D422826B5C00F4A8F2 /* drw_render_gl_barrier.c */,
 				575B4E9520C9E95D00E875FE /* Frameworks */,
 				57967B6320D185FD00003F66 /* lib */,
 				D13332FE1EA66418008284B1 /* Products */,
@@ -251,6 +256,7 @@
 				570FA31321BF234800F945F7 /* drw_type_ftgl.c in Sources */,
 				57BDF7C720AB99E0004C154E /* drw_render.c in Sources */,
 				577DD22520D3577800623919 /* drw_render_gl.c in Sources */,
+				574C45D522826B5C00F4A8F2 /* drw_render_gl_barrier.c in Sources */,
 				57BDF7C920AB99E0004C154E /* drw_primitives.c in Sources */,
 				57BDF7C620AB99E0004C154E /* drw_wobject_ops.c in Sources */,
 				5703DBE820ACBF98007E1800 /* drw_ext_gpc.c in Sources */,
