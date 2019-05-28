@@ -13,6 +13,7 @@
 #include <hershey/futural.h>
 //#include <r4/src/r4_config.h>
 #include <stdbool.h>
+#include <drw/drw.h>
 
 void drw_type_hershey_initialize(void)
 {

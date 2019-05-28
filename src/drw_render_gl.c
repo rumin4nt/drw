@@ -53,8 +53,6 @@ static signed alpha_stack = 0;
 
 //#include "../app/r_app_ios.h"
 
-//#include <OpenGLES/ES1/gl.h>
-//#include <OpenGLES/ES3/gl.h>
 
 #include "type/drw_type_ftgles.h"
 #include <glulookat/gluLookAt.h>

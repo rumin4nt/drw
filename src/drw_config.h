@@ -53,7 +53,13 @@
 #endif
 
 #ifdef DRW_PLATFORM_IOS
+#define TEMP_GL_LEGACY_BACKPORT
+
+#ifdef TEMP_GL_LEGACY_BACKPORT
 #include <OpenGLES/ES1/gl.h>
+#else
+#include <OpenGLES/ES2/gl.h>
+#endif
 #include <OpenGLES/ES3/gl.h>
 #endif
 
@@ -96,7 +102,7 @@
 #define DRW_TYPE_PROVIDER_ENABLE_HPVEC
 #define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
 
-#ifdef DRW_PLATFORM_LINUX
+#ifndef DRW_PLATFORM_LINUX
 #define DRW_TYPE_PROVIDER_ENABLE_HERSHEY
 #endif
 

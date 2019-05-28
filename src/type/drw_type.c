@@ -7,7 +7,6 @@
 //
 
 #include "drw_type.h"
-
 //#ifdef DEBUG
 #include "../drw_log.h"
 //#endif
@@ -32,7 +31,6 @@
 #include "drw_type_hershey.h"
 #endif
 
-
 #include "drw_type_hpvec.h"
 #define TEXT_MAX 1024
 #define PROVIDER_ID_MAX 32
@@ -41,19 +39,19 @@
 
 #include <drw/drw.h>
 
-int drw_type_debug = 0;
-static int	 align_x       = 0;
-static int	 align_y       = 0;
-static int	 type_provider = -1;
-static int	 num_providers = 0;
-drw_type_draw_fun* draw_funcs    = NULL;
-drw_type_bbox_fun* bbox_funcs    = NULL;
+int		   drw_type_debug = 0;
+static int	 align_x	= 0;
+static int	 align_y	= 0;
+static int	 type_provider  = -1;
+static int	 num_providers  = 0;
+drw_type_draw_fun* draw_funcs     = NULL;
+drw_type_bbox_fun* bbox_funcs     = NULL;
 static int	 _text_size;
 const char**       provider_ids = NULL;
 
 static bool right_to_left = false;
 
-void   drw_type_set_righttoleft(bool v)
+void drw_type_set_righttoleft(bool v)
 {
 	right_to_left = v;
 }
@@ -76,12 +74,11 @@ void drw_type_debug_set(int v)
 
 void drw_type_init(void)
 {
-	
-	
+
 #ifdef DRW_TYPE_PROVIDER_ENABLE_FTGLES
 	drw_type_ftgles_initialize();
 #endif
-	
+
 #ifdef DRW_TYPE_PROVIDER_ENABLE_FTGL
 	drw_type_ftgl_initialize();
 #endif
@@ -93,18 +90,18 @@ void drw_type_init(void)
 #ifdef DRW_TYPE_PROVIDER_ENABLE_HPVEC
 	drw_type_hpvec_initialize();
 #endif
-	
+
 #ifdef DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
 	drw_type_asteroids_initialize();
 #endif
-	
+
 	int n = drw_type_provider_count();
 	if (n == 0)
 	{
 		drw_log("NO type providers...provided!");
 		return;
 	}
- 	drw_type_provider_select(0);
+	drw_type_provider_select(0);
 
 	drw_type_set_align(DRW_TYPE_ALIGN_H_RIGHT, DRW_TYPE_ALIGN_V_BOTTOM);
 }
@@ -118,7 +115,7 @@ void drw_type_deinit(void)
 
 void drw_type_get_align(int* x, int* y)
 {
-	
+
 	*x = align_x;
 	*y = align_y;
 }
@@ -126,29 +123,29 @@ void drw_type_get_align(int* x, int* y)
 void drw_type_set_align(int x, int y)
 {
 	int tx, ty = -1;
-	
-	if ( x > -1 && x < DRW_TYPE_ALIGN_H_NONE )
+
+	if (x > -1 && x < DRW_TYPE_ALIGN_H_NONE)
 	{
 		align_x = x;
 	}
-	#ifdef DEBUG
-	else{
+#ifdef DEBUG
+	else
+	{
 		drw_log("invalid horizontal type alignment requested!\n");
-		
 	}
 #endif
-	
-	if ( y > -1 && y < DRW_TYPE_ALIGN_V_NONE )
+
+	if (y > -1 && y < DRW_TYPE_ALIGN_V_NONE)
 	{
 		align_y = y;
 	}
 #ifdef DEBUG
-	else{
+	else
+	{
 		drw_log("invalid vertical type alignment requested!\n");
-
 	}
 #endif
-	
+
 	/*
 #ifdef DEBUG
 	if ( x < 0 || x > 2 || y < 0 || y > 2 )
@@ -157,11 +154,10 @@ void drw_type_set_align(int x, int y)
 		return;
 	}
 #endif
-	
+
 	align_x = x;
 	align_y = y;
 */
-	
 }
 
 int drw_type_get_size(void)
@@ -174,7 +170,7 @@ void drw_type_set_size(int sz, int resolution)
 #ifdef DRW_ENABLE_FTGLES
 	drw_type_ftgles_size(sz, resolution);
 #endif
-	
+
 #ifdef DRW_ENABLE_FTGL
 	drw_type_ftgl_size(sz, resolution);
 #endif
@@ -213,22 +209,21 @@ void drw_type_get_bbox(const char* text, unsigned long sz, float* bounds)
 		drw_log("NO type provider specified, return.");
 		return;
 	}
-	
+
 	if (num_providers == 0)
 	{
 		drw_log("NO providers registered, return.");
 		return;
 	}
-	
-	if ( type_provider >= num_providers )
+
+	if (type_provider >= num_providers)
 	{
 		drw_log("Requested out of range type provider.\n");
 		return;
 	}
-	
+
 	drw_type_bbox_fun fun = bbox_funcs[type_provider];
 	(*fun)(text, sz, bounds);
-
 }
 
 void drw_type_draw(const char* format, ...)
@@ -237,12 +232,12 @@ void drw_type_draw(const char* format, ...)
 	{
 		drw_log("NO type provider specified, return.");
 	}
-	
+
 	if (num_providers == 0)
 	{
 		drw_log("NO providers registered, return.");
 	}
-	
+
 	char buf[TEXT_MAX];
 	memset(buf, 0, sizeof(strlen(buf)));
 	sprintf(buf, "%s", format);
@@ -261,8 +256,8 @@ void drw_type_draw(const char* format, ...)
 
 	drw_type_draw_fun fun = draw_funcs[type_provider];
 	double		  tx = 0, ty = 0;
-	
-	 //
+
+	//
 	switch (align_x)
 	{
 	case DRW_TYPE_ALIGN_H_LEFT:
@@ -284,7 +279,7 @@ void drw_type_draw(const char* format, ...)
 		ty = wy * -.1;
 		break;
 	case DRW_TYPE_ALIGN_V_CENTER:
-		ty = wy * -.5 ;
+		ty = wy * -.5;
 		break;
 	case DRW_TYPE_ALIGN_V_BOTTOM:
 		ty = wy * 0;
@@ -292,8 +287,7 @@ void drw_type_draw(const char* format, ...)
 	default:
 		break;
 	}
-	 
-	
+
 	drw_push();
 	drw_translate2f(tx, ty);
 	fun(buf);
@@ -308,7 +302,7 @@ void drw_type_load_ttf(const char* path)
 
 	drw_type_ftgles_load(path);
 #endif
-	
+
 #ifdef DRW_TYPE_PROVIDER_ENABLE_FTGL
 	drw_type_ftgl_load(path);
 #endif

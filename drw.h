@@ -46,6 +46,8 @@
 
 #include "stdlib.h"
 
+#define TEMP_GL_LEGACY_BACKPORT
+
 int		    drw_check_version_match(const char* str);
 int		    drw_check_compat_match(const char* str);
 char*		    drw_get_version_string(void);

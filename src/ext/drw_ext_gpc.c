@@ -12,6 +12,19 @@
 #include <stdlib.h>
 
 //#ifdef RUMINANT4_PRESENT
+#include <drw/drw.h>
+
+#include "../drw_render_gl_barrier.h"
+//
+//#ifdef DRW_PLATFORM_IOS
+//#ifdef TEMP_GL_LEGACY_BACKPORT
+//#error hi
+//#include <OpenGLES/ES1/gl.h>
+//#else
+//
+//#include <OpenGLES/ES2/gl.h>
+//#endif
+//#endif
 
 void drw_gpc_polygon_outline(GPCRec* rec)
 {

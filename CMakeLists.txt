@@ -24,14 +24,14 @@ src/type/drw_type_hpvec.c
 src/type/drw_type_asteroids.c
 )
 
-if(${OperatingSystem} MATCHES "macos")
+#if(${OperatingSystem} MATCHES "macos")
 	file(GLOB sources ${sources}
 	src/type/drw_type_ftgl.c
 	src/ext/*.c
 	src/hacks/*.c
 )
 
-endif()
+#endif()
 
 link_directories(${CMAKE_BINARY_DIR}
                  ${CMAKE_SOURCE_DIR}/contrib/platform/darwin /usr/local/lib)
