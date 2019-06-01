@@ -42,7 +42,7 @@
 //#include <grdn/grdn.h>
 //#include <r4/r4.h>
 
-//#include <deps/gl-matrix/gl-matrix.h>
+//#include <gl-matrix/gl-matrix.h>
 
 #ifdef DRW_ENABLE_SNOOP
 
@@ -115,10 +115,10 @@ void drw_color_push(void);
 // void drw_color_c8(RColor8*);
 // void drw_color_c16(RColor16*);
 double drw_alpha_get(void);
-void drw_alpha(double a);
-void drw_alpha_pop(void);
-void drw_alpha_mult(double v);
-void drw_alpha_mult_pop(void);
+void   drw_alpha(double a);
+void   drw_alpha_pop(void);
+void   drw_alpha_mult(double v);
+void   drw_alpha_mult_pop(void);
 
 //	debug stuff
 void drw_axis(void);

@@ -50,6 +50,8 @@
 		5703D74B20ACBCBD007E1800 /* drw_ext_gpc.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_ext_gpc.c; sourceTree = "<group>"; };
 		5703DB1920ACBD5C007E1800 /* gpc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = gpc.c; sourceTree = "<group>"; };
 		5703DB1A20ACBD5C007E1800 /* gpc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gpc.h; sourceTree = "<group>"; };
+		5720784722A0956300D5FE82 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		5720784822A0957300D5FE82 /* drw_hacks.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_hacks.h; sourceTree = "<group>"; };
 		5741595E20D4221100E5498B /* drw_render.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render.h; sourceTree = "<group>"; };
 		5767C01120DC64870022A676 /* drw_snoop.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_snoop.c; sourceTree = "<group>"; };
 		5767C01220DC64870022A676 /* drw_snoop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_snoop.h; sourceTree = "<group>"; };
@@ -139,6 +141,8 @@
 			children = (
 				5767C01120DC64870022A676 /* drw_snoop.c */,
 				5767C01220DC64870022A676 /* drw_snoop.h */,
+				5720784722A0956300D5FE82 /* Header.h */,
+				5720784822A0957300D5FE82 /* drw_hacks.h */,
 			);
 			path = hacks;
 			sourceTree = "<group>";
@@ -320,6 +324,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = D1A833521E99AD2B009AA5D2;

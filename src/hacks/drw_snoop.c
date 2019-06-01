@@ -20,8 +20,10 @@ static bool     _snooping = false;
 //typedef void (*snoop_record_fun)(RLine* l);
 #include <drw/drw.h>
 
-void drw_snoop_add_rline3(RLine3* line)
+void drw_snoop_add_rline3(void* data)
 {
+
+	RLine3* line = data;
 	snoopnum++;
 	if (!snoopdata)
 	{
@@ -59,8 +61,9 @@ void drw_snoop_add_rline3(RLine3* line)
 	snoopdata[snoopnum - 1] = rl;
 }
 
-void drw_snoop_add_rline(RLine* l)
+void drw_snoop_add_rline(void* data)
 {
+	RLine* line = data;
 	snoopnum++;
 	if (!snoopdata)
 	{
@@ -73,9 +76,9 @@ void drw_snoop_add_rline(RLine* l)
 
 	double  rx, ry, rz;
 	RLine3* rl = r_line3_create();
-	for (int i = 0; i < l->num; i++)
+	for (int i = 0; i < line->num; i++)
 	{
-		RPoint p = l->data[i];
+		RPoint p = line->data[i];
 
 		double x = p.x;
 		double y = p.y;
@@ -85,9 +88,9 @@ void drw_snoop_add_rline(RLine* l)
 		r_line3_add_point3f(rl, rx, ry, rz);
 	}
 
-	if (l->closed)
+	if (line->closed)
 	{
-		RPoint p = l->data[0];
+		RPoint p = line->data[0];
 
 		double x = p.x;
 		double y = p.y;
@@ -99,7 +102,7 @@ void drw_snoop_add_rline(RLine* l)
 	snoopdata[snoopnum - 1] = rl;
 }
 
-RLine* drw_snoop_rline_from_f(float* data, int num)
+void* drw_snoop_rline_from_f(float* data, int num)
 {
 	RLine* l = r_line_create();
 	for (int i = 0; i < num; i += 2)

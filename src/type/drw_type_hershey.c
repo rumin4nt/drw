@@ -8,12 +8,17 @@
 
 #include "drw_type_hershey.h"
 
+//#include <drw/src/drw_config.h>
 #ifdef DRW_TYPE_PROVIDER_ENABLE_HERSHEY
 
+
+//	linux (gnu? REAlly does not like this generated file lol
 #include <hershey/futural.h>
 //#include <r4/src/r4_config.h>
 #include <stdbool.h>
-#include <drw/drw.h>
+//#include <drw/drw.h>
+#include <drw/src/type/drw_type.h>
+#include <drw/src/drw_render_gl.h>
 
 void drw_type_hershey_initialize(void)
 {
