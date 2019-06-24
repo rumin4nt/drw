@@ -141,6 +141,8 @@
 		57BDF7AE20AB99E0004C154E /* src */ = {
 			isa = PBXGroup;
 			children = (
+				57A89EA1229DE0260019E933 /* drw_render_gl_barrier.c */,
+				57A89EA0229DE0250019E933 /* drw_render_gl_barrier.h */,
 				575B4E9220C9E69900E875FE /* drw_config.h */,
 				575B4E9320C9E69900E875FE /* drw_dummy.h */,
 				57967B6620D186A800003F66 /* drw_export.c */,

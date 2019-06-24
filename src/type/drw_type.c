@@ -101,8 +101,11 @@ void drw_type_init(void)
 		drw_log("NO type providers...provided!");
 		return;
 	}
+
+	
 	drw_type_provider_select(1);
 
+	
 	drw_type_set_align(DRW_TYPE_ALIGN_H_RIGHT, DRW_TYPE_ALIGN_V_BOTTOM);
 }
 
@@ -326,6 +329,7 @@ int drw_type_provider_count(void)
 
 #ifdef DRW_EXT_R4
 
+
 void* drw_type_render(const char* text)
 {
 	if (type_provider < -1) {
@@ -346,6 +350,7 @@ void* drw_type_render(const char* text)
 	drw_type_render_fun fun = render_funcs[type_provider];
 	void* rendered = (*fun)(text);
 	return rendered;
+
 }
 
 #endif

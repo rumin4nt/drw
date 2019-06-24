@@ -34,8 +34,9 @@ void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 
 #ifdef DRW_EXT_R4
 void* drw_type_hpvec_render(const char* text);
-#endif
 
 #endif
+#endif
+
 
 #endif /* drw_type_hpvec_h */

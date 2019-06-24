@@ -9,6 +9,9 @@
 #ifndef drw_type_h
 #define drw_type_h
 
+
+#include <stdbool.h>
+
 enum DRWAlignmentHorizontal {
 	DRW_TYPE_ALIGN_H_LEFT,
 	DRW_TYPE_ALIGN_H_CENTER,
@@ -58,6 +61,8 @@ enum {
 
 typedef void (*drw_type_draw_fun)(const char*);
 typedef void (*drw_type_bbox_fun)(const char*, unsigned long, float*);
+#define DRW_EXT_R4
+
 
 extern int drw_type_debug;
 void       drw_type_init(void);
@@ -80,7 +85,9 @@ int  drw_type_provider_count(void);
 void drw_type_provider_select(signed index);
 
 #ifdef DRW_EXT_R4
+
 void* drw_type_render(const char* text);
+
 #endif
 
 #endif /* drw_type_h */

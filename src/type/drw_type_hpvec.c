@@ -67,8 +67,10 @@ void drw_type_hpvec_initialize(void)
 {
 #ifdef DRW_EXT_R4
 	drw_type_provider_register("hpvec", drw_type_hpvec_draw, drw_type_hpvec_bbox, drw_type_hpvec_render);
+
 #else
 	drw_type_provider_register("hpvec", drw_type_hpvec_draw, drw_type_hpvec_bbox, NULL);
+
 #endif
 }
 
@@ -300,6 +302,7 @@ HPGlyph** drw_type_hpvec_glyph(const char* text)
 
 #ifdef DRW_EXT_R4
 void* drw_type_hpvec_render(const char* text)
+
 {
 
 	return NULL;
