@@ -88,6 +88,7 @@ void drw_snoop_add_rline(void* data)
 		r_line3_add_point3f(rl, rx, ry, rz);
 	}
 
+	
 	if (line->closed)
 	{
 		RPoint p = line->data[0];
@@ -99,6 +100,9 @@ void drw_snoop_add_rline(void* data)
 		drw_point_3d_to_2d(x, y, z, &rx, &ry, &rz);
 		r_line3_add_point3f(rl, rx, ry, rz);
 	}
+	 
+	
+	
 	snoopdata[snoopnum - 1] = rl;
 }
 

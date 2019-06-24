@@ -298,8 +298,67 @@ void drw_type_draw(const char* format, ...)
 	fun(buf);
 	drw_pop();
 
-	//free(buf);
 }
+
+
+void drw_type_draw_fixed(const char* text)
+{
+	if (type_provider == -1) {
+		drw_log("NO type provider specified, return.");
+	}
+	
+	if (num_providers == 0) {
+		drw_log("NO providers registered, return.");
+	}
+	
+	
+	
+	float bounds[6];
+	bounds[0] = bounds[1] = bounds[2] = bounds[3] = bounds[4] = bounds[5] = -1;
+	drw_type_get_bbox(text, strlen(text), bounds);
+	//if ( align_x)
+	double wx = bounds[3] - bounds[0];
+	double wy = bounds[4] - bounds[1];
+	//double wz = bounds[5] - bounds[2];
+	
+	drw_type_draw_fun fun = draw_funcs[type_provider];
+	double		  tx = 0, ty = 0;
+	
+	//
+	switch (align_x) {
+		case DRW_TYPE_ALIGN_H_LEFT:
+			tx = wx * -1;
+			break;
+		case DRW_TYPE_ALIGN_H_CENTER:
+			tx = wx * -.5;
+			break;
+		case DRW_TYPE_ALIGN_H_RIGHT:
+			tx = wx * 0;
+			break;
+		default:
+			break;
+	}
+	
+	switch (align_y) {
+		case DRW_TYPE_ALIGN_V_TOP:
+			ty = wy * -.1;
+			break;
+		case DRW_TYPE_ALIGN_V_CENTER:
+			ty = wy * -.5;
+			break;
+		case DRW_TYPE_ALIGN_V_BOTTOM:
+			ty = wy * 0;
+			break;
+		default:
+			break;
+	}
+	
+	drw_push();
+	drw_translate2f(tx, ty);
+	fun(text);
+	drw_pop();
+}
+
 
 void drw_type_load_ttf(const char* path)
 {

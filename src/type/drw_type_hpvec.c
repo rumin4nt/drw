@@ -301,11 +301,49 @@ HPGlyph** drw_type_hpvec_glyph(const char* text)
 }
 
 #ifdef DRW_EXT_R4
-void* drw_type_hpvec_render(const char* text)
 
+//----------------------------------------------------------------
+#pragma mark rline rendering
+
+
+static RLine* render_hp_glyph_as_rline(int idx)
 {
+	if (idx < 0)
+		return NULL;
+	
+	const int* points = hp1345a[idx];
+	int	num    = hp1345a_sizes[idx];
+	if (num == 0)
+		return NULL;
+	
+	RLine* l = r_line_create();
+	int    j;
+	for (j = 0; j < num - 1; j += 2) {
+		
+		r_line_add_point2f(l, points[j], points[j + 1]);
+	}
+	
+	return l;
+}
 
-	return NULL;
+void* drw_type_hpvec_render(const char* text)
+{
+	RObject* obj = r_object_create();
+	
+	
+	int n = strlen(text);
+	
+	for ( int i = 0; i < n ; i ++ )
+	{
+		char c = text[i];
+		
+		RLine* line = render_hp_glyph_as_rline(text[i]);
+		r_line_translate(line, i * HPVEC_FONT_SIZE, 0);
+		r_object_add_line(obj, line);
+		
+	}
+	
+	return obj;
 }
 #endif
 

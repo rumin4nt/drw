@@ -71,6 +71,7 @@ void       drw_type_deinit(void);
 void drw_type_debug_set(int v);
 
 void drw_type_draw(const char* text, ...);
+void drw_type_draw_fixed(const char* text);
 void drw_type_get_bbox(const char*, unsigned long sz, float*);
 double drw_type_get_width(const char*);
 int    drw_type_get_size(void);

@@ -16,6 +16,7 @@
 //#ifdef DEBUG
 #include <drw/src/drw_log.h>
 //#endif
+#include "hacks/drw_snoop.h"
 
 #include "ext/drw_ext_gpc.h"
 #include "type/drw_type.h"
@@ -80,10 +81,10 @@ static signed alpha_stack = 0;
 
 //#include <GL/glew.h>
 //#include "type/drw_type_ftgl.h"
-#include "hacks/drw_hacks.h"
-#ifdef DRW_ENABLE_SNOOP
+//#include "hacks/drw_hacks.h"
+//#ifdef DRW_ENABLE_SNOOP
 #include "hacks/drw_snoop.h"
-#endif
+//#endif
 
 //#undef DRW_PLATFORM_IOS
 #endif
@@ -815,6 +816,7 @@ void drw_line_3f(float ax, float ay, float az, float bx, float by, float bz)
 	if (drw_snoop_get())
 	{
 		RLine3* nl = _snoop_rline3_from_f(renderLine, 6);
+		nl->closed = true;
 		drw_snoop_add_rline3(nl);
 	}
 #endif
@@ -1872,6 +1874,7 @@ void drw_rline(const RLine* poly)
 		return;
 	}
 #ifdef DRW_ENABLE_SNOOP
+
 	if (drw_snoop_get())
 	{
 		drw_snoop_add_rline(poly);
