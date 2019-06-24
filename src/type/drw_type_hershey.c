@@ -11,18 +11,31 @@
 //#include <drw/src/drw_config.h>
 #ifdef DRW_TYPE_PROVIDER_ENABLE_HERSHEY
 
-
 //	linux (gnu? REAlly does not like this generated file lol
 #include <hershey/futural.h>
 //#include <r4/src/r4_config.h>
 #include <stdbool.h>
 //#include <drw/drw.h>
-#include <drw/src/type/drw_type.h>
 #include <drw/src/drw_render_gl.h>
+#include <drw/src/type/drw_type.h>
+
+#ifdef DRW_EXT_R4
+RObject* drw_type_hershey_render(const char* text)
+{
+	return NULL;
+}
+
+#endif
 
 void drw_type_hershey_initialize(void)
 {
-	drw_type_provider_register("hershey", drw_type_hershey_draw, drw_type_hershey_bbox);
+#ifdef DRW_EXT_R4
+	drw_type_provider_register("hershey", drw_type_hershey_draw, drw_type_hershey_bbox, drw_type_hershey_render);
+
+#else
+	drw_type_provider_register("hershey", drw_type_hershey_draw, drw_type_hershey_bbox, NULL);
+
+#endif
 }
 
 void drw_type_hershey_bbox(const char* str, unsigned long num, float* data)
@@ -38,17 +51,13 @@ void drw_type_hershey_draw(const char* text)
 	char c    = (char)0;
 	bool done = false;
 	int  i    = 0;
-	while (!done)
-	{
+	while (!done) {
 		c = text[i];
 		//printf("%c", c);
-		if (c == '\0')
-		{
+		if (c == '\0') {
 
 			done = true;
-		}
-		else
-		{
+		} else {
 			//int w = futural_width;
 
 			//int h = futural_height;
@@ -68,8 +77,7 @@ void drw_type_hershey_draw(const char* text)
 			//printf("width is %d\n", w);
 			drw_push();
 			drw_scale(1, -1, 1);
-			for (int i2 = 0; i2 < sz; i2 += 4)
-			{
+			for (int i2 = 0; i2 < sz; i2 += 4) {
 				const char a  = data[i2];
 				const char b  = data[i2 + 1];
 				const char c  = data[i2 + 2];

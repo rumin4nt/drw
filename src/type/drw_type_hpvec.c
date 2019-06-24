@@ -38,17 +38,16 @@ static int alignment_v = DRW_TYPE_ALIGN_V_CENTER;
 
 void drw_type_hpvec_bbox(const char* text, unsigned long sz, float* data)
 {
-	double x = HPVEC_GRID_SIZE * sz;
-	double y  = HPVEC_GRID_SIZE;
-	unsigned w,h;
-	
-	if ( !drw_screenspace_get())
-	{
+	double   x = HPVEC_GRID_SIZE * sz;
+	double   y = HPVEC_GRID_SIZE;
+	unsigned w, h;
+
+	if (!drw_screenspace_get()) {
 		drw_screensize_get(&w, &h);
 		x /= w;
 		y /= w;
-//		x *= .5;
-//		y *= .5;
+		//		x *= .5;
+		//		y *= .5;
 	}
 	data[0] = 0;
 	data[1] = 0;
@@ -60,7 +59,13 @@ void drw_type_hpvec_bbox(const char* text, unsigned long sz, float* data)
 
 void drw_type_hpvec_initialize(void)
 {
-	drw_type_provider_register("hpvec", drw_type_hpvec_draw, drw_type_hpvec_bbox);
+#ifdef DRW_EXT_R4
+	drw_type_provider_register("hpvec", drw_type_hpvec_draw, drw_type_hpvec_bbox, drw_type_hpvec_render);
+
+#else
+	drw_type_provider_register("hpvec", drw_type_hpvec_draw, drw_type_hpvec_bbox, NULL);
+
+#endif
 }
 
 void drw_type_hpvec_set_alignment(int h, int v)
@@ -83,8 +88,7 @@ static void draw_hp_glyph(int idx)
 
 	RLine* l = r_line_create();
 	int    j;
-	for (j = 0; j < num - 1; j += 2)
-	{
+	for (j = 0; j < num - 1; j += 2) {
 
 		r_line_add_point2f(l, points[j], points[j + 1]);
 	}
@@ -95,29 +99,28 @@ static void draw_hp_glyph(int idx)
 
 static void draw_debug(const char* text)
 {
-	float *dims = calloc(6, sizeof(float));
-	
+	float* dims = calloc(6, sizeof(float));
+
 	drw_type_hpvec_bbox(text, strlen(text), dims);
 	double wx = dims[3] - dims[0];
 	double wy = dims[2] - dims[1];
-	
+
 	drw_rect(dims[0], dims[1], wx, wy);
-	
+
 	free(dims);
 }
 
 void drw_type_hpvec_draw(const char* text)
 {
-	if (!text || 0 == strcmp("", text))
-	{
+	if (!text || 0 == strcmp("", text)) {
 #ifdef DEBUG
 		drw_log("Error, no text to draw!");
 #endif
 		return;
 	}
-	if ( drw_type_debug )
+	if (drw_type_debug)
 		draw_debug(text);
-	
+
 	bool done = false;
 	int  i    = 0;
 
@@ -163,8 +166,7 @@ void drw_type_hpvec_draw(const char* text)
 	drw_push();
 	int w, h;
 
-	if (!drw_screenspace_get())
-	{
+	if (!drw_screenspace_get()) {
 		drw_query_framebuffer(&w, &h);
 
 		double sz = drw_type_size_get();
@@ -176,20 +178,15 @@ void drw_type_hpvec_draw(const char* text)
 
 	//drw_translate(offx, offy, 0);
 
-	while (!done)
-	{
+	while (!done) {
 
 		char c = text[i];
-		if (c == '\0')
-		{
+		if (c == '\0') {
 			done = true;
-		}
-		else
-		{
+		} else {
 			int	 idx  = 0 + c;
 			static bool once = false;
-			if (!once)
-			{
+			if (!once) {
 				once = true;
 				printf("index [%c] %d\n", c, idx);
 			}
@@ -233,8 +230,7 @@ void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 
 	unsigned long len = strlen(text);
 
-	switch (alignment_h)
-	{
+	switch (alignment_h) {
 	case DRW_TYPE_ALIGN_H_LEFT:
 		break;
 	case DRW_TYPE_ALIGN_H_CENTER:
@@ -250,8 +246,7 @@ void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 		break;
 	}
 
-	switch (alignment_v)
-	{
+	switch (alignment_v) {
 	case DRW_TYPE_ALIGN_V_TOP:
 		offy = -HPVEC_FONT_SIZE;
 		break;
@@ -272,8 +267,7 @@ void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 	*ox = offx;
 	*oy = offy;
 
-	if (!drw_screenspace_get())
-	{
+	if (!drw_screenspace_get()) {
 		drw_query_framebuffer(&w, &h);
 
 		double sz = drw_type_size_get();
@@ -282,25 +276,30 @@ void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 
 		*scale = sc;
 		//drw_scale_u(sc);
-	}
-	else
-	{
+	} else {
 		*scale = 1;
 	}
 }
 
-HPGlyph** drw_type_hpvec_render(const char* text)
+HPGlyph** drw_type_hpvec_glyph(const char* text)
 {
 	unsigned long len = strlen(text);
 
 	HPGlyph** glyphs = calloc(len, sizeof(HPGlyph*));
 
-	for (unsigned long i = 0; i < len; i++)
-	{
+	for (unsigned long i = 0; i < len; i++) {
 		glyphs[i] = render_hp_glyph(text[i]);
 	}
 
 	return glyphs;
 }
+
+#ifdef DRW_EXT_R4
+RObject* drw_type_hpvec_render(const char* text)
+{
+
+	return NULL;
+}
+#endif
 
 #endif

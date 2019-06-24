@@ -15,6 +15,11 @@
 void drw_type_hershey_initialize(void);
 void drw_type_hershey_draw(const char* text);
 void drw_type_hershey_bbox(const char*, unsigned long, float*);
+
+#ifdef DRW_EXT_R4
+RObject* drw_type_hershey_render(const char* text);
+#endif
+
 #endif
 
 #endif /* drw_type_hershey_h */

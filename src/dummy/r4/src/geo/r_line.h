@@ -92,7 +92,7 @@ void r_line_calculate_circle(RLine* line, RPoint* center, double* inner, double*
 void 		wsh_line_hnd_destroy(WLineHnd*);
 void		wsh_line_hnd_add_point(WLineHnd, WPoint);
 
-void		wsh_line_move(WLine* src, double x, double y);
+void		wsh_line_translate(WLine* src, double x, double y);
 void		wsh_line_scale(WLine* src, double x, double y);
 
 void		wsh_line_find_mins(WLine* src, double* x, double* y);

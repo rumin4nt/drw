@@ -39,15 +39,16 @@
 
 #include <drw/drw.h>
 
-int		   drw_type_debug = 0;
-static int	 align_x	= 0;
-static int	 align_y	= 0;
-static int	 type_provider  = -1;
-static int	 num_providers  = 0;
-drw_type_draw_fun* draw_funcs     = NULL;
-drw_type_bbox_fun* bbox_funcs     = NULL;
-static int	 _text_size;
-const char**       provider_ids = NULL;
+int		     drw_type_debug = 0;
+static int	   align_x	= 0;
+static int	   align_y	= 0;
+static int	   type_provider  = -1;
+static int	   num_providers  = 0;
+drw_type_draw_fun*   draw_funcs     = NULL;
+drw_type_bbox_fun*   bbox_funcs     = NULL;
+drw_type_render_fun* render_funcs   = NULL;
+static int	   _text_size;
+const char**	 provider_ids = NULL;
 
 static bool right_to_left = false;
 
@@ -96,8 +97,7 @@ void drw_type_init(void)
 #endif
 
 	int n = drw_type_provider_count();
-	if (n == 0)
-	{
+	if (n == 0) {
 		drw_log("NO type providers...provided!");
 		return;
 	}
@@ -110,6 +110,9 @@ void drw_type_deinit(void)
 {
 	free(draw_funcs);
 	free(bbox_funcs);
+	if (render_funcs)
+		free(render_funcs);
+
 	free(provider_ids);
 }
 
@@ -124,24 +127,20 @@ void drw_type_set_align(int x, int y)
 {
 	int tx, ty = -1;
 
-	if (x > -1 && x < DRW_TYPE_ALIGN_H_NONE)
-	{
+	if (x > -1 && x < DRW_TYPE_ALIGN_H_NONE) {
 		align_x = x;
 	}
 #ifdef DEBUG
-	else
-	{
+	else {
 		drw_log("invalid horizontal type alignment requested!\n");
 	}
 #endif
 
-	if (y > -1 && y < DRW_TYPE_ALIGN_V_NONE)
-	{
+	if (y > -1 && y < DRW_TYPE_ALIGN_V_NONE) {
 		align_y = y;
 	}
 #ifdef DEBUG
-	else
-	{
+	else {
 		drw_log("invalid vertical type alignment requested!\n");
 	}
 #endif
@@ -177,47 +176,54 @@ void drw_type_set_size(int sz, int resolution)
 	_text_size = sz;
 }
 
-int drw_type_provider_register(const char* ident, drw_type_draw_fun render, drw_type_bbox_fun bbox)
+int drw_type_provider_register(const char* ident, drw_type_draw_fun draw, drw_type_bbox_fun bbox, drw_type_render_fun* render)
 {
 	drw_log("registering provider: %s", ident);
 
 	num_providers++;
-	if (provider_ids == NULL)
-	{
+	if (provider_ids == NULL) {
 		provider_ids = calloc(num_providers, PROVIDER_ID_MAX * sizeof(char*));
 		draw_funcs   = calloc(num_providers, sizeof(drw_type_draw_fun));
 		bbox_funcs   = calloc(num_providers, sizeof(drw_type_bbox_fun));
-	}
-	else
-	{
+#ifdef DRW_EXT_R4
+		render_funcs = calloc(num_providers, sizeof(drw_type_render_fun));
+
+#endif
+
+	} else {
 		provider_ids = realloc(provider_ids, num_providers * PROVIDER_ID_MAX * sizeof(char*));
 		draw_funcs   = realloc(draw_funcs, num_providers * sizeof(drw_type_draw_fun));
 		bbox_funcs   = realloc(bbox_funcs, num_providers * sizeof(drw_type_bbox_fun));
+#ifdef DRW_EXT_R4
+
+		render_funcs = realloc(render_funcs, num_providers * sizeof(drw_type_render_fun));
+#endif
 	}
 
 	int idx		  = num_providers - 1;
 	provider_ids[idx] = ident;
-	draw_funcs[idx]   = render;
+	draw_funcs[idx]   = draw;
 	bbox_funcs[idx]   = bbox;
+#ifdef DRW_EXT_R4
+	render_funcs[idx] = render;
+#endif
+
 	return 0;
 }
 
 void drw_type_get_bbox(const char* text, unsigned long sz, float* bounds)
 {
-	if (type_provider < -1)
-	{
+	if (type_provider < -1) {
 		drw_log("NO type provider specified, return.");
 		return;
 	}
 
-	if (num_providers == 0)
-	{
+	if (num_providers == 0) {
 		drw_log("NO providers registered, return.");
 		return;
 	}
 
-	if (type_provider >= num_providers)
-	{
+	if (type_provider >= num_providers) {
 		drw_log("Requested out of range type provider.\n");
 		return;
 	}
@@ -228,13 +234,11 @@ void drw_type_get_bbox(const char* text, unsigned long sz, float* bounds)
 
 void drw_type_draw(const char* format, ...)
 {
-	if (type_provider == -1)
-	{
+	if (type_provider == -1) {
 		drw_log("NO type provider specified, return.");
 	}
 
-	if (num_providers == 0)
-	{
+	if (num_providers == 0) {
 		drw_log("NO providers registered, return.");
 	}
 
@@ -258,8 +262,7 @@ void drw_type_draw(const char* format, ...)
 	double		  tx = 0, ty = 0;
 
 	//
-	switch (align_x)
-	{
+	switch (align_x) {
 	case DRW_TYPE_ALIGN_H_LEFT:
 		tx = wx * -1;
 		break;
@@ -273,8 +276,7 @@ void drw_type_draw(const char* format, ...)
 		break;
 	}
 
-	switch (align_y)
-	{
+	switch (align_y) {
 	case DRW_TYPE_ALIGN_V_TOP:
 		ty = wy * -.1;
 		break;
@@ -321,3 +323,13 @@ int drw_type_provider_count(void)
 {
 	return num_providers;
 }
+
+#ifdef DRW_EXT_R4
+
+RObject* drw_type_render(const char* text)
+{
+
+	return NULL;
+}
+
+#endif

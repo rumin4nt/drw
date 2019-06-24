@@ -240,10 +240,10 @@ void drw_type_load_ttf(const char* path);
 */
 
 //	wash primitives
-void drw_verts(WLine*);
-void drw_verts_r(RLine*);
-void drw_robject_verts(RObject* obj);
-void drw_wobject_verts(WObject* obj);
+void drw_verts(const WLine*);
+void drw_verts_r(const RLine*);
+void drw_robject_verts(const RObject* obj);
+void drw_wobject_verts(const WObject* obj);
 void drw_robject(RObject* obj);
 void drw_wline_fill(WLine* line);
 void drw_wline(const WLine* line);

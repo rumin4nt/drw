@@ -68,7 +68,7 @@ void wsh_line_hnd_destroy(WLineHnd*);
 void wsh_line_hnd_add_point(WLineHnd*, WPoint);
 void wsh_line_hnd_add_point2f(WLineHnd* hnd, double x, double y);
 void wsh_line_calc_bounds(WLine* src);
-void wsh_line_move(WLine* src, double x, double y);
+void wsh_line_translate(WLine* src, double x, double y);
 void wsh_line_rotate(WLine* line, double cx, double cy, double r);
 
 void wsh_line_scale(WLine* src, double x, double y);

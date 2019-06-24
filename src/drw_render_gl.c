@@ -681,7 +681,7 @@ void drw_alpha(double a)
 	}
 #endif
 	if (a < 0 || a > 1)
-		drw_log("Invalid value passed to alpha!");
+		drw_log("Invalid value passed to alpha! : %f", a);
 	prev_alpha = a;
 	glColor4f(_r, _g, _b, a);
 }
@@ -1534,7 +1534,7 @@ void drw_wobject_strokeonly_notransform(WObject* obj)
 	drw_pop();
 }
 
-void drw_verts_r(RLine* l)
+void drw_verts_r(const RLine* l)
 {
 
 	int i;
@@ -1552,7 +1552,7 @@ void drw_verts_r(RLine* l)
 	}
 }
 
-void drw_verts(WLine* l)
+void drw_verts(const WLine* l)
 {
 	int i;
 	for (i = 0; i < l->num; ++i)
@@ -1567,7 +1567,7 @@ void drw_verts(WLine* l)
 	}
 }
 
-void drw_robject_verts(RObject* obj)
+void drw_robject_verts(const RObject* obj)
 {
 	int i;
 	for (i = 0; i < obj->num; i++)
@@ -1582,7 +1582,7 @@ void drw_robject_verts(RObject* obj)
 	}
 }
 
-void drw_wobject_verts(WObject* obj)
+void drw_wobject_verts(const WObject* obj)
 {
 	int i;
 	for (i = 0; i < obj->num; i++)

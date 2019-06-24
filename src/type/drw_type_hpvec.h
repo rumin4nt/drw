@@ -9,7 +9,8 @@
 #ifndef drw_type_hpvec_h
 #define drw_type_hpvec_h
 
-#include "../drw_config.h"
+//#include "drw.h"
+#include "drw_type.h"
 
 #ifdef DRW_TYPE_PROVIDER_ENABLE_HPVEC
 void drw_type_hpvec_initialize(void);
@@ -25,8 +26,12 @@ typedef struct HPGlyph
 void drw_type_hpvec_set_alignment(int h, int v);
 void drw_type_hpvec_draw(const char* text);
 
-HPGlyph** drw_type_hpvec_render(const char* text);
-void      drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, double* sc);
+HPGlyph** drw_type_hpvec_glyph(const char* text);
+void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, double* sc);
+
+#ifdef DRW_EXT_R4
+RObject* drw_type_hpvec_render(const char* text);
+#endif
 
 #endif
 
