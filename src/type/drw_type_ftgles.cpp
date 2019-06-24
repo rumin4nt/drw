@@ -22,7 +22,13 @@ static FTTextureFont* tfont = 0;
 
 void drw_type_ftgles_initialize(void)
 {
-	drw_type_provider_register("ftgles", drw_type_ftgles_draw, drw_type_ftgles_bbox);
+#ifdef DRW_EXT_R4
+	drw_type_provider_register("ftgles", drw_type_ftgles_draw, drw_type_ftgles_bbox, NULL);
+
+#else
+	drw_type_provider_register("ftgles", drw_type_ftgles_draw, drw_type_ftgles_bbox, NULL);
+#endif
+	
 }
 
 void drw_type_ftgles_init()

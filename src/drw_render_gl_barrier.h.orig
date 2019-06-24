@@ -1,0 +1,46 @@
+//
+//  drw_render_gl_barrier.h
+//  drw
+//
+//  Created by vs on 5/7/19.
+//  Copyright © 2019 ruminant. All rights reserved.
+//
+
+#ifndef drw_render_gl_barrier_h
+#define drw_render_gl_barrier_h
+
+	#include "drw_config.h"
+
+//#else
+//#include <OpenGLES/ES2/gl.h>
+//#endif
+
+//#include <OpenGLES/ES1/gl.h>
+	#ifdef RPLATFORM_IOS
+
+		#ifdef R4_GLES_1
+
+			#include "drw_render_gl.h"
+		#endif
+
+		#ifdef R4_GLES_2
+//			#include <OpenGLES/ES2/gl.h>
+			#include "drw_render_gl_2.h"
+		#endif
+
+		#ifdef  R4_GLES_3
+//			#include <OpenGLES/ES3/gl.h>
+			#include "drw_render_gl_3.h"
+		#endif
+
+
+		//#else
+
+
+
+	#endif
+
+
+#endif /* drw_render_gl_barrier_h */
+
+

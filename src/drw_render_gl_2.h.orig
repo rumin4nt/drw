@@ -1,13 +1,17 @@
 //
-//  render.h
-//  r4
+//  drw_render_gl_2.h
+//  drw
 //
-//  Created by Andrew Macfarlane on 12/9/16.
-//  Copyright © 2016 vaporstack. All rights reserved.
+//  Created by vs on 5/7/19.
+//  Copyright © 2019 ruminant. All rights reserved.
 //
 
-#ifndef d_rended_h
-#define d_rended_h
+#ifndef drw_render_gl_2_h
+#define drw_render_gl_2_h
+
+#include "drw_render_gl_barrier.h"
+
+#ifdef R4_GLES_2
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -50,16 +54,16 @@
 #endif
 
 #include "type/drw_type.h"
-
-enum
-{
-	DRW_BLEND_MODE_NONE,
-	DRW_BLEND_MODE_NORMAL,
-	DRW_BLEND_MODE_ADD,
-	DRW_BLEND_MODE_MULTIPLY,
-	DRW_BLEND_MODE_SCREEN,
-	DRW_BLEND_MODE_SUBTRACT
-};
+//
+//enum
+//{
+//	DRW_BLEND_MODE_NONE,
+//	DRW_BLEND_MODE_NORMAL,
+//	DRW_BLEND_MODE_ADD,
+//	DRW_BLEND_MODE_MULTIPLY,
+//	DRW_BLEND_MODE_SCREEN,
+//	DRW_BLEND_MODE_SUBTRACT
+//};
 
 void drw_init(void);
 void drw_deinit(void);
@@ -115,10 +119,10 @@ void drw_color_push(void);
 // void drw_color_c8(RColor8*);
 // void drw_color_c16(RColor16*);
 double drw_alpha_get(void);
-void   drw_alpha(double a);
-void   drw_alpha_pop(void);
-void   drw_alpha_mult(double v);
-void   drw_alpha_mult_pop(void);
+void drw_alpha(double a);
+void drw_alpha_pop(void);
+void drw_alpha_mult(double v);
+void drw_alpha_mult_pop(void);
 
 //	debug stuff
 void drw_axis(void);
@@ -233,17 +237,17 @@ void drw_triangle_strip(WLine*);
 
 //	fancy
 /*void drw_type_set_provider(unsigned int type);
-void drw_type_draw(const char* text, ...);
-void drw_type_set_size(int, int);
-int  drw_type_get_size(void);
-void drw_type_load_ttf(const char* path);
-*/
+ void drw_type_draw(const char* text, ...);
+ void drw_type_set_size(int, int);
+ int  drw_type_get_size(void);
+ void drw_type_load_ttf(const char* path);
+ */
 
 //	wash primitives
-void drw_verts(const WLine*);
-void drw_verts_r(const RLine*);
-void drw_robject_verts(const RObject* obj);
-void drw_wobject_verts(const WObject* obj);
+void drw_verts(WLine*);
+void drw_verts_r(RLine*);
+void drw_robject_verts(RObject* obj);
+void drw_wobject_verts(WObject* obj);
 void drw_robject(RObject* obj);
 void drw_wline_fill(WLine* line);
 void drw_wline(const WLine* line);
@@ -308,4 +312,6 @@ int drw_checkmatrix(void);
 void drw_swap(void);
 void drw_finish(void);
 
-#endif /* rended_h */
+#endif
+
+#endif /* drw_render_gl_2_h */

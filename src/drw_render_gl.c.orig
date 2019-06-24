@@ -9,6 +9,9 @@
 
 #include "drw_render_gl.h"
 
+
+#ifdef R4_GLES_1
+
 #include "drw_config.h"
 #include "drw_platform.h"
 #include <drw/drw.h>
@@ -25,6 +28,7 @@
 //#include <r4/src/r4_platform.h>
 
 #ifndef DRW_PLATFORM_IOS
+
 #define ENABLE_OLD_HACKY_GLUT
 #endif
 
@@ -39,7 +43,7 @@
 #endif
 
 #ifdef DEBUG
-static signed fill_stack  = 0;
+static signed fill_stack = 0;
 static signed alpha_stack = 0;
 #endif
 
@@ -52,6 +56,7 @@ static signed alpha_stack = 0;
 //#endif
 
 //#include "../app/r_app_ios.h"
+
 
 #include "type/drw_type_ftgles.h"
 #include <glulookat/gluLookAt.h>
@@ -80,10 +85,8 @@ static signed alpha_stack = 0;
 
 //#include <GL/glew.h>
 //#include "type/drw_type_ftgl.h"
-#include "hacks/drw_hacks.h"
-#ifdef DRW_ENABLE_SNOOP
+
 #include "hacks/drw_snoop.h"
-#endif
 
 //#undef DRW_PLATFORM_IOS
 #endif
@@ -675,13 +678,13 @@ void drw_alpha(double a)
 {
 #ifdef DEBUG
 	alpha_stack++;
-	if (alpha_stack > 1)
+	if ( alpha_stack > 1 )
 	{
 		printf("alpha stack overflow\n");
 	}
 #endif
 	if (a < 0 || a > 1)
-		drw_log("Invalid value passed to alpha! : %f", a);
+		drw_log("Invalid value passed to alpha!");
 	prev_alpha = a;
 	glColor4f(_r, _g, _b, a);
 }
@@ -690,7 +693,7 @@ void drw_alpha_pop()
 {
 #ifdef DEBUG
 	alpha_stack--;
-	if (alpha_stack < 0)
+	if ( alpha_stack < 0 )
 	{
 		printf("alpha stack underflow\n");
 	}
@@ -1303,6 +1306,8 @@ void drw_tess(void* tess)
 	drw_gpc_tristrip(tess);
 }
 
+
+
 void drw_wline(const WLine* l)
 {
 	if (l == NULL)
@@ -1327,10 +1332,10 @@ void drw_wline(const WLine* l)
 			drw_poly(l);
 			drw_fill_pop();
 		}
-		//		if (l->stroke)
-		//		{
-		//r_alpha_pop();
-		//		}
+//		if (l->stroke)
+//		{
+			//r_alpha_pop();
+//		}
 	}
 	else
 	{
@@ -1534,7 +1539,8 @@ void drw_wobject_strokeonly_notransform(WObject* obj)
 	drw_pop();
 }
 
-void drw_verts_r(const RLine* l)
+
+void drw_verts_r(RLine* l)
 {
 
 	int i;
@@ -1543,7 +1549,7 @@ void drw_verts_r(const RLine* l)
 		RPoint* p = &l->data[i];
 		drw_push();
 		drw_translate2f(p->x, p->y);
-		double pv = (_screenspace) ? 10 : .01;
+		double pv = ( _screenspace) ? 10 : .01;
 
 		drw_square(pv);
 		//drw_scale_u(4);
@@ -1552,7 +1558,7 @@ void drw_verts_r(const RLine* l)
 	}
 }
 
-void drw_verts(const WLine* l)
+void drw_verts(WLine* l)
 {
 	int i;
 	for (i = 0; i < l->num; ++i)
@@ -1567,7 +1573,7 @@ void drw_verts(const WLine* l)
 	}
 }
 
-void drw_robject_verts(const RObject* obj)
+void drw_robject_verts(RObject* obj)
 {
 	int i;
 	for (i = 0; i < obj->num; i++)
@@ -1582,7 +1588,7 @@ void drw_robject_verts(const RObject* obj)
 	}
 }
 
-void drw_wobject_verts(const WObject* obj)
+void drw_wobject_verts(WObject* obj)
 {
 	int i;
 	for (i = 0; i < obj->num; i++)
@@ -1670,6 +1676,7 @@ static void edge_cp(CPoint a, CPoint b, double sz)
 	drw_line(a.x, a.y, a.x, a.y + sz);
 	drw_line(b.x, b.y, b.x - sz, b.y);
 	drw_line(b.x, b.y, b.x, b.y - sz);
+
 }
 
 static void edge(double ax, double ay, double bx, double by, double sz)
@@ -1682,6 +1689,7 @@ static void edge(double ax, double ay, double bx, double by, double sz)
 	drw_line(ax, ay, ax, ay + sz);
 	drw_line(bx, by, bx - sz, by);
 	drw_line(bx, by, bx, by - sz);
+
 }
 
 void drw_rect_corners(double ax, double ay, double bx, double by, double sz)
@@ -1717,7 +1725,7 @@ void drw_rect_cp(CPoint a, CPoint b)
 
 	glVertexPointer(2, GL_FLOAT, 0, &arr);
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
-	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
+	: glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
 
 void drw_rect_rp(RPoint a, RPoint b)
@@ -1843,8 +1851,8 @@ void drw_ellipse(float _x, float _y)
 	for (i = 0; i < renderLineSize; i += 2)
 	{
 		float degInRad = drw_deg2rad * (float)i;
-		float x	= cos(degInRad + M_PI * .5) * (_x)*1;
-		float y	= sin(degInRad + M_PI * .5) * (_y)*1;
+		float x	= cos(degInRad + M_PI * .5) * (_x) * 1;
+		float y	= sin(degInRad + M_PI * .5) * (_y) * 1;
 		arr[i]	 = x;
 		arr[i + 1]     = y;
 	}
@@ -2402,6 +2410,7 @@ void drw_setup_view_ortho()
 
 	float width, height;
 
+
 	width  = framebuffer_width;
 	height = framebuffer_height;
 	//double x = width;
@@ -2422,13 +2431,13 @@ void drw_setup_view_ortho()
 
 	glViewport(0, 0, (int)width, (int)height);
 	_near = 1024;
-	_far  = 1024;
+	_far = 1024;
 	if (!_screenspace)
 	{
 		width  = 1.;
 		height = 1.;
-		_near  = -1024;
-		_far   = 1024;
+		_near = -1024;
+		_far = 1024;
 		if (_landscape)
 		{
 			width *= _aspect;
@@ -2609,7 +2618,7 @@ void drw_fill_pop()
 {
 #ifdef DEBUG
 	fill_stack--;
-	if (fill_stack < 0)
+	if ( fill_stack < 0 )
 	{
 		printf("Fill stack underflow!\n");
 	}
@@ -2621,7 +2630,7 @@ void drw_fill_set(bool v)
 {
 #ifdef DEBUG
 	fill_stack++;
-	if (fill_stack > 1)
+	if ( fill_stack > 1 )
 	{
 		printf("Fill stack overflow!\n");
 	}
@@ -2769,3 +2778,6 @@ void drw_finish(void)
 {
 	glFinish();
 }
+
+#endif
+

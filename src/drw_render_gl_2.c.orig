@@ -1,13 +1,14 @@
 //
+//  drw_render_gl_2.c
+//  drw
 //
-//  render.c
-//  r4
-//
-//  Created by Andrew Macfarlane on 12/9/16.
-//  Copyright © 2016 vaporstack. All rights reserved.
+//  Created by vs on 5/7/19.
+//  Copyright © 2019 ruminant. All rights reserved.
 //
 
-#include "drw_render_gl.h"
+#include "drw_render_gl_2.h"
+
+#ifdef R4_GLES_2
 
 #include "drw_config.h"
 #include "drw_platform.h"
@@ -39,7 +40,7 @@
 #endif
 
 #ifdef DEBUG
-static signed fill_stack  = 0;
+static signed fill_stack = 0;
 static signed alpha_stack = 0;
 #endif
 
@@ -52,6 +53,7 @@ static signed alpha_stack = 0;
 //#endif
 
 //#include "../app/r_app_ios.h"
+
 
 #include "type/drw_type_ftgles.h"
 #include <glulookat/gluLookAt.h>
@@ -80,10 +82,8 @@ static signed alpha_stack = 0;
 
 //#include <GL/glew.h>
 //#include "type/drw_type_ftgl.h"
-#include "hacks/drw_hacks.h"
-#ifdef DRW_ENABLE_SNOOP
+
 #include "hacks/drw_snoop.h"
-#endif
 
 //#undef DRW_PLATFORM_IOS
 #endif
@@ -233,42 +233,42 @@ int drw_get_gl_error()
 
 	switch (e)
 	{
-	case GL_NO_ERROR:
-		// printf("cool\n");
-		break;
+		case GL_NO_ERROR:
+			// printf("cool\n");
+			break;
 
-	case GL_INVALID_ENUM:
+		case GL_INVALID_ENUM:
 #ifdef DEBUG
-		drw_log("GL_INVALID_ENUM");
+			drw_log("GL_INVALID_ENUM");
 #endif
-		break;
+			break;
 
-	case GL_INVALID_VALUE:
-		drw_log("GL_INVALID_VALUE");
+		case GL_INVALID_VALUE:
+			drw_log("GL_INVALID_VALUE");
 
-		break;
+			break;
 
-	case GL_INVALID_OPERATION:
-		drw_log("GL_INVALID_OPERATION");
-		break;
+		case GL_INVALID_OPERATION:
+			drw_log("GL_INVALID_OPERATION");
+			break;
 
-		// case GL_INVALID_FRAMEBUFFER_OPERATION:
-		//    printf("invalid framebuffer\n");
-		//    break;
+			// case GL_INVALID_FRAMEBUFFER_OPERATION:
+			//    printf("invalid framebuffer\n");
+			//    break;
 
-	case GL_OUT_OF_MEMORY:
-		drw_log("out of memory");
-		break;
+		case GL_OUT_OF_MEMORY:
+			drw_log("out of memory");
+			break;
 
-	case GL_STACK_UNDERFLOW:
-		drw_log("underflow");
-		break;
-	case GL_STACK_OVERFLOW:
-		drw_log("overflow");
-		break;
+		case GL_STACK_UNDERFLOW:
+			drw_log("underflow");
+			break;
+		case GL_STACK_OVERFLOW:
+			drw_log("overflow");
+			break;
 
-	default:
-		break;
+		default:
+			break;
 	}
 
 	return e;
@@ -281,9 +281,9 @@ void drw_init()
 		circle_defs[i] = NULL;
 	}
 	/*
-	if (_text_provider_type == -1)
-		drw_type_set_provider(DRW_TYPE_PROVIDER_HPVEC);
-*/
+	 if (_text_provider_type == -1)
+	 drw_type_set_provider(DRW_TYPE_PROVIDER_HPVEC);
+	 */
 
 	// glBlendEquation =
 	// (PFNGLBLENDEQUATIONPROC)wglGetProcAddress("glBlendEquation");
@@ -383,44 +383,44 @@ void drw_set_line_width(float v)
 	drw_get_gl_error();
 }
 /*
-void drw_type_set_provider(unsigned int type)
-{
-	if (type >= DRW_TYPE_PROVIDER_NONE)
-	{
-		drw_log("Invalid ask in %s", __func__);
-		return;
-	}
-	drw_log("Setting provider: %d", type);
+ void drw_type_set_provider(unsigned int type)
+ {
+ if (type >= DRW_TYPE_PROVIDER_NONE)
+ {
+ drw_log("Invalid ask in %s", __func__);
+ return;
+ }
+ drw_log("Setting provider: %d", type);
 
-	_text_provider_type = type;
-}
-*/
+ _text_provider_type = type;
+ }
+ */
 /*
-void drw_type_load_ttf(const char* path)
-{
+ void drw_type_load_ttf(const char* path)
+ {
 
-// 0if ( path != NULL )
-//{
-// const char* path = r_resource_load("vs-junk","otf");
-#ifdef DRW_PLATFORM_IOS
-	//#error hi
-	drw_type_ftgles_load(path);
-#else
+ // 0if ( path != NULL )
+ //{
+ // const char* path = r_resource_load("vs-junk","otf");
+ #ifdef DRW_PLATFORM_IOS
+ //#error hi
+ drw_type_ftgles_load(path);
+ #else
 
-#ifdef DRW_ENABLE_FTGL
-	drw_type_ftgl_load(path);
+ #ifdef DRW_ENABLE_FTGL
+ drw_type_ftgl_load(path);
 
-#endif
-#endif
+ #endif
+ #endif
 
-	//#ifdef DRW_ENABLE_FTGLES
-	//	drw_type_ftgles_load(path);
-	//#endif
+ //#ifdef DRW_ENABLE_FTGLES
+ //	drw_type_ftgles_load(path);
+ //#endif
 
-	// drw_type_set_size(72);
-	// }
-}
-*/
+ // drw_type_set_size(72);
+ // }
+ }
+ */
 
 void drw_blend_set(int v)
 {
@@ -430,38 +430,38 @@ void drw_blend_set(int v)
 
 	switch (v)
 	{
-	case 0:
-		glDisable(GL_BLEND);
-	case DRW_BLEND_MODE_NORMAL:
-		// printf("normal blend!\n");
-		glEnable(GL_BLEND);
-		glBlendEquation(GL_FUNC_ADD);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		break;
-	case DRW_BLEND_MODE_ADD:
-		glEnable(GL_BLEND);
-		glBlendEquation(GL_FUNC_ADD);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		break;
-	case DRW_BLEND_MODE_MULTIPLY:
-		glEnable(GL_BLEND);
-		glBlendEquation(GL_FUNC_SUBTRACT);
-		glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
-		break;
-	case DRW_BLEND_MODE_SCREEN:
+		case 0:
+			glDisable(GL_BLEND);
+		case DRW_BLEND_MODE_NORMAL:
+			// printf("normal blend!\n");
+			glEnable(GL_BLEND);
+			glBlendEquation(GL_FUNC_ADD);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			break;
+		case DRW_BLEND_MODE_ADD:
+			glEnable(GL_BLEND);
+			glBlendEquation(GL_FUNC_ADD);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			break;
+		case DRW_BLEND_MODE_MULTIPLY:
+			glEnable(GL_BLEND);
+			glBlendEquation(GL_FUNC_SUBTRACT);
+			glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA);
+			break;
+		case DRW_BLEND_MODE_SCREEN:
 
-		glEnable(GL_BLEND);
-		glBlendEquation(GL_FUNC_ADD);
-		glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE);
-		break;
-	case DRW_BLEND_MODE_SUBTRACT:
-		glEnable(GL_BLEND);
-		glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-		break;
-	default:
-		drw_log("Unhandled blend mode!");
-		break;
+			glEnable(GL_BLEND);
+			glBlendEquation(GL_FUNC_ADD);
+			glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE);
+			break;
+		case DRW_BLEND_MODE_SUBTRACT:
+			glEnable(GL_BLEND);
+			glBlendEquation(GL_FUNC_REVERSE_SUBTRACT);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			break;
+		default:
+			drw_log("Unhandled blend mode!");
+			break;
 	}
 #else
 	drw_log("Blend modes not currently implemented in windows.");
@@ -607,12 +607,12 @@ void drw_color_wc(WColor c)
 }
 
 /*
-void drw_color_wc8(WColor8 c)
-{
-	_set_internal_colors(c.r, c.g, c.b, c.a);
-	glColor4f(c.r, c.g, c.b, c.a);
-}
-*/
+ void drw_color_wc8(WColor8 c)
+ {
+ _set_internal_colors(c.r, c.g, c.b, c.a);
+ glColor4f(c.r, c.g, c.b, c.a);
+ }
+ */
 
 void drw_color_wc16(WColor16 c)
 {
@@ -675,13 +675,13 @@ void drw_alpha(double a)
 {
 #ifdef DEBUG
 	alpha_stack++;
-	if (alpha_stack > 1)
+	if ( alpha_stack > 1 )
 	{
 		printf("alpha stack overflow\n");
 	}
 #endif
 	if (a < 0 || a > 1)
-		drw_log("Invalid value passed to alpha! : %f", a);
+		drw_log("Invalid value passed to alpha!");
 	prev_alpha = a;
 	glColor4f(_r, _g, _b, a);
 }
@@ -690,7 +690,7 @@ void drw_alpha_pop()
 {
 #ifdef DEBUG
 	alpha_stack--;
-	if (alpha_stack < 0)
+	if ( alpha_stack < 0 )
 	{
 		printf("alpha stack underflow\n");
 	}
@@ -871,7 +871,7 @@ void drw_line3_r(RLine3* poly)
 	else
 	{
 		poly->closed ? glDrawArrays(GL_LINE_LOOP, 0, poly->num)
-			     : glDrawArrays(GL_LINE_STRIP, 0, poly->num);
+		: glDrawArrays(GL_LINE_STRIP, 0, poly->num);
 	}
 	//glDrawArrays(GL_LINE_STRIP, 0, (int)poly->num);
 	free(arr);
@@ -1035,10 +1035,10 @@ void drw_transform_deapply(WTransform t)
 {
 	/*drw_rotate_wvec(t.rotation);
 
-	drw_translate_wvec(t.position);
-	drw_translate_wvec(t.anchor);
-	drw_scale_wvec(t.scale);
-*/
+	 drw_translate_wvec(t.position);
+	 drw_translate_wvec(t.anchor);
+	 drw_scale_wvec(t.scale);
+	 */
 }
 
 void drw_gtransform_deapply(GTransform t)
@@ -1108,78 +1108,78 @@ void drw_axis_nice()
 	drw_pop();
 }
 /*
-int drw_type_get_size(void)
-{
-	return _text_size;
-}
+ int drw_type_get_size(void)
+ {
+ return _text_size;
+ }
 
-void drw_type_set_size(int sz, int resolution)
-{
-#ifdef DRW_ENABLE_FTGL
-	//drw_type_ftgl_size(sz, resolution);
-#endif
-	//_text_size = sz;
-}
+ void drw_type_set_size(int sz, int resolution)
+ {
+ #ifdef DRW_ENABLE_FTGL
+ //drw_type_ftgl_size(sz, resolution);
+ #endif
+ //_text_size = sz;
+ }
 
  */
 /*
-void drw_type_draw(const char* format, ...)
-{
-	//if (_text_provider_type == DRW_TYPE_PROVIDER_NONE)
-	//	return;
+ void drw_type_draw(const char* format, ...)
+ {
+ //if (_text_provider_type == DRW_TYPE_PROVIDER_NONE)
+ //	return;
 
-	char buf[TEXT_MAX];
-	sprintf(buf, "%s", format);
-	va_list args;
-	va_start(args, format);
-	vsprintf(buf, format, args);
-	va_end(args);
+ char buf[TEXT_MAX];
+ sprintf(buf, "%s", format);
+ va_list args;
+ va_start(args, format);
+ vsprintf(buf, format, args);
+ va_end(args);
 
-	drw_type_draw(buf);
+ drw_type_draw(buf);
 
 
-	switch (_text_provider_type)
-	{
-	//case DRW_TYPE_PROVIDER_NONE:
-	//	return;
-	//	break; //haha
-	case DRW_TYPE_PROVIDER_HPVEC:
-		drw_type_hpvec_draw(buf);
-		break;
-	case DRW_TYPE_PROVIDER_ASTEROIDS:
-		drw_type_asteroids(buf);
-		break;
+ switch (_text_provider_type)
+ {
+ //case DRW_TYPE_PROVIDER_NONE:
+ //	return;
+ //	break; //haha
+ case DRW_TYPE_PROVIDER_HPVEC:
+ drw_type_hpvec_draw(buf);
+ break;
+ case DRW_TYPE_PROVIDER_ASTEROIDS:
+ drw_type_asteroids(buf);
+ break;
 
-	case DRW_TYPE_PROVIDER_FTGL:
-	{
-#ifdef DRW_ENABLE_FTGL
-		drw_type_draw(buf);
-#endif
-		break;
-	}
-	default:
-		break;
-	}
+ case DRW_TYPE_PROVIDER_FTGL:
+ {
+ #ifdef DRW_ENABLE_FTGL
+ drw_type_draw(buf);
+ #endif
+ break;
+ }
+ default:
+ break;
+ }
 
-	//#ifdef DRW_ENABLE_FTGL
-	//	drw_type_draw(buf);
-	//
-	//#endif
+ //#ifdef DRW_ENABLE_FTGL
+ //	drw_type_draw(buf);
+ //
+ //#endif
 
-}*/
+ }*/
 
 /*
-void d_wsequence_e(WSequence* seq, int frame)
-{
+ void d_wsequence_e(WSequence* seq, int frame)
+ {
 
-	// TODO
-	// implement this.
-	//
-	// WObject* fr = seq->frames[frame];
+ // TODO
+ // implement this.
+ //
+ // WObject* fr = seq->frames[frame];
 
-	//  do stuff here.
-}
-*/
+ //  do stuff here.
+ }
+ */
 
 void drw_robject(RObject* obj)
 {
@@ -1279,9 +1279,9 @@ void drw_wline_fill(WLine* l)
 
 /*
  static void _wlinepoly(WLine* line)
-{
-}
-*/
+ {
+ }
+ */
 
 void drw_wline_strokeonly(WLine* l)
 {
@@ -1302,6 +1302,8 @@ void drw_tess(void* tess)
 	}
 	drw_gpc_tristrip(tess);
 }
+
+
 
 void drw_wline(const WLine* l)
 {
@@ -1337,46 +1339,46 @@ void drw_wline(const WLine* l)
 	}
 	/*#ifdef DISABLE_UNTIL_WORKLINE_REFACTOR_COMPLETE
 
-	if (l->brush)
-	{
-		if (l->tess)
-		{
-			drw_gpc_tristrip(l->tess);
-			return;
-		}
+	 if (l->brush)
+	 {
+	 if (l->tess)
+	 {
+	 drw_gpc_tristrip(l->tess);
+	 return;
+	 }
 
-		if (l->brush->stroke)
-		{
-			if (l->brush->stroke->tess)
-			{
-				drw_gpc_tristrip(l->brush->stroke->tess);
-			}
-			else
-			{
+	 if (l->brush->stroke)
+	 {
+	 if (l->brush->stroke->tess)
+	 {
+	 drw_gpc_tristrip(l->brush->stroke->tess);
+	 }
+	 else
+	 {
 
-				drw_triangle_strip(l->brush->stroke);
-			}
-		}
-		// else{
+	 drw_triangle_strip(l->brush->stroke);
+	 }
+	 }
+	 // else{
 
-		//  drw_poly(l->brush->stroke);
-		//}
-	}
-	else
-	{
+	 //  drw_poly(l->brush->stroke);
+	 //}
+	 }
+	 else
+	 {
 
-		if (l->tess)
-		{
-			drw_gpc_tristrip(l->tess);
-		}
-		else
-		{
-			drw_poly(l);
-		}
-	}
-#else
-#endif
-*/
+	 if (l->tess)
+	 {
+	 drw_gpc_tristrip(l->tess);
+	 }
+	 else
+	 {
+	 drw_poly(l);
+	 }
+	 }
+	 #else
+	 #endif
+	 */
 
 	drw_poly(l);
 
@@ -1534,7 +1536,8 @@ void drw_wobject_strokeonly_notransform(WObject* obj)
 	drw_pop();
 }
 
-void drw_verts_r(const RLine* l)
+
+void drw_verts_r(RLine* l)
 {
 
 	int i;
@@ -1543,7 +1546,7 @@ void drw_verts_r(const RLine* l)
 		RPoint* p = &l->data[i];
 		drw_push();
 		drw_translate2f(p->x, p->y);
-		double pv = (_screenspace) ? 10 : .01;
+		double pv = ( _screenspace) ? 10 : .01;
 
 		drw_square(pv);
 		//drw_scale_u(4);
@@ -1552,7 +1555,7 @@ void drw_verts_r(const RLine* l)
 	}
 }
 
-void drw_verts(const WLine* l)
+void drw_verts(WLine* l)
 {
 	int i;
 	for (i = 0; i < l->num; ++i)
@@ -1567,7 +1570,7 @@ void drw_verts(const WLine* l)
 	}
 }
 
-void drw_robject_verts(const RObject* obj)
+void drw_robject_verts(RObject* obj)
 {
 	int i;
 	for (i = 0; i < obj->num; i++)
@@ -1582,7 +1585,7 @@ void drw_robject_verts(const RObject* obj)
 	}
 }
 
-void drw_wobject_verts(const WObject* obj)
+void drw_wobject_verts(WObject* obj)
 {
 	int i;
 	for (i = 0; i < obj->num; i++)
@@ -1628,7 +1631,7 @@ void drw_axis_living()
 
  void drw_rect_r(RRect r )
  {
- 	drw_rect(r.pos.x, r.pos.y, r.pos.x + r.size.x, r.pos.y + r.size.y);
+ drw_rect(r.pos.x, r.pos.y, r.pos.x + r.size.x, r.pos.y + r.size.y);
 
  }
  */
@@ -1657,7 +1660,7 @@ void drw_rect_wp(WPoint a, WPoint b)
 
 	glVertexPointer(2, GL_FLOAT, 0, &arr);
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
-	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
+	: glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
 
 static void edge_cp(CPoint a, CPoint b, double sz)
@@ -1670,6 +1673,7 @@ static void edge_cp(CPoint a, CPoint b, double sz)
 	drw_line(a.x, a.y, a.x, a.y + sz);
 	drw_line(b.x, b.y, b.x - sz, b.y);
 	drw_line(b.x, b.y, b.x, b.y - sz);
+
 }
 
 static void edge(double ax, double ay, double bx, double by, double sz)
@@ -1682,6 +1686,7 @@ static void edge(double ax, double ay, double bx, double by, double sz)
 	drw_line(ax, ay, ax, ay + sz);
 	drw_line(bx, by, bx - sz, by);
 	drw_line(bx, by, bx, by - sz);
+
 }
 
 void drw_rect_corners(double ax, double ay, double bx, double by, double sz)
@@ -1717,7 +1722,7 @@ void drw_rect_cp(CPoint a, CPoint b)
 
 	glVertexPointer(2, GL_FLOAT, 0, &arr);
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
-	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
+	: glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
 
 void drw_rect_rp(RPoint a, RPoint b)
@@ -1734,7 +1739,7 @@ void drw_rect_rp(RPoint a, RPoint b)
 
 	glVertexPointer(2, GL_FLOAT, 0, &arr);
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
-	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
+	: glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
 
 void drw_rect(float ax, float ay, float bx, float by)
@@ -1751,7 +1756,7 @@ void drw_rect(float ax, float ay, float bx, float by)
 
 	glVertexPointer(2, GL_FLOAT, 0, &arr);
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, 4)
-	     : glDrawArrays(GL_LINE_LOOP, 0, 4);
+	: glDrawArrays(GL_LINE_LOOP, 0, 4);
 
 #ifdef DRW_ENABLE_SNOOP
 	if (drw_snoop_get())
@@ -1801,30 +1806,30 @@ void drw_circle(float r)
 {
 	drw_ellipse(r, r);
 	/*
-	float* circle = circle_defs[circle_precision];
-	if (circle == NULL) {
-		printf("calculating circle for %i\n", circle_precision);
-		calculate_circle(circle_precision);
-	}
-	circle = circle_defs[circle_precision];
-	glVertexPointer(2, GL_FLOAT, 0, circle);
+	 float* circle = circle_defs[circle_precision];
+	 if (circle == NULL) {
+	 printf("calculating circle for %i\n", circle_precision);
+	 calculate_circle(circle_precision);
+	 }
+	 circle = circle_defs[circle_precision];
+	 glVertexPointer(2, GL_FLOAT, 0, circle);
 
-	// cout << "c:" << circleArray[2] << endl;
-	drw_scale_u(r);
-	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, circle_precision)
-	     : glDrawArrays(GL_LINE_LOOP, 0, circle_precision);
+	 // cout << "c:" << circleArray[2] << endl;
+	 drw_scale_u(r);
+	 fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, circle_precision)
+	 : glDrawArrays(GL_LINE_LOOP, 0, circle_precision);
 
-	//r_ellipse(r, r);
-*/
+	 //r_ellipse(r, r);
+	 */
 }
 
 void drw_ellipse(float _x, float _y)
 {
 	/*if ( _x == _y )
-	{
-		drw_circle(_x);
-		return;
-	}*/
+	 {
+	 drw_circle(_x);
+	 return;
+	 }*/
 
 	// glEnableClientState( GL_VERTEX_ARRAY );
 
@@ -1843,23 +1848,23 @@ void drw_ellipse(float _x, float _y)
 	for (i = 0; i < renderLineSize; i += 2)
 	{
 		float degInRad = drw_deg2rad * (float)i;
-		float x	= cos(degInRad + M_PI * .5) * (_x)*1;
-		float y	= sin(degInRad + M_PI * .5) * (_y)*1;
+		float x	= cos(degInRad + M_PI * .5) * (_x) * 1;
+		float y	= sin(degInRad + M_PI * .5) * (_y) * 1;
 		arr[i]	 = x;
 		arr[i + 1]     = y;
 	}
 	/*
-#ifdef DRW_ENABLE_SNOOP
-	if (drw_snoop_get())
-	{
-		drw_snoop_add_rline(drw_snoop_rline_from_f(arr, renderLineSize));
-	}
-#endif
-	*/
+	 #ifdef DRW_ENABLE_SNOOP
+	 if (drw_snoop_get())
+	 {
+	 drw_snoop_add_rline(drw_snoop_rline_from_f(arr, renderLineSize));
+	 }
+	 #endif
+	 */
 	glVertexPointer(2, GL_FLOAT, 0, arr);
 
 	fill ? glDrawArrays(GL_TRIANGLE_FAN, 0, circle_precision)
-	     : glDrawArrays(GL_LINE_LOOP, 0, circle_precision);
+	: glDrawArrays(GL_LINE_LOOP, 0, circle_precision);
 
 	free(arr);
 }
@@ -2025,7 +2030,7 @@ void drw_rawpoly_2d(double* arr, int num, bool closed)
 	else
 	{
 		closed ? glDrawArrays(GL_LINE_LOOP, 0, (int)num * .5)
-		       : glDrawArrays(GL_LINE_STRIP, 0, (int)num * .5);
+		: glDrawArrays(GL_LINE_STRIP, 0, (int)num * .5);
 	}
 }
 
@@ -2041,7 +2046,7 @@ void drw_rawpoly_2df(float* arr, int num, bool closed)
 	else
 	{
 		closed ? glDrawArrays(GL_LINE_LOOP, 0, (int)num * .5)
-		       : glDrawArrays(GL_LINE_STRIP, 0, (int)num * .5);
+		: glDrawArrays(GL_LINE_STRIP, 0, (int)num * .5);
 	}
 }
 
@@ -2057,7 +2062,7 @@ void drw_rawpoly_3d(double* arr, int num, bool closed)
 	else
 	{
 		closed ? glDrawArrays(GL_LINE_LOOP, 0, (int)num * 1)
-		       : glDrawArrays(GL_LINE_STRIP, 0, (int)num * 1);
+		: glDrawArrays(GL_LINE_STRIP, 0, (int)num * 1);
 	}
 }
 
@@ -2073,7 +2078,7 @@ void drw_rawpoly_3f(float* arr, int num, bool closed)
 	else
 	{
 		closed ? glDrawArrays(GL_LINE_LOOP, 0, (int)num)
-		       : glDrawArrays(GL_LINE_STRIP, 0, (int)num);
+		: glDrawArrays(GL_LINE_STRIP, 0, (int)num);
 	}
 }
 
@@ -2373,12 +2378,12 @@ void drw_setup_view_persp()
 	//#else
 	/*
 	 _l = left;
-	_r = right;
-	_t = top;
-	_b = bottom;
-	_n = znear;
-	_f = zfar;
-	*/
+	 _r = right;
+	 _t = top;
+	 _b = bottom;
+	 _n = znear;
+	 _f = zfar;
+	 */
 
 #ifndef DRW_PLATFORM_IOS
 	gluPerspective(fov, _aspect, _near, _far);
@@ -2402,6 +2407,7 @@ void drw_setup_view_ortho()
 
 	float width, height;
 
+
 	width  = framebuffer_width;
 	height = framebuffer_height;
 	//double x = width;
@@ -2422,13 +2428,13 @@ void drw_setup_view_ortho()
 
 	glViewport(0, 0, (int)width, (int)height);
 	_near = 1024;
-	_far  = 1024;
+	_far = 1024;
 	if (!_screenspace)
 	{
 		width  = 1.;
 		height = 1.;
-		_near  = -1024;
-		_far   = 1024;
+		_near = -1024;
+		_far = 1024;
 		if (_landscape)
 		{
 			width *= _aspect;
@@ -2477,7 +2483,7 @@ void drw_setup_view_ortho()
 void drw_get_screencoords(double* l, double* r, double* t, double* b, double* n, double* f)
 {
 #ifdef DEBUG
-//printf("Sanity check: %f %f %f %f %f %f\n", _left, _right, _top, _bottom, _near, _far);
+	//printf("Sanity check: %f %f %f %f %f %f\n", _left, _right, _top, _bottom, _near, _far);
 #endif
 	if (l)
 		*l = _left;
@@ -2574,8 +2580,8 @@ void drw_circle_precision_set(int v)
 		else
 		{
 			static bool
-			    emit_warning_about_high_precision_circles_once =
-				false;
+			emit_warning_about_high_precision_circles_once =
+			false;
 			if (!emit_warning_about_high_precision_circles_once)
 			{
 				//				char buf[256];
@@ -2589,7 +2595,7 @@ void drw_circle_precision_set(int v)
 					"precise? (%d)\nsetting circ to max %d",
 					v, override_circle_limit);
 				emit_warning_about_high_precision_circles_once =
-				    true;
+				true;
 			}
 			circle_precision = override_circle_limit;
 
@@ -2609,7 +2615,7 @@ void drw_fill_pop()
 {
 #ifdef DEBUG
 	fill_stack--;
-	if (fill_stack < 0)
+	if ( fill_stack < 0 )
 	{
 		printf("Fill stack underflow!\n");
 	}
@@ -2621,7 +2627,7 @@ void drw_fill_set(bool v)
 {
 #ifdef DEBUG
 	fill_stack++;
-	if (fill_stack > 1)
+	if ( fill_stack > 1 )
 	{
 		printf("Fill stack overflow!\n");
 	}
@@ -2656,7 +2662,7 @@ static void cube(double r)
 void drw_cube(float r)
 {
 	cube(r);
-/*
+	/*
 	 // Draw the triangle !
 	 glDrawArrays(GL_TRIANGLES, 0, 12*3);
 	 // 1rst attribute buffer : vertices
@@ -2665,9 +2671,9 @@ void drw_cube(float r)
 	 glVertexAttribPointer(
 	 0,                  // attribute 0. No particular reason for 0, but
 	 must match the layout in the shader. 3,                  // size
-   GL_FLOAT,
+	 GL_FLOAT,
 	 // type GL_FALSE,           // normalized? 0,                  //
-   stride (void*)0
+	 stride (void*)0
 	 // array buffer offset
 	 );
 	 // Draw the triangle !
@@ -2677,7 +2683,7 @@ void drw_cube(float r)
 
 	 */
 #ifndef DRW_PLATFORM_IOS
-//glutWireCube(v);
+	//glutWireCube(v);
 #endif
 }
 
@@ -2697,7 +2703,7 @@ void drw_glut_init(void)
 {
 #ifdef ENABLE_OLD_HACKY_GLUT
 
-// glutInit(app_argc, app_argv);
+	// glutInit(app_argc, app_argv);
 #endif
 }
 
@@ -2769,3 +2775,8 @@ void drw_finish(void)
 {
 	glFinish();
 }
+
+
+
+#endif
+

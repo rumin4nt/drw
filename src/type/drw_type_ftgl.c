@@ -26,7 +26,7 @@ int       justification = 0;
 
 void drw_type_ftgl_initialize(void)
 {
-	drw_type_provider_register("ftgl", drw_type_ftgl_draw, drw_type_ftgl_bbox);
+	drw_type_provider_register("ftgl", drw_type_ftgl_draw, drw_type_ftgl_bbox, NULL);
 }
 
 void drw_type_ftgl_init()
@@ -37,8 +37,7 @@ void drw_type_ftgl_init()
 
 void drw_type_ftgl_deinit()
 {
-	if (font)
-	{
+	if (font) {
 		ftglDestroyFont(font);
 	}
 	font = NULL;
@@ -53,13 +52,11 @@ void drw_type_ftgl_size(int sz, int resolution)
 
 	drw_type_size_set(sz);
 
-	if (!font)
-	{
+	if (!font) {
 		return;
 	}
 
-	if (sz == 0)
-	{
+	if (sz == 0) {
 		printf("Uhh wtf font size was 0\n");
 		sz = 18;
 	}
@@ -73,9 +70,9 @@ void drw_type_ftgl_size(int sz, int resolution)
 int drw_type_ftgl_load(const char* path)
 {
 	//assert(path);
-	if ( !path )
+	if (!path)
 		return -1;
-	
+
 	// if ( font )
 	//{
 	//	ftglDestroyFont(font);
@@ -95,8 +92,7 @@ int drw_type_ftgl_load(const char* path)
 void drw_type_ftgl_draw(const char* str)
 {
 
-	if (!font)
-	{
+	if (!font) {
 		//	logging belongs to the application space
 		// l_warning("Error, no font!\n");
 		printf("Error, no font!\n");
@@ -107,13 +103,10 @@ void drw_type_ftgl_draw(const char* str)
 	//	drw_type_load_ttf("data/ttf/terminus.ttf");
 	//}
 
-	if (drw_screenspace_get())
-	{
+	if (drw_screenspace_get()) {
 		//ftglRenderFont(font, str, FTGL_RENDER_ALL);
 		ftglRenderFont(font, str, FTGL_RENDER_SIDE);
-	}
-	else
-	{
+	} else {
 		drw_push();
 		int w, h;
 		drw_query_framebuffer(&w, &h);
@@ -133,11 +126,9 @@ void drw_type_ftgl_draw(const char* str)
 
 void drw_type_ftgl_bbox(const char* str, unsigned long num, float* data)
 {
-	if ( !font )
-	{
+	if (!font) {
 		printf("Error, can't get bbox, no font\n");
 		return;
-		
 	}
 	ftglGetFontBBox(font, str, (int)num, data);
 }
@@ -149,11 +140,9 @@ double drw_type_ftgl_get_width(const char* str)
 
 	// could probably ditch done here and merely do
 	// while() etc
-	while (!done)
-	{
+	while (!done) {
 		char c = str[count];
-		if (c == '\0')
-		{
+		if (c == '\0') {
 			done = true;
 			break;
 		}
@@ -161,8 +150,7 @@ double drw_type_ftgl_get_width(const char* str)
 	}
 
 	float* bounds = calloc(6, sizeof(float));
-	for (int j = 0; j < 6; j++)
-	{
+	for (int j = 0; j < 6; j++) {
 		bounds[j] = 0;
 	}
 	drw_type_get_bbox(str, count, bounds);

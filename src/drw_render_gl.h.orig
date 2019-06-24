@@ -9,8 +9,16 @@
 #ifndef d_rended_h
 #define d_rended_h
 
+
+#include "drw_render_gl_barrier.h"
+#include "drw_gl.h"
+
+#ifdef R4_GLES_1
+
+
 #include <stdbool.h>
 #include <stdlib.h>
+
 
 //	todo: get this out?  a lot of deps for a convenience
 // #include <wsh/wsh.h>
@@ -50,6 +58,7 @@
 #endif
 
 #include "type/drw_type.h"
+
 
 enum
 {
@@ -115,10 +124,10 @@ void drw_color_push(void);
 // void drw_color_c8(RColor8*);
 // void drw_color_c16(RColor16*);
 double drw_alpha_get(void);
-void   drw_alpha(double a);
-void   drw_alpha_pop(void);
-void   drw_alpha_mult(double v);
-void   drw_alpha_mult_pop(void);
+void drw_alpha(double a);
+void drw_alpha_pop(void);
+void drw_alpha_mult(double v);
+void drw_alpha_mult_pop(void);
 
 //	debug stuff
 void drw_axis(void);
@@ -240,10 +249,10 @@ void drw_type_load_ttf(const char* path);
 */
 
 //	wash primitives
-void drw_verts(const WLine*);
-void drw_verts_r(const RLine*);
-void drw_robject_verts(const RObject* obj);
-void drw_wobject_verts(const WObject* obj);
+void drw_verts(WLine*);
+void drw_verts_r(RLine*);
+void drw_robject_verts(RObject* obj);
+void drw_wobject_verts(WObject* obj);
 void drw_robject(RObject* obj);
 void drw_wline_fill(WLine* line);
 void drw_wline(const WLine* line);
@@ -307,5 +316,7 @@ int drw_checkmatrix(void);
 
 void drw_swap(void);
 void drw_finish(void);
+
+#endif
 
 #endif /* rended_h */

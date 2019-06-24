@@ -1,0 +1,15 @@
+//
+//  drw_render_gl.h
+//  drw
+//
+//  Created by vs on 6/14/18.
+//  Copyright © 2018 ruminant. All rights reserved.
+//
+
+#ifndef drw_render_h
+#define drw_render_h
+
+#include "drw_render_gl_barrier.h"
+#include "drw_gl.h"
+
+#endif /* drw_render_h */

@@ -9,10 +9,10 @@
 #ifndef drw_type_asteroids_h
 #define drw_type_asteroids_h
 
-#include "../drw_config.h"
+//#include "../drw_config.h"
+#include "drw_type.h"
 
 #ifdef DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
-#include "drw_type.h"
 
 void drw_type_asteroids_initialize(void);
 

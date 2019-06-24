@@ -8,28 +8,27 @@
 
 #include "drw_type_asteroids.h"
 
-
 #ifdef DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
+
+#include <stdlib.h>
 
 void drw_type_asteroids_initialize(void)
 {
-	drw_type_provider_register("asteroids", drw_type_asteroids_draw, drw_type_asteroids_bbox);
+	drw_type_provider_register("asteroids", drw_type_asteroids_draw, drw_type_asteroids_bbox, NULL);
 }
 
 void drw_type_asteroids_init(void)
 {
-	
+
 	//ummm guess we don't need this?
 }
 
 void drw_type_asteroids_bbox(const char* text, unsigned long idk, float* address)
 {
-	
 }
 
 void drw_type_asteroids_draw(const char* text)
 {
-	
 }
 
 void drw_type_asteroids(const char* text)

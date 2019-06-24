@@ -52,16 +52,16 @@
 
 #endif
 
-#ifdef DRW_PLATFORM_IOS
-#define TEMP_GL_LEGACY_BACKPORT
-
-#ifdef TEMP_GL_LEGACY_BACKPORT
-#include <OpenGLES/ES1/gl.h>
-#else
-#include <OpenGLES/ES2/gl.h>
-#endif
-#include <OpenGLES/ES3/gl.h>
-#endif
+//#ifdef DRW_PLATFORM_IOS
+//#define TEMP_GL_LEGACY_BACKPORT
+//
+//#ifdef TEMP_GL_LEGACY_BACKPORT
+//#include <OpenGLES/ES1/gl.h>
+//#else
+//#include <OpenGLES/ES2/gl.h>
+//#endif
+//#include <OpenGLES/ES3/gl.h>
+//#endif
 
 #ifdef __clang__
 #pragma clang diagnostic pop
@@ -87,7 +87,24 @@
 
 #endif
 
+#ifdef DRW_PLATFORM_IOS
+#include <TargetConditionals.h>
+#define DRW_TYPE_PROVIDER_ENABLE_FTGLES
 
+#ifndef TARGET_IPHONE_SIMULATOR
+#define DRW_TYPE_PROVIDER_ENABLE_FTGLES
+#endif
+
+#else
+#define DRW_TYPE_PROVIDER_ENABLE_FTGL
+#endif
+
+#define DRW_TYPE_PROVIDER_ENABLE_HPVEC
+#define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
+
+#ifndef DRW_PLATFORM_LINUX
+#define DRW_TYPE_PROVIDER_ENABLE_HERSHEY
+#endif
 
 #ifndef DRW_PLATFORM_IOS
 #define DRW_ENABLE_SNOOP
