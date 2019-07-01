@@ -413,6 +413,11 @@ void* drw_type_render(const char* text)
 	}
 
 	drw_type_render_fun fun      = render_funcs[type_provider];
+	if ( !fun )
+	{
+		printf("No rendering method provided.\n");
+		return NULL;
+	}
 	void*		    rendered = (*fun)(text);
 	return rendered;
 }

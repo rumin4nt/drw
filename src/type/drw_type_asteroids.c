@@ -11,6 +11,9 @@
 #ifdef DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
 
 #include <stdlib.h>
+#include "../contrib/fonts/asteroids_font.h"
+#include "ctype.h"
+#include <stdio.h>
 
 void drw_type_asteroids_initialize(void)
 {
@@ -25,6 +28,7 @@ void drw_type_asteroids_initialize(void)
 void drw_type_asteroids_init(void)
 {
 
+	
 	//ummm guess we don't need this?
 }
 
@@ -34,6 +38,38 @@ void drw_type_asteroids_bbox(const char* text, unsigned long idk, float* address
 
 void drw_type_asteroids_draw(const char* text)
 {
+	int n = strlen(text);
+	for ( size_t i = 0; i < n; i++ )
+	{
+		
+		const char c = text[i];
+		char up = toupper(c);
+		int i = (int)up;
+		//i -= 128;
+		asteroids_char_t ch = asteroids_font[i];
+		
+		printf("ch : %d\n", i );
+		bool done = false;
+		int j = 0;
+		bool alt = true;
+		while (!done )
+		{
+			uint8_t v = ch.points[j];
+			
+			char x = v >> 4;
+			char y = v >> 0;
+			
+			if ( v == FONT_LAST )
+				done = true;
+		
+			alt = !alt;
+			j++;
+			if( j == 8)
+				done = true;
+		}
+		
+		
+	}
 }
 
 void drw_type_asteroids(const char* text)

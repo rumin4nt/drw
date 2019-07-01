@@ -33,6 +33,8 @@ enum {
 	DRW_TYPE_PROVIDER_NONE
 };
 
+#define DRW_EXT_R4
+
 #include <stdbool.h>
 //#include "../drw_ext.h"
 #include "../drw_config.h"
@@ -55,13 +57,17 @@ enum {
 #define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
 
 #ifndef DRW_PLATFORM_LINUX
-//#define DRW_TYPE_PROVIDER_ENABLE_HERSHEY
+#define DRW_TYPE_PROVIDER_ENABLE_HERSHEY
 #endif
 
 typedef void (*drw_type_draw_fun)(const char*);
 typedef void (*drw_type_bbox_fun)(const char*, unsigned long, float*);
 
-//#define DRW_EXT_R4
+
+#ifdef DRW_EXT_R4
+
+typedef void* (*drw_type_render_fun)(const char*);
+#endif
 
 extern int drw_type_debug;
 void       drw_type_init(void);

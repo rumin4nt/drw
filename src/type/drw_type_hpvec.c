@@ -338,13 +338,13 @@ static RLine* render_hp_glyph_as_rline(int idx)
 	if (num == 0)
 		return NULL;
 
-	double real = get_real_sz();
+	//double real = get_real_sz();
 
 	RLine* l = r_line_create();
 	int    j;
 	for (j = 0; j < num - 1; j += 2) {
 
-		r_line_add_point2f(l, points[j] * real, points[j + 1] * real);
+		r_line_add_point2f(l, points[j] , points[j + 1] );
 	}
 
 	return l;
@@ -355,18 +355,22 @@ void* drw_type_hpvec_render(const char* text)
 	RObject* obj = r_object_create();
 
 	unsigned long n = strlen(text);
-
+	double real = get_real_sz();
+	real /= 8;
 	for (int i = 0; i < n; i++) {
 		char c = text[i];
 
 		RLine* line = render_hp_glyph_as_rline(text[i]);
 		if (!line)
 			continue;
-		double real = get_real_sz();
+		
+		r_line_scale(line, real, real);
 		r_line_translate(line, i * real * HPVEC_GRID_SIZE, 0);
 		r_object_add_line(obj, line);
 	}
-
+	
+	//r_object_scale(obj, real, real);
+	//r_object_translate(obj, i * real, 0);
 	return obj;
 }
 #endif
