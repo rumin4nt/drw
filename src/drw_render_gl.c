@@ -16,7 +16,9 @@
 //#ifdef DEBUG
 #include <drw/src/drw_log.h>
 //#endif
+#ifndef DRW_PLATFORM_IOS
 #include "hacks/drw_snoop.h"
+#endif
 
 #include "ext/drw_ext_gpc.h"
 #include "type/drw_type.h"
@@ -83,7 +85,9 @@ static signed alpha_stack = 0;
 //#include "type/drw_type_ftgl.h"
 //#include "hacks/drw_hacks.h"
 //#ifdef DRW_ENABLE_SNOOP
+#ifndef DRW_PLATFORM_IOS
 #include "hacks/drw_snoop.h"
+#endif
 //#endif
 
 //#undef DRW_PLATFORM_IOS

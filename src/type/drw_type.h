@@ -9,7 +9,6 @@
 #ifndef drw_type_h
 #define drw_type_h
 
-
 #include <stdbool.h>
 
 enum DRWAlignmentHorizontal {
@@ -35,7 +34,7 @@ enum {
 };
 
 #include <stdbool.h>
-#include "../drw_ext.h"
+//#include "../drw_ext.h"
 #include "../drw_config.h"
 #ifdef DRW_PLATFORM_IOS
 #include <TargetConditionals.h>
@@ -61,8 +60,8 @@ enum {
 
 typedef void (*drw_type_draw_fun)(const char*);
 typedef void (*drw_type_bbox_fun)(const char*, unsigned long, float*);
-#define DRW_EXT_R4
 
+//#define DRW_EXT_R4
 
 extern int drw_type_debug;
 void       drw_type_init(void);
@@ -75,13 +74,21 @@ void drw_type_draw_fixed(const char* text);
 void drw_type_get_bbox(const char*, unsigned long sz, float*);
 double drw_type_get_width(const char*);
 int    drw_type_get_size(void);
+void drw_type_get_default(double* x, double* y);
+
 void drw_type_set_align(int w, int h);
 void drw_type_set_size(int x, int y);
 void drw_type_set_righttoleft(bool v);
 
 void drw_type_load_ttf(const char* path);
 
+#ifdef DRW_EXT_R4
+
 int drw_type_provider_register(const char* ident, drw_type_draw_fun draw, drw_type_bbox_fun bbox, drw_type_render_fun* render);
+#else
+int drw_type_provider_register(const char* ident, drw_type_draw_fun draw, drw_type_bbox_fun bbox);
+#endif
+
 int  drw_type_provider_count(void);
 void drw_type_provider_select(signed index);
 

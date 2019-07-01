@@ -14,7 +14,12 @@
 
 void drw_type_asteroids_initialize(void)
 {
+#ifdef DRW_EXT_R4
 	drw_type_provider_register("asteroids", drw_type_asteroids_draw, drw_type_asteroids_bbox, NULL);
+#else
+	drw_type_provider_register("asteroids", drw_type_asteroids_draw, drw_type_asteroids_bbox);
+
+#endif
 }
 
 void drw_type_asteroids_init(void)

@@ -40,6 +40,22 @@
 static int alignment_h = DRW_TYPE_ALIGN_H_CENTER;
 static int alignment_v = DRW_TYPE_ALIGN_V_CENTER;
 
+static double get_real_sz()
+{
+	double x = HPVEC_GRID_SIZE;
+	//double   y = HPVEC_GRID_SIZE;
+	unsigned w, h;
+
+	if (!drw_screenspace_get()) {
+		drw_screensize_get(&w, &h);
+		x /= w;
+		//y /= w;
+		//		x *= .5;
+		//		y *= .5;
+	}
+	return x;
+}
+
 void drw_type_hpvec_bbox(const char* text, unsigned long sz, float* data)
 {
 	double   x = HPVEC_GRID_SIZE * sz;
@@ -69,7 +85,7 @@ void drw_type_hpvec_initialize(void)
 	drw_type_provider_register("hpvec", drw_type_hpvec_draw, drw_type_hpvec_bbox, drw_type_hpvec_render);
 
 #else
-	drw_type_provider_register("hpvec", drw_type_hpvec_draw, drw_type_hpvec_bbox, NULL);
+	drw_type_provider_register("hpvec", drw_type_hpvec_draw, drw_type_hpvec_bbox);
 
 #endif
 }
@@ -92,11 +108,17 @@ static void draw_hp_glyph(int idx)
 	if (num == 0)
 		return;
 
+	double sz = drw_query_dpi();
+	sz *= .5;
 	RLine* l = r_line_create();
 	int    j;
 	for (j = 0; j < num - 1; j += 2) {
 
-		r_line_add_point2f(l, points[j], points[j + 1]);
+        double x = points[j];
+        double y = points[1+j];
+		x *= sz;
+		y *= sz;
+		r_line_add_point2f(l, x, y);
 	}
 
 	drw_rline(l);
@@ -183,7 +205,8 @@ void drw_type_hpvec_draw(const char* text)
 	}
 
 	//drw_translate(offx, offy, 0);
-
+	double sz = drw_query_dpi();
+	sz *= .5;
 	while (!done) {
 
 		char c = text[i];
@@ -197,7 +220,7 @@ void drw_type_hpvec_draw(const char* text)
 				printf("index [%c] %d\n", c, idx);
 			}
 			draw_hp_glyph(idx);
-			drw_translate_x(HPVEC_FONT_SIZE);
+			drw_translate_x(HPVEC_FONT_SIZE * sz);
 		}
 		i++;
 	}
@@ -305,44 +328,45 @@ HPGlyph** drw_type_hpvec_glyph(const char* text)
 //----------------------------------------------------------------
 #pragma mark rline rendering
 
-
 static RLine* render_hp_glyph_as_rline(int idx)
 {
 	if (idx < 0)
 		return NULL;
-	
+
 	const int* points = hp1345a[idx];
 	int	num    = hp1345a_sizes[idx];
 	if (num == 0)
 		return NULL;
-	
+
+	double real = get_real_sz();
+
 	RLine* l = r_line_create();
 	int    j;
 	for (j = 0; j < num - 1; j += 2) {
-		
-		r_line_add_point2f(l, points[j], points[j + 1]);
+
+		r_line_add_point2f(l, points[j] * real, points[j + 1] * real);
 	}
-	
+
 	return l;
 }
 
 void* drw_type_hpvec_render(const char* text)
 {
 	RObject* obj = r_object_create();
-	
-	
-	int n = strlen(text);
-	
-	for ( int i = 0; i < n ; i ++ )
-	{
+
+	unsigned long n = strlen(text);
+
+	for (int i = 0; i < n; i++) {
 		char c = text[i];
-		
+
 		RLine* line = render_hp_glyph_as_rline(text[i]);
-		r_line_translate(line, i * HPVEC_FONT_SIZE, 0);
+		if (!line)
+			continue;
+		double real = get_real_sz();
+		r_line_translate(line, i * real * HPVEC_GRID_SIZE, 0);
 		r_object_add_line(obj, line);
-		
 	}
-	
+
 	return obj;
 }
 #endif

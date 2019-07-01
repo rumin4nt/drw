@@ -39,16 +39,20 @@
 
 #include <drw/drw.h>
 
-int		     drw_type_debug = 0;
-static int	   align_x	= 0;
-static int	   align_y	= 0;
-static int	   type_provider  = -1;
-static int	   num_providers  = 0;
-drw_type_draw_fun*   draw_funcs     = NULL;
-drw_type_bbox_fun*   bbox_funcs     = NULL;
-drw_type_render_fun* render_funcs   = NULL;
-static int	   _text_size;
-const char**	 provider_ids = NULL;
+int		   drw_type_debug = 0;
+static int	 align_x	= 0;
+static int	 align_y	= 0;
+static int	 type_provider  = -1;
+static int	 num_providers  = 0;
+drw_type_draw_fun* draw_funcs     = NULL;
+drw_type_bbox_fun* bbox_funcs     = NULL;
+
+#ifdef DRW_EXT_R4
+drw_type_render_fun* render_funcs = NULL;
+#endif
+
+static int   _text_size;
+const char** provider_ids = NULL;
 
 static bool right_to_left = false;
 
@@ -102,9 +106,12 @@ void drw_type_init(void)
 		return;
 	}
 
-	
+#ifdef RPLATFORM_IOS
+	drw_type_provider_select(0);
+#else
 	drw_type_provider_select(1);
 
+#endif
 	
 	drw_type_set_align(DRW_TYPE_ALIGN_H_RIGHT, DRW_TYPE_ALIGN_V_BOTTOM);
 }
@@ -113,9 +120,10 @@ void drw_type_deinit(void)
 {
 	free(draw_funcs);
 	free(bbox_funcs);
+#ifdef DRW_EXT_R4
 	if (render_funcs)
 		free(render_funcs);
-
+#endif
 	free(provider_ids);
 }
 
@@ -178,8 +186,12 @@ void drw_type_set_size(int sz, int resolution)
 #endif
 	_text_size = sz;
 }
+#ifdef DRW_EXT_R4
 
 int drw_type_provider_register(const char* ident, drw_type_draw_fun draw, drw_type_bbox_fun bbox, drw_type_render_fun* render)
+#else
+int drw_type_provider_register(const char* ident, drw_type_draw_fun draw, drw_type_bbox_fun bbox)
+#endif
 {
 	drw_log("registering provider: %s", ident);
 
@@ -297,22 +309,18 @@ void drw_type_draw(const char* format, ...)
 	drw_translate2f(tx, ty);
 	fun(buf);
 	drw_pop();
-
 }
-
 
 void drw_type_draw_fixed(const char* text)
 {
 	if (type_provider == -1) {
 		drw_log("NO type provider specified, return.");
 	}
-	
+
 	if (num_providers == 0) {
 		drw_log("NO providers registered, return.");
 	}
-	
-	
-	
+
 	float bounds[6];
 	bounds[0] = bounds[1] = bounds[2] = bounds[3] = bounds[4] = bounds[5] = -1;
 	drw_type_get_bbox(text, strlen(text), bounds);
@@ -320,45 +328,44 @@ void drw_type_draw_fixed(const char* text)
 	double wx = bounds[3] - bounds[0];
 	double wy = bounds[4] - bounds[1];
 	//double wz = bounds[5] - bounds[2];
-	
+
 	drw_type_draw_fun fun = draw_funcs[type_provider];
 	double		  tx = 0, ty = 0;
-	
+
 	//
 	switch (align_x) {
-		case DRW_TYPE_ALIGN_H_LEFT:
-			tx = wx * -1;
-			break;
-		case DRW_TYPE_ALIGN_H_CENTER:
-			tx = wx * -.5;
-			break;
-		case DRW_TYPE_ALIGN_H_RIGHT:
-			tx = wx * 0;
-			break;
-		default:
-			break;
+	case DRW_TYPE_ALIGN_H_LEFT:
+		tx = wx * -1;
+		break;
+	case DRW_TYPE_ALIGN_H_CENTER:
+		tx = wx * -.5;
+		break;
+	case DRW_TYPE_ALIGN_H_RIGHT:
+		tx = wx * 0;
+		break;
+	default:
+		break;
 	}
-	
+
 	switch (align_y) {
-		case DRW_TYPE_ALIGN_V_TOP:
-			ty = wy * -.1;
-			break;
-		case DRW_TYPE_ALIGN_V_CENTER:
-			ty = wy * -.5;
-			break;
-		case DRW_TYPE_ALIGN_V_BOTTOM:
-			ty = wy * 0;
-			break;
-		default:
-			break;
+	case DRW_TYPE_ALIGN_V_TOP:
+		ty = wy * -.1;
+		break;
+	case DRW_TYPE_ALIGN_V_CENTER:
+		ty = wy * -.5;
+		break;
+	case DRW_TYPE_ALIGN_V_BOTTOM:
+		ty = wy * 0;
+		break;
+	default:
+		break;
 	}
-	
+
 	drw_push();
 	drw_translate2f(tx, ty);
 	fun(text);
 	drw_pop();
 }
-
 
 void drw_type_load_ttf(const char* path)
 {
@@ -388,28 +395,26 @@ int drw_type_provider_count(void)
 
 #ifdef DRW_EXT_R4
 
-
 void* drw_type_render(const char* text)
 {
 	if (type_provider < -1) {
 		drw_log("NO type provider specified, return.");
 		return NULL;
 	}
-	
+
 	if (num_providers == 0) {
 		drw_log("NO providers registered, return.");
 		return NULL;
 	}
-	
+
 	if (type_provider >= num_providers) {
 		drw_log("Requested out of range type provider.\n");
 		return NULL;
 	}
-	
-	drw_type_render_fun fun = render_funcs[type_provider];
-	void* rendered = (*fun)(text);
-	return rendered;
 
+	drw_type_render_fun fun      = render_funcs[type_provider];
+	void*		    rendered = (*fun)(text);
+	return rendered;
 }
 
 #endif

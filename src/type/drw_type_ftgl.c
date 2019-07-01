@@ -26,7 +26,12 @@ int       justification = 0;
 
 void drw_type_ftgl_initialize(void)
 {
+#ifdef DRW_EXT_R4
 	drw_type_provider_register("ftgl", drw_type_ftgl_draw, drw_type_ftgl_bbox, NULL);
+#else
+	drw_type_provider_register("ftgl", drw_type_ftgl_draw, drw_type_ftgl_bbox);
+
+#endif
 }
 
 void drw_type_ftgl_init()

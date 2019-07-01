@@ -30,13 +30,12 @@ void drw_type_hpvec_draw(const char* text);
 HPGlyph** drw_type_hpvec_glyph(const char* text);
 void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, double* sc);
 
-#include "../drw_ext.h"
+//#include "../drw_ext.h"
 
 #ifdef DRW_EXT_R4
 void* drw_type_hpvec_render(const char* text);
 
 #endif
 #endif
-
 
 #endif /* drw_type_hpvec_h */

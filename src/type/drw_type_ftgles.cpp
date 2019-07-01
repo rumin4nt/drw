@@ -26,7 +26,7 @@ void drw_type_ftgles_initialize(void)
 	drw_type_provider_register("ftgles", drw_type_ftgles_draw, drw_type_ftgles_bbox, NULL);
 
 #else
-	drw_type_provider_register("ftgles", drw_type_ftgles_draw, drw_type_ftgles_bbox, NULL);
+	drw_type_provider_register("ftgles", drw_type_ftgles_draw, drw_type_ftgles_bbox);
 #endif
 	
 }
