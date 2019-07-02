@@ -54,10 +54,13 @@ enum {
 #define DRW_TYPE_PROVIDER_ENABLE_HPVEC
 #endif
 
-#define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
+//#define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
 
 #ifndef DRW_PLATFORM_LINUX
+#ifndef DRW_PLATFORM_IOS
 #define DRW_TYPE_PROVIDER_ENABLE_HERSHEY
+
+#endif
 #endif
 
 typedef void (*drw_type_draw_fun)(const char*);

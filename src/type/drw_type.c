@@ -24,7 +24,7 @@
 #include "drw_type_ftgl.h"
 #endif
 
-#define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
+//#define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
 
 #include "drw_type_asteroids.h"
 #ifdef DRW_TYPE_PROVIDER_ENABLE_HERSHEY
@@ -109,7 +109,7 @@ void drw_type_init(void)
 #ifdef RPLATFORM_IOS
 	drw_type_provider_select(0);
 #else
-	drw_type_provider_select(1);
+	drw_type_provider_select(0);
 
 #endif
 	

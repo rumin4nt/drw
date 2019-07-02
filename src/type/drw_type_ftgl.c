@@ -63,7 +63,8 @@ void drw_type_ftgl_size(int sz, int resolution)
 
 	if (sz == 0) {
 		printf("Uhh wtf font size was 0\n");
-		sz = 18;
+		//sz = 18;
+		sz = 9;
 	}
 	// printf("Setting font size: %d %d\n", sz, resolution);
 
@@ -89,8 +90,8 @@ int drw_type_ftgl_load(const char* path)
 		return -1;
 
 	// drw_type_set_size(R_UI_FONT_SIZE * app_settings.scale_retina );
-
-	drw_type_set_size(D_FONT_SIZE, 144);
+	double dpi = drw_query_dpi();
+	drw_type_set_size(D_FONT_SIZE, 72 * dpi);
 	return 0;
 }
 
@@ -110,13 +111,14 @@ void drw_type_ftgl_draw(const char* str)
 
 	if (drw_screenspace_get()) {
 		//ftglRenderFont(font, str, FTGL_RENDER_ALL);
+		//	if we're in screenspace, merely shrink by .
 		ftglRenderFont(font, str, FTGL_RENDER_SIDE);
 	} else {
 		drw_push();
 		int w, h;
 		drw_query_framebuffer(&w, &h);
 		//int    sz   = drw_type_get_size();
-		//double dpi  = drw_query_dpi();
+		double dpi  = drw_query_dpi();
 		double mult = h;
 		double frac = 1.0 / mult;
 		drw_scale_u(frac);
