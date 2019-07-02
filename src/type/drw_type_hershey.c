@@ -11,6 +11,7 @@
 //#include <drw/src/drw_config.h>
 
 #include <drw/src/type/drw_type.h>
+#include <drw/src/drw_platform.h>
 #ifdef DRW_TYPE_PROVIDER_ENABLE_HERSHEY
 
 /*
@@ -114,15 +115,39 @@ void drw_type_hershey_initialize(void)
 #endif
 }
 
+static double get_real_sz(void);
+
 void drw_type_hershey_bbox(const char* str, unsigned long num, float* data)
 {
+	double acc = 0;
+	double h = -1;
+	for ( int i = 0; i < num; i++ )
+	{
+		char c = str[i];
+		int idx = c-32;
+		
+		int w = futural_realwidth[idx];
+		double lh = futural_height;
+		if ( lh > h )
+			h = lh;
+		acc += w;
+	}
+	
+	double sz = get_real_sz();
+	data[0] = 0;
+	data[1] = 0;
+	data[2] = 0;
+	data[3] = acc * sz;
+	data[4] = h * sz;
+	data[5] = 0;
 }
 
-static double get_real_sz()
+static double get_real_sz(void)
 {
-	double x = 16;
+	/*double x = 16;
 	//double   y = HPVEC_GRID_SIZE;
 	unsigned w, h;
+	
 	
 	if (!drw_screenspace_get()) {
 		drw_screensize_get(&w, &h);
@@ -132,6 +157,17 @@ static double get_real_sz()
 		//		y *= .5;
 	}
 	return x;
+
+	 */
+	if ( drw_screenspace_get() )
+	{
+		
+		return 1 * drw_query_dpi();
+	}else{
+		unsigned w, h;
+		drw_screensize_get(&w, &h);
+		return (drw_type_get_size() / w) * drw_query_dpi();;
+	}
 }
 
 
@@ -145,6 +181,7 @@ void drw_type_hershey_draw(const char* text)
 	bool done = false;
 	int  i    = 0;
 	double rsz = get_real_sz();
+	double dp = drw_query_dpi();
 	double acc = 0;
 	while (!done) {
 		c = text[i];
@@ -177,12 +214,15 @@ void drw_type_hershey_draw(const char* text)
 			
 			
 			drw_push();
-			
+			drw_translate(0, futural_height * dp, 0);
 			drw_scale(1, -1, 1);
-			drw_scale_u(.25);
+			//drw_scale_u(.25);
 			
 			drw_translate(acc , 0, 0);
-			acc += w * .25 * .25 * .25;
+			
+			acc += w * dp;
+			//acc += w * .25 * .25 * .25;
+			
 			for (int i2 = 0; i2 < sz; i2 += 4) {
 				const char a  = data[i2];
 				const char b  = data[i2 + 1];
@@ -204,8 +244,13 @@ void drw_type_hershey_draw(const char* text)
 				arr[1] = ay;
 				arr[2] = bx;
 				arr[3] = by;
-
+#ifdef DRW_PLATFORM_IOS
+				
+				glVertexPointer(2, GL_FLOAT, 0, &arr);
+#else
 				glVertexPointer(2, GL_DOUBLE, 0, &arr);
+
+#endif
 				glDrawArrays(GL_LINES, 0, 4);
 			}
 			drw_pop();

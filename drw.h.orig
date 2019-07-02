@@ -9,33 +9,44 @@
 #ifndef drw_h
 #define drw_h
 
+#define GL_SILENCE_DEPRECATION
+
 #define DRW_VERSION_MAJOR 0
 #define DRW_VERSION_MINOR 0
 #define DRW_VERSION_PATCH 1
+
+#ifndef PHI_I
+#define PHI_I 0.618033988749895
+#endif
 
 #include "src/drw_platform.h"
 
 #include "src/drw_config.h"
 #include "src/drw_export.h"
-#include "src/drw_point.h"
-#include "src/drw_render.h"
-#include "src/drw_render_gl.h"
+//#include "src/drw_point.h"
+//#include "src/drw_render.h"
+//#include "src/drw_render_gl.h"
+
+//#include "src/drw_render_gl_barrier.h"
+//#include "src/drw_gl.h"
+
 
 //#include "src/r_hatch.h"
 
 //#define DRW_BUILD_STANDALONE
 
 #ifdef DRW_PLATFORM_IOS
-//#error ios
-#include "src/type/drw_type_ftgles.h"
+#define R4_GLES_1
+
+#include "src/drw_render_gl_barrier.h"
+
 #else
 //#error macos
-#include "src/type/drw_type_ftgl.h"
+//#include "src/type/drw_type_ftgl.h"
 #endif
 
-
 //#include "src/d_glus.h"
-#include "src/drw_point.h"
+//#include "src/drw_point.h"
 #include "src/drw_wobject_ops.h"
 
 #include "src/drw_primitives.h"
@@ -68,10 +79,10 @@ static inline char* drw_get_version_string_header(void)
 	return buf;
 }
 
-
-
-
 int    drw_lib_init(void);
 int    drw_lib_deinit(void);
+double drw_type_size_real_get(void);
+void   drw_type_size_set(int sz);
+int    drw_type_size_get(void);
 
 #endif /* drw_h */

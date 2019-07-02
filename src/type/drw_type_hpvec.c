@@ -37,8 +37,8 @@
 
 // 	???
 #define HPVEC_GRID_SIZE 16
-static int alignment_h = DRW_TYPE_ALIGN_H_CENTER;
-static int alignment_v = DRW_TYPE_ALIGN_V_CENTER;
+//static int alignment_h = DRW_TYPE_ALIGN_H_CENTER;
+//static int alignment_v = DRW_TYPE_ALIGN_V_CENTER;
 
 static double get_real_sz()
 {
@@ -90,6 +90,7 @@ void drw_type_hpvec_initialize(void)
 #endif
 }
 
+/*
 void drw_type_hpvec_set_alignment(int h, int v)
 {
 	if (h != -1)
@@ -97,6 +98,7 @@ void drw_type_hpvec_set_alignment(int h, int v)
 	if (v != -1)
 		alignment_v = v;
 }
+*/
 
 static void draw_hp_glyph(int idx)
 {
@@ -252,6 +254,7 @@ static HPGlyph* render_hp_glyph(unsigned long idx)
 	return glyph;
 }
 
+/*
 void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, double* scale)
 {
 	int offx = 0;
@@ -309,6 +312,7 @@ void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, d
 		*scale = 1;
 	}
 }
+*/
 
 HPGlyph** drw_type_hpvec_glyph(const char* text)
 {

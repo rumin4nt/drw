@@ -121,7 +121,7 @@ void drw_type_ftgl_draw(const char* str)
 		double dpi  = drw_query_dpi();
 		double mult = h;
 		double frac = 1.0 / mult;
-		drw_scale_u(frac);
+		//drw_scale_u(frac);
 		//ftglRenderFont(font, str, FTGL_RENDER_ALL);
 		ftglRenderFont(font, str, FTGL_RENDER_SIDE);
 

@@ -24,7 +24,7 @@
 #include "drw_type_ftgl.h"
 #endif
 
-//#define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
+#define DRW_TYPE_PROVIDER_ENABLE_ASTEROIDS
 
 #include "drw_type_asteroids.h"
 #ifdef DRW_TYPE_PROVIDER_ENABLE_HERSHEY
@@ -51,7 +51,10 @@ drw_type_bbox_fun* bbox_funcs     = NULL;
 drw_type_render_fun* render_funcs = NULL;
 #endif
 
-static int   _text_size;
+static int   _text_size = 12;
+
+//static int _text_size = 12;
+
 const char** provider_ids = NULL;
 
 static bool right_to_left = false;
@@ -170,6 +173,27 @@ void drw_type_set_align(int x, int y)
 */
 }
 
+void drw_type_size_set(int sz)
+{
+	drw_log("Unified font size %d", sz);
+	_text_size = sz;
+}
+
+double drw_type_size_real_get(void)
+{
+	int w, h;
+	drw_query_framebuffer(&w, &h);
+	
+	double sz = drw_type_size_get();
+	double sc = 1. / (h / sz * 8);
+	return sc;
+}
+
+int drw_type_size_get(void)
+{
+	return _text_size;
+}
+
 int drw_type_get_size(void)
 {
 	return _text_size;
@@ -188,7 +212,7 @@ void drw_type_set_size(int sz, int resolution)
 }
 #ifdef DRW_EXT_R4
 
-int drw_type_provider_register(const char* ident, drw_type_draw_fun draw, drw_type_bbox_fun bbox, drw_type_render_fun* render)
+int drw_type_provider_register(const char* ident, drw_type_draw_fun draw, drw_type_bbox_fun bbox, drw_type_render_fun render)
 #else
 int drw_type_provider_register(const char* ident, drw_type_draw_fun draw, drw_type_bbox_fun bbox)
 #endif
@@ -247,6 +271,57 @@ void drw_type_get_bbox(const char* text, unsigned long sz, float* bounds)
 	(*fun)(text, sz, bounds);
 }
 
+void drw_type_draw_bbox(const char* word)
+{
+	float bb[6];
+	drw_type_get_bbox(word, strlen(word), bb);
+	
+	
+	double dx = bb[3] - bb[0];
+	double dy = bb[4] - bb[1];
+	
+	double wx = bb[3] - bb[0];
+	double wy = bb[4] - bb[1];
+	//double wz = bounds[5] - bounds[2];
+	
+	drw_type_draw_fun fun = draw_funcs[type_provider];
+	double		  tx = 0, ty = 0;
+	switch (align_x) {
+		case DRW_TYPE_ALIGN_H_LEFT:
+			tx = wx * -1;
+			break;
+		case DRW_TYPE_ALIGN_H_CENTER:
+			tx = wx * -.5;
+			break;
+		case DRW_TYPE_ALIGN_H_RIGHT:
+			tx = wx * 0;
+			break;
+		default:
+			break;
+	}
+	
+	switch (align_y) {
+		case DRW_TYPE_ALIGN_V_TOP:
+			ty = wy * -.1;
+			break;
+		case DRW_TYPE_ALIGN_V_CENTER:
+			ty = wy * -.5;
+			break;
+		case DRW_TYPE_ALIGN_V_BOTTOM:
+			ty = wy * 0;
+			break;
+		default:
+			break;
+	}
+	
+	
+	drw_push();
+	drw_translate2f(tx, ty);
+	drw_rect(0,0, wx, wy);
+	drw_pop();
+
+}
+
 void drw_type_draw(const char* format, ...)
 {
 	if (type_provider == -1) {
@@ -255,6 +330,11 @@ void drw_type_draw(const char* format, ...)
 
 	if (num_providers == 0) {
 		drw_log("NO providers registered, return.");
+	}
+	
+	if (type_provider >= num_providers) {
+		drw_log("Requested out of range type provider.\n");
+		return;
 	}
 
 	char buf[TEXT_MAX];
@@ -307,6 +387,7 @@ void drw_type_draw(const char* format, ...)
 
 	drw_push();
 	drw_translate2f(tx, ty);
+	drw_rect(0,0, wx, wy);
 	fun(buf);
 	drw_pop();
 }

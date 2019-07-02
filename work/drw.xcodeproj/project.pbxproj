@@ -35,6 +35,43 @@
 		57939B3C21BF584B00F74BF4 /* drw_log.c in Sources */ = {isa = PBXBuildFile; fileRef = 57939B3A21BF584B00F74BF4 /* drw_log.c */; };
 		57967B6120D17B3000003F66 /* drw_export.h in Headers */ = {isa = PBXBuildFile; fileRef = 57967B5F20D17B3000003F66 /* drw_export.h */; };
 		57967B6220D17B3000003F66 /* drw_export.c in Sources */ = {isa = PBXBuildFile; fileRef = 57967B6020D17B3000003F66 /* drw_export.c */; };
+		57A807F922CBFDE600E81EEB /* asteroids_font.c in Sources */ = {isa = PBXBuildFile; fileRef = 57A807D222CBFDE500E81EEB /* asteroids_font.c */; };
+		57A807FA22CBFDE600E81EEB /* hershey_font.c in Sources */ = {isa = PBXBuildFile; fileRef = 57A807D322CBFDE500E81EEB /* hershey_font.c */; };
+		57A807FB22CBFDE600E81EEB /* asteroids_font.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807D422CBFDE500E81EEB /* asteroids_font.h */; };
+		57A807FC22CBFDE600E81EEB /* music.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807D622CBFDE500E81EEB /* music.h */; };
+		57A807FD22CBFDE600E81EEB /* gothitt.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807D722CBFDE500E81EEB /* gothitt.h */; };
+		57A807FE22CBFDE600E81EEB /* futuram.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807D822CBFDE500E81EEB /* futuram.h */; };
+		57A807FF22CBFDE600E81EEB /* gothgrt.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807D922CBFDE500E81EEB /* gothgrt.h */; };
+		57A8080022CBFDE600E81EEB /* japanese.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807DA22CBFDE500E81EEB /* japanese.h */; };
+		57A8080122CBFDE600E81EEB /* timesib.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807DB22CBFDE500E81EEB /* timesib.h */; };
+		57A8080222CBFDE600E81EEB /* scriptc.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807DC22CBFDE500E81EEB /* scriptc.h */; };
+		57A8080322CBFDE600E81EEB /* rowmand.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807DD22CBFDE500E81EEB /* rowmand.h */; };
+		57A8080422CBFDE600E81EEB /* hershey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57A807DE22CBFDE500E81EEB /* hershey.cpp */; };
+		57A8080522CBFDE600E81EEB /* gothiceng.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807DF22CBFDE500E81EEB /* gothiceng.h */; };
+		57A8080622CBFDE600E81EEB /* meteorology.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E022CBFDE500E81EEB /* meteorology.h */; };
+		57A8080722CBFDE600E81EEB /* gothicger.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E122CBFDE500E81EEB /* gothicger.h */; };
+		57A8080822CBFDE600E81EEB /* greeks.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E222CBFDE500E81EEB /* greeks.h */; };
+		57A8080922CBFDE600E81EEB /* timesg.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E322CBFDE500E81EEB /* timesg.h */; };
+		57A8080A22CBFDE600E81EEB /* timesi.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E422CBFDE500E81EEB /* timesi.h */; };
+		57A8080B22CBFDE600E81EEB /* scripts.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E522CBFDE500E81EEB /* scripts.h */; };
+		57A8080C22CBFDE600E81EEB /* rowmans.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E622CBFDE500E81EEB /* rowmans.h */; };
+		57A8080D22CBFDE600E81EEB /* symbolic.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E722CBFDE500E81EEB /* symbolic.h */; };
+		57A8080E22CBFDE600E81EEB /* mathupp.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E822CBFDE500E81EEB /* mathupp.h */; };
+		57A8080F22CBFDE600E81EEB /* greek.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E922CBFDE500E81EEB /* greek.h */; };
+		57A8081022CBFDE600E81EEB /* gothgbt.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807EA22CBFDE500E81EEB /* gothgbt.h */; };
+		57A8081122CBFDE600E81EEB /* cursive.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807EB22CBFDE500E81EEB /* cursive.h */; };
+		57A8081222CBFDE600E81EEB /* timesrb.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807EC22CBFDE500E81EEB /* timesrb.h */; };
+		57A8081322CBFDE600E81EEB /* markers.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807ED22CBFDE500E81EEB /* markers.h */; };
+		57A8081422CBFDE600E81EEB /* cyrilc_1.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807EE22CBFDE500E81EEB /* cyrilc_1.h */; };
+		57A8081522CBFDE600E81EEB /* gothicita.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807EF22CBFDE500E81EEB /* gothicita.h */; };
+		57A8081622CBFDE600E81EEB /* greekc.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807F022CBFDE500E81EEB /* greekc.h */; };
+		57A8081722CBFDE600E81EEB /* futural.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807F122CBFDE500E81EEB /* futural.h */; };
+		57A8081822CBFDE600E81EEB /* cyrillic.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807F222CBFDE500E81EEB /* cyrillic.h */; };
+		57A8081922CBFDE600E81EEB /* mathlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807F322CBFDE500E81EEB /* mathlow.h */; };
+		57A8081A22CBFDE600E81EEB /* astrology.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807F422CBFDE500E81EEB /* astrology.h */; };
+		57A8081B22CBFDE600E81EEB /* rowmant.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807F522CBFDE500E81EEB /* rowmant.h */; };
+		57A8081C22CBFDE600E81EEB /* timesr.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807F722CBFDE500E81EEB /* timesr.h */; };
+		57A8081D22CBFDE600E81EEB /* hershey_font.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807F822CBFDE500E81EEB /* hershey_font.h */; };
 		57BDF7E620AC7CD1004C154E /* drw_wobject_ops.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */; };
 		57BDF7E720AC7CD1004C154E /* drw_point.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF7D520AC7CD1004C154E /* drw_point.c */; };
 		57BDF7ED20AC7CD1004C154E /* drw_primitives.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF7DB20AC7CD1004C154E /* drw_primitives.h */; };
@@ -76,6 +113,44 @@
 		57939B3A21BF584B00F74BF4 /* drw_log.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_log.c; sourceTree = "<group>"; };
 		57967B5F20D17B3000003F66 /* drw_export.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_export.h; sourceTree = "<group>"; };
 		57967B6020D17B3000003F66 /* drw_export.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = drw_export.c; sourceTree = "<group>"; };
+		57A807D222CBFDE500E81EEB /* asteroids_font.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = asteroids_font.c; sourceTree = "<group>"; };
+		57A807D322CBFDE500E81EEB /* hershey_font.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = hershey_font.c; sourceTree = "<group>"; };
+		57A807D422CBFDE500E81EEB /* asteroids_font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asteroids_font.h; sourceTree = "<group>"; };
+		57A807D622CBFDE500E81EEB /* music.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = music.h; sourceTree = "<group>"; };
+		57A807D722CBFDE500E81EEB /* gothitt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gothitt.h; sourceTree = "<group>"; };
+		57A807D822CBFDE500E81EEB /* futuram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = futuram.h; sourceTree = "<group>"; };
+		57A807D922CBFDE500E81EEB /* gothgrt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gothgrt.h; sourceTree = "<group>"; };
+		57A807DA22CBFDE500E81EEB /* japanese.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = japanese.h; sourceTree = "<group>"; };
+		57A807DB22CBFDE500E81EEB /* timesib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timesib.h; sourceTree = "<group>"; };
+		57A807DC22CBFDE500E81EEB /* scriptc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptc.h; sourceTree = "<group>"; };
+		57A807DD22CBFDE500E81EEB /* rowmand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rowmand.h; sourceTree = "<group>"; };
+		57A807DE22CBFDE500E81EEB /* hershey.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hershey.cpp; sourceTree = "<group>"; };
+		57A807DF22CBFDE500E81EEB /* gothiceng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gothiceng.h; sourceTree = "<group>"; };
+		57A807E022CBFDE500E81EEB /* meteorology.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meteorology.h; sourceTree = "<group>"; };
+		57A807E122CBFDE500E81EEB /* gothicger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gothicger.h; sourceTree = "<group>"; };
+		57A807E222CBFDE500E81EEB /* greeks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = greeks.h; sourceTree = "<group>"; };
+		57A807E322CBFDE500E81EEB /* timesg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timesg.h; sourceTree = "<group>"; };
+		57A807E422CBFDE500E81EEB /* timesi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timesi.h; sourceTree = "<group>"; };
+		57A807E522CBFDE500E81EEB /* scripts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scripts.h; sourceTree = "<group>"; };
+		57A807E622CBFDE500E81EEB /* rowmans.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rowmans.h; sourceTree = "<group>"; };
+		57A807E722CBFDE500E81EEB /* symbolic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = symbolic.h; sourceTree = "<group>"; };
+		57A807E822CBFDE500E81EEB /* mathupp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mathupp.h; sourceTree = "<group>"; };
+		57A807E922CBFDE500E81EEB /* greek.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = greek.h; sourceTree = "<group>"; };
+		57A807EA22CBFDE500E81EEB /* gothgbt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gothgbt.h; sourceTree = "<group>"; };
+		57A807EB22CBFDE500E81EEB /* cursive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cursive.h; sourceTree = "<group>"; };
+		57A807EC22CBFDE500E81EEB /* timesrb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timesrb.h; sourceTree = "<group>"; };
+		57A807ED22CBFDE500E81EEB /* markers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = markers.h; sourceTree = "<group>"; };
+		57A807EE22CBFDE500E81EEB /* cyrilc_1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cyrilc_1.h; sourceTree = "<group>"; };
+		57A807EF22CBFDE500E81EEB /* gothicita.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gothicita.h; sourceTree = "<group>"; };
+		57A807F022CBFDE500E81EEB /* greekc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = greekc.h; sourceTree = "<group>"; };
+		57A807F122CBFDE500E81EEB /* futural.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = futural.h; sourceTree = "<group>"; };
+		57A807F222CBFDE500E81EEB /* cyrillic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cyrillic.h; sourceTree = "<group>"; };
+		57A807F322CBFDE500E81EEB /* mathlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mathlow.h; sourceTree = "<group>"; };
+		57A807F422CBFDE500E81EEB /* astrology.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = astrology.h; sourceTree = "<group>"; };
+		57A807F522CBFDE500E81EEB /* rowmant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rowmant.h; sourceTree = "<group>"; };
+		57A807F622CBFDE500E81EEB /* hershey.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hershey.txt; sourceTree = "<group>"; };
+		57A807F722CBFDE500E81EEB /* timesr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timesr.h; sourceTree = "<group>"; };
+		57A807F822CBFDE500E81EEB /* hershey_font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hershey_font.h; sourceTree = "<group>"; };
 		57BDF7D420AC7CD1004C154E /* drw_wobject_ops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_wobject_ops.h; sourceTree = "<group>"; };
 		57BDF7D520AC7CD1004C154E /* drw_point.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_point.c; sourceTree = "<group>"; };
 		57BDF7DB20AC7CD1004C154E /* drw_primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_primitives.h; sourceTree = "<group>"; };
@@ -157,6 +232,60 @@
 			path = ../../libs/drw/contrib/deps/vector;
 			sourceTree = "<group>";
 		};
+		57A807D122CBFDE500E81EEB /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				57A807D222CBFDE500E81EEB /* asteroids_font.c */,
+				57A807D322CBFDE500E81EEB /* hershey_font.c */,
+				57A807D422CBFDE500E81EEB /* asteroids_font.h */,
+				57A807D522CBFDE500E81EEB /* hershey_decon */,
+				57A807F822CBFDE500E81EEB /* hershey_font.h */,
+			);
+			name = fonts;
+			path = ../contrib/fonts;
+			sourceTree = "<group>";
+		};
+		57A807D522CBFDE500E81EEB /* hershey_decon */ = {
+			isa = PBXGroup;
+			children = (
+				57A807D622CBFDE500E81EEB /* music.h */,
+				57A807D722CBFDE500E81EEB /* gothitt.h */,
+				57A807D822CBFDE500E81EEB /* futuram.h */,
+				57A807D922CBFDE500E81EEB /* gothgrt.h */,
+				57A807DA22CBFDE500E81EEB /* japanese.h */,
+				57A807DB22CBFDE500E81EEB /* timesib.h */,
+				57A807DC22CBFDE500E81EEB /* scriptc.h */,
+				57A807DD22CBFDE500E81EEB /* rowmand.h */,
+				57A807DE22CBFDE500E81EEB /* hershey.cpp */,
+				57A807DF22CBFDE500E81EEB /* gothiceng.h */,
+				57A807E022CBFDE500E81EEB /* meteorology.h */,
+				57A807E122CBFDE500E81EEB /* gothicger.h */,
+				57A807E222CBFDE500E81EEB /* greeks.h */,
+				57A807E322CBFDE500E81EEB /* timesg.h */,
+				57A807E422CBFDE500E81EEB /* timesi.h */,
+				57A807E522CBFDE500E81EEB /* scripts.h */,
+				57A807E622CBFDE500E81EEB /* rowmans.h */,
+				57A807E722CBFDE500E81EEB /* symbolic.h */,
+				57A807E822CBFDE500E81EEB /* mathupp.h */,
+				57A807E922CBFDE500E81EEB /* greek.h */,
+				57A807EA22CBFDE500E81EEB /* gothgbt.h */,
+				57A807EB22CBFDE500E81EEB /* cursive.h */,
+				57A807EC22CBFDE500E81EEB /* timesrb.h */,
+				57A807ED22CBFDE500E81EEB /* markers.h */,
+				57A807EE22CBFDE500E81EEB /* cyrilc_1.h */,
+				57A807EF22CBFDE500E81EEB /* gothicita.h */,
+				57A807F022CBFDE500E81EEB /* greekc.h */,
+				57A807F122CBFDE500E81EEB /* futural.h */,
+				57A807F222CBFDE500E81EEB /* cyrillic.h */,
+				57A807F322CBFDE500E81EEB /* mathlow.h */,
+				57A807F422CBFDE500E81EEB /* astrology.h */,
+				57A807F522CBFDE500E81EEB /* rowmant.h */,
+				57A807F622CBFDE500E81EEB /* hershey.txt */,
+				57A807F722CBFDE500E81EEB /* timesr.h */,
+			);
+			path = hershey_decon;
+			sourceTree = "<group>";
+		};
 		57BDF7D220AC7CD1004C154E /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -206,6 +335,7 @@
 		D1A833521E99AD2B009AA5D2 = {
 			isa = PBXGroup;
 			children = (
+				57A807D122CBFDE500E81EEB /* fonts */,
 				5703DAAC20ACBD5C007E1800 /* deps */,
 				57BDF7D220AC7CD1004C154E /* src */,
 				57E6659820F2CB54006E5BB2 /* drw.c */,
@@ -230,24 +360,58 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57A8081122CBFDE600E81EEB /* cursive.h in Headers */,
+				57A807FD22CBFDE600E81EEB /* gothitt.h in Headers */,
+				57A8080E22CBFDE600E81EEB /* mathupp.h in Headers */,
 				577DD21620D3546E00623919 /* drw_render_gl.h in Headers */,
 				57939B2621BF56C500F74BF4 /* drw_type_hershey.h in Headers */,
+				57A8081222CBFDE600E81EEB /* timesrb.h in Headers */,
+				57A8081D22CBFDE600E81EEB /* hershey_font.h in Headers */,
+				57A8081822CBFDE600E81EEB /* cyrillic.h in Headers */,
+				57A8080322CBFDE600E81EEB /* rowmand.h in Headers */,
+				57A8080C22CBFDE600E81EEB /* rowmans.h in Headers */,
+				57A8081022CBFDE600E81EEB /* gothgbt.h in Headers */,
+				57A8080122CBFDE600E81EEB /* timesib.h in Headers */,
+				57A8080F22CBFDE600E81EEB /* greek.h in Headers */,
+				57A8080D22CBFDE600E81EEB /* symbolic.h in Headers */,
 				57BDF7E620AC7CD1004C154E /* drw_wobject_ops.h in Headers */,
 				57BDF7F220AC7CD1004C154E /* drw_point.h in Headers */,
+				57A8081622CBFDE600E81EEB /* greekc.h in Headers */,
+				57A8080922CBFDE600E81EEB /* timesg.h in Headers */,
+				57A8081722CBFDE600E81EEB /* futural.h in Headers */,
+				57A8081422CBFDE600E81EEB /* cyrilc_1.h in Headers */,
 				57939B2F21BF56C500F74BF4 /* drw_type.h in Headers */,
 				57939B2521BF56C500F74BF4 /* drw_type_ftgl.h in Headers */,
 				5703DBA120ACBD5C007E1800 /* gpc.h in Headers */,
+				57A8081322CBFDE600E81EEB /* markers.h in Headers */,
+				57A8080B22CBFDE600E81EEB /* scripts.h in Headers */,
+				57A8080622CBFDE600E81EEB /* meteorology.h in Headers */,
+				57A8080722CBFDE600E81EEB /* gothicger.h in Headers */,
+				57A8081A22CBFDE600E81EEB /* astrology.h in Headers */,
+				57A8080A22CBFDE600E81EEB /* timesi.h in Headers */,
+				57A8081922CBFDE600E81EEB /* mathlow.h in Headers */,
 				57939B3B21BF584B00F74BF4 /* drw_log.h in Headers */,
 				57BDF80920ACA86A004C154E /* drw_platform.h in Headers */,
 				57BDF7ED20AC7CD1004C154E /* drw_primitives.h in Headers */,
 				57939B2A21BF56C500F74BF4 /* drw_type_ftgles.h in Headers */,
 				57939B2E21BF56C500F74BF4 /* drw_type_hpvec.h in Headers */,
+				57A8081522CBFDE600E81EEB /* gothicita.h in Headers */,
 				577858CD20B3661E00218129 /* vector.h in Headers */,
+				57A8080822CBFDE600E81EEB /* greeks.h in Headers */,
 				57967B6120D17B3000003F66 /* drw_export.h in Headers */,
+				57A8080022CBFDE600E81EEB /* japanese.h in Headers */,
 				5703D74C20ACBCBD007E1800 /* drw_ext_gpc.h in Headers */,
+				57A8081C22CBFDE600E81EEB /* timesr.h in Headers */,
+				57A807FF22CBFDE600E81EEB /* gothgrt.h in Headers */,
+				57A8081B22CBFDE600E81EEB /* rowmant.h in Headers */,
 				5741595F20D4221100E5498B /* drw_render.h in Headers */,
+				57A807FB22CBFDE600E81EEB /* asteroids_font.h in Headers */,
+				57A8080222CBFDE600E81EEB /* scriptc.h in Headers */,
 				5767C01420DC64870022A676 /* drw_snoop.h in Headers */,
+				57A807FC22CBFDE600E81EEB /* music.h in Headers */,
+				57A8080522CBFDE600E81EEB /* gothiceng.h in Headers */,
 				57939B2721BF56C500F74BF4 /* drw_type_asteroids.h in Headers */,
+				57A807FE22CBFDE600E81EEB /* futuram.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,9 +512,11 @@
 				577DD21B20D3548D00623919 /* drw_render_gl.c in Sources */,
 				57939B2921BF56C500F74BF4 /* drw_type_ftgl.c in Sources */,
 				57BDF7EE20AC7CD1004C154E /* drw_wobject_ops.c in Sources */,
+				57A807F922CBFDE600E81EEB /* asteroids_font.c in Sources */,
 				57E6659920F2CB54006E5BB2 /* drw.c in Sources */,
 				57967B6220D17B3000003F66 /* drw_export.c in Sources */,
 				5703DBA020ACBD5C007E1800 /* gpc.c in Sources */,
+				57A807FA22CBFDE600E81EEB /* hershey_font.c in Sources */,
 				57939B2821BF56C500F74BF4 /* drw_type.c in Sources */,
 				57939B2D21BF56C500F74BF4 /* drw_type_hershey.c in Sources */,
 				57BDF7E720AC7CD1004C154E /* drw_point.c in Sources */,
@@ -361,6 +527,7 @@
 				577DD21720D3546E00623919 /* drw_render.c in Sources */,
 				57939B3C21BF584B00F74BF4 /* drw_log.c in Sources */,
 				5703D74D20ACBCBD007E1800 /* drw_ext_gpc.c in Sources */,
+				57A8080422CBFDE600E81EEB /* hershey.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

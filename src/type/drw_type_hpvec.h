@@ -24,11 +24,11 @@ typedef struct HPGlyph
 	const int*    points;
 } HPGlyph;
 
-void drw_type_hpvec_set_alignment(int h, int v);
+//void drw_type_hpvec_set_alignment(int h, int v);
 void drw_type_hpvec_draw(const char* text);
 
 HPGlyph** drw_type_hpvec_glyph(const char* text);
-void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, double* sc);
+//void drw_type_hpvec_get_offset_scale(const char* text, double* ox, double* oy, double* sc);
 
 //#include "../drw_ext.h"
 
