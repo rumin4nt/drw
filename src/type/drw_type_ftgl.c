@@ -55,7 +55,8 @@ void drw_type_ftgl_size(int sz, int resolution)
 	//
 	//	for now we just call it on behalf of the user (me)
 
-	drw_type_size_set(sz);
+	double dpi = drw_query_dpi();
+	drw_type_size_set(sz * dpi);
 
 	if (!font) {
 		return;
@@ -110,9 +111,15 @@ void drw_type_ftgl_draw(const char* str)
 	//}
 
 	if (drw_screenspace_get()) {
+		
+		double dp = drw_query_dpi();
+		
 		//ftglRenderFont(font, str, FTGL_RENDER_ALL);
 		//	if we're in screenspace, merely shrink by .
+		drw_push();
+		drw_scale_u(dp);
 		ftglRenderFont(font, str, FTGL_RENDER_SIDE);
+		drw_pop();
 	} else {
 		drw_push();
 		int w, h;

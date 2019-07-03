@@ -44,7 +44,8 @@ void drw_type_ftgles_size(int sz, int garbage)
 		printf("Can't set font size, font is NULL\n");
 		return;
 	}
-	font->FaceSize(sz);
+	double dp = drw_query_dpi();
+	font->FaceSize(sz * dp);
 }
 
 void drw_type_ftgles_deinit()
@@ -85,7 +86,8 @@ int drw_type_ftgles_load(const char* path)
 		printf("Font failed or did not load.\n");
 		return -7;
 	}
-	font->FaceSize(D_FONT_SIZE);
+	double d = drw_query_dpi();
+	font->FaceSize(D_FONT_SIZE * d);
 	//tfont->FaceSize(72);
 
 	//font = ftglCreatePolygonFont(path);

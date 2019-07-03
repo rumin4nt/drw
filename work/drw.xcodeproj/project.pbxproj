@@ -46,7 +46,6 @@
 		57A8080122CBFDE600E81EEB /* timesib.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807DB22CBFDE500E81EEB /* timesib.h */; };
 		57A8080222CBFDE600E81EEB /* scriptc.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807DC22CBFDE500E81EEB /* scriptc.h */; };
 		57A8080322CBFDE600E81EEB /* rowmand.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807DD22CBFDE500E81EEB /* rowmand.h */; };
-		57A8080422CBFDE600E81EEB /* hershey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57A807DE22CBFDE500E81EEB /* hershey.cpp */; };
 		57A8080522CBFDE600E81EEB /* gothiceng.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807DF22CBFDE500E81EEB /* gothiceng.h */; };
 		57A8080622CBFDE600E81EEB /* meteorology.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E022CBFDE500E81EEB /* meteorology.h */; };
 		57A8080722CBFDE600E81EEB /* gothicger.h in Headers */ = {isa = PBXBuildFile; fileRef = 57A807E122CBFDE500E81EEB /* gothicger.h */; };
@@ -124,7 +123,6 @@
 		57A807DB22CBFDE500E81EEB /* timesib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timesib.h; sourceTree = "<group>"; };
 		57A807DC22CBFDE500E81EEB /* scriptc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptc.h; sourceTree = "<group>"; };
 		57A807DD22CBFDE500E81EEB /* rowmand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rowmand.h; sourceTree = "<group>"; };
-		57A807DE22CBFDE500E81EEB /* hershey.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hershey.cpp; sourceTree = "<group>"; };
 		57A807DF22CBFDE500E81EEB /* gothiceng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gothiceng.h; sourceTree = "<group>"; };
 		57A807E022CBFDE500E81EEB /* meteorology.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meteorology.h; sourceTree = "<group>"; };
 		57A807E122CBFDE500E81EEB /* gothicger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gothicger.h; sourceTree = "<group>"; };
@@ -256,7 +254,6 @@
 				57A807DB22CBFDE500E81EEB /* timesib.h */,
 				57A807DC22CBFDE500E81EEB /* scriptc.h */,
 				57A807DD22CBFDE500E81EEB /* rowmand.h */,
-				57A807DE22CBFDE500E81EEB /* hershey.cpp */,
 				57A807DF22CBFDE500E81EEB /* gothiceng.h */,
 				57A807E022CBFDE500E81EEB /* meteorology.h */,
 				57A807E122CBFDE500E81EEB /* gothicger.h */,
@@ -527,7 +524,6 @@
 				577DD21720D3546E00623919 /* drw_render.c in Sources */,
 				57939B3C21BF584B00F74BF4 /* drw_log.c in Sources */,
 				5703D74D20ACBCBD007E1800 /* drw_ext_gpc.c in Sources */,
-				57A8080422CBFDE600E81EEB /* hershey.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

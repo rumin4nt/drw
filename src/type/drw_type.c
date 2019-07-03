@@ -387,7 +387,7 @@ void drw_type_draw(const char* format, ...)
 
 	drw_push();
 	drw_translate2f(tx, ty);
-	drw_rect(0,0, wx, wy);
+	//drw_rect(0,0, wx, wy);
 	fun(buf);
 	drw_pop();
 }

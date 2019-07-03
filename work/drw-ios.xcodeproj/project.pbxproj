@@ -21,7 +21,6 @@
 		57967B6820D186AB00003F66 /* drw_export.c in Sources */ = {isa = PBXBuildFile; fileRef = 57967B6620D186A800003F66 /* drw_export.c */; };
 		57A807A422CBEA7200E81EEB /* asteroids_font.c in Sources */ = {isa = PBXBuildFile; fileRef = 57A8077D22CBEA7200E81EEB /* asteroids_font.c */; };
 		57A807A522CBEA7200E81EEB /* hershey_font.c in Sources */ = {isa = PBXBuildFile; fileRef = 57A8077E22CBEA7200E81EEB /* hershey_font.c */; };
-		57A807A622CBEA7200E81EEB /* hershey.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 57A8078922CBEA7200E81EEB /* hershey.cpp */; };
 		57A89EA2229DE0260019E933 /* drw_render_gl_barrier.c in Sources */ = {isa = PBXBuildFile; fileRef = 57A89EA1229DE0260019E933 /* drw_render_gl_barrier.c */; };
 		57B6B0C720CDBB14009B3BFB /* drw.c in Sources */ = {isa = PBXBuildFile; fileRef = 57B6B0C620CDBB14009B3BFB /* drw.c */; };
 		57BDF7C120AB99E0004C154E /* drw_point.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF7B120AB99E0004C154E /* drw_point.c */; };
@@ -80,7 +79,6 @@
 		57A8078622CBEA7200E81EEB /* timesib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timesib.h; sourceTree = "<group>"; };
 		57A8078722CBEA7200E81EEB /* scriptc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = scriptc.h; sourceTree = "<group>"; };
 		57A8078822CBEA7200E81EEB /* rowmand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = rowmand.h; sourceTree = "<group>"; };
-		57A8078922CBEA7200E81EEB /* hershey.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = hershey.cpp; sourceTree = "<group>"; };
 		57A8078A22CBEA7200E81EEB /* gothiceng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gothiceng.h; sourceTree = "<group>"; };
 		57A8078B22CBEA7200E81EEB /* meteorology.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = meteorology.h; sourceTree = "<group>"; };
 		57A8078C22CBEA7200E81EEB /* gothicger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = gothicger.h; sourceTree = "<group>"; };
@@ -203,7 +201,6 @@
 				57A8078622CBEA7200E81EEB /* timesib.h */,
 				57A8078722CBEA7200E81EEB /* scriptc.h */,
 				57A8078822CBEA7200E81EEB /* rowmand.h */,
-				57A8078922CBEA7200E81EEB /* hershey.cpp */,
 				57A8078A22CBEA7200E81EEB /* gothiceng.h */,
 				57A8078B22CBEA7200E81EEB /* meteorology.h */,
 				57A8078C22CBEA7200E81EEB /* gothicger.h */,
@@ -360,7 +357,6 @@
 				57A89EA2229DE0260019E933 /* drw_render_gl_barrier.c in Sources */,
 				57BDF7C920AB99E0004C154E /* drw_primitives.c in Sources */,
 				57BDF7C620AB99E0004C154E /* drw_wobject_ops.c in Sources */,
-				57A807A622CBEA7200E81EEB /* hershey.cpp in Sources */,
 				5703DBE820ACBF98007E1800 /* drw_ext_gpc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
