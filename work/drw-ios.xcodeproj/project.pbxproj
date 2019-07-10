@@ -312,18 +312,18 @@
 				TargetAttributes = {
 					D13332FC1EA66418008284B1 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 42R5XUY266;
+						DevelopmentTeam = W7MSG2FEA9;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = D13332F81EA66418008284B1 /* Build configuration list for PBXProject "drw-ios" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = D13332F41EA66418008284B1;
 			productRefGroup = D13332FE1EA66418008284B1 /* Products */;
@@ -474,7 +474,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 42R5XUY266;
+				DEVELOPMENT_TEAM = W7MSG2FEA9;
 				HEADER_SEARCH_PATHS = (
 					"$(r4_root)/contrib",
 					"$(r4_root)/libs",
@@ -501,7 +501,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 42R5XUY266;
+				DEVELOPMENT_TEAM = W7MSG2FEA9;
 				HEADER_SEARCH_PATHS = (
 					"$(r4_root)/contrib",
 					"$(r4_root)/libs",

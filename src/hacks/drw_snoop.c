@@ -138,7 +138,8 @@ void drw_snoop_dump(const char* path)
 	double dpi = drw_query_dpi();
 	printf("are we scallllling our artwork by our stuuuupid high DPI display? %f\n", dpi);
 	double sc = 1.0 / dpi;
-
+	
+	 sc = .75;
 	printf("Dumping snoop data! %d lines\n", snoopnum);
 	for (int i = 0; i < snoopnum; i++)
 	{

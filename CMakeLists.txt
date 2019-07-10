@@ -31,6 +31,8 @@ file (GLOB sources
 file (GLOB sources
            ${sources}
            src/type/drw_type_ftgl.c
+           contrib/fonts/*.c
+           src/type/*.c
            src/ext/*.c
            src/hacks/*.c)
 

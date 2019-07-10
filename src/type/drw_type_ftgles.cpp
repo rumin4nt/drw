@@ -165,7 +165,20 @@ void drw_type_ftgles_bbox(const char* str, unsigned long num, float* data)
 		return;
 	}
 	font->BBox(str, data[0], data[1], data[2], data[3], data[4], data[5]);
-
+	double sz = drw_query_dpi();
+	
+//	if ( sz == 1 )
+//		return;
+//	
+//	data[0] *= sz;
+//	data[1] *= sz;
+//	data[2] *= sz;
+//	data[3] *= sz;
+//	data[4] *= sz;
+//	data[5] *= sz;
+	
+	
+	
 	//ftglGetFontBBox(font, str, num, data);
 }
 
