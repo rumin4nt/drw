@@ -14,7 +14,7 @@
 //#ifdef RUMINANT4_PRESENT
 #include <drw/drw.h>
 
-#include "../drw_render_gl_barrier.h"
+//#include "../drw_render_gl_barrier.h"
 //
 //#ifdef DRW_PLATFORM_IOS
 //#ifdef TEMP_GL_LEGACY_BACKPORT

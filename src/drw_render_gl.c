@@ -9,15 +9,26 @@
 
 #include "drw_render_gl.h"
 
-#include "drw_config.h"
+
+//#include "drw_config.h"
+
+#ifdef DRW_GL_1
+
 #include "drw_platform.h"
-#include <drw/drw.h>
+//
+//#ifdef DRW_PLATFORM_IOS
+//#include <OpenGLES/ES1/gl.h>
+//#endif
+
+
+//#include <drw/drw.h>
 
 //#ifdef DEBUG
 #include <drw/src/drw_log.h>
 //#endif
 #ifndef DRW_PLATFORM_IOS
 #include "hacks/drw_snoop.h"
+
 #endif
 
 #include "ext/drw_ext_gpc.h"
@@ -44,9 +55,11 @@
 #ifdef DEBUG
 static signed fill_stack  = 0;
 static signed alpha_stack = 0;
+static signed color_stack = 0;
 #endif
 
 #ifdef DRW_PLATFORM_IOS
+#include <OpenGLES/ES3/gl.h>
 
 //#ifdef DRW_PLATFORM_IOS
 #define glTranslated glTranslatef
@@ -255,7 +268,7 @@ int drw_get_gl_error()
 
 	case GL_INVALID_OPERATION:
 		drw_log("GL_INVALID_OPERATION");
-		break;
+			break;
 
 		// case GL_INVALID_FRAMEBUFFER_OPERATION:
 		//    printf("invalid framebuffer\n");
@@ -427,6 +440,8 @@ void drw_type_load_ttf(const char* path)
 }
 */
 
+//#include <glad.h>
+
 void drw_blend_set(int v)
 {
 
@@ -571,8 +586,32 @@ void drw_color_fg_set(double r, double g, double b, double a)
 	fg_a = a;
 }
 
+#ifdef DEBUG
+static void color_stack_push(void)
+{
+	color_stack++;
+	if ( color_stack > 16 )
+	{
+		printf("Color stack overflow!\n");
+	}
+}
+
+static void color_stack_pop(void)
+{
+	color_stack--;
+	if ( color_stack < 0 )
+	{
+		printf("Color stack underflow!\n");
+	}
+}
+#endif
+
 void drw_color(double r, double g, double b, double a)
 {
+//#ifdef DEBUG
+//	color_stack_push();
+//#endif
+	
 	_set_internal_colors(r, g, b, a);
 #ifndef DRW_PLATFORM_IOS
 	glColor4d(r, g, b, a);
@@ -583,30 +622,47 @@ void drw_color(double r, double g, double b, double a)
 
 void drw_color4f(float r, float g, float b, float a)
 {
+//#ifdef DEBUG
+//	color_stack_push();
+//#endif
+
 	_set_internal_colors(r, g, b, a);
 	glColor4f(r, g, b, a);
 }
 
 void drw_color_c(RColor c)
 {
+//#ifdef DEBUG
+//	color_stack_push();
+//#endif
+
 	_set_internal_colors(c.r, c.g, c.b, c.a);
 	glColor4f(c.r, c.g, c.b, c.a);
 }
 
 void drw_color_c8(RColor8 c)
 {
+//#ifdef DEBUG
+//	color_stack_push();
+//#endif
 	_set_internal_colors(c.r, c.g, c.b, c.a);
 	glColor4f(c.r, c.g, c.b, c.a);
 }
 
 void drw_color_c16(RColor16 c)
 {
+//#ifdef DEBUG
+//	color_stack_push();
+//#endif
 	_set_internal_colors(c.r, c.g, c.b, c.a);
 	glColor4f(c.r, c.g, c.b, c.a);
 }
 
 void drw_color_wc(WColor c)
 {
+//#ifdef DEBUG
+//	color_stack_push();
+//#endif
 	_set_internal_colors(c.r, c.g, c.b, c.a);
 	glColor4f(c.r, c.g, c.b, c.a);
 }
@@ -621,34 +677,55 @@ void drw_color_wc8(WColor8 c)
 
 void drw_color_wc16(WColor16 c)
 {
+//#ifdef DEBUG
+//	color_stack_push();
+//#endif
 	_set_internal_colors(c.r, c.g, c.b, c.a);
 	glColor4f(c.r, c.g, c.b, c.a);
 }
 void drw_color3f(float r, float g, float b)
 {
+//#ifdef DEBUG
+//	color_stack_push();
+//#endif
 	_set_internal_colors(r, g, b, _a);
 	glColor4f(r, g, b, _a);
 }
 
 void drw_color_u(float v)
 {
+//#ifdef DEBUG
+//	color_stack_push();
+//#endif
 	_set_internal_colors(v, v, v, 1.);
 	glColor4f(v, v, v, 1.);
 }
 
-void drw_color_push()
+void drw_color_save()
 {
+	#ifdef DEBUG
+//		color_stack_push();
+	#endif
 	prev.r = _r;
 	prev.g = _g;
 	prev.b = _b;
 	prev.a = _a;
 }
 
+void drw_color_restore(void)
+{
+	#ifdef DEBUG
+//		color_stack_pop();
+	#endif
+	
+	_set_internal_colors(prev.r, prev.g, prev.b, prev.a);
+	glColor4f(prev.r, prev.g, prev.b, prev.a);
+}
+
 void drw_color_pop()
 {
-	_set_internal_colors(prev.r, prev.g, prev.b, prev.a);
 
-	glColor4f(prev.r, prev.g, prev.b, prev.a);
+	
 }
 
 /*
@@ -706,6 +783,7 @@ void drw_alpha_pop()
 }
 
 #ifdef DRW_PLATFORM_IOS
+
 #define MATRIX_STACK_MAX 16
 #else
 #define MATRIX_STACK_MAX 32
@@ -786,6 +864,12 @@ void drw_rotate_r(double x, double y, double z)
 }
 
 #pragma mark primitives
+
+void drw_line_cp(CPoint a, CPoint b)
+{
+	drw_line(a.x, a.y, b.x, b.y);
+	
+}
 
 void drw_line_r(RLine* poly)
 {
@@ -2245,8 +2329,8 @@ static void print_debug(void)
 void drw_setup_view_persp()
 {
 	// if(debug_settings.render)
-	drw_log("PERSP");
-	print_debug();
+	//drw_log("PERSP");
+	//print_debug();
 
 	// static int zoomFactor = 1;
 	//float left, right, top, bottom, znear, zfar;
@@ -2404,7 +2488,7 @@ void drw_setup_view_persp()
 //	this appears to work in both configurations.
 void drw_setup_view_ortho()
 {
-	drw_log("ORTHO");
+	//drw_log("ORTHO");
 	print_debug();
 
 	float width, height;
@@ -2522,7 +2606,7 @@ void drw_set_framebuffer(double w, double h)
 	framebuffer_width  = w;
 	framebuffer_height = h;
 
-	drw_color(0, 0, 0, 0);
+	//drw_color(0, 0, 0, 0);
 	// drw_calculate_scale();
 	// drw_setup_view();
 }
@@ -2776,3 +2860,6 @@ void drw_finish(void)
 {
 	glFinish();
 }
+
+#endif
+

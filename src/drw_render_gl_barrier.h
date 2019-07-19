@@ -8,14 +8,21 @@
 
 #ifndef drw_render_gl_barrier_h
 #define drw_render_gl_barrier_h
-
+/*
 #include "drw_config.h"
+
+//#define DRW_GLES_1
+
+
+
 
 #ifdef RPLATFORM_IOS
 
-#define R4_GLES_1
-#ifndef R4_GLES_1
 
+//#include "drw_render_gl.h"
+
+/*
+#ifdef R4_GLES_1
 #include "src/drw_render_gl.h"
 #elif R4_GLES_2
 #include "src/drw_render_gl_2.h"
@@ -23,10 +30,11 @@
 #include "src/drw_render_gl_3.h"
 #endif
 #else
+*/
 
-
-
+/*
 #endif
 
+*/
 
 #endif /* drw_render_gl_barrier_h */

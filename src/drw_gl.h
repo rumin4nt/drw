@@ -9,6 +9,7 @@
 #ifndef drw_gl_h
 #define drw_gl_h
 
+/*
 #include "drw_config.h"
 #ifdef RPLATFORM_IOS
 //#error hi
@@ -27,5 +28,7 @@
 #endif
 
 #endif
+*/
+
 
 #endif /* drw_gl_h */

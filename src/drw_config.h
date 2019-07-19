@@ -18,7 +18,7 @@
 //#include <glad/glad.h>
 //#include "GL/glus.h"
 //#define R4_ENABLE_RTMIDI
-
+#define DRW_GL_1
 #ifdef __clang__
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdocumentation"
@@ -33,6 +33,7 @@
 #endif
 
 #ifdef DRW_PLATFORM_WIN
+#define DRW_GL_1
 //#include <glad/glad.h>
 
 //#include <gl/glew.h>
@@ -49,18 +50,34 @@
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
-
+#define DRW_GL_1
 #endif
 
 #ifdef DRW_PLATFORM_IOS
-#define TEMP_GL_LEGACY_BACKPORT
 
-#ifdef TEMP_GL_LEGACY_BACKPORT
+#define DRW_GL_1
+
+//#define DRW_GLES_2
+//#define DRW_GLES_3
+
+
+#ifdef DRW_GL_1
 #include <OpenGLES/ES1/gl.h>
-#else
-#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/ES1/glext.h>
 #endif
+
+#ifdef DRW_GLES_2
+#error FAXK
+#include <OpenGLES/ES2/gl.h>
+#include <OpenGLES/gltypes.h>
+
+#endif
+
+#ifdef DRW_GLES_3
+#error fuk
 #include <OpenGLES/ES3/gl.h>
+#endif
+
 #endif
 
 #ifdef __clang__

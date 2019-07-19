@@ -79,6 +79,7 @@
 		57BDF7F420AC7CD1004C154E /* drw_primitives.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF7E220AC7CD1004C154E /* drw_primitives.c */; };
 		57BDF80920ACA86A004C154E /* drw_platform.h in Headers */ = {isa = PBXBuildFile; fileRef = 57BDF80820ACA86A004C154E /* drw_platform.h */; };
 		57E6659920F2CB54006E5BB2 /* drw.c in Sources */ = {isa = PBXBuildFile; fileRef = 57E6659820F2CB54006E5BB2 /* drw.c */; };
+		57FF714322DE960500243BD3 /* drw_config.h in Headers */ = {isa = PBXBuildFile; fileRef = 57FF714222DE960500243BD3 /* drw_config.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -158,6 +159,7 @@
 		57BDF80820ACA86A004C154E /* drw_platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_platform.h; sourceTree = "<group>"; };
 		57BDF80A20ACA91E004C154E /* drw_config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = drw_config.h; sourceTree = "<group>"; };
 		57E6659820F2CB54006E5BB2 /* drw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = drw.c; path = ../drw.c; sourceTree = "<group>"; };
+		57FF714222DE960500243BD3 /* drw_config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_config.h; sourceTree = "<group>"; };
 		D1A8335B1E99AD2C009AA5D2 /* libdrw.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libdrw.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1A8368D1E99AEF3009AA5D2 /* libdrw.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libdrw.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1AA9AB91EA00E1A00675C3A /* drw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = drw.h; path = ../drw.h; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 		57BDF7D220AC7CD1004C154E /* src */ = {
 			isa = PBXGroup;
 			children = (
+				57FF714222DE960500243BD3 /* drw_config.h */,
 				5767C01020DC64870022A676 /* hacks */,
 				57939B3A21BF584B00F74BF4 /* drw_log.c */,
 				57939B3921BF584B00F74BF4 /* drw_log.h */,
@@ -375,6 +378,7 @@
 				57BDF7F220AC7CD1004C154E /* drw_point.h in Headers */,
 				57A8081622CBFDE600E81EEB /* greekc.h in Headers */,
 				57A8080922CBFDE600E81EEB /* timesg.h in Headers */,
+				57FF714322DE960500243BD3 /* drw_config.h in Headers */,
 				57A8081722CBFDE600E81EEB /* futural.h in Headers */,
 				57A8081422CBFDE600E81EEB /* cyrilc_1.h in Headers */,
 				57939B2F21BF56C500F74BF4 /* drw_type.h in Headers */,

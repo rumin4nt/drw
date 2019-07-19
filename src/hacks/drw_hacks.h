@@ -9,11 +9,10 @@
 #ifndef drw_hacks_h
 #define drw_hacks_h
 
+#include "../drw_platform.h"
 
-
-///#ifndef DRW_PLATFORM_IOS
+#ifndef DRW_PLATFORM_IOS
 #define DRW_ENABLE_SNOOP
-//#endif
-
+#endif
 
 #endif /* drw_hacks_h */

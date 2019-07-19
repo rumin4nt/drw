@@ -18,7 +18,7 @@
 #include "src/drw_config.h"
 #include "src/drw_export.h"
 #include "src/drw_point.h"
-#include "src/drw_render.h"
+//#include "src/drw_render.h"
 #include "src/drw_render_gl.h"
 
 //#include "src/r_hatch.h"
@@ -46,7 +46,7 @@
 
 #include "stdlib.h"
 
-#define TEMP_GL_LEGACY_BACKPORT
+//#define TEMP_GL_LEGACY_BACKPORT
 
 int		    drw_check_version_match(const char* str);
 int		    drw_check_compat_match(const char* str);

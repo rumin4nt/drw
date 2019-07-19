@@ -6,8 +6,10 @@
 //  Copyright © 2016 vaporstack. All rights reserved.
 //
 
-#ifndef d_rended_h
-#define d_rended_h
+#ifndef d_render_h
+#define d_render_h
+
+#include "drw_config.h"
 
 #include <stdbool.h>
 #include <stdlib.h>
@@ -108,8 +110,9 @@ void drw_color_wc16(WColor16);
 
 void drw_color3f(float, float, float);
 void drw_color_u(float);
-void drw_color_pop(void);
-void drw_color_push(void);
+void drw_color_save(void);
+void drw_color_restore(void);
+//void drw_color_push(void);
 
 // void drw_color_c(RColor*);
 // void drw_color_c8(RColor8*);
@@ -182,6 +185,7 @@ int drw_get_gl_error(void);
 void drw_line_r(RLine* line);
 void drw_line3_r(RLine3* line);
 
+void drw_line_cp(CPoint a, CPoint b);
 void drw_line(float, float, float, float);
 void drw_line_wp(WPoint, WPoint);
 void drw_line_rp(RPoint, RPoint);
@@ -268,7 +272,7 @@ void drw_dodecahedron(float v);
 void drw_icosahedron(float v);
 
 //	debug
-void drw_grid(float, int);
+void drw_grid(float cellsize, int subdiv);
 
 //	matrix helpers
 
@@ -284,7 +288,7 @@ void drw_circle_precision_set_override_limit(bool v);
 void drw_circle_precision_set(int sides);
 void drw_circle_precision_pop(void);
 
-void drw_fill_set(bool);
+void drw_fill_set(bool value);
 void drw_fill_pop(void);
 
 void drw_set_fov(double v);

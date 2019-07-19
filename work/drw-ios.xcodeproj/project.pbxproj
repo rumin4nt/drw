@@ -21,12 +21,12 @@
 		57967B6820D186AB00003F66 /* drw_export.c in Sources */ = {isa = PBXBuildFile; fileRef = 57967B6620D186A800003F66 /* drw_export.c */; };
 		57A807A422CBEA7200E81EEB /* asteroids_font.c in Sources */ = {isa = PBXBuildFile; fileRef = 57A8077D22CBEA7200E81EEB /* asteroids_font.c */; };
 		57A807A522CBEA7200E81EEB /* hershey_font.c in Sources */ = {isa = PBXBuildFile; fileRef = 57A8077E22CBEA7200E81EEB /* hershey_font.c */; };
-		57A89EA2229DE0260019E933 /* drw_render_gl_barrier.c in Sources */ = {isa = PBXBuildFile; fileRef = 57A89EA1229DE0260019E933 /* drw_render_gl_barrier.c */; };
 		57B6B0C720CDBB14009B3BFB /* drw.c in Sources */ = {isa = PBXBuildFile; fileRef = 57B6B0C620CDBB14009B3BFB /* drw.c */; };
 		57BDF7C120AB99E0004C154E /* drw_point.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF7B120AB99E0004C154E /* drw_point.c */; };
 		57BDF7C620AB99E0004C154E /* drw_wobject_ops.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF7B820AB99E0004C154E /* drw_wobject_ops.c */; };
 		57BDF7C720AB99E0004C154E /* drw_render.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF7B920AB99E0004C154E /* drw_render.c */; };
 		57BDF7C920AB99E0004C154E /* drw_primitives.c in Sources */ = {isa = PBXBuildFile; fileRef = 57BDF7BE20AB99E0004C154E /* drw_primitives.c */; };
+		57FF714122DE91F600243BD3 /* drw_render_gl_2.c in Sources */ = {isa = PBXBuildFile; fileRef = 57FF714022DE91F500243BD3 /* drw_render_gl_2.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -106,7 +106,6 @@
 		57A807A222CBEA7200E81EEB /* timesr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = timesr.h; sourceTree = "<group>"; };
 		57A807A322CBEA7200E81EEB /* hershey_font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = hershey_font.h; sourceTree = "<group>"; };
 		57A89EA0229DE0250019E933 /* drw_render_gl_barrier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render_gl_barrier.h; sourceTree = "<group>"; };
-		57A89EA1229DE0260019E933 /* drw_render_gl_barrier.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_render_gl_barrier.c; sourceTree = "<group>"; };
 		57B6B0C520CDBB13009B3BFB /* drw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = drw.h; path = ../drw.h; sourceTree = "<group>"; };
 		57B6B0C620CDBB14009B3BFB /* drw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = drw.c; path = ../drw.c; sourceTree = "<group>"; };
 		57BDF7AF20AB99E0004C154E /* drw_render_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_render_gl.h; sourceTree = "<group>"; };
@@ -117,6 +116,8 @@
 		57BDF7B920AB99E0004C154E /* drw_render.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_render.c; sourceTree = "<group>"; };
 		57BDF7BC20AB99E0004C154E /* drw_point.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_point.h; sourceTree = "<group>"; };
 		57BDF7BE20AB99E0004C154E /* drw_primitives.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_primitives.c; sourceTree = "<group>"; };
+		57FF714022DE91F500243BD3 /* drw_render_gl_2.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = drw_render_gl_2.c; sourceTree = "<group>"; };
+		57FF714422DE96FB00243BD3 /* drw_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = drw_gl.h; sourceTree = "<group>"; };
 		D13332FD1EA66418008284B1 /* libdrw.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libdrw.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -238,6 +239,7 @@
 				57967B6620D186A800003F66 /* drw_export.c */,
 				57967B6720D186AB00003F66 /* drw_export.h */,
 				575872AA22C1340F00BDEBFD /* drw_ext.h */,
+				57FF714422DE96FB00243BD3 /* drw_gl.h */,
 				570FA31A21BF262500F945F7 /* drw_log.c */,
 				570FA31921BF262500F945F7 /* drw_log.h */,
 				575B4E9420C9E69900E875FE /* drw_platform.h */,
@@ -245,7 +247,7 @@
 				57BDF7BC20AB99E0004C154E /* drw_point.h */,
 				57BDF7BE20AB99E0004C154E /* drw_primitives.c */,
 				57BDF7B720AB99E0004C154E /* drw_primitives.h */,
-				57A89EA1229DE0260019E933 /* drw_render_gl_barrier.c */,
+				57FF714022DE91F500243BD3 /* drw_render_gl_2.c */,
 				57A89EA0229DE0250019E933 /* drw_render_gl_barrier.h */,
 				577DD22420D3577800623919 /* drw_render_gl.c */,
 				57BDF7AF20AB99E0004C154E /* drw_render_gl.h */,
@@ -354,7 +356,7 @@
 				570FA31321BF234800F945F7 /* drw_type_ftgl.c in Sources */,
 				57BDF7C720AB99E0004C154E /* drw_render.c in Sources */,
 				577DD22520D3577800623919 /* drw_render_gl.c in Sources */,
-				57A89EA2229DE0260019E933 /* drw_render_gl_barrier.c in Sources */,
+				57FF714122DE91F600243BD3 /* drw_render_gl_2.c in Sources */,
 				57BDF7C920AB99E0004C154E /* drw_primitives.c in Sources */,
 				57BDF7C620AB99E0004C154E /* drw_wobject_ops.c in Sources */,
 				5703DBE820ACBF98007E1800 /* drw_ext_gpc.c in Sources */,
