@@ -16,6 +16,7 @@
 
 //#ifdef RUMINANT4_PRESENT
 void drw_gpc_polygon_outline(GPCRec*);
+void drw_gpc_polygon_fill(GPCRec*);
 void drw_gpc_polygon(GPCRec*);
 void drw_gpc_verts(void*);
 void drw_gpc_triwire(void* dat);

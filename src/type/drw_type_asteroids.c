@@ -48,7 +48,7 @@ void drw_type_asteroids_bbox(const char* text, unsigned long idk, float* address
 
 }
 
-#define SIZE 1
+#define SIZE .5
 #include <drw/drw.h>
 
 static void ast_char(char c, int ox, int oy)
@@ -181,12 +181,15 @@ static double get_real_sz()
 
 void drw_type_asteroids_draw(const char* text)
 {
-	double dpi = drw_query_dpi();
-	//drw_push();
+//	double dpi = drw_query_dpi();
+//	double sc = dpi * .5;;
+//
+//	printf("%f\n", dpi);
+//	drw_push();
 	
 	
 	//if ( dpi != 1 )
-	//	drw_scale_u(dpi);
+//		drw_scale_u(sc);
 	
 	
 	
@@ -200,7 +203,7 @@ void drw_type_asteroids_draw(const char* text)
 		char   upper = toupper(text[i]);
 		ast_char(upper, x, y);
 	}
-	//drw_pop();
+//	drw_pop();
 }
 
 void* drw_type_asteroids_render(const char* text)

@@ -992,6 +992,7 @@ void drw_tri(float ax, float ay, float bx, float by, float cx, float cy)
 {
 	const GLfloat renderLine[] = {ax, ay, bx, by, cx, cy};
 	glVertexPointer(2, GL_FLOAT, 0, renderLine);
+	(fill) ? glDrawArrays(GL_TRIANGLES, 0, 3) :
 	glDrawArrays(GL_LINE_STRIP, 0, 3);
 }
 

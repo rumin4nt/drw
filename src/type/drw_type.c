@@ -326,10 +326,12 @@ void drw_type_draw(const char* format, ...)
 {
 	if (type_provider == -1) {
 		drw_log("NO type provider specified, return.");
+		return;
 	}
 
 	if (num_providers == 0) {
 		drw_log("NO providers registered, return.");
+		return;
 	}
 	
 	if (type_provider >= num_providers) {
@@ -353,6 +355,8 @@ void drw_type_draw(const char* format, ...)
 	double wy = bounds[4] - bounds[1];
 	//double wz = bounds[5] - bounds[2];
 
+	
+	
 	drw_type_draw_fun fun = draw_funcs[type_provider];
 	double		  tx = 0, ty = 0;
 

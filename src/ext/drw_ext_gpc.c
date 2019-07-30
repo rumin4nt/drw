@@ -61,6 +61,40 @@ void drw_gpc_polygon_outline(GPCRec* rec)
 	}
 }
 
+void drw_gpc_polygon_fill(GPCRec* rec)
+{
+	gpc_polygon* poly = (gpc_polygon*)rec->polygon;
+	// gpc_polygon* poly = rec->polygon;
+	// int	   j, s;
+	int i, k, j;
+
+	for (i = 0; i < poly->num_contours; i++)
+	{
+		// printf("c %d\n", i);
+		gpc_vertex_list contour = poly->contour[i];
+
+		GLfloat* arr =
+		    malloc(sizeof(GLfloat) * contour.num_vertices * 2);
+		for (k = 0, j = 0; k < contour.num_vertices; k++, j += 2)
+		{
+			if (!contour.vertex)
+			{
+				printf("ack!\n");
+			}
+			else
+			{
+				gpc_vertex v = contour.vertex[k];
+				arr[j]       = v.x;
+				arr[j + 1]   = v.y;
+			}
+		}
+
+		glVertexPointer(2, GL_FLOAT, 0, arr);
+		glDrawArrays(GL_TRIANGLE_FAN, 0, contour.num_vertices);
+		free(arr);
+	}
+}
+
 void drw_gpc_polygon(GPCRec* rec)
 {
 	gpc_polygon* poly = (gpc_polygon*)rec->polygon;
