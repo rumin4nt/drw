@@ -888,8 +888,16 @@ void drw_line_r(RLine* poly)
 	}
 
 	glVertexPointer(2, GL_FLOAT, 0, arr);
+	if ( fill )
+	{
+		glDrawArrays(GL_TRIANGLE_FAN, 0, (int)poly->num);
+		//	(poly->closed) ? glDrawArrays(GL_TRIANGL, 0, (int)poly->num) : glDrawArrays(GL_LINE_STRIP, 0, (int)poly->num);
+		
+		
+	}else{
+		(poly->closed) ? glDrawArrays(GL_LINE_LOOP, 0, (int)poly->num) : glDrawArrays(GL_LINE_STRIP, 0, (int)poly->num);
 
-	(poly->closed) ? glDrawArrays(GL_LINE_LOOP, 0, (int)poly->num) : glDrawArrays(GL_LINE_STRIP, 0, (int)poly->num);
+	}
 	free(arr);
 }
 

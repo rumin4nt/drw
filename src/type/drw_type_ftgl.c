@@ -23,7 +23,7 @@
 
 FTGLfont* font		= NULL;
 int       justification = 0;
-
+static double size = 9;
 void drw_type_ftgl_initialize(void)
 {
 #ifdef DRW_EXT_R4
@@ -32,6 +32,12 @@ void drw_type_ftgl_initialize(void)
 	drw_type_provider_register("ftgl", drw_type_ftgl_draw, drw_type_ftgl_bbox);
 
 #endif
+}
+
+static double calc_scale(void)
+{
+	return .125 * .25 * .25 * .5;
+	
 }
 
 void drw_type_ftgl_init()
@@ -122,14 +128,19 @@ void drw_type_ftgl_draw(const char* str)
 		drw_pop();
 	} else {
 		drw_push();
+		
+//		drw_color(1,0,0,1);
+		
 		int w, h;
 		drw_query_framebuffer(&w, &h);
+		
 		//int    sz   = drw_type_get_size();
 		double dpi  = drw_query_dpi();
 		double mult = h;
 		double frac = 1.0 / mult;
-		//drw_scale_u(frac);
-		//ftglRenderFont(font, str, FTGL_RENDER_ALL);
+//		drw_scale_u(frac);
+		drw_scale_u(calc_scale());
+		ftglRenderFont(font, str, FTGL_RENDER_FRONT);
 		ftglRenderFont(font, str, FTGL_RENDER_SIDE);
 
 		drw_pop();
@@ -145,6 +156,18 @@ void drw_type_ftgl_bbox(const char* str, unsigned long num, float* data)
 		return;
 	}
 	ftglGetFontBBox(font, str, (int)num, data);
+	
+	if ( drw_screenspace_get() )
+		return;
+	
+	double sc = calc_scale();
+	data[0] *= sc;
+	data[1] *= sc;
+	data[2] *= sc;
+	data[3] *= sc;
+	data[4] *= sc;
+	data[5] *= sc;
+	
 }
 
 double drw_type_ftgl_get_width(const char* str)
@@ -168,6 +191,17 @@ double drw_type_ftgl_get_width(const char* str)
 		bounds[j] = 0;
 	}
 	drw_type_get_bbox(str, count, bounds);
+	
+	if ( !drw_screenspace_get() )
+	{
+		double sc = calc_scale();
+		bounds[0] *= sc;
+		bounds[1] *= sc;
+		bounds[2] *= sc;
+		bounds[3] *= sc;
+		bounds[4] *= sc;
+		bounds[5] *= sc;
+	}
 	double v = bounds[3] - bounds[0];
 	free(bounds);
 	return v;
