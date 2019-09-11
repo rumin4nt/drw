@@ -115,7 +115,7 @@ void drw_type_init(void)
 	drw_type_provider_select(0);
 
 #endif
-	
+
 	drw_type_set_align(DRW_TYPE_ALIGN_H_RIGHT, DRW_TYPE_ALIGN_V_BOTTOM);
 }
 
@@ -183,7 +183,7 @@ double drw_type_size_real_get(void)
 {
 	int w, h;
 	drw_query_framebuffer(&w, &h);
-	
+
 	double sz = drw_type_size_get();
 	double sc = 1. / (h / sz * 8);
 	return sc;
@@ -274,31 +274,20 @@ void drw_type_get_bbox(const char* text, unsigned long sz, float* bounds)
 void drw_type_draw_bbox(const char* word)
 {
 	float bb[6];
-<<<<<<< Updated upstream
-	drw_type_get_bbox(word, strlen(word), bb);
-	
-	
-	double dx = bb[3] - bb[0];
-	double dy = bb[4] - bb[1];
-=======
+
 	memset(bb, 0, sizeof(float));
 	drw_type_get_bbox(word, strlen(word), bb);
-	
-	
+
+
 //	double dx = bb[3] - bb[0];
 //	double dy = bb[4] - bb[1];
->>>>>>> Stashed changes
-	
+
 	double wx = bb[3] - bb[0];
 	double wy = bb[4] - bb[1];
 	//double wz = bounds[5] - bounds[2];
-	
-<<<<<<< Updated upstream
+
 	drw_type_draw_fun fun = draw_funcs[type_provider];
-=======
-//	drw_type_draw_fun fun = draw_funcs[type_provider];
-	
->>>>>>> Stashed changes
+
 	double		  tx = 0, ty = 0;
 	switch (align_x) {
 		case DRW_TYPE_ALIGN_H_LEFT:
@@ -313,7 +302,7 @@ void drw_type_draw_bbox(const char* word)
 		default:
 			break;
 	}
-	
+
 	switch (align_y) {
 		case DRW_TYPE_ALIGN_V_TOP:
 			ty = wy * -.1;
@@ -327,8 +316,8 @@ void drw_type_draw_bbox(const char* word)
 		default:
 			break;
 	}
-	
-	
+
+
 	drw_push();
 	drw_translate2f(tx, ty);
 	drw_rect(0,0, wx, wy);
@@ -347,7 +336,7 @@ void drw_type_draw(const char* format, ...)
 		drw_log("NO providers registered, return.");
 		return;
 	}
-	
+
 	if (type_provider >= num_providers) {
 		drw_log("Requested out of range type provider.\n");
 		return;
@@ -369,8 +358,8 @@ void drw_type_draw(const char* format, ...)
 	double wy = bounds[4] - bounds[1];
 	//double wz = bounds[5] - bounds[2];
 
-	
-	
+
+
 	drw_type_draw_fun fun = draw_funcs[type_provider];
 	double		  tx = 0, ty = 0;
 
@@ -419,7 +408,6 @@ void drw_type_draw_fixed(const char* text)
 	if (num_providers == 0) {
 		drw_log("NO providers registered, return.");
 	}
-<<<<<<< Updated upstream
 
 	float bounds[6];
 	bounds[0] = bounds[1] = bounds[2] = bounds[3] = bounds[4] = bounds[5] = -1;
@@ -461,49 +449,6 @@ void drw_type_draw_fixed(const char* text)
 		break;
 	}
 
-=======
-
-	float bounds[6];
-	bounds[0] = bounds[1] = bounds[2] = bounds[3] = bounds[4] = bounds[5] = -1;
-	drw_type_get_bbox(text, strlen(text), bounds);
-	//if ( align_x)
-	double wx = bounds[3] - bounds[0];
-	double wy = bounds[4] - bounds[1];
-	//double wz = bounds[5] - bounds[2];
-
-	drw_type_draw_fun fun = draw_funcs[type_provider];
-	double		  tx = 0, ty = 0;
-
-	//
-	switch (align_x) {
-	case DRW_TYPE_ALIGN_H_LEFT:
-		tx = wx * -1;
-		break;
-	case DRW_TYPE_ALIGN_H_CENTER:
-		tx = wx * -.5;
-		break;
-	case DRW_TYPE_ALIGN_H_RIGHT:
-		tx = wx * 0;
-		break;
-	default:
-		break;
-	}
-
-	switch (align_y) {
-	case DRW_TYPE_ALIGN_V_TOP:
-		ty = wy * -.1;
-		break;
-	case DRW_TYPE_ALIGN_V_CENTER:
-		ty = wy * -.5;
-		break;
-	case DRW_TYPE_ALIGN_V_BOTTOM:
-		ty = wy * 0;
-		break;
-	default:
-		break;
-	}
-
->>>>>>> Stashed changes
 	drw_push();
 	drw_translate2f(tx, ty);
 	fun(text);
